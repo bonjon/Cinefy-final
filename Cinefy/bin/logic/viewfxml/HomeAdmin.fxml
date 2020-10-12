@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1480.0"
+	xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="logic.viewfxml.HomeAdminBoundary">
+	<children>
+		<BorderPane AnchorPane.bottomAnchor="0.0"
+			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+			AnchorPane.topAnchor="0.0">
+			<left>
+				<AnchorPane maxWidth="-Infinity" minWidth="-Infinity"
+					prefWidth="220.0" style="-fx-background-color: #121212;"
+					BorderPane.alignment="CENTER">
+					<children>
+						<Label layoutX="48.0" layoutY="14.0" text="Cinefy"
+							textFill="#f5c518" AnchorPane.topAnchor="14.0">
+							<font>
+								<Font name="DejaVu Sans Mono Bold" size="33.0" />
+							</font>
+						</Label>
+						<Label fx:id="home" layoutX="75.0" layoutY="320.0"
+							text="Home" textFill="#f5c518" underline="true"
+							AnchorPane.bottomAnchor="500.0">
+							<font>
+								<Font name="Arial Bold Italic" size="25.0" />
+							</font>
+						</Label>
+						<Label fx:id="profile" layoutX="73.0" layoutY="676.0"
+							onMouseClicked="#onProfileClicked" text="Profile"
+							textFill="#f5c518" AnchorPane.bottomAnchor="340.0">
+							<font>
+								<Font name="Arial" size="25.0" />
+							</font>
+						</Label>
+						<Line endX="100.0" layoutX="110.0" layoutY="71.0"
+							startX="-100.0" stroke="#f5c518" />
+					</children>
+				</AnchorPane>
+			</left>
+			<center>
+				<AnchorPane style="-fx-background-color: #1c1c1c;"
+					BorderPane.alignment="CENTER">
+					<children>
+						<ListView fx:id="listQuestions" layoutX="25.0"
+							layoutY="70.0" onMouseClicked="#onSelectedQuestion"
+							prefHeight="250.0" style="-fx-background-color: #1c1c1c;"
+							AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0"
+							AnchorPane.topAnchor="70.0" />
+						<Label fx:id="errorLabel" layoutX="229.0" layoutY="27.0"
+							textFill="#ff0202" AnchorPane.leftAnchor="229.0">
+							<font>
+								<Font name="Arial" size="13.0" />
+							</font>
+						</Label>
+						<Label layoutX="7.0" layoutY="6.0" text="Questions in queue"
+							textFill="#f5c518" AnchorPane.leftAnchor="25.0"
+							AnchorPane.topAnchor="25.0">
+							<font>
+								<Font name="Arial" size="17.0" />
+							</font>
+						</Label>
+						<Label layoutX="25.0" layoutY="320.0"
+							text="Answers in queue" textFill="#f5c518"
+							AnchorPane.topAnchor="355.0">
+							<font>
+								<Font name="Arial" size="17.0" />
+							</font>
+						</Label>
+						<ListView fx:id="listAnswers" layoutX="25.0"
+							layoutY="375.0" minWidth="-Infinity"
+							onMouseClicked="#onSelectedAnswer" prefHeight="250.0"
+							style="-fx-background-color: #1c1c1c;"
+							AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0"
+							AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="400.0">
+							<BorderPane.margin>
+								<Insets left="25.0" />
+							</BorderPane.margin>
+						</ListView>
+						<Label fx:id="errorLabel2" layoutX="194.0" layoutY="357.0"
+							textFill="#ff0202">
+							<font>
+								<Font name="Arial" size="13.0" />
+							</font>
+						</Label>
+					</children>
+				</AnchorPane>
+			</center>
+		</BorderPane>
+	</children>
+</AnchorPane>

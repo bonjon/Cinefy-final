@@ -1,0 +1,32 @@
+package logic.view;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Servlet implementation class LogoutServlet per il Logout.
+ */
+
+@WebServlet("/LogoutServlet")
+public class LogoutServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
+    
+    public LogoutServlet() {
+        super();
+    }
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session  = request.getSession();
+		String logout = (String) request.getParameter("logout");
+		if(logout != null) {
+			session.invalidate();
+		}
+		response.sendRedirect(request.getContextPath());
+	}
+}
