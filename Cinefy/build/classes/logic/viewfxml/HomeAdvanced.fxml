@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1480.0"
+	xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="logic.viewfxml.HomeAdvancedBoundary">
+	<children>
+		<BorderPane AnchorPane.bottomAnchor="0.0"
+			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+			AnchorPane.topAnchor="0.0">
+			<left>
+				<AnchorPane maxWidth="-Infinity" minWidth="-Infinity"
+					prefWidth="220.0" style="-fx-background-color: #121212;"
+					BorderPane.alignment="CENTER">
+					<children>
+						<Label layoutX="48.0" layoutY="14.0" text="Cinefy"
+							textFill="#f5c518" AnchorPane.topAnchor="14.0">
+							<font>
+								<Font name="DejaVu Sans Mono Bold" size="33.0" />
+							</font>
+						</Label>
+						<Label fx:id="home" layoutX="75.0" layoutY="320.0"
+							text="Home" textFill="#f5c518" underline="true"
+							AnchorPane.bottomAnchor="500.0">
+							<font>
+								<Font name="Arial Bold Italic" size="25.0" />
+							</font>
+						</Label>
+						<Label fx:id="answer" layoutX="66.0" layoutY="352.0"
+							onMouseClicked="#onAnswerClicked" text="Answer"
+							textFill="#f5c518" AnchorPane.bottomAnchor="338.0">
+							<font>
+								<Font name="Arial" size="25.0" />
+							</font>
+						</Label>
+						<Label fx:id="playlists" layoutX="62.0" layoutY="608.0"
+							onMouseClicked="#onPlaylistsClicked" text="Playlists"
+							textFill="#f5c518" AnchorPane.bottomAnchor="200.0">
+							<font>
+								<Font name="Arial" size="25.0" />
+							</font>
+						</Label>
+						<Label fx:id="profile" layoutX="73.0" layoutY="676.0"
+							onMouseClicked="#onProfileClicked" text="Profile"
+							textFill="#f5c518" AnchorPane.bottomAnchor="60.0">
+							<font>
+								<Font name="Arial" size="25.0" />
+							</font>
+						</Label>
+						<Line endX="100.0" layoutX="110.0" layoutY="71.0"
+							startX="-100.0" stroke="#f5c518" />
+					</children>
+				</AnchorPane>
+			</left>
+			<center>
+				<AnchorPane style="-fx-background-color: #1c1c1c;"
+					BorderPane.alignment="CENTER">
+					<children>
+						<Label layoutX="10.0" layoutY="16.0"
+							style="-fx-background-color: transparent;" text="Search Film"
+							textFill="#f5c518" AnchorPane.leftAnchor="25.0"
+							AnchorPane.topAnchor="20.0">
+							<font>
+								<Font name="Arial Bold" size="17.0" />
+							</font>
+						</Label>
+						<TextField fx:id="movie" layoutX="122.0" layoutY="17.0"
+							onKeyPressed="#onEnterPressed"
+							style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;"
+							AnchorPane.leftAnchor="157.0" AnchorPane.topAnchor="17.0" />
+						<WebView fx:id="web" layoutX="25.0" layoutY="185.0"
+							maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0"
+							prefHeight="-1.0" prefWidth="-1.0" visible="false"
+							AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="25.0"
+							AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="185.0" />
+						<SplitMenuButton fx:id="splitMenu" layoutX="328.0"
+							layoutY="17.0" mnemonicParsing="false"
+							style="-fx-body-color: #121212; -fx-border-color: #f5c518#f5c518;"
+							text="Search by:" textFill="#f5c518"
+							AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="17.0">
+							<items>
+								<MenuItem mnemonicParsing="false"
+									onAction="#onDirectorPressed" text="Director" />
+								<MenuItem mnemonicParsing="false"
+									onAction="#onNationPressed" text="Nation" />
+								<MenuItem mnemonicParsing="false"
+									onAction="#onActorPressed" text="Actor" />
+								<MenuItem mnemonicParsing="false"
+									onAction="#onYearPressed" text="Release year" />
+								<MenuItem mnemonicParsing="false"
+									onAction="#onGenrePressed" text="Genre" />
+							</items>
+							<font>
+								<Font name="Arial Bold" size="13.0" />
+							</font>
+						</SplitMenuButton>
+						<ListView fx:id="listView" layoutX="25.0" layoutY="70.0"
+							onMouseClicked="#onSelectedFilm" prefHeight="100.0"
+							style="-fx-background-color: #1c1c1c;"
+							AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0"
+							AnchorPane.topAnchor="70.0" />
+						<Label fx:id="errorLabel" layoutX="506.0" layoutY="22.0"
+							textFill="#ff0202" AnchorPane.leftAnchor="506.0">
+							<font>
+								<Font name="Arial" size="13.0" />
+							</font>
+						</Label>
+					</children>
+				</AnchorPane>
+			</center>
+		</BorderPane>
+	</children>
+</AnchorPane>
