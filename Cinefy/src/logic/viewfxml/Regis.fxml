@@ -109,7 +109,7 @@
 			<left>
 				<AnchorPane prefHeight="720.0" prefWidth="740.0" style="-fx-background-color: #121212;" BorderPane.alignment="CENTER">
 					<children>
-						<ImageView blendMode="COLOR_DODGE" fitHeight="720.0" fitWidth="740.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<ImageView fx:id="cinema" blendMode="COLOR_DODGE" fitHeight="720.0" fitWidth="740.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<image>
 								<Image url="@../../../res/cinema.png" />
 							</image>

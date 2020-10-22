@@ -16,11 +16,11 @@
 			<left>
 				<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="740.0" style="-fx-background-color: #121212;" BorderPane.alignment="CENTER">
 					<children>
-						<ImageView blendMode="COLOR_DODGE" fitHeight="720.0" fitWidth="740.0" pickOnBounds="true" preserveRatio="true">
-							<image>
-								<Image url="@../../../res/cinema.png" />
-							</image>
-						</ImageView>
+                  <ImageView fx:id="cinema" blendMode="COLOR_DODGE" fitHeight="720.0" fitWidth="740.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../res/cinema.png" />
+                     </image>
+                  </ImageView>
 						<Label layoutX="99.0" layoutY="491.0" prefHeight="63.0" text="Have a great&#10;interaction with &#10;our cinema experts" textFill="#f5c518" AnchorPane.leftAnchor="99.0" AnchorPane.topAnchor="491.0">
 							<font>
 								<Font name="Arial" size="15.0" />
@@ -103,9 +103,9 @@
       								</Label>
       								<Button layoutX="14.0" layoutY="86.0" mnemonicParsing="false" style="-fx-background-color: #4764A7; -fx-background-radius: 30 30 30 30;" text="Login with facebook" textFill="WHITE" AnchorPane.topAnchor="86.0">
       									<graphic>
-      										<ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+      										<ImageView fx:id="facebook" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
       											<image>
-      												<Image url="@../../../res/facebook.png" />
+      												<Image url="@../../../WebContent/img/facebook.png" />
       											</image>
       										</ImageView>
       									</graphic>

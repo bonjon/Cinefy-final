@@ -1,24 +1,31 @@
 package logic.viewfxml;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import logic.bean.GeneralUserBean;
 import logic.controllers.LoginController;
 import logic.exceptions.FieldEmptyException;
+import logic.utils.FileManager;
 import logic.utils.SessionUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 
-public class LoginBoundary {
+public class LoginBoundary implements Initializable {
 
 	@FXML
 	public TextField tfUser;
@@ -34,6 +41,9 @@ public class LoginBoundary {
 	public Label passwordError;
 	@FXML
 	private Label userPassInvalid;
+	@FXML
+	private ImageView cinema, facebook;
+
 	
 	@FXML
 	public void onSignInPressed(ActionEvent event) throws SQLException, IOException, FieldEmptyException, ClassNotFoundException {
@@ -99,7 +109,6 @@ public class LoginBoundary {
 	@FXML
 	public void onRegistrationPressed(ActionEvent event) throws IOException {
 		try {
-			System.out.println("ciao");
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Regis.fxml"));
 
 			Scene sc = ((Node) event.getSource()).getScene();
@@ -122,5 +131,20 @@ public class LoginBoundary {
 		}
 		return;
 }
+
+
+
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		String path = FileManager.PROJECT + "cinema.png";
+		String path2 = FileManager.PROJECT + "facebook.png";
+		File file = new File(path);
+		Image img = new Image(file.toURI().toString());
+		this.cinema.setImage(img);
+		File file2 = new File(path2);
+		Image img2 = new Image(file2.toURI().toString());
+		this.facebook.setImage(img2);
+	}
 
 }

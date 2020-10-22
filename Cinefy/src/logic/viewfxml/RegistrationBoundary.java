@@ -5,16 +5,19 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Files;
 //import java.nio.file.Files;
 //import java.util.logging.Level;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -38,7 +41,7 @@ import logic.exceptions.FieldTooLongException;
 import logic.utils.FileManager;
 import logic.utils.Roles;
 
-public class RegistrationBoundary {
+public class RegistrationBoundary implements Initializable {
 
 	@FXML
 	private Button btnBacktologin;
@@ -62,7 +65,7 @@ public class RegistrationBoundary {
 	private SplitMenuButton splitMenuProf;
 
 	@FXML
-	private ImageView ivProfilepic;
+	private ImageView ivProfilepic, cinema;
 	
 	@FXML
 	private Label userError;
@@ -359,5 +362,16 @@ public class RegistrationBoundary {
 		imageChanged=false;
 		
 		}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		String path = FileManager.PROJECT + "cinema.png";
+		File file = new File(path);
+		Image img = new Image(file.toURI().toString());
+		this.cinema.setImage(img);
+		File file2 = new File(defaultPath);
+		Image img2 = new Image(file2.toURI().toString());
+		this.ivProfilepic.setImage(img2);		
+	}
 
 }
