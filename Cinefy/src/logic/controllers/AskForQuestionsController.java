@@ -1,6 +1,7 @@
 package logic.controllers;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 import logic.bean.AdvancedUserBean;
@@ -50,7 +51,7 @@ public class AskForQuestionsController extends Controller {
 		DomandaDAO dd = new DomandaDAO();
 		List<Domanda> ld = dd.getQuestions(username, role);
 		if (ld == null)
-			return null;
+			return Collections.emptyList();
 		return this.convertQuestionList(ld);
 	}
 
