@@ -2,7 +2,7 @@ package logic.viewfxml;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.Label;
-
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 
 import javafx.scene.layout.AnchorPane;
@@ -50,7 +50,20 @@ public class SelectedQuestionBoundary  {
 	@FXML
 	private TextArea taAnswer;
 	@FXML
-	private AnchorPane suggestionPane;
+	private CheckBox cbColleague;
+	@FXML
+	private CheckBox cbResources;
+	@FXML
+	private TextField tfColleague;
+	@FXML
+	private SplitMenuButton splitMenuReason;
+	@FXML
+	private TextField tfWiki;
+	@FXML
+	private TextField tfYoutube;
+	@FXML
+	private AnchorPane advicePane;
+	
 	@FXML
 	private TextField tfFilm1;
 	@FXML
@@ -80,10 +93,10 @@ public class SelectedQuestionBoundary  {
 	private String beginnerName;
 	private String selQuestion;
 	private String profession;
-	private String technical = "technical";
+	private String general = "general";
 	private String filmAdvice = "film";
 	
-	boolean change=false; //booleano: true se la grafica è technical answer, false se la grafica è film advice
+	boolean change=false; //booleano: true se la grafica è general answer, false se la grafica è film advice
 
 	
 	
@@ -117,16 +130,34 @@ public class SelectedQuestionBoundary  {
 		
 		
 		if(change==false) {
-			//caso in cui la grafica è technical answer
-			String technicalAnswer = taAnswer.getText();
-			String advices = taExplanation.getText();
+			//caso in cui la grafica è general answer
+			String generalAnswer = taAnswer.getText();
+			boolean colleague = cbColleague.isSelected();
+			boolean resources = cbResources.isSelected(); 
 			
-			rb.setContenuto(technicalAnswer);
-			rb.setExplanation(advices);
-			rb.setChoice(technical);
+			rb.setChoice(general);
 			
+			rb.setContenuto(generalAnswer);
 			
-			aqc.createAnswer(rb );
+			if(colleague==true) {
+				String reasonChoice = splitMenuReason.getText();
+				String colleagueName = cbColleague.getText();
+				
+				rb.setColleagueFlag(colleague);
+				rb.setColleagueName(colleagueName);
+				rb.setReasonChoice(reasonChoice);
+			}
+			
+			if(resources==true) {
+				String wiki= tfWiki.getText();
+				String youtube = tfYoutube.getText();
+				
+				rb.setResourceFlag(resources);
+				rb.setWikiLink(wiki);
+				rb.setYoutubeLink(youtube);
+			}
+			
+			aqc.createAnswer(rb);
 		}
 		else {
 			//caso in cui la grafica è film advices
@@ -152,17 +183,15 @@ public class SelectedQuestionBoundary  {
 	@FXML
 	public void onSwitchPressed(ActionEvent event) {
 		if(change==true) {
-			laType.setText("Technical answer");
-			taExplanation.setPromptText("Suggestions for practicing");
+			laType.setText("General answer");
 			technicalPane.setVisible(true);
-			suggestionPane.setVisible(false);
+			advicePane.setVisible(false);
 			change=false;
 		}
 		else {
 			laType.setText("Film advice");
-			taExplanation.setPromptText("Explanation");
 			technicalPane.setVisible(false);
-			suggestionPane.setVisible(true);
+			advicePane.setVisible(true);
 			change=true;
 		}
 	}
@@ -170,7 +199,7 @@ public class SelectedQuestionBoundary  {
 
 	public void init(DomandaBean db) throws AdvancedNotFoundException, SQLException  {
 		
-			selectedQuestion = db;
+		selectedQuestion = db;
 		
 		this.agc = AdvancedGraphicChange.getInstance();
 		advancedName = db.getAdvancedName();
@@ -183,8 +212,8 @@ public class SelectedQuestionBoundary  {
 		
 		this.selQuestion = selectedQuestion.getContenuto();
 		laSelquestion.setText(selQuestion);
-		laType.setText("Technical answer");
-		taExplanation.setPromptText("Suggestions for practicing");
+		laType.setText("General answer");
+		
 		aub = new AdvancedUserBean();
 		aub = aqc.getAdvanced(advancedName);
 		String bio = aub.getBio();

@@ -53,8 +53,18 @@ public class ManageAnswerBoundary {
 	
 
 	@FXML
-	public void onReject(ActionEvent event) {
-		
+	public void onReject(ActionEvent event) throws IOException  {
+		try {
+		this.aqc.rejectAnswer(this.selectedAnswer);
+		this.agc.toHomepage(this.btnReject.getScene());
+		}
+		catch (NumberFormatException e) {
+			e.printStackTrace();
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
 	}
 	
 	public void init(RispostaBean rb) {

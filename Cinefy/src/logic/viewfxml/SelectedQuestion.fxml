@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1480.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1480.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<left>
@@ -27,7 +30,7 @@
 								<Font name="Arial" size="25.0" />
 							</font>
 						</Label>
-						<Label fx:id="answer" layoutX="85.0" layoutY="351.0" text="Answer" textFill="#f5c518" underline="true" AnchorPane.bottomAnchor="340.0">
+						<Label fx:id="answer" layoutX="67.0" layoutY="345.0" text="Answer" textFill="#f5c518" underline="true" AnchorPane.bottomAnchor="345.0">
 							<font>
 								<Font name="Arial Bold Italic" size="25.0" />
 							</font>
@@ -49,26 +52,45 @@
 			<center>
 				<AnchorPane style="-fx-background-color: #1c1c1c;" BorderPane.alignment="CENTER">
 					<children>
+						<Button fx:id="btnSubmit" layoutX="677.0" layoutY="657.0" mnemonicParsing="false" onAction="#onSubmitBtn" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;" text="Submit" textFill="#f5c518" AnchorPane.topAnchor="657.0">
+							<font>
+								<Font size="18.0" />
+							</font>
+						</Button>
 						<Label layoutX="6.0" layoutY="6.0" text="Answer to this user" textFill="#f5c518" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
 							<font>
 								<Font name="Arial Bold" size="17.0" />
 							</font>
 						</Label>
-						<ImageView fitHeight="250.0" fitWidth="300.0" layoutX="20.0" layoutY="40.0" pickOnBounds="true" AnchorPane.topAnchor="60.0">
+                  <AnchorPane layoutX="340.0" layoutY="288.0" prefHeight="44.0" prefWidth="815.0">
+                     <children>
+                        <Button fx:id="btnSwitch" layoutX="529.0" layoutY="8.0" mnemonicParsing="false" onAction="#onSwitchPressed" prefHeight="28.0" prefWidth="272.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #1c1c1c;" text="Switch type of answer" textFill="#f5c518" underline="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Label fx:id="laType" layoutY="11.0" text="Type of answer..." textFill="#f5c518">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+						<ImageView fitHeight="183.0" fitWidth="232.0" layoutX="20.0" layoutY="40.0" pickOnBounds="true" AnchorPane.topAnchor="60.0">
 							<image>
 								<Image url="@../../../res/profilePictures/default.png" />
 							</image>
 						</ImageView>
-                  <AnchorPane layoutX="340.0" layoutY="60.0">
+                  <AnchorPane layoutX="340.0" layoutY="56.0" prefHeight="194.0" prefWidth="759.0">
                      <children>
       						<Label text="Username" textFill="#f5c518">
       							<font>
       								<Font name="Arial Bold" size="17.0" />
       							</font>
       						</Label>
-      						<Label fx:id="laUsername" layoutY="40.0" text="username..." textFill="#f5c518">
+      						<Label fx:id="laUsername" layoutY="40.0" text="username..." textFill="#ffdf87d6">
       							<font>
-      								<Font name="Arial" size="17.0" />
+      								<Font size="14.0" />
       							</font>
       						</Label>
       						<Label layoutY="80.0" prefHeight="50.0" prefWidth="205.0" text="Number of questions &#10;in queue from this user" textFill="#f5c518">
@@ -76,9 +98,9 @@
       								<Font name="Arial Bold" size="17.0" />
       							</font>
       						</Label>
-      						<Label fx:id="laNumber" layoutY="145.0" text="number..." textFill="#f5c518">
+      						<Label fx:id="laNumber" layoutY="147.0" text="number..." textFill="#ffe283d6">
       							<font>
-      								<Font name="Arial" size="17.0" />
+      								<Font size="14.0" />
       							</font>
       						</Label>
                         <AnchorPane layoutX="350.0">
@@ -88,93 +110,132 @@
                                     <Font size="17.0" />
                                  </font>
                               </Label>
-            						<Label fx:id="laBio" alignment="TOP_LEFT" layoutY="41.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="179.0" prefWidth="409.0" text="bio..." textFill="#f5c518" wrapText="true">
+            						<Label fx:id="laBio" alignment="TOP_LEFT" layoutY="41.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="135.0" prefWidth="409.0" text="bio..." textFill="#ffe085d7" wrapText="true">
             							<font>
-            								<Font size="19.0" />
+            								<Font size="15.0" />
             							</font>
             						</Label>
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-						<Button fx:id="btnSubmit" layoutX="499.0" layoutY="630.0" mnemonicParsing="false" onAction="#onSubmitBtn" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;" text="Submit" textFill="#f5c518" AnchorPane.topAnchor="650.0">
-							<font>
-								<Font size="18.0" />
-							</font>
-						</Button>
 						<Label fx:id="labelError" layoutX="690.0" layoutY="302.0" textFill="RED" />
-                  <AnchorPane layoutX="340.0" layoutY="406.0" prefHeight="125.0" prefWidth="766.0">
+                  <AnchorPane fx:id="technicalPane" layoutX="336.0" layoutY="332.0" prefHeight="320.0" prefWidth="763.0">
                      <children>
-                        <AnchorPane fx:id="technicalPane" prefHeight="125.0" prefWidth="763.0">
+      						<TextArea fx:id="taAnswer" focusTraversable="false" prefHeight="138.0" prefWidth="763.0" promptText="Write your answer here..." style="-fx-control-inner-background: #121212; -fx-border-color: #f5c518; -fx-prompt-text-fill: GREY; -fx-text-fill: WHITE;" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      							<font>
+      								<Font size="17.0" />
+      							</font>
+      						</TextArea>
+                        <AnchorPane layoutX="36.0" layoutY="155.0" prefHeight="151.0" prefWidth="692.0">
                            <children>
-            						<TextArea fx:id="taAnswer" focusTraversable="false" prefHeight="125.0" prefWidth="763.0" promptText="Write your answer here..." style="-fx-control-inner-background: #121212; -fx-border-color: #f5c518; -fx-prompt-text-fill: GREY; -fx-text-fill: WHITE;" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            							<font>
-            								<Font size="17.0" />
-            							</font>
-            						</TextArea>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane fx:id="suggestionPane" layoutX="13.0" visible="false">
+                              <TextField fx:id="tfColleague" layoutX="34.0" layoutY="58.0" prefHeight="26.0" prefWidth="287.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextField>
+                              <CheckBox fx:id="cbColleague" layoutX="7.0" layoutY="7.0" mnemonicParsing="false" text="Suggest to interact also with a colleague:" textFill="#f5c518">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></CheckBox>
+                              <SplitMenuButton fx:id="splitMenuReason" layoutX="34.0" layoutY="104.0" mnemonicParsing="false" text="Why I suggest him">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" text="personal knowledge" />
+                                  <MenuItem mnemonicParsing="false" text="Renowned person in this sector" />
+                                </items>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </SplitMenuButton>
+                              <CheckBox fx:id="cbResources" layoutX="382.0" layoutY="7.0" mnemonicParsing="false" text="Suggest additional web resources:" textFill="#f5c518">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></CheckBox>
+                              <Label layoutX="409.0" layoutY="103.0" text="YouTube link" textFill="#f5c518">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfYoutube" layoutX="409.0" layoutY="121.0" prefHeight="30.0" prefWidth="272.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="409.0" layoutY="38.0" text="Wikipedia link" textFill="#f5c518">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfWiki" layoutX="409.0" layoutY="56.0" prefHeight="30.0" prefWidth="272.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="34.0" layoutY="38.0" text="Advanced user' s name" textFill="#f5c518">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                           </children></AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="advicePane" layoutX="340.0" layoutY="332.0" prefHeight="314.0" prefWidth="762.0" visible="false">
+                     <children>
+                        <TextArea fx:id="taExplanation" focusTraversable="false" layoutX="-1.0" layoutY="71.0" prefHeight="243.0" prefWidth="763.0" promptText="Why do you suggest this film?" style="-fx-control-inner-background: #121212; -fx-border-color: #f5c518; -fx-prompt-text-fill: GREY; -fx-text-fill: WHITE;" wrapText="true">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </TextArea>
+                        <AnchorPane prefHeight="58.0" prefWidth="734.0">
                            <children>
                               <Label layoutX="1.0" text="Film that I suggest" textFill="#f5c518">
                                  <font>
-                                    <Font name="Arial Bold" size="14.0" />
+                                    <Font size="12.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="tfFilm1" layoutX="1.0" layoutY="18.0" prefHeight="30.0" prefWidth="272.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
                                  <font>
-                                    <Font name="Arial" size="13.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </TextField>
                               <TextField fx:id="tfName1" layoutX="298.0" layoutY="18.0" prefHeight="30.0" prefWidth="242.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
                                  <font>
-                                    <Font name="Arial" size="13.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </TextField>
                               <TextField fx:id="tfGenre1" layoutX="572.0" layoutY="20.0" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
                                  <font>
-                                    <Font name="Arial" size="13.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </TextField>
                               <Label fx:id="laName" layoutX="298.0" text="Name" textFill="#f5c518">
                                  <font>
-                                    <Font name="Arial Bold" size="14.0" />
+                                    <Font size="12.0" />
                                  </font>
                               </Label>
                               <Label layoutX="572.0" text="Genre" textFill="#f5c518">
                                  <font>
-                                    <Font name="Arial Bold" size="14.0" />
+                                    <Font size="12.0" />
                                  </font>
                               </Label>
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="19.966796875" layoutY="350.0">
+                  <AnchorPane layoutX="20.0" layoutY="295.0" prefHeight="320.0" prefWidth="295.0">
                      <children>
-                        <Label layoutX="0.033203125" text="You' re answering &#10;the following question" textFill="#f5c518">
+                        <Label layoutY="4.0" text="The question" textFill="#f5c518">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label fx:id="laSelquestion" alignment="TOP_LEFT" layoutX="1.033203125" layoutY="56.0" prefHeight="167.0" prefWidth="299.0" style="-fx-background-color: #121212; -fx-text-fill: WHITE; -fx-border-color: #f5c518;" text="selected question..." />
+                        <AnchorPane layoutY="36.0" prefHeight="284.0" prefWidth="295.0">
+                           <children>
+                              <Label fx:id="laSelquestion" alignment="TOP_LEFT" prefHeight="293.0" prefWidth="295.0" text="selected question..." textFill="#ffe085d7" wrapText="true" />
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <Label fx:id="laType" layoutX="340.0" layoutY="350.0" text="Type of answer..." textFill="#f5c518">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Label>
-                  <TextArea fx:id="taExplanation" focusTraversable="false" layoutX="340.0" layoutY="544.0" prefHeight="84.0" prefWidth="762.0" promptText="Suggestions for practicing or explanation..." style="-fx-control-inner-background: #121212; -fx-border-color: #f5c518; -fx-prompt-text-fill: GREY; -fx-text-fill: WHITE;" wrapText="true">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </TextArea>
-                  <Button fx:id="btnSwitch" layoutX="63.0" layoutY="600.0" mnemonicParsing="false" onAction="#onSwitchPressed" prefHeight="28.0" prefWidth="214.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #1c1c1c;" text="Switch type of answer" textFill="#f5c518" underline="true">
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
-                  </Button>
 					</children>
 				</AnchorPane>
 			</center>
