@@ -15,8 +15,8 @@ import logic.entities.Domanda;
 import logic.entities.Risposta;
 import logic.exceptions.AdvancedNotFoundException;
 import logic.utils.Controller;
-import logic.utils.FilmAdvice;
-import logic.utils.TechnicalAnswer;
+import logic.utils.FilmAdviceFactory;
+import logic.utils.GeneralAnswerFactory;
 
 public class AnswerQuestionsController extends Controller{
 	
@@ -58,16 +58,16 @@ public class AnswerQuestionsController extends Controller{
 	public void createAnswer(RispostaBean rb) throws NumberFormatException, SQLException {
 		
 		RispostaDAO rd;
-		TechnicalAnswer ta;
-		FilmAdvice fa;
+		GeneralAnswerFactory gaf;
+		FilmAdviceFactory faf;
 		
-		if(rb.getChoice()=="technical") {
-			ta = new TechnicalAnswer();
-			answer = ta.answerCreation(rb);
+		if(rb.getChoice()=="general") {
+			gaf = new GeneralAnswerFactory();
+			answer = gaf.answerCreation(rb);
 		}
 		else if (rb.getChoice()=="film") {
-			fa = new FilmAdvice();
-			answer = fa.answerCreation(rb);
+			faf = new FilmAdviceFactory();
+			answer = faf.answerCreation(rb);
 			
 			
 		}
