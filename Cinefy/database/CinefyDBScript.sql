@@ -156,12 +156,9 @@ CREATE TABLE IF NOT EXISTS `CinefyDB`.`Playlist` (
   `playlistPic` VARCHAR(45) NULL DEFAULT 'default2.jpg',
   `AdvancedName` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL,
   PRIMARY KEY (`idPlaylist`),
-  INDEX `fk_Playlist_Advanced1_idx` (`AdvancedName` ASC) VISIBLE,
-  CONSTRAINT `fk_Playlist_Advanced1`
-    FOREIGN KEY (`AdvancedName`)
-    REFERENCES `CinefyDB`.`Advanced` (`username`))
+  INDEX `fk_Playlist_Advanced1_idx` (`AdvancedName` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 14
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin;
 
@@ -409,11 +406,10 @@ DELIMITER ;
 
 DELIMITER $$
 USE `CinefyDB`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `aggiungi_playlist`(IN var_name varchar(45), IN var_advanced varchar(16), IN var_nome_film varchar(200), IN var_date date, IN var_pic varchar(45))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `aggiungi_playlist`(IN var_name varchar(45), IN var_advanced varchar(16), IN var_pic varchar(45))
 BEGIN
-	declare var_film int;
-    declare var_playlist int;
-    insert into Playlist (AdvancedName, Voto, DataPubblicazione, numerodivoti, Nome, playlistPic) values (var_advanced, 0.0,  var_date, 0, var_name, var_pic);  
+    insert into Playlist (AdvancedName, Voto, DataPubblicazione, numerodivoti, Nome, playlistPic) values (var_advanced, 0.0,  now(), 0, var_name, var_pic);
+    select * from Playlist where idPlaylist = @@IDENTITY;
 END$$
 
 DELIMITER ;
@@ -837,7 +833,7 @@ BEGIN
 	declare var_controllo double;
     declare var_media double;
     declare var_new_numero int;
-	/*insert into VotaPlaylist (`BeginnerName`, `idPlaylist`) values (var_beginner, var_id);*/
+	insert into VotaPlaylist (`BeginnerName`, `idPlaylist`) values (var_beginner, var_id);
 	select Voto, numerodivoti from Playlist where idPlaylist = var_id into var_controllo, var_new_numero;
     if var_controllo = 0.0 then
 		update Playlist set Voto = var_voto, numerodivoti = 1 where idPlaylist = var_id;
