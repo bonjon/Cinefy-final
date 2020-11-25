@@ -79,6 +79,7 @@ public class PlaylistDetailsADBoundary {
 
 	public void init(PlaylistBean pb) {
 		this.pdc = new PlaylistDetailsController();
+		this.agc = AdvancedGraphicChange.getInstance();
 		this.selectedPlaylist = pb;
 		this.playlistName.setText(pb.getName());
 		this.advancedName.setText(pb.getAdvancedName());

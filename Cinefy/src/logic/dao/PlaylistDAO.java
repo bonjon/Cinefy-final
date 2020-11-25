@@ -28,17 +28,16 @@ public class PlaylistDAO {
 			s.setString(1, name);
 			s.setString(2, username);
 			s.setString(3, playlistPic);
-			s.executeUpdate();
 			try (ResultSet rs = s.executeQuery()) {
-				if (rs.next()) {
-					int id = rs.getInt("idPlaylist");
-					String advanced = rs.getString("AdvancedName");
-					double voto = rs.getDouble("Voto");
-					Date data = rs.getDate("DataPubblicazione");
-					int numerodivoti = rs.getInt("numerodivoti");
-					String playlistPath = rs.getString("playlistPic");
-					p = new Playlist(id, advanced, voto, numerodivoti, data, name, playlistPath);
-				}
+				if(!rs.first())
+					System.out.println("Error");
+				int id = rs.getInt("idPlaylist");
+				String advanced = rs.getString("AdvancedName");
+				double voto = rs.getDouble("Voto");
+				Date data = rs.getDate("DataPubblicazione");
+				int numerodivoti = rs.getInt("numerodivoti");
+				String playlistPath = rs.getString("playlistPic");
+				p = new Playlist(id, advanced, voto, numerodivoti, data, name, playlistPath);
 			}
 		}
 		return p;

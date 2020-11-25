@@ -62,6 +62,8 @@ public class CreatePlaylistBoundary implements Initializable {
 	@FXML
 	private Label profile;
 	@FXML
+	private Label labelError;
+	@FXML
 	private ImageView imageView;
 	@FXML
 	private ListView<FilmBean> filmPlaylist;
@@ -137,6 +139,7 @@ public class CreatePlaylistBoundary implements Initializable {
 			}
 			this.pb = this.cpc.createPlaylist(this.playlistName.getText(), gub.getUsername(), pathPic);
 			this.btnAdd.setVisible(true);
+			this.btnOk.setVisible(false);
 			this.tvStatus.setText("Now you must insert films");
 			this.movie.setVisible(true);
 			this.filmPlaylist.setVisible(true);
@@ -154,13 +157,14 @@ public class CreatePlaylistBoundary implements Initializable {
 		try {
 			this.cpc.addFilm(Integer.parseInt(this.pb.getId()), this.selected);
 		} catch (FieldEmptyException e) {
-			e.printStackTrace();
+			this.labelError.setText(e.getMessage());
 		}
 	}
 
 	@FXML
 	public void onEnterPressed(KeyEvent event) {
 		this.filmPlaylist.getItems().clear();
+		this.labelError.setText("");
 		ViewListOfFilmsController vfc = new ViewListOfFilmsController();
 		if(event.getCode() == KeyCode.ENTER) {
 			String a = this.movie.getText().toString();
@@ -188,9 +192,9 @@ public class CreatePlaylistBoundary implements Initializable {
 				});
 
 			} catch (FilmNotFoundException e) {
-				e.printStackTrace();
+				this.labelError.setText(e.getMessage());
 			} catch (SQLException e) {
-				e.printStackTrace();
+				this.labelError.setText("Probably you also add this film!");
 			}
 		}
 	}
@@ -211,6 +215,10 @@ public class CreatePlaylistBoundary implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		String path = FileManager.PLAYLISTS + File.separator + "default2.jpg";
+		File file = new File(path);
+		Image img = new Image(file.toURI().toString());
+		this.imageView.setImage(img);
 		this.agc = AdvancedGraphicChange.getInstance();
 		this.cpc = new CreatePlaylistController();
 		list = FXCollections.observableArrayList();;

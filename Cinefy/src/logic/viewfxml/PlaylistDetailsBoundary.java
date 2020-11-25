@@ -44,6 +44,8 @@ public class PlaylistDetailsBoundary {
 	@FXML
 	private Label profile;
 	@FXML
+	private Label labelError;
+	@FXML
 	private ListView<FilmBean> filmPlaylist;
 	@FXML
 	private Label playlistName;
@@ -92,7 +94,7 @@ public class PlaylistDetailsBoundary {
 		try {
 			pdc.votePlaylist(vote, this.selectedPlaylist.getId(), gub.getUsername());
 		} catch (NumberFormatException | SQLException e) {
-			this.btnOk.setText("YOU ALREADY VOTE THIS PLAYLIST!");
+			this.labelError.setText("YOU ALREADY VOTE THIS PLAYLIST!");
 		}
 	}
 
