@@ -46,9 +46,13 @@ public class QuestionDetailsBoundary {
 	@FXML
 	private Label labelCheck;
 	@FXML
+	private Label labelError;
+	@FXML
 	private Slider sliderVote;
 	@FXML
 	private Button btnOk;
+	@FXML
+	private Button btnBack;
 	@FXML
 	private Label labelQuestion;
 	@FXML
@@ -77,10 +81,16 @@ public class QuestionDetailsBoundary {
 	public void onOk(ActionEvent event) {
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
 		try {
-			this.afc.voteAdvanced(this.selectedQuestion.getAdvancedName(),gub.getUsername(),(int)this.sliderVote.getValue());
+			this.afc.voteAdvanced(this.selectedQuestion.getAdvancedName(), gub.getUsername(),
+					(int) this.sliderVote.getValue());
 		} catch (SQLException e) {
-			e.printStackTrace();
+			this.labelError.setText(e.getMessage());
 		}
+	}
+
+	@FXML
+	public void onBack(ActionEvent event) throws IOException {
+		this.bgc.toAsk(this.btnBack.getScene());
 	}
 
 	public void init(DomandaBean db, String color) {

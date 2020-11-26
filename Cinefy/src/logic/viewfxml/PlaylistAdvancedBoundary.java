@@ -81,7 +81,9 @@ public class PlaylistAdvancedBoundary implements Initializable {
 
 	@FXML
 	public void onSelectedPlaylist(MouseEvent event) throws IOException {
-		if(!list2.isEmpty())
+		if(!list.isEmpty())
+			this.agc.toPlaylistDetails(this.topPlaylist.getScene(), this.topPlaylist.getSelectionModel().getSelectedItem());
+		else if(!list2.isEmpty())
 			this.agc.toPlaylistDetails(this.playlistList.getScene(), this.playlistList.getSelectionModel().getSelectedItem());
 	}
 
@@ -96,8 +98,6 @@ public class PlaylistAdvancedBoundary implements Initializable {
 		list2 = FXCollections.observableArrayList();
 		this.vpc = new ViewPlaylistsController();
 		this.agc = AdvancedGraphicChange.getInstance();
-		this.topPlaylist.setMouseTransparent(true);
-		this.topPlaylist.setFocusTraversable(false);
 		list.removeAll(list);
 		list2.removeAll(list2);
 		try {

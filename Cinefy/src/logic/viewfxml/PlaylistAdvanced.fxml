@@ -76,8 +76,9 @@
 									</font>
 								</Label>
 								<ListView fx:id="topPlaylist" layoutX="20.0"
-									layoutY="40.0" orientation="HORIZONTAL" prefHeight="200.0"
-									prefWidth="1020.0" style="-fx-background-color: #1c1c1c;"
+									layoutY="40.0" onMouseClicked="#onSelectedPlaylist"
+									orientation="HORIZONTAL" prefHeight="200.0" prefWidth="1020.0"
+									style="-fx-background-color: #1c1c1c;"
 									AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
 									AnchorPane.topAnchor="60.0" />
 								<Label layoutX="20.0" layoutY="260.0"

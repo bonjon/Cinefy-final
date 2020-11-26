@@ -61,6 +61,8 @@ public class PlaylistDetailsBoundary {
 	private ImageView playlistPic;
 	@FXML
 	private Button btnOk;
+	@FXML
+	private Button btnBack;
 
 	private BeginnerGraphicChange bgc;
 	private PlaylistBean selectedPlaylist;
@@ -94,8 +96,13 @@ public class PlaylistDetailsBoundary {
 		try {
 			pdc.votePlaylist(vote, this.selectedPlaylist.getId(), gub.getUsername());
 		} catch (NumberFormatException | SQLException e) {
-			this.labelError.setText("YOU ALREADY VOTE THIS PLAYLIST!");
+			this.labelError.setText(e.getMessage());
 		}
+	}
+
+	@FXML
+	public void onBack(ActionEvent event) throws IOException {
+		this.bgc.toPlaylists(this.btnBack.getScene());
 	}
 
 	public void init(PlaylistBean pb) {

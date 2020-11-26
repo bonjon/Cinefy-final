@@ -7,8 +7,9 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -52,6 +53,8 @@ public class PlaylistDetailsADBoundary {
 	private Label voto;
 	@FXML
 	private Label playlistDate;
+	@FXML
+	private Button btnBack;
 
 	private AdvancedGraphicChange agc;
 	private PlaylistBean selectedPlaylist;
@@ -77,6 +80,11 @@ public class PlaylistDetailsADBoundary {
 		this.agc.toProfile(this.profile.getScene());
 	}
 
+	@FXML
+	public void onBack(ActionEvent event) throws IOException {
+		this.agc.toPlaylists(this.btnBack.getScene());
+	}
+	
 	public void init(PlaylistBean pb) {
 		this.pdc = new PlaylistDetailsController();
 		this.agc = AdvancedGraphicChange.getInstance();

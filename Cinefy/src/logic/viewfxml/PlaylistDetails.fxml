@@ -166,6 +166,15 @@
 										<Font name="Arial" size="17.0" />
 									</font>
 								</Label>
+								<Button fx:id="btnBack" layoutX="1211.0" layoutY="17.0"
+									mnemonicParsing="false" onAction="#onBack"
+									style="-fx-background-color: #121212; -fx-background-radius: 30 30 30 30;"
+									text="Back" textFill="#f5c518" AnchorPane.rightAnchor="20.0"
+									AnchorPane.topAnchor="20.0">
+									<font>
+										<Font name="Arial" size="13.0" />
+									</font>
+								</Button>
 							</children>
 						</AnchorPane>
 					</children>

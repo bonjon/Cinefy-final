@@ -56,7 +56,6 @@ public class AdvancedGraphicChange extends GraphicChangeTemplate {
 		loader.setController(sqb);
 		scene.setRoot(loader.load());
 		sqb.init(selectedItem);
-	
 	}
 
 	public void toPlaylists(Scene scene) throws IOException {

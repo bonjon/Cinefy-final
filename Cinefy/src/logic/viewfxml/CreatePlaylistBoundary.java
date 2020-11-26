@@ -77,6 +77,8 @@ public class CreatePlaylistBoundary implements Initializable {
 	private Button btnOk;
 	@FXML
 	private Button btnAdd;
+	@FXML
+	private Button btnBack;
 
 	private AdvancedGraphicChange agc;
 	private CreatePlaylistController cpc;
@@ -153,6 +155,11 @@ public class CreatePlaylistBoundary implements Initializable {
 	}
 
 	@FXML
+	public void onBack(ActionEvent event) throws IOException {
+		this.agc.toPlaylists(this.btnBack.getScene());
+	}
+
+	@FXML
 	public void onAdd(ActionEvent event) throws NumberFormatException, SQLException {
 		try {
 			this.cpc.addFilm(Integer.parseInt(this.pb.getId()), this.selected);
@@ -166,7 +173,7 @@ public class CreatePlaylistBoundary implements Initializable {
 		this.filmPlaylist.getItems().clear();
 		this.labelError.setText("");
 		ViewListOfFilmsController vfc = new ViewListOfFilmsController();
-		if(event.getCode() == KeyCode.ENTER) {
+		if (event.getCode() == KeyCode.ENTER) {
 			String a = this.movie.getText().toString();
 			list.removeAll(list);
 			try {
@@ -221,7 +228,8 @@ public class CreatePlaylistBoundary implements Initializable {
 		this.imageView.setImage(img);
 		this.agc = AdvancedGraphicChange.getInstance();
 		this.cpc = new CreatePlaylistController();
-		list = FXCollections.observableArrayList();;
+		list = FXCollections.observableArrayList();
+		;
 		this.tvStatus.setText("");
 		this.movie.setVisible(false);
 		this.btnAdd.setVisible(false);

@@ -39,7 +39,7 @@ public class QuestionsBoundary {
 	@FXML
 	private TextArea questionArea;
 	@FXML
-	private Button btnSubmit;
+	private Button btnSubmit, btnBack;
 
 	public void init(AdvancedUserBean aub) {
 		selectedAdvanced = aub;
@@ -72,6 +72,11 @@ public class QuestionsBoundary {
 	@FXML
 	public void onProfileClicked(MouseEvent event) throws IOException {
 		this.bgc.toProfile(this.profile.getScene());
+	}
+
+	@FXML
+	public void onBack(ActionEvent event) throws IOException {
+		this.bgc.toAsk(this.btnBack.getScene());
 	}
 
 	@FXML

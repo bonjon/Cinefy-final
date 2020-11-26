@@ -147,6 +147,15 @@
 						</Button>
 						<Label fx:id="labelError" layoutX="690.0" layoutY="302.0"
 							textFill="RED" />
+						<Button fx:id="btnBack" layoutX="1042.0" layoutY="24.0"
+							mnemonicParsing="false" onAction="#onBack"
+							style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;"
+							text="Back" textFill="#f5c518" AnchorPane.rightAnchor="40.0"
+							AnchorPane.topAnchor="20.0">
+							<font>
+								<Font size="14.0" />
+							</font>
+						</Button>
 					</children>
 				</AnchorPane>
 			</center>
