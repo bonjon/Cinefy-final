@@ -810,6 +810,11 @@ BEGIN
 	declare var_media double;
     declare var_controllo double;
     declare var_new_numero int;
+	declare var_check int;
+    select count(*) from VotaAdvanced where `BeginnerName` = var_beginner and `AdvancedName` = var_advanced into var_check;
+    if var_check > 0 then
+		signal sqlstate "45000" set message_text = "You already voted this advanced!";
+	end if;
     insert into VotaAdvanced (`BeginnerName`, `AdvancedName`) values (var_beginner, var_advanced);
     select voto, numerodivoti from Advanced where username = var_advanced into var_controllo, var_new_numero;
     if var_controllo = 0.0 then
@@ -833,7 +838,12 @@ BEGIN
 	declare var_controllo double;
     declare var_media double;
     declare var_new_numero int;
-	insert into VotaPlaylist (`BeginnerName`, `idPlaylist`) values (var_beginner, var_id);
+	declare var_check int;
+    select count(*) from VotaPlaylist where `BeginnerName` = var_beginner and `idPlaylist` = var_id into var_check;
+    if var_check > 0 then
+		signal sqlstate "45000" set message_text = "You already voted this playlist!";
+	end if;
+    insert into VotaPlaylist (`BeginnerName`, `idPlaylist`) values (var_beginner, var_id);
 	select Voto, numerodivoti from Playlist where idPlaylist = var_id into var_controllo, var_new_numero;
     if var_controllo = 0.0 then
 		update Playlist set Voto = var_voto, numerodivoti = 1 where idPlaylist = var_id;
