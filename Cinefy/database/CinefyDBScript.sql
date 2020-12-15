@@ -2,7 +2,7 @@
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
 -- Schema CinefyDB
@@ -33,7 +33,7 @@ COLLATE = utf8_bin;
 CREATE TABLE IF NOT EXISTS `CinefyDB`.`Admin` (
   `username` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL,
   PRIMARY KEY (`username`),
-  INDEX `fk_Admin_GeneralUser1_idx` (`username` ASC) VISIBLE,
+  INDEX `fk_Admin_GeneralUser1_idx` (`username` ASC),
   CONSTRAINT `fk_Admin_GeneralUser1`
     FOREIGN KEY (`username`)
     REFERENCES `CinefyDB`.`GeneralUser` (`username`))
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `CinefyDB`.`Advanced` (
   `numerodivoti` INT NULL DEFAULT '0',
   `tokens` INT NULL DEFAULT '0',
   PRIMARY KEY (`username`),
-  INDEX `fk_Advanced_GeneralUser1_idx` (`username` ASC) VISIBLE,
+  INDEX `fk_Advanced_GeneralUser1_idx` (`username` ASC),
   CONSTRAINT `fk_Advanced_GeneralUser1`
     FOREIGN KEY (`username`)
     REFERENCES `CinefyDB`.`GeneralUser` (`username`))
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `CinefyDB`.`Beginner` (
   `bio` VARCHAR(200) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL DEFAULT NULL,
   `immagine` VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL DEFAULT 'default.png',
   PRIMARY KEY (`username`),
-  INDEX `fk_Beginner_GeneralUser1_idx` (`username` ASC) VISIBLE,
+  INDEX `fk_Beginner_GeneralUser1_idx` (`username` ASC),
   CONSTRAINT `fk_Beginner_GeneralUser1`
     FOREIGN KEY (`username`)
     REFERENCES `CinefyDB`.`GeneralUser` (`username`))
@@ -89,8 +89,8 @@ CREATE TABLE IF NOT EXISTS `CinefyDB`.`Domanda` (
   `BeginnerName` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL,
   `AdvancedName` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Domanda_Beginner1_idx` (`BeginnerName` ASC) VISIBLE,
-  INDEX `fk_Domanda_Advanced1_idx` (`AdvancedName` ASC) VISIBLE,
+  INDEX `fk_Domanda_Beginner1_idx` (`BeginnerName` ASC),
+  INDEX `fk_Domanda_Advanced1_idx` (`AdvancedName` ASC),
   CONSTRAINT `fk_Domanda_Advanced1`
     FOREIGN KEY (`AdvancedName`)
     REFERENCES `CinefyDB`.`Advanced` (`username`),
@@ -112,8 +112,8 @@ CREATE TABLE IF NOT EXISTS `CinefyDB`.`Domanda_incoda` (
   `AdvancedName` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL,
   `BeginnerName` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Domanda_incoda_Advanced1_idx` (`AdvancedName` ASC) VISIBLE,
-  INDEX `fk_Domanda_incoda_Beginner1_idx` (`BeginnerName` ASC) VISIBLE,
+  INDEX `fk_Domanda_incoda_Advanced1_idx` (`AdvancedName` ASC),
+  INDEX `fk_Domanda_incoda_Beginner1_idx` (`BeginnerName` ASC),
   CONSTRAINT `fk_Domanda_incoda_Advanced1`
     FOREIGN KEY (`AdvancedName`)
     REFERENCES `CinefyDB`.`Advanced` (`username`),
@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `CinefyDB`.`Playlist` (
   `playlistPic` VARCHAR(45) NULL DEFAULT 'default2.jpg',
   `AdvancedName` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL,
   PRIMARY KEY (`idPlaylist`),
-  INDEX `fk_Playlist_Advanced1_idx` (`AdvancedName` ASC) VISIBLE)
+  INDEX `fk_Playlist_Advanced1_idx` (`AdvancedName` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 14
 DEFAULT CHARACTER SET = utf8
@@ -170,8 +170,8 @@ CREATE TABLE IF NOT EXISTS `CinefyDB`.`Playlist_Film` (
   `idPlaylist` INT NOT NULL,
   `FilmId` INT NOT NULL,
   PRIMARY KEY (`FilmId`, `idPlaylist`),
-  INDEX `fk_Playlist_has_Film_Film1_idx` (`FilmId` ASC) VISIBLE,
-  INDEX `fk_Playlist_has_Film_Playlist1_idx` (`idPlaylist` ASC) VISIBLE,
+  INDEX `fk_Playlist_has_Film_Film1_idx` (`FilmId` ASC),
+  INDEX `fk_Playlist_has_Film_Playlist1_idx` (`idPlaylist` ASC),
   CONSTRAINT `fk_Playlist_has_Film_Film1`
     FOREIGN KEY (`FilmId`)
     REFERENCES `CinefyDB`.`Film` (`FilmId`),
@@ -188,17 +188,19 @@ COLLATE = utf8_bin;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CinefyDB`.`Risposta` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `Contenuto` VARCHAR(300) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL DEFAULT NULL,
+  `Contenuto` VARCHAR(2048) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL DEFAULT NULL,
   `idDomanda` INT NOT NULL,
   `BeginnerName` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL,
   `AdvancedName` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Risposta_Domanda1_idx` (`idDomanda` ASC) VISIBLE,
-  INDEX `fk_Risposta_Beginner1_idx` (`BeginnerName` ASC) VISIBLE,
-  INDEX `fk_Risposta_Advanced1_idx` (`AdvancedName` ASC) VISIBLE,
+  INDEX `fk_Risposta_Domanda1_idx` (`idDomanda` ASC),
+  INDEX `fk_Risposta_Beginner1_idx` (`BeginnerName` ASC),
+  INDEX `fk_Risposta_Advanced1_idx` (`AdvancedName` ASC),
   CONSTRAINT `fk_Risposta_Advanced1`
     FOREIGN KEY (`AdvancedName`)
-    REFERENCES `CinefyDB`.`Advanced` (`username`),
+    REFERENCES `CinefyDB`.`Advanced` (`username`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
   CONSTRAINT `fk_Risposta_Beginner1`
     FOREIGN KEY (`BeginnerName`)
     REFERENCES `CinefyDB`.`Beginner` (`username`),
@@ -216,14 +218,14 @@ COLLATE = utf8_bin;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CinefyDB`.`Risposta_incoda` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `Contenuto` VARCHAR(300) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL DEFAULT NULL,
+  `Contenuto` VARCHAR(2048) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL DEFAULT NULL,
   `idDomanda` INT NOT NULL,
   `AdvancedName` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL,
   `BeginnerName` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Risposta_incoda_Domanda1_idx` (`idDomanda` ASC) VISIBLE,
-  INDEX `fk_Risposta_incoda_Advanced1_idx` (`AdvancedName` ASC) VISIBLE,
-  INDEX `fk_Risposta_incoda_Beginner1_idx` (`BeginnerName` ASC) VISIBLE,
+  INDEX `fk_Risposta_incoda_Domanda1_idx` (`idDomanda` ASC),
+  INDEX `fk_Risposta_incoda_Advanced1_idx` (`AdvancedName` ASC),
+  INDEX `fk_Risposta_incoda_Beginner1_idx` (`BeginnerName` ASC),
   CONSTRAINT `fk_Risposta_incoda_Advanced1`
     FOREIGN KEY (`AdvancedName`)
     REFERENCES `CinefyDB`.`Advanced` (`username`),
@@ -246,8 +248,8 @@ CREATE TABLE IF NOT EXISTS `CinefyDB`.`VotaAdvanced` (
   `BeginnerName` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL,
   `AdvancedName` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL,
   PRIMARY KEY (`BeginnerName`, `AdvancedName`),
-  INDEX `fk_Beginner_has_Advanced_Advanced1_idx` (`AdvancedName` ASC) VISIBLE,
-  INDEX `fk_Beginner_has_Advanced_Beginner1_idx` (`BeginnerName` ASC) VISIBLE,
+  INDEX `fk_Beginner_has_Advanced_Advanced1_idx` (`AdvancedName` ASC),
+  INDEX `fk_Beginner_has_Advanced_Beginner1_idx` (`BeginnerName` ASC),
   CONSTRAINT `fk_Beginner_has_Advanced_Advanced1`
     FOREIGN KEY (`AdvancedName`)
     REFERENCES `CinefyDB`.`Advanced` (`username`),
@@ -266,8 +268,8 @@ CREATE TABLE IF NOT EXISTS `CinefyDB`.`VotaPlaylist` (
   `BeginnerName` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL,
   `idPlaylist` INT NOT NULL,
   PRIMARY KEY (`BeginnerName`, `idPlaylist`),
-  INDEX `fk_Beginner_has_Playlist_Playlist1_idx` (`idPlaylist` ASC) VISIBLE,
-  INDEX `fk_Beginner_has_Playlist_Beginner1_idx` (`BeginnerName` ASC) VISIBLE,
+  INDEX `fk_Beginner_has_Playlist_Playlist1_idx` (`idPlaylist` ASC),
+  INDEX `fk_Beginner_has_Playlist_Beginner1_idx` (`BeginnerName` ASC),
   CONSTRAINT `fk_Beginner_has_Playlist_Beginner1`
     FOREIGN KEY (`BeginnerName`)
     REFERENCES `CinefyDB`.`Beginner` (`username`),
@@ -307,7 +309,7 @@ DELIMITER $$
 USE `CinefyDB`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `accetta_risposta`(IN var_id int)
 BEGIN
-	declare var_contenuto varchar(300);
+	declare var_contenuto varchar(2048);
     declare var_idDomanda int;
     declare var_advanced varchar(16);
     declare var_beginner varchar(16);
@@ -393,7 +395,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `CinefyDB`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `aggiungi_nuova_risposta`(IN var_contenuto varchar(300), IN var_beginner varchar(16), IN var_advanced varchar(16), IN var_id_domanda int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `aggiungi_nuova_risposta`(IN var_contenuto varchar(2048), IN var_beginner varchar(16), IN var_advanced varchar(16), IN var_id_domanda int)
 BEGIN
 	insert into Risposta_incoda (Contenuto, idDomanda, BeginnerName, AdvancedName) values (var_contenuto, var_id_domanda, var_beginner, var_advanced);
 END$$
@@ -851,6 +853,19 @@ BEGIN
     set var_new_numero = var_new_numero + 1;
     set var_media = (var_controllo + var_voto)/var_new_numero;
 	update Playlist set Voto = var_media, numerodivoti = var_new_numero where idPlaylist = var_id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure stampa_domande_ad_beg
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `CinefyDB`$$
+CREATE PROCEDURE `stampa_domande_ad_beg`(IN var_ad varchar(16),IN var_beg varchar(16))
+BEGIN
+select * from Domanda where AdvancedName = var_ad AND BeginnerName = var_beg;
 END$$
 
 INSERT INTO `Film` (`FilmId`,`Titolo`,`Url`,`Regista`,`AttorePrincipale`,`Anno`,`Nazione`,`Genere`) VALUES
