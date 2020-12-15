@@ -15,6 +15,7 @@ public class AdvancedUserBean extends GeneralUserBean implements Serializable {
 	private String voto;
 	private String numeroVoti;
 	private String tokens;
+	private Integer queueCount;
 
 	public String getProfilePic() {
 		return profilePic;
@@ -62,6 +63,13 @@ public class AdvancedUserBean extends GeneralUserBean implements Serializable {
 
 	public void setTokens(int tokens) {
 		this.tokens = "" + tokens;
+	}
+	public Integer getQueueCount() {
+		return queueCount;
+	}
+	
+	public void setQueueCount(Integer queueCount) {
+		 this.queueCount = queueCount;
 	}
 
 }

@@ -1,30 +1,45 @@
 package logic.viewfxml;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 
 import javafx.scene.layout.AnchorPane;
 import logic.bean.AdvancedUserBean;
+import logic.bean.BeginnerUserBean;
 import logic.bean.DomandaBean;
+//import logic.bean.GeneralUserBean;
 import logic.bean.RispostaBean;
 import logic.controllers.AnswerQuestionsController;
 import logic.exceptions.AdvancedNotFoundException;
-
+import logic.exceptions.FieldEmptyException;
+import logic.utils.FileManager;
+import javafx.scene.input.KeyEvent;
+//import logic.utils.SessionUser;
 import javafx.scene.input.MouseEvent;
 
 
-public class SelectedQuestionBoundary  {
+public class SelectedQuestionBoundary implements Initializable  {
 	@FXML
 	private Label home;
 	@FXML
@@ -33,8 +48,8 @@ public class SelectedQuestionBoundary  {
 	private Label playlists;
 	@FXML
 	private Label profile;
-	/*@FXML
-	private ImageView profilePic;*/
+	@FXML
+	private ImageView ivBegPic;
 	@FXML
 	private Label laUsername;
 	@FXML
@@ -44,7 +59,7 @@ public class SelectedQuestionBoundary  {
 	@FXML
 	private Button btnSubmit;
 	@FXML
-	private Label labelError;
+	private Label submitError;
 	@FXML
 	private AnchorPane technicalPane;
 	@FXML
@@ -97,12 +112,9 @@ public class SelectedQuestionBoundary  {
 	private String filmAdvice = "film";
 	
 	boolean change=false; //booleano: true se la grafica è general answer, false se la grafica è film advice
-
+	boolean buttonFocused=false; //booleano: true se uno dei bottoni dello splitMenuReason è stato pigiato, false altrimenti
 	
-	
-	/*public SelectedQuestionBoundary(DomandaBean db) {
-		this.selectedQuestion = db;
-	}*/
+	Image img;
 
 	@FXML
 	public void onHomeClicked(MouseEvent event) throws IOException {
@@ -127,7 +139,7 @@ public class SelectedQuestionBoundary  {
 		rb.setBeginnerName(beginnerName);
 		rb.setId(Integer.parseInt(id));
 		
-		
+		try {
 		
 		if(change==false) {
 			//caso in cui la grafica è general answer
@@ -141,10 +153,11 @@ public class SelectedQuestionBoundary  {
 			
 			if(colleague==true) {
 				String reasonChoice = splitMenuReason.getText();
-				String colleagueName = cbColleague.getText();
+				String colleagueName = tfColleague.getText();
 				
 				rb.setColleagueFlag(colleague);
 				rb.setColleagueName(colleagueName);
+				if(buttonFocused==false) {reasonChoice=null;};
 				rb.setReasonChoice(reasonChoice);
 			}
 			
@@ -157,7 +170,9 @@ public class SelectedQuestionBoundary  {
 				rb.setYoutubeLink(youtube);
 			}
 			
-			aqc.createAnswer(rb);
+			
+				aqc.createAnswer(rb);
+			
 		}
 		else {
 			//caso in cui la grafica è film advices
@@ -177,11 +192,32 @@ public class SelectedQuestionBoundary  {
 		}
 		
 		agc.toAnswer(btnSubmit.getScene());
+		
+		}
+		catch (FieldEmptyException e) {
+			this.submitError.setText(e.getMessage());
+		}
+	}
+	
+	@FXML
+	public void keyPressed(KeyEvent event) {
+		this.submitError.setText("");
+	}
+	
+	@FXML
+	public void onReasonMenu(ActionEvent event ) {
+		MenuItem pressedButton = (MenuItem)event.getSource();
+		buttonFocused=true;
+		String reason = pressedButton.getText();
+		splitMenuReason.setText(reason);
+		this.submitError.setText("");
+		
 	}
 	
 	
 	@FXML
 	public void onSwitchPressed(ActionEvent event) {
+		this.submitError.setText("");
 		if(change==true) {
 			laType.setText("General answer");
 			technicalPane.setVisible(true);
@@ -197,71 +233,76 @@ public class SelectedQuestionBoundary  {
 	}
 	
 
-	public void init(DomandaBean db) throws AdvancedNotFoundException, SQLException  {
+	public void init(DomandaBean db) throws AdvancedNotFoundException, SQLException, FileNotFoundException  {
+		
+		
+		Integer queueCount;
 		
 		selectedQuestion = db;
+		BeginnerUserBean bub;
+		String begPicPath;
+		
 		
 		this.agc = AdvancedGraphicChange.getInstance();
 		advancedName = db.getAdvancedName();
 		aqc = new AnswerQuestionsController();
-		//GeneralUserBean gub = SessionUser.getInstance().getSession();
+		aub = new AdvancedUserBean();
+	
 		beginnerName = db.getBeginnerName();
-		System.out.println(beginnerName);
+		
 		laUsername.setText(beginnerName);
 		id = db.getId();
+		
+		AdvancedUserBean auBean = new AdvancedUserBean();
+		auBean = aqc.queueCountFromABeg(advancedName, beginnerName);
+		queueCount=auBean.getQueueCount();
+		laNumber.setText(queueCount.toString());
+		
 		
 		this.selQuestion = selectedQuestion.getContenuto();
 		laSelquestion.setText(selQuestion);
 		laType.setText("General answer");
 		
-		aub = new AdvancedUserBean();
+		
 		aub = aqc.getAdvanced(advancedName);
 		String bio = aub.getBio();
 		laBio.setText(bio);
 		profession = aub.getProfession();
 		laName.setText(profession);
-	
+		bub = new BeginnerUserBean();
+		bub = aqc.getBegPic(beginnerName, "beginner");
+		if (bub.getProfilePic()==null) {
+			begPicPath = FileManager.PROFILE + File.separator + "default.png";
+		}
+		else {
+			begPicPath = FileManager.PROFILE + File.separator + bub.getProfilePic();
+		}
 		
 		
 		
-		
+		InputStream input = new FileInputStream(begPicPath);
+		Image image = new Image(input);
+		ivBegPic.setImage(image);
 		
 	}
 
 
-/*	@Override
+	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 		
-		this.agc = AdvancedGraphicChange.getInstance();
+	/*	this.agc = AdvancedGraphicChange.getInstance();
 		advancedName = this.selectedQuestion.getAdvancedName();
 		aqc = new AnswerQuestionsController();
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
 		beginnerName = selectedQuestion.getBeginnerName();
 		System.out.println(beginnerName);
 		laUsername.setText(beginnerName);
-		id = selectedQuestion.getId();
-		
-		this.selQuestion = selectedQuestion.getContenuto();
-		laSelquestion.setText(selQuestion);
-		laType.setText("Technical answer");
-		taExplanation.setPromptText("Suggestions for practicing");
-		aub = new AdvancedUserBean();
-		try {
-			aub = aqc.getAdvanced(advancedName);
-		} catch (AdvancedNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String bio = aub.getBio();
-		laBio.setText(bio);
-		profession = aub.getProfession();
-		laName.setText(profession);
-	
+		id = selectedQuestion.getId();*/
 		
 		
-	}	*/
+		
+		
+		
+	}	
 }

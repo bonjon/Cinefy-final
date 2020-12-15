@@ -18,9 +18,7 @@ public class RegistrationController {
 	public Boolean createBeginnerUser(BeginnerUserBean bub) throws FieldEmptyException, FieldTooLongException {
 		boolean beanCheck=false; //booleano: true se uno dei campi della bean è vuoto, false altrimenti.
 		
-		System.out.println("prima del controllo");
-		System.out.println(FieldEmptyException.EMPTYROLE);
-		System.out.println(bub.getProfilePic());
+		
 		
 		if (bub.getUsername().equals("")) {
 			FieldEmptyException.EMPTYUSERNAME = true;
@@ -32,8 +30,7 @@ public class RegistrationController {
 		}
 		if (bub.getRole()=="noSelRole") {
 			FieldEmptyException.EMPTYROLE = true;
-			System.out.println("dopo del controllo");
-			System.out.println(FieldEmptyException.EMPTYROLE);
+		
 			beanCheck=true;
 		}
 		
@@ -44,13 +41,13 @@ public class RegistrationController {
 		
 		boolean lengthControl = fieldTooLongControls(bub,bub.getBio());
 		if(lengthControl==true) {
-			throw new FieldTooLongException("You exceeded the max number of characters for this field");
+			throw new FieldTooLongException("Too many characters for this field");
 		}
 
 		BeginnerUserDAO bud = new BeginnerUserDAO();
 		
 		try {
-			System.out.println(bub.getProfilePic());
+			
 			return bud.createBeginnerUser(bub.getUsername(), bub.getPassword(),bub.getBio(),bub.getProfilePic());
 		} catch (SQLException e) {
 			return Boolean.FALSE;

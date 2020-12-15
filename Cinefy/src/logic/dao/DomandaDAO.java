@@ -66,6 +66,35 @@ public class DomandaDAO {
 		}
 		return ld;
 	}
+	
+	public List<Domanda> getQuestionsFromABeg(String advancedName, String beginnerName) throws SQLException{
+		Connection conn = ConnectionDB.getInstance();
+		List<Domanda> ld = new ArrayList<>();
+		String sql = "call CinefyDB.stampa_domande_ad_beg(?,?);\r\n";
+	
+		
+		try (PreparedStatement s = conn.prepareStatement(sql)) {
+			s.setString(1, advancedName);
+			s.setString(2, beginnerName);
+			try (ResultSet rs = s.executeQuery()) {
+				if (!rs.first())
+					return null;
+				do {
+					int id = rs.getInt("id");
+					String contenuto = rs.getString("Contenuto");
+					String begName = rs.getString("BeginnerName");
+					String adName = rs.getString("AdvancedName");
+					ld.add(new Domanda(id, contenuto, begName, adName));
+				} while (rs.next());
+			}
+		} 
+		
+		return ld;
+	}
+				
+			
+		
+	
 
 	public boolean addQuestion(String contenuto, String beginnerName, String advancedName) throws SQLException {
 		Connection conn = ConnectionDB.getInstance();

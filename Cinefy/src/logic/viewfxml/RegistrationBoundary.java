@@ -187,7 +187,6 @@ public class RegistrationBoundary implements Initializable {
 		
 			fileName=this.imageFile.getName();
 			
-			
 			newFileName = FileManager.generateNewFileName(fileName, username);
 		
 		}
@@ -216,11 +215,10 @@ public class RegistrationBoundary implements Initializable {
 				
 					contrRes = controller.createAdvancedUser(aub);
 					
-				
 				}
 
 				if(contrRes.equals(Boolean.FALSE)) {
-					System.out.println("controller returns false");
+					
 					userError.setText(usernameAlreadyUsed);
 				}
 				else {
@@ -228,9 +226,8 @@ public class RegistrationBoundary implements Initializable {
 					//copia dell' immagine nella cartella "res"
 					
 					String path = FileManager.PROFILE;
-					System.out.println(path);
 					
-					
+
 					if(imageChanged==false) {
 						newFileName=FileManager.generateNewFileName("default.png", username);
 						fileName="default.png";
@@ -244,7 +241,7 @@ public class RegistrationBoundary implements Initializable {
 						
 					
 					fileName = this.imageFile.getName();
-					System.out.println("filename"+fileName);
+					
 					File file = new File(path, fileName);
 					File newFile = new File(path, newFileName);
 					InputStream input = new FileInputStream(this.imageFile);
@@ -329,7 +326,7 @@ public class RegistrationBoundary implements Initializable {
 			profession = pressedButton.getText();
 			splitMenuProf.setText(profession);
 			this.professionError.setText("");
-			System.out.println(profession);
+			
 			
 			return;
 			

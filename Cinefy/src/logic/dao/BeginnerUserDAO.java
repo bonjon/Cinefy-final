@@ -16,15 +16,14 @@ public class BeginnerUserDAO {
 	public boolean createBeginnerUser(String username, String password, String bio, String profilePic)
 			throws SQLException {
 		Connection conn = ConnectionDB.getInstance();
-		System.out.println("ok");
+		
 		String sql = "call CinefyDB.aggiungi_beginner(?,?,?,?);\r\n";
 		try (PreparedStatement s = conn.prepareStatement(sql)) {
 			s.setString(1, username);
 			s.setString(2, password);
 			s.setString(3, bio);
 			s.setString(4, profilePic);
-			System.out.println("in dao:");
-			System.out.println(profilePic);
+			
 			s.executeUpdate();
 			return true;
 		}

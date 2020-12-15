@@ -64,10 +64,13 @@ public class AnswerAdvancedBoundary implements Initializable {
 
 	@FXML
 	public void onSelectedQuestion(MouseEvent event) throws IOException, AdvancedNotFoundException, SQLException {
+		
+		
 		if (!listReceived.isEmpty()) {
 			//GeneralUserBean gub = SessionUser.getInstance().getSession();
-			this.agc.toSelQuestionDetail(this.questions.getScene(),
-					this.questions.getSelectionModel().getSelectedItem());
+			DomandaBean clickedItem = this.questions.getSelectionModel().getSelectedItem();
+			
+			this.agc.toSelQuestionDetail(this.questions.getScene(),clickedItem);
 		}
 	}
 
@@ -89,7 +92,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 		
 		if (lb != null) {
 			listReceived.addAll(lb);}
-		System.out.println(listReceived);
+		
 		
 		
 		questions.getItems().addAll(listReceived);

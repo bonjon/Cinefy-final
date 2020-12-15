@@ -64,7 +64,7 @@
 						</Label>
                   <AnchorPane layoutX="340.0" layoutY="288.0" prefHeight="44.0" prefWidth="815.0">
                      <children>
-                        <Button fx:id="btnSwitch" layoutX="529.0" layoutY="8.0" mnemonicParsing="false" onAction="#onSwitchPressed" prefHeight="28.0" prefWidth="272.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #1c1c1c;" text="Switch type of answer" textFill="#f5c518" underline="true">
+                        <Button fx:id="btnSwitch" layoutX="537.0" layoutY="8.0" mnemonicParsing="false" onAction="#onSwitchPressed" prefHeight="28.0" prefWidth="272.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #1c1c1c;" text="Switch type of answer" textFill="#f5c518" underline="true">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -76,7 +76,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-						<ImageView fitHeight="183.0" fitWidth="232.0" layoutX="20.0" layoutY="40.0" pickOnBounds="true" AnchorPane.topAnchor="60.0">
+						<ImageView fx:id="ivBegPic" fitHeight="183.0" fitWidth="232.0" layoutX="20.0" layoutY="40.0" pickOnBounds="true" AnchorPane.topAnchor="60.0">
 							<image>
 								<Image url="@../../../res/profilePictures/default.png" />
 							</image>
@@ -119,17 +119,16 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-						<Label fx:id="labelError" layoutX="690.0" layoutY="302.0" textFill="RED" />
                   <AnchorPane fx:id="technicalPane" layoutX="336.0" layoutY="332.0" prefHeight="320.0" prefWidth="763.0">
                      <children>
-      						<TextArea fx:id="taAnswer" focusTraversable="false" prefHeight="138.0" prefWidth="763.0" promptText="Write your answer here..." style="-fx-control-inner-background: #121212; -fx-border-color: #f5c518; -fx-prompt-text-fill: GREY; -fx-text-fill: WHITE;" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      						<TextArea fx:id="taAnswer" focusTraversable="false" onKeyPressed="#keyPressed" prefHeight="138.0" prefWidth="763.0" promptText="Write your answer here..." style="-fx-control-inner-background: #121212; -fx-border-color: #f5c518; -fx-prompt-text-fill: GREY; -fx-text-fill: WHITE;" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       							<font>
       								<Font size="17.0" />
       							</font>
       						</TextArea>
                         <AnchorPane layoutX="36.0" layoutY="155.0" prefHeight="151.0" prefWidth="692.0">
                            <children>
-                              <TextField fx:id="tfColleague" layoutX="34.0" layoutY="58.0" prefHeight="26.0" prefWidth="287.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
+                              <TextField fx:id="tfColleague" layoutX="34.0" layoutY="58.0" onKeyPressed="#keyPressed" prefHeight="26.0" prefWidth="287.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -138,10 +137,10 @@
                                  <font>
                                     <Font size="14.0" />
                                  </font></CheckBox>
-                              <SplitMenuButton fx:id="splitMenuReason" layoutX="34.0" layoutY="104.0" mnemonicParsing="false" text="Why I suggest him">
+                              <SplitMenuButton fx:id="splitMenuReason" layoutX="34.0" layoutY="106.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="251.0" text="Why I suggest this colleague">
                                 <items>
-                                  <MenuItem mnemonicParsing="false" text="personal knowledge" />
-                                  <MenuItem mnemonicParsing="false" text="Renowned person in this sector" />
+                                  <MenuItem mnemonicParsing="false" onAction="#onReasonMenu" text="My personal knowledge" />
+                                  <MenuItem mnemonicParsing="false" onAction="#onReasonMenu" text="Renowned person in this sector" />
                                 </items>
                                  <font>
                                     <Font size="14.0" />
@@ -156,7 +155,7 @@
                                     <Font size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="tfYoutube" layoutX="409.0" layoutY="121.0" prefHeight="30.0" prefWidth="272.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
+                              <TextField fx:id="tfYoutube" layoutX="409.0" layoutY="121.0" onKeyPressed="#keyPressed" prefHeight="30.0" prefWidth="272.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -166,7 +165,7 @@
                                     <Font size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="tfWiki" layoutX="409.0" layoutY="56.0" prefHeight="30.0" prefWidth="272.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
+                              <TextField fx:id="tfWiki" layoutX="409.0" layoutY="56.0" onKeyPressed="#keyPressed" prefHeight="30.0" prefWidth="272.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -181,29 +180,29 @@
                   </AnchorPane>
                   <AnchorPane fx:id="advicePane" layoutX="340.0" layoutY="332.0" prefHeight="314.0" prefWidth="762.0" visible="false">
                      <children>
-                        <TextArea fx:id="taExplanation" focusTraversable="false" layoutX="-1.0" layoutY="71.0" prefHeight="243.0" prefWidth="763.0" promptText="Why do you suggest this film?" style="-fx-control-inner-background: #121212; -fx-border-color: #f5c518; -fx-prompt-text-fill: GREY; -fx-text-fill: WHITE;" wrapText="true">
+                        <TextArea fx:id="taExplanation" focusTraversable="false" layoutX="-4.0" layoutY="71.0" onKeyPressed="#keyPressed" prefHeight="243.0" prefWidth="763.0" promptText="Why do you suggest this film?" style="-fx-control-inner-background: #121212; -fx-border-color: #f5c518; -fx-prompt-text-fill: GREY; -fx-text-fill: WHITE;" wrapText="true">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </TextArea>
-                        <AnchorPane prefHeight="58.0" prefWidth="734.0">
+                        <AnchorPane prefHeight="58.0" prefWidth="758.0">
                            <children>
                               <Label layoutX="1.0" text="Film that I suggest" textFill="#f5c518">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="tfFilm1" layoutX="1.0" layoutY="18.0" prefHeight="30.0" prefWidth="272.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
+                              <TextField fx:id="tfFilm1" layoutX="1.0" layoutY="18.0" onKeyPressed="#keyPressed" prefHeight="30.0" prefWidth="272.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="tfName1" layoutX="298.0" layoutY="18.0" prefHeight="30.0" prefWidth="242.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
+                              <TextField fx:id="tfName1" layoutX="298.0" layoutY="18.0" onKeyPressed="#keyPressed" prefHeight="30.0" prefWidth="250.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="tfGenre1" layoutX="572.0" layoutY="20.0" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
+                              <TextField fx:id="tfGenre1" layoutX="573.0" layoutY="17.0" onKeyPressed="#keyPressed" prefHeight="30.0" prefWidth="185.0" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -236,6 +235,7 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
+                  <Label fx:id="submitError" layoutX="782.0" layoutY="666.0" textFill="#ff0202" />
 					</children>
 				</AnchorPane>
 			</center>

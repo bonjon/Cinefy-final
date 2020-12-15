@@ -9,8 +9,8 @@ import java.io.File;
 
 public class FileManager {
 
-	private static String cinefy = "cinefy.git";
-	//private static String cinefy = "cinefy";
+//	private static String cinefy = "cinefy.git";
+	private static String cinefy = "cinefy";
 	public static final String PROJECT = System.getProperty("user.home") + File.separator + cinefy + File.separator
 			+ "trunk" + File.separator + "Cinefy" + File.separator + "res" + File.separator;
 	public static final String WEB = System.getProperty("user.home") + File.separator + cinefy + File.separator
@@ -38,10 +38,10 @@ public class FileManager {
 		if (newFileName.length() > maxPicName) {
 			int nameLength = fileName.length();
 			String extension = fileName.substring(nameLength - 4, nameLength);
-			System.out.println(extension);
+			
 			newFileName = username + fileName;
 			newFileName = newFileName.substring(0, maxPicName - 5) + extension;
-			System.out.println(newFileName);
+			
 		}
 
 		return newFileName;

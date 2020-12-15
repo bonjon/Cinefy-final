@@ -14,8 +14,8 @@ public class ConnectionDB {
 	// Dichiarazione variabili
 	private static ConnectionDB INSTANCE;
 	private String username = "root";
-	private String password = "password";
-	//private String password = "Password_98";
+	//private String password = "password";
+	private String password = "Password_98";
 	//private String DB_URL = "jdbc:mysql://localhost:3306/CinefyDB";
 	private String DB_URL = "jdbc:mysql://localhost:3306/CinefyDB?useSSL=false";
 	private static String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";

@@ -9,6 +9,7 @@ public class GeneralAnswerFactory implements AnswerAutomationFactory{
 	String messageResource;
 	String answer;
 	
+	
 	public GeneralAnswerFactory () {
 
 		this.header = "||GENERAL ANSWER||";
@@ -21,17 +22,34 @@ public class GeneralAnswerFactory implements AnswerAutomationFactory{
 		
 		answer = header+"\n"+"\n"+rb.getContenuto()+"\n"+"\n";
 		
+		
 		if (rb.isAColleagueSuggested()==true) {
+			String reasonChoice = rb.getReasonChoice();
+			String firstLetter = reasonChoice.substring(0,1);
+			String newReasonChoice = reasonChoice.replaceFirst(firstLetter,firstLetter.toLowerCase());
+			
 			messageColleague = "I also suggest you to contact the advanced user "+
-					rb.getColleagueName()+" because of "+rb.getReasonChoice()+"\n"+"\n";
+					rb.getColleagueName()+" because of "+newReasonChoice+"."+"\n"+"\n";
 			answer = answer +messageColleague;
 		}
 		
 		if (rb.isAResourceSuggested()==true) {
-			messageResource = "I also suggest you to look at the following the web contents:"+"\n";
-			String wikiRow="Wikipedia "+rb.getWikiLink()+"\n";
-			String youtubeRow="YouTube "+rb.getYoutubeLink();
-			messageResource=messageResource+wikiRow+youtubeRow;
+			
+			messageResource = "I advise you to look at the following web contents:"+"\n";
+			
+			if (rb.getWikiLink().isEmpty()==false) {
+				
+				String wikiRow="Wikipedia - "+rb.getWikiLink()+"\n";
+				messageResource=messageResource+wikiRow;
+			}
+			
+			if (rb.getYoutubeLink().isEmpty()==false) {
+			
+				String youtubeRow = "YouTube - " +rb.getYoutubeLink();
+				messageResource=messageResource+youtubeRow;
+			}
+			
+			
 			answer = answer + messageResource;
 		}
 		

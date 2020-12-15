@@ -13,6 +13,7 @@ public class DomandaBean implements Serializable {
 	private String contenuto;
 	private String beginnerName;
 	private String advancedName;
+	
 
 	public String getId() {
 		return id;
@@ -45,5 +46,7 @@ public class DomandaBean implements Serializable {
 	public void setAdvancedName(String advancedName) {
 		this.advancedName = advancedName;
 	}
+	
+	
 
 }
