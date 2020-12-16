@@ -50,7 +50,7 @@ public class AskBeginnerServlet extends HttpServlet {
 		}
 		session.setAttribute("topAd", topAd);
 		try {
-			questions = afc.getQuestions(gub.getUsername(), gub.getRole());
+			questions = afc.getQuestions(gub, gub.getRole());
 			if (questions == null)
 				request.setAttribute("error", "No questions list");
 			else

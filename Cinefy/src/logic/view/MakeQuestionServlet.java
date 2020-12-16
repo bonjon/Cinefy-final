@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import logic.bean.AdvancedUserBean;
+import logic.bean.DomandaBean;
 import logic.bean.GeneralUserBean;
 import logic.controllers.AskForQuestionsController;
 import logic.exceptions.FieldEmptyException;
@@ -42,10 +43,14 @@ public class MakeQuestionServlet extends HttpServlet {
 	private RequestDispatcher makeQuestion(HttpServletRequest request, HttpSession session,
 			AskForQuestionsController afc) {
 		String question = (String) request.getParameter("question");
+		DomandaBean db = new DomandaBean();
+		db.setContenuto(question);
 		AdvancedUserBean aub = (AdvancedUserBean) session.getAttribute("AdS");
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
+		db.setAdvancedName(aub.getUsername());
+		db.setBeginnerName(gub.getUsername());
 		try {
-			afc.makeQuestion(question, gub.getUsername(), aub.getUsername());
+			afc.makeQuestion(db);
 		} catch (FieldTooLongException e) {
 			request.setAttribute("error", e.getMessage());
 			return request.getRequestDispatcher("AskBeginnerServlet");

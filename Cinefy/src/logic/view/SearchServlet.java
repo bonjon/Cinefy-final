@@ -38,8 +38,10 @@ public class SearchServlet extends HttpServlet {
 			searchString = (String) request.getAttribute("searchString");
 		}
 		request.setAttribute("searchString", searchString);
+		AdvancedUserBean au = new AdvancedUserBean();
+		au.setUsername(searchString);
 		try {
-			aub = afc.getAdvanced(searchString);
+			aub = afc.getAdvanced(au);
 			session.setAttribute("AdS", aub);
 			rd = request.getRequestDispatcher("question.jsp");
 		} catch (AdvancedNotFoundException e) {

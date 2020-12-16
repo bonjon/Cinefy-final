@@ -38,7 +38,7 @@ public class HomeAdminServlet extends HttpServlet {
 		List<DomandaBean> questionsList = new ArrayList<>();
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 		try {
-			questionsList = afc.getQuestions(gub.getUsername(), gub.getRole());
+			questionsList = afc.getQuestions(gub, gub.getRole());
 			if (questionsList == null)
 				request.setAttribute("error", "No questions");
 		} catch (SQLException e) {
