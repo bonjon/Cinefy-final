@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import logic.bean.BeginnerUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.PlaylistBean;
 import logic.exceptions.AdvancedNotFoundException;
@@ -50,12 +51,12 @@ public class AdvancedGraphicChange extends GraphicChangeTemplate {
 		scene.setRoot(loader.load());
 	}
 	
-	public void toSelQuestionDetail(Scene scene, DomandaBean selectedItem) throws IOException, AdvancedNotFoundException, SQLException {
+	public void toSelQuestionDetail(Scene scene, DomandaBean selectedItem, BeginnerUserBean bub) throws IOException, AdvancedNotFoundException, SQLException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectedQuestion.fxml"));
 		SelectedQuestionBoundary sqb = new SelectedQuestionBoundary();
 		loader.setController(sqb);
 		scene.setRoot(loader.load());
-		sqb.init(selectedItem);
+		sqb.init(selectedItem,bub);
 	}
 
 	public void toPlaylists(Scene scene) throws IOException {

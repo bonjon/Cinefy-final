@@ -131,6 +131,21 @@ public class AnswerQuestionsController extends Controller{
 	public void deleteQuestion() {
 		
 	}
+	
+	public BeginnerUserBean getUser(String username, String role) {
+		GeneralUserDAO gud = new GeneralUserDAO();
+		BeginnerUserBean bub = new BeginnerUserBean();
+		try {
+			BeginnerUser gu = gud.findByName(username, role);
+			bub.setUsername(gu.getUsername());
+			bub.setPassword(gu.getPassword());
+			bub.setBio(gu.getBio());
+			bub.setProfilePic(gu.getProfilePic());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return bub;
+	}
 
       
       public AdvancedUserBean getAdvanced(String username) throws AdvancedNotFoundException, SQLException {
@@ -153,16 +168,5 @@ public class AnswerQuestionsController extends Controller{
 
 	}
       
-	public BeginnerUserBean getBegPic(String username, String role) {
-		GeneralUserDAO gud = new GeneralUserDAO();
-		BeginnerUserBean bub = new BeginnerUserBean();
-		try {
-			BeginnerUser gu = gud.findByName(username, role);
-			bub.setProfilePic(gu.getProfilePic());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return bub;
-	}
-      
+	
  }

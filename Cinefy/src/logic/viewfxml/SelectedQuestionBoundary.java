@@ -233,13 +233,13 @@ public class SelectedQuestionBoundary implements Initializable  {
 	}
 	
 
-	public void init(DomandaBean db) throws AdvancedNotFoundException, SQLException, FileNotFoundException  {
+	public void init(DomandaBean db, BeginnerUserBean bub) throws AdvancedNotFoundException, SQLException, FileNotFoundException  {
 		
 		
 		Integer queueCount;
 		
 		selectedQuestion = db;
-		BeginnerUserBean bub;
+		
 		String begPicPath;
 		
 		
@@ -248,7 +248,7 @@ public class SelectedQuestionBoundary implements Initializable  {
 		aqc = new AnswerQuestionsController();
 		aub = new AdvancedUserBean();
 	
-		beginnerName = db.getBeginnerName();
+		beginnerName = bub.getUsername();
 		
 		laUsername.setText(beginnerName);
 		id = db.getId();
@@ -265,12 +265,11 @@ public class SelectedQuestionBoundary implements Initializable  {
 		
 		
 		aub = aqc.getAdvanced(advancedName);
-		String bio = aub.getBio();
+		String bio = bub.getBio();
 		laBio.setText(bio);
 		profession = aub.getProfession();
 		laName.setText(profession);
-		bub = new BeginnerUserBean();
-		bub = aqc.getBegPic(beginnerName, "beginner");
+		
 		if (bub.getProfilePic()==null) {
 			begPicPath = FileManager.PROFILE + File.separator + "default.png";
 		}

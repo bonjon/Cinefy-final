@@ -17,6 +17,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
+
+import logic.bean.BeginnerUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.GeneralUserBean;
 import logic.bean.RispostaBean;
@@ -67,10 +69,13 @@ public class AnswerAdvancedBoundary implements Initializable {
 		
 		
 		if (!listReceived.isEmpty()) {
-			//GeneralUserBean gub = SessionUser.getInstance().getSession();
+		
 			DomandaBean clickedItem = this.questions.getSelectionModel().getSelectedItem();
+			BeginnerUserBean bub = new BeginnerUserBean();
+			String beginnerName = clickedItem.getBeginnerName();
+			bub = aqc.getUser(beginnerName, "beginner");
 			
-			this.agc.toSelQuestionDetail(this.questions.getScene(),clickedItem);
+			this.agc.toSelQuestionDetail(this.questions.getScene(),clickedItem,bub);
 		}
 	}
 
