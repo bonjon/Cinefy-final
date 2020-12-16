@@ -72,7 +72,7 @@ public class HomeAdminBoundary implements Initializable {
 		// Initialize the list of questions in pending
 		list.removeAll(list);
 		try {
-			List<DomandaBean> dbl = afc.getQuestions(gu.getUsername(), gu.getRole());
+			List<DomandaBean> dbl = afc.getQuestions(gu, gu.getRole());
 			if (dbl != null)
 				list.addAll(dbl);
 			this.listQuestions.getItems().addAll(list);

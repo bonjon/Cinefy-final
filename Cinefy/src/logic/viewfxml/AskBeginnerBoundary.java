@@ -100,8 +100,10 @@ public class AskBeginnerBoundary implements Initializable {
 			start = 0;
 			String a = this.adText.getText().toString();
 			listSearch.removeAll(listSearch);
+			AdvancedUserBean ab = new AdvancedUserBean();
+			ab.setUsername(a);
 			try {
-				AdvancedUserBean aub = afc.getAdvanced(a);
+				AdvancedUserBean aub = afc.getAdvanced(ab);
 				listSearch.add(aub);
 				this.advanced.getItems().addAll(listSearch);
 				this.advanced.setCellFactory(param -> new ListCell<AdvancedUserBean>() {
@@ -146,8 +148,10 @@ public class AskBeginnerBoundary implements Initializable {
 		start = 1;
 		String a = this.splitMenu.getText().toString();
 		listSearch.removeAll(listSearch);
+		AdvancedUserBean ab = new AdvancedUserBean();
+		ab.setRole(a);
 		try {
-			List<AdvancedUserBean> aub = afc.getAdvancedByRole(a);
+			List<AdvancedUserBean> aub = afc.getAdvancedByRole(ab);
 			listSearch.addAll(aub);
 			this.advanced.getItems().addAll(listSearch);
 			this.advanced.setCellFactory(param -> new ListCell<AdvancedUserBean>() {
@@ -191,8 +195,10 @@ public class AskBeginnerBoundary implements Initializable {
 		start = 1;
 		String a = this.splitMenu.getText().toString();
 		listSearch.removeAll(listSearch);
+		AdvancedUserBean ab = new AdvancedUserBean();
+		ab.setRole(a);
 		try {
-			List<AdvancedUserBean> aub = afc.getAdvancedByRole(a);
+			List<AdvancedUserBean> aub = afc.getAdvancedByRole(ab);
 			listSearch.addAll(aub);
 			this.advanced.getItems().addAll(listSearch);
 			this.advanced.setCellFactory(param -> new ListCell<AdvancedUserBean>() {
@@ -236,8 +242,10 @@ public class AskBeginnerBoundary implements Initializable {
 		start = 1;
 		String a = this.splitMenu.getText().toString();
 		listSearch.removeAll(listSearch);
+		AdvancedUserBean ab = new AdvancedUserBean();
+		ab.setRole(a);
 		try {
-			List<AdvancedUserBean> aub = afc.getAdvancedByRole(a);
+			List<AdvancedUserBean> aub = afc.getAdvancedByRole(ab);
 			listSearch.addAll(aub);
 			this.advanced.getItems().addAll(listSearch);
 			this.advanced.setCellFactory(param -> new ListCell<AdvancedUserBean>() {
@@ -281,8 +289,10 @@ public class AskBeginnerBoundary implements Initializable {
 		start = 1;
 		String a = this.splitMenu.getText().toString();
 		listSearch.removeAll(listSearch);
+		AdvancedUserBean ab = new AdvancedUserBean();
+		ab.setRole(a);
 		try {
-			List<AdvancedUserBean> aub = afc.getAdvancedByRole(a);
+			List<AdvancedUserBean> aub = afc.getAdvancedByRole(ab);
 			listSearch.addAll(aub);
 			this.advanced.getItems().addAll(listSearch);
 			this.advanced.setCellFactory(param -> new ListCell<AdvancedUserBean>() {
@@ -326,8 +336,10 @@ public class AskBeginnerBoundary implements Initializable {
 		start = 1;
 		String a = this.splitMenu.getText().toString();
 		listSearch.removeAll(listSearch);
+		AdvancedUserBean ab = new AdvancedUserBean();
+		ab.setRole(a);
 		try {
-			List<AdvancedUserBean> aub = afc.getAdvancedByRole(a);
+			List<AdvancedUserBean> aub = afc.getAdvancedByRole(ab);
 			listSearch.addAll(aub);
 			this.advanced.getItems().addAll(listSearch);
 			this.advanced.setCellFactory(param -> new ListCell<AdvancedUserBean>() {
@@ -381,8 +393,7 @@ public class AskBeginnerBoundary implements Initializable {
 							this.questions.getSelectionModel().getSelectedItem(), color);
 				}
 				if (ldb.contains(this.questions.getSelectionModel().getSelectedItem())) {
-					if (!this.afc.checkAnswer(gub.getUsername(),
-							this.questions.getSelectionModel().getSelectedItem().getId())) {
+					if (!this.afc.checkAnswer(gub, this.questions.getSelectionModel().getSelectedItem())) {
 						color = "g";
 						this.bgc.toQuestionDetails(this.questions.getScene(),
 								this.questions.getSelectionModel().getSelectedItem(), color);
@@ -416,8 +427,7 @@ public class AskBeginnerBoundary implements Initializable {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}
-			else {
+			} else {
 				this.labelError3.setText("No leaderboard");
 			}
 			this.topAdvanced.setCellFactory(param -> new ListCell<AdvancedUserBean>() {
@@ -450,10 +460,10 @@ public class AskBeginnerBoundary implements Initializable {
 				}
 			});
 			listQuestions.removeAll(listQuestions);
-			lb = afc.getQuestions(gub.getUsername(), "beginner2"); // Domande in coda
+			lb = afc.getQuestions(gub, "beginner2"); // Domande in coda
 			if (lb != null)
 				listQuestions.addAll(lb);
-			ldb = afc.getQuestions(gub.getUsername(), "beginner");
+			ldb = afc.getQuestions(gub, "beginner");
 			if (ldb != null)
 				listQuestions.addAll(ldb);
 			this.questions.getItems().addAll(listQuestions);
@@ -483,7 +493,7 @@ public class AskBeginnerBoundary implements Initializable {
 						}
 						if (ldb != null && ldb.contains(item)) {
 							try {
-								if (!afc.checkAnswer(gub.getUsername(), item.getId())) {
+								if (!afc.checkAnswer(gub, item)) {
 									String path = FileManager.GREEN;
 									File file = new File(path);
 									Image img = new Image(file.toURI().toString());

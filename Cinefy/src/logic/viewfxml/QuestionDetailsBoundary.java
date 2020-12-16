@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.input.MouseEvent;
+import logic.bean.AdvancedUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.GeneralUserBean;
 import logic.controllers.AskForQuestionsController;
@@ -80,9 +81,11 @@ public class QuestionDetailsBoundary {
 	@FXML
 	public void onOk(ActionEvent event) {
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
+		AdvancedUserBean aub = new AdvancedUserBean();
+		aub.setUsername(this.selectedQuestion.getAdvancedName());
+		aub.setVoto(this.sliderVote.getValue());
 		try {
-			this.afc.voteAdvanced(this.selectedQuestion.getAdvancedName(), gub.getUsername(),
-					(int) this.sliderVote.getValue());
+			this.afc.voteAdvanced(aub, gub);
 		} catch (SQLException e) {
 			this.labelError.setText(e.getMessage());
 		}
@@ -129,8 +132,7 @@ public class QuestionDetailsBoundary {
 				Image img = new Image(file.toURI().toString());
 				this.imageView.setImage(img);
 				this.labelCheck.setText("You have received an answer from " + this.selectedQuestion.getAdvancedName());
-				this.labelAnswer
-						.setText(afc.getAnswer(gub.getUsername(), this.selectedQuestion.getId()).getContenuto());
+				this.labelAnswer.setText(afc.getAnswer(gub, this.selectedQuestion).getContenuto());
 				this.labelName.setText("Answer from " + this.selectedQuestion.getAdvancedName());
 				this.sliderVote.setDisable(false);
 				this.btnOk.setDisable(false);

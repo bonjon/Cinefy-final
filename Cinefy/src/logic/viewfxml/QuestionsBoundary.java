@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import logic.bean.AdvancedUserBean;
+import logic.bean.DomandaBean;
 import logic.bean.GeneralUserBean;
 import logic.controllers.AskForQuestionsController;
 import logic.exceptions.FieldEmptyException;
@@ -82,8 +83,12 @@ public class QuestionsBoundary {
 	@FXML
 	public void onSubmitBtn(ActionEvent event) throws IOException {
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
+		DomandaBean db = new DomandaBean();
 		try {
-			this.afc.makeQuestion(this.questionArea.getText(), gub.getUsername(), this.selectedAdvanced.getUsername());
+			db.setContenuto(this.questionArea.getText());
+			db.setBeginnerName(gub.getUsername());
+			db.setAdvancedName(this.selectedAdvanced.getUsername());
+			this.afc.makeQuestion(db);
 			this.bgc.toAsk(this.btnSubmit.getScene());
 		} catch (FieldTooLongException e) {
 			this.labelError.setText(e.getMessage());
