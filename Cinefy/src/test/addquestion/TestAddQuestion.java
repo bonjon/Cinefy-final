@@ -29,6 +29,6 @@ public class TestAddQuestion {
 		db.setAdvancedName(TEST);
 		db.setBeginnerName(TEST);
 		db.setContenuto(bld.toString());
-		afc.makeQuestion(db.getContenuto(), db.getBeginnerName(), db.getAdvancedName());
+		afc.makeQuestion(db);
 	}
 }
