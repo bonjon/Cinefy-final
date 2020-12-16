@@ -6,6 +6,7 @@ import java.util.List;
 
 import logic.bean.AdvancedUserBean;
 import logic.bean.DomandaBean;
+import logic.bean.GeneralUserBean;
 import logic.bean.RispostaBean;
 import logic.entities.AdvancedUser;
 import logic.entities.Domanda;
@@ -27,9 +28,9 @@ import logic.utils.Controller;
 
 public class AskForQuestionsController extends Controller {
 
-	public AdvancedUserBean getAdvanced(String username) throws AdvancedNotFoundException, SQLException {
+	public AdvancedUserBean getAdvanced(AdvancedUserBean aub) throws AdvancedNotFoundException, SQLException {
 		AdvancedUserDAO aud = new AdvancedUserDAO();
-		AdvancedUser au = aud.selectAdvancedByUsername(username);
+		AdvancedUser au = aud.selectAdvancedByUsername(aub.getUsername());
 		return this.convert(au);
 	}
 
@@ -41,30 +42,30 @@ public class AskForQuestionsController extends Controller {
 		return this.convertAdvancedList(lau);
 	}
 
-	public List<AdvancedUserBean> getAdvancedByRole(String role) throws AdvancedNotFoundException, SQLException {
+	public List<AdvancedUserBean> getAdvancedByRole(AdvancedUserBean aub) throws AdvancedNotFoundException, SQLException {
 		AdvancedUserDAO aud = new AdvancedUserDAO();
-		List<AdvancedUser> lau = aud.selectAdvancedByRole(role);
+		List<AdvancedUser> lau = aud.selectAdvancedByRole(aub.getRole());
 		return this.convertAdvancedList(lau);
 	}
 
-	public List<DomandaBean> getQuestions(String username, String role) throws SQLException {
+	public List<DomandaBean> getQuestions(GeneralUserBean gub, String role) throws SQLException {
 		DomandaDAO dd = new DomandaDAO();
-		List<Domanda> ld = dd.getQuestions(username, role);
+		List<Domanda> ld = dd.getQuestions(gub.getUsername(), role);
 		if (ld == null)
 			return Collections.emptyList();
 		return this.convertQuestionList(ld);
 	}
 
-	public void makeQuestion(String text, String username, String username2)
+	public void makeQuestion(DomandaBean db)
 			throws FieldTooLongException, SQLException, FieldEmptyException {
 		DomandaDAO dd = new DomandaDAO();
-		if (text.length() >= 200) {
+		if (db.getContenuto().length() >= 200) {
 			throw new FieldTooLongException("Question body can't be longer than 200 characters");
 		}
-		if (text.isEmpty()){
+		if (db.getContenuto().isEmpty()){
 			throw new FieldEmptyException("You didn't write anything!");
 		}
-		dd.addQuestion(text, username, username2);
+		dd.addQuestion(db.getContenuto(), db.getBeginnerName(), db.getAdvancedName());
 	}
 
 	public void acceptQuestion(DomandaBean db) throws NumberFormatException, SQLException {
@@ -77,21 +78,22 @@ public class AskForQuestionsController extends Controller {
 		dd.manageQuestions(Integer.parseInt(db.getId()), DomandaDAO.REJECT);
 	}
 
-	public boolean checkAnswer(String username, String id) throws NumberFormatException, SQLException {
+	public boolean checkAnswer(GeneralUserBean gub, DomandaBean db) throws NumberFormatException, SQLException {
 		RispostaDAO rd = new RispostaDAO();
-		if (rd.getAnswer(username, Integer.parseInt(id)) == null)
+		if (rd.getAnswer(gub.getUsername(), Integer.parseInt(db.getId())) == null)
 			return false;
 		return true;
 	}
 
-	public RispostaBean getAnswer(String username, String id) throws NumberFormatException, SQLException {
+	public RispostaBean getAnswer(GeneralUserBean gub, DomandaBean db) throws NumberFormatException, SQLException {
 		RispostaDAO rd = new RispostaDAO();
-		Risposta r = rd.getAnswer(username, Integer.parseInt(id));
+		Risposta r = rd.getAnswer(gub.getUsername(), Integer.parseInt(db.getId()));
 		return this.convert(r);
 	}
 
-	public void voteAdvanced(String advancedName, String username, int getValue) throws SQLException {
+	public void voteAdvanced(AdvancedUserBean aub, GeneralUserBean gub) throws SQLException {
 		BeginnerUserDAO bud = new BeginnerUserDAO();
-		bud.voteAdvanced(advancedName, username, getValue);
+		int a = (int) Double.parseDouble(aub.getVoto());
+		bud.voteAdvanced(aub.getUsername(), gub.getUsername(), a);
 	}
 }
