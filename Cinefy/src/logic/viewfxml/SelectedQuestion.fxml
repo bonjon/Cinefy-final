@@ -170,7 +170,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </TextField>
-                              <Label layoutX="34.0" layoutY="38.0" text="Advanced user' s name" textFill="#f5c518">
+                              <Label layoutX="34.0" layoutY="38.0" text="Advanced user' s nickname" textFill="#f5c518">
                                  <font>
                                     <Font size="12.0" />
                                  </font>

@@ -33,6 +33,7 @@ import logic.bean.RispostaBean;
 import logic.controllers.AnswerQuestionsController;
 import logic.exceptions.AdvancedNotFoundException;
 import logic.exceptions.FieldEmptyException;
+import logic.exceptions.FieldTooLongException;
 import logic.utils.FileManager;
 import javafx.scene.input.KeyEvent;
 //import logic.utils.SessionUser;
@@ -194,7 +195,7 @@ public class SelectedQuestionBoundary implements Initializable  {
 		agc.toAnswer(btnSubmit.getScene());
 		
 		}
-		catch (FieldEmptyException e) {
+		catch (FieldEmptyException | FieldTooLongException e) {
 			this.submitError.setText(e.getMessage());
 		}
 	}
@@ -268,7 +269,7 @@ public class SelectedQuestionBoundary implements Initializable  {
 		String bio = bub.getBio();
 		laBio.setText(bio);
 		profession = aub.getProfession();
-		laName.setText(profession);
+		laName.setText(profession+" to focus on");
 		
 		if (bub.getProfilePic()==null) {
 			begPicPath = FileManager.PROFILE + File.separator + "default.png";

@@ -18,6 +18,7 @@ import logic.entities.Domanda;
 import logic.entities.Risposta;
 import logic.exceptions.AdvancedNotFoundException;
 import logic.exceptions.FieldEmptyException;
+import logic.exceptions.FieldTooLongException;
 import logic.utils.Controller;
 import logic.utils.FilmAdviceFactory;
 import logic.utils.GeneralAnswerFactory;
@@ -68,7 +69,7 @@ public class AnswerQuestionsController extends Controller{
 		}
 	
 		
-	public void createAnswer(RispostaBean rb) throws NumberFormatException, SQLException, FieldEmptyException {
+	public void createAnswer(RispostaBean rb) throws NumberFormatException, SQLException, FieldEmptyException, FieldTooLongException {
 		
 		RispostaDAO rd;
 		GeneralAnswerFactory gaf;
@@ -99,9 +100,11 @@ public class AnswerQuestionsController extends Controller{
 			}
 			if(rb.isAResourceSuggested()==true) {
 				if(rb.getWikiLink().isEmpty()&&rb.getYoutubeLink().isEmpty()) {
-					throw new FieldEmptyException("Please, enter a link at least");
+					throw new FieldEmptyException("Please, enter a Wikipedia or YouTube's URL at least");
 				}
 			}
+			
+			
 			
 			gaf = new GeneralAnswerFactory();
 			answer = gaf.answerCreation(rb);
@@ -121,10 +124,69 @@ public class AnswerQuestionsController extends Controller{
 			
 		}
 		
+		fieldTooLongControls(rb);
 		
 		rd = new RispostaDAO();
 		rd.addAnswer(answer, rb.getBeginnerName(), rb.getAdvancedName(), Integer.parseInt(rb.getId()));
 		
+		
+	}
+	
+	public void fieldTooLongControls(RispostaBean rb) throws FieldTooLongException {
+		//general answer
+		//circa 182 caratteri vengono aggiunti nel caso peggiore (reason: renown....person in this sector)
+		//dal pattern che formatta la risposta per una  general answer
+		//2048-182=1866 caratteri disponibili
+		Integer genAnswerSize = 600;
+		Integer colleagueSize = 16;
+		Integer wikiSize = 250;
+		Integer youTubeSize = 900;
+		
+		//film advice
+		//circa 120 caratteri vengono aggiunti nel caso peggiore (professione screenwriter) dal pattern 
+		//che formatta la risposta per una  film advice
+		//2048-120=1928 caratteri disponibili
+		Integer filmSize = 150;
+		Integer partecipantSize = 70;
+		Integer genreSize = 100;
+		Integer explanationSize = 1400;
+		
+		
+		if(rb.getChoice()=="general") {
+			
+			if (rb.getContenuto().length()>genAnswerSize) {
+				throw new FieldTooLongException("Answer box text is too long \n(max "+genAnswerSize.toString()+" characters)");
+			}
+			if(rb.isAColleagueSuggested()==true) {	
+				if (rb.getColleagueName().length()>colleagueSize) {
+					throw new FieldTooLongException("Suggested advanced user' s name is too long \n(max " +colleagueSize.toString()+" characters)");
+				}
+			}
+			if(rb.isAResourceSuggested()==true) {
+				if(rb.getWikiLink().length()>wikiSize) {
+					throw new FieldTooLongException("The entered Wiki's URL is too long \n(max "+wikiSize.toString()+" characters)");
+				}
+				if(rb.getYoutubeLink().length()>youTubeSize) {
+					throw new FieldTooLongException("The entered YouTube's URL is too long \n(max "+youTubeSize.toString()+" characters)");
+				}
+			}
+			
+		}
+		else if (rb.getChoice()=="film") {
+			
+			if(rb.getFilm().length()>filmSize) {
+				throw new FieldTooLongException("The entered film's title is too long \n(max "+filmSize.toString()+" characters)");
+			}
+			if(rb.getPartecipant().length()>partecipantSize) {
+				throw new FieldTooLongException("The entered "+rb.getProfession().toLowerCase()+"'s name is too long \n(max "+partecipantSize.toString()+" characters)");
+			}
+			if(rb.getGenre().length()>genreSize) {
+				throw new FieldTooLongException("The entered film's title is too long \n(max "+filmSize.toString()+" characters)");
+			}
+			if(rb.getExplanation().length()>explanationSize) {
+				throw new FieldTooLongException("The explanation of the film advice is too long \n(max "+explanationSize.toString()+" characters)");
+			}
+		}
 		
 	}
 	

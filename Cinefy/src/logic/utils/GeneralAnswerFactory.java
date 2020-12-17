@@ -45,7 +45,7 @@ public class GeneralAnswerFactory implements AnswerAutomationFactory{
 			
 			if (rb.getYoutubeLink().isEmpty()==false) {
 			
-				String youtubeRow = "YouTube - " +rb.getYoutubeLink();
+				String youtubeRow = "YouTube - " +rb.getYoutubeLink()+"\n"+"\n"+"\n";
 				messageResource=messageResource+youtubeRow;
 			}
 			

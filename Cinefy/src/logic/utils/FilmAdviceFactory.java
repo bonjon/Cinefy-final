@@ -16,7 +16,7 @@ public class FilmAdviceFactory implements AnswerAutomationFactory {
 	
 	public FilmAdviceFactory() {
 		this.header = "||FILM ADVICE||";
-		this.explanationHeader = "EXPLANATION: ";
+		this.explanationHeader = "\nI adviced you this film because of the reason below.\n";
 		this.titleHeader = "Title: ";
 		this.genreHeader = "Genre: ";
 		
@@ -27,9 +27,9 @@ public class FilmAdviceFactory implements AnswerAutomationFactory {
 	@Override
 	public String answerCreation(RispostaBean rb) {
 		String result="";
-		String row1,row2,row3;
+		String row1,row2,row3,row1bis;
 		
-		partecipantHeader = rb.getProfession()+": ";
+		partecipantHeader = rb.getProfession()+" to focus on: ";
 		title = rb.getFilm();
 		partecipant = rb.getPartecipant();
 		genre = rb.getGenre();
@@ -37,9 +37,10 @@ public class FilmAdviceFactory implements AnswerAutomationFactory {
 		explanation = rb.getExplanation();
 		
 		row1 = header+"\n";
-		row2 = titleHeader+title+"  "+partecipantHeader+partecipant+"  "+genreHeader+genre+"\n";
-		row3 = explanationHeader+explanation;
-		result = row1+row2+row3;
+		row1bis = "I suggest you to watch the following film:\n";
+		row2 = titleHeader+title+"\n"+partecipantHeader+partecipant+"\n"+genreHeader+genre+"\n"+"\n";
+		row3 = explanationHeader+explanation+"\n"+"\n"+"\n";
+		result = row1+row1bis+row2+row3;
 		
 		return result;
 	}
