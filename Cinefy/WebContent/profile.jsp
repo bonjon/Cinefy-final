@@ -34,14 +34,14 @@
 					</form></li>
 				<li class="liBtn"><form action="AskBeginnerServlet"
 						method="post">
-						<input type="submit" class="selected" value="Ask">
+						<input type="submit" class="notSelected" value="Ask">
 					</form></li>
 				<li class="liBtn"><form action="PlaylistsBeginnerServlet"
 						method="post">
 						<input type="submit" class="notSelected" value="Playlists">
 					</form></li>
 				<li class="liBtn"><form action="profile.jsp" method="post">
-						<input type="submit" class="notSelected" value="Profile">
+						<input type="submit" class="selected" value="Profile">
 					</form></li>
 			</ul>
 		</div>
@@ -71,12 +71,15 @@
 			</div>
 			<%
 				} else {
-			%><div class="cardContainer">
+			%>
+			<label class="textUp">Profile</label><br>
+			<div class="cardContainer">
 				<img src="<%="img/profilePictures/" + bub.getProfilePic()%>"
 					class="circleImg" height="150" width="150" />
 				<h3 class="headUser"><%=bub.getUsername()%></h3>
 				<p class="bioP"><%=bub.getBio()%></p>
-			</div><br>
+			</div>
+			<br>
 			<%
 				}
 			%>
