@@ -868,6 +868,8 @@ BEGIN
 select * from Domanda where AdvancedName = var_ad AND BeginnerName = var_beg;
 END$$
 
+DELIMITER ;
+
 INSERT INTO `Film` (`FilmId`,`Titolo`,`Url`,`Regista`,`AttorePrincipale`,`Anno`,`Nazione`,`Genere`) VALUES
 (1, 'Blade Runner', 'https://www.imdb.com/title/tt0083658/', 'Ridley Scott', 'Harrison Ford', 1982, 'USA', 'Sci-Fi'),
 (2, 'Lost Highway', 'https://www.imdb.com/title/tt0116922/', 'David Lynch','Bill Pullman', 1997, 'USA', 'Thriller'),
@@ -889,8 +891,6 @@ INSERT INTO `Film` (`FilmId`,`Titolo`,`Url`,`Regista`,`AttorePrincipale`,`Anno`,
 (18, '2001: A Space Odissey', 'https://www.imdb.com/title/tt0062622/?ref_=nv_sr_srsg_0', 'Stanley Kubrick', 'Keir Dullea', 1968, 'USA', 'Sci-Fi'),
 (19, 'Dr. StrangeLove', 'https://www.imdb.com/title/tt0057012/?ref_=nv_sr_srsg_0', 'Stanley Kubrick', 'Peter Sellers', 1964, 'USA', 'Comedy'),
 (20, 'Polytechnique', 'https://www.imdb.com/title/tt1194238/?ref_=nv_sr_srsg_0', 'Denis Villeneuve', 'Karin Vanasse', 2009, 'France', 'Crime');
-
-DELIMITER ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
