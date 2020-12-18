@@ -31,7 +31,6 @@ public class LoginController {
 		GeneralUser result;
 		try {
 			result = gud.findUser(userBean.getUsername(), userBean.getPassword());
-			System.out.println(result.getUsername());
 			GeneralUserBean gu = new GeneralUserBean();
 			
 			gu.setUsername(result.getUsername());
