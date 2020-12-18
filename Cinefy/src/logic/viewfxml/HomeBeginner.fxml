@@ -100,6 +100,8 @@
 									onAction="#onYearPressed" text="Release year" />
 								<MenuItem mnemonicParsing="false"
 									onAction="#onGenrePressed" text="Genre" />
+								<MenuItem mnemonicParsing="false"
+									onAction="#onResetPressed" text="Reset" />
 							</items>
 							<font>
 								<Font name="Arial Bold" size="13.0" />

@@ -83,8 +83,8 @@
 							</image>
 						</ImageView>
 						<Label fx:id="labelCheck" layoutX="100.0" layoutY="109.0"
-							text="The question has been sent to our admins who will accept or reject"
-							textFill="#e8b100" AnchorPane.leftAnchor="140.0">
+							text="Question state"
+							textFill="#ffdf87" AnchorPane.leftAnchor="140.0">
 							<font>
 								<Font name="Arial" size="19.0" />
 							</font>
@@ -109,20 +109,18 @@
 							</font>
 						</Button>
 						<ScrollPane layoutX="53.0" layoutY="201.0"
-							style="-fx-background-color: #1c1c1c;"
+							prefHeight="100.0" style="-fx-background-color: #1c1c1c;"
 							AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0"
 							AnchorPane.topAnchor="201.0">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0"
-									prefHeight="100.0" prefWidth="1180.0"
-									style="-fx-background-color: #1c1c1c;">
+								<AnchorPane minHeight="100.0" minWidth="0.0"
+									prefWidth="1180.0" style="-fx-background-color: #1c1c1c;">
 									<children>
-										<Label fx:id="labelQuestion" layoutX="14.0"
-											layoutY="14.0" prefWidth="700.0"
-											text="Ciao quentin volevo sapere come si diventa registi? "
-											textFill="#f5c518" wrapText="true"
-											AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-											AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+										<Label fx:id="labelQuestion" ellipsisString=""
+											layoutX="14.0" layoutY="14.0" prefWidth="700.0"
+											text="Domanda"
+											textFill="#ffdf87" textOverrun="CLIP" wrapText="true"
+											AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 											<font>
 												<Font name="Arial Italic" size="19.0" />
 											</font>
@@ -144,20 +142,17 @@
 							</font>
 						</Label>
 						<ScrollPane layoutX="40.0" layoutY="354.0"
-							prefHeight="100.0" prefWidth="1180.0"
-							style="-fx-background-color: #1c1c1c;"
+							prefHeight="100.0" style="-fx-background-color: #1c1c1c;"
 							AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0"
-									prefHeight="100.0" prefWidth="1180.0"
-									style="-fx-background-color: #1c1c1c;">
+								<AnchorPane minHeight="100.0" minWidth="0.0"
+									prefWidth="1180.0" style="-fx-background-color: #1c1c1c;">
 									<children>
-										<Label fx:id="labelAnswer" layoutX="-32.0"
-											layoutY="13.0" prefWidth="700.0"
-											text="Ciao giovanni, beh ci vuole tanta pazienza e tanto impegno!"
-											textFill="#f5c518" wrapText="true"
-											AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-											AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+										<Label fx:id="labelAnswer" ellipsisString=""
+											layoutX="-32.0" layoutY="13.0" prefWidth="700.0"
+											text="Risposta"
+											textFill="#ffdf87" textOverrun="CLIP" wrapText="true"
+											AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 											<font>
 												<Font name="Arial Italic" size="19.0" />
 											</font>

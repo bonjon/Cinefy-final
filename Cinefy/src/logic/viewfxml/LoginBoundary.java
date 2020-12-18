@@ -92,7 +92,6 @@ public class LoginBoundary implements Initializable {
 		}
 			catch (FieldEmptyException e) {
 				if (FieldEmptyException.EMPTYUSERNAME==true) {
-					System.out.println(e.getMessage());
 					this.userError.setText(e.getMessage());
 					FieldEmptyException.EMPTYUSERNAME=false;
 				}

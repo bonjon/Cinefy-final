@@ -48,7 +48,6 @@ public class HomeBeginnerBoundary implements Initializable {
 	private ViewListOfFilmsController vfc;
 	private BeginnerGraphicChange bgc;
 	int itemSelected; // 0 movie name, 1 Director, 2 Nation, 3 Actor, 4 Release Year, 5 Genre
-	int start;
 
 	@FXML
 	public void onAskClicked(MouseEvent event) throws IOException {
@@ -69,37 +68,38 @@ public class HomeBeginnerBoundary implements Initializable {
 	public void onDirectorPressed(ActionEvent event) {
 		itemSelected = 1;
 		this.splitMenu.setText("Director");
-		start = 1;
 	}
 
 	@FXML
 	public void onNationPressed(ActionEvent event) {
 		itemSelected = 2;
 		this.splitMenu.setText("Nation");
-		start = 1;
 	}
 
 	@FXML
 	public void onActorPressed(ActionEvent event) {
 		itemSelected = 3;
 		this.splitMenu.setText("Actor");
-		start = 1;
 	}
 
 	@FXML
 	public void onYearPressed(ActionEvent event) {
 		itemSelected = 4;
 		this.splitMenu.setText("Year");
-		start = 1;
 	}
 
 	@FXML
 	public void onGenrePressed(ActionEvent event) {
 		itemSelected = 5;
 		this.splitMenu.setText("Genre");
-		start = 1;
 	}
 
+	@FXML
+	public void onResetPressed(ActionEvent event) {
+		itemSelected = 0;
+		this.splitMenu.setText("Search by:");
+	}
+	
 	@FXML
 	public void onSelectedFilm(MouseEvent event) {
 		WebEngine engine = web.getEngine();
@@ -108,18 +108,13 @@ public class HomeBeginnerBoundary implements Initializable {
 		engine.load(url);
 		this.web.setVisible(true);
 	}
-
+	
 	@FXML
 	public void onEnterPressed(KeyEvent event) throws SQLException {
 		this.listView.getItems().clear();
 		this.errorLabel.setText("");
-		if (start == 0) {
-			this.splitMenu.setText("Search by:");
-			itemSelected = 0;
-		}
 		if (event.getCode() == KeyCode.ENTER) {
 			// Caso in cui non si applicano filtri e si cerchi per nome del film
-			start = 0;
 			if (itemSelected == 0) {
 				String a = this.movie.getText().toString();
 				list.removeAll(list);

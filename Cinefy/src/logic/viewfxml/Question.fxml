@@ -87,7 +87,7 @@
 							</font>
 						</Label>
 						<Label fx:id="username" layoutX="340.0" layoutY="80.0"
-							text="username..." textFill="#f5c518"
+							text="username..." textFill="#ffdf87"
 							AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="100.0">
 							<font>
 								<Font name="Arial" size="17.0" />
@@ -101,7 +101,7 @@
 							</font>
 						</Label>
 						<Label fx:id="voto" layoutX="340.0" layoutY="160.0"
-							text="voto..." textFill="#f5c518" AnchorPane.topAnchor="180.0">
+							text="voto..." textFill="#ffdf87" AnchorPane.topAnchor="180.0">
 							<font>
 								<Font name="Arial" size="17.0" />
 							</font>
@@ -113,7 +113,7 @@
 							</font>
 						</Label>
 						<Label fx:id="role" layoutX="340.0" layoutY="240.0"
-							text="ruolo..." textFill="#f5c518" AnchorPane.topAnchor="260.0">
+							text="ruolo..." textFill="#ffdf87" AnchorPane.topAnchor="260.0">
 							<font>
 								<Font name="Arial" size="17.0" />
 							</font>
@@ -121,7 +121,7 @@
 						<Label fx:id="bio" alignment="TOP_LEFT" layoutX="692.0"
 							layoutY="60.0" maxHeight="-Infinity" minHeight="-Infinity"
 							prefHeight="230.0" prefWidth="540.0" text="bio..."
-							textFill="#f5c518" wrapText="true" AnchorPane.leftAnchor="690.0"
+							textFill="#ffdf87" wrapText="true" AnchorPane.leftAnchor="690.0"
 							AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
 							<font>
 								<Font size="19.0" />

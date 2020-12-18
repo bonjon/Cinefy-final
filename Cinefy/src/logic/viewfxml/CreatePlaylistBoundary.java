@@ -165,6 +165,8 @@ public class CreatePlaylistBoundary implements Initializable {
 			this.cpc.addFilm(Integer.parseInt(this.pb.getId()), this.selected);
 		} catch (FieldEmptyException e) {
 			this.labelError.setText(e.getMessage());
+		} catch (SQLException e) {
+			this.labelError.setText("Film already added");
 		}
 	}
 
@@ -201,7 +203,7 @@ public class CreatePlaylistBoundary implements Initializable {
 			} catch (FilmNotFoundException e) {
 				this.labelError.setText(e.getMessage());
 			} catch (SQLException e) {
-				this.labelError.setText("Probably you also add this film!");
+				this.labelError.setText("SqlError");
 			}
 		}
 	}
