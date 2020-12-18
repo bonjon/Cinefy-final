@@ -16,6 +16,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -33,6 +34,7 @@ import logic.controllers.AskForQuestionsController;
 import logic.exceptions.AdvancedNotFoundException;
 import logic.observer.ObservableAdTopList;
 import logic.observer.TopRatedPanel;
+import logic.utils.ChangeOnceListener;
 import logic.utils.FileManager;
 import logic.utils.SessionUser;
 
@@ -60,6 +62,8 @@ public class AskBeginnerBoundary implements Initializable {
 	private ListView<DomandaBean> questions;
 	@FXML
 	private SplitMenuButton splitMenu;
+	@FXML
+	private ScrollPane scrollPane;
 
 	private ObservableAdTopList observable;
 	private TopRatedPanel tp;
@@ -412,6 +416,11 @@ public class AskBeginnerBoundary implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
+		
+		scrollPane.hvalueProperty().addListener(new ChangeOnceListener<>((observable, oldValue, newValue) -> {
+            scrollPane.setHvalue(0.0);
+        }));
+		
 		listSearch = FXCollections.observableArrayList();
 		listQuestions = FXCollections.observableArrayList();
 		this.afc = new AskForQuestionsController();
