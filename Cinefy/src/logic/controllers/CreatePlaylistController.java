@@ -16,7 +16,7 @@ public class CreatePlaylistController extends Controller {
 	public PlaylistBean createPlaylist(String text, String username, String playlistPic)
 			throws FieldEmptyException, FieldTooLongException, SQLException {
 		PlaylistDAO pd = new PlaylistDAO();
-		if (text == null) {
+		if (text.isEmpty()) {
 			throw new FieldEmptyException("Insert the name");
 		}
 		if (text.length() >= 45) {
