@@ -28,6 +28,9 @@
 		<div class="splitLeft">
 			<div class="titolo">Cinefy</div>
 			<ul class="listGroup">
+				<%
+					if (gub.getRole().equals("beginner")) {
+				%>
 				<li class="liBtn"><form action="home_beginner.jsp"
 						method="post">
 						<input type="submit" class="notSelected" value="Home">
@@ -43,6 +46,27 @@
 				<li class="liBtn"><form action="profile.jsp" method="post">
 						<input type="submit" class="selected" value="Profile">
 					</form></li>
+				<%
+					} else {
+				%>
+				<li class="liBtn"><form action="home_beginner.jsp"
+						method="post">
+						<input type="submit" class="notSelected" value="Home">
+					</form></li>
+				<li class="liBtn"><form action="AnswerAdvancedServlet"
+						method="post">
+						<input type="submit" class="notSelected" value="Answer">
+					</form></li>
+				<li class="liBtn"><form action="PlaylistsAdvancedServlet"
+						method="post">
+						<input type="submit" class="notSelected" value="Playlists">
+					</form></li>
+				<li class="liBtn"><form action="profile.jsp" method="post">
+						<input type="submit" class="selected" value="Profile">
+					</form></li>
+				<%
+					}
+				%>
 			</ul>
 		</div>
 		<div class="splitRight">

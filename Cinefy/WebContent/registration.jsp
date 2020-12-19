@@ -46,7 +46,7 @@
 				String log2 = (String) request.getAttribute("reg");
 				if (log2 != null) {
 					if (log2 != null) {
-			%><h6 style="color: RED text-align: center;"><%=log2%></h6>
+			%><h6 style="color: RED;"><%=log2%></h6>
 			<%
 				}
 				}
@@ -56,7 +56,7 @@
 				String log = (String) request.getAttribute("field");
 				if (log != null) {
 					if (log != null) {
-			%><h6 style="color: RED text-align: center;"><%=log%></h6>
+			%><h6 style="color: RED;"><%=log%></h6>
 			<%
 				}
 				}
@@ -105,7 +105,7 @@
 				<br>
 				<div>
 					<input name="registration" type="submit" id="registration"
-						value="Sign up" class="btn">
+						value="Sign up" class="signIn">
 				</div>
 			</form>
 		</div>

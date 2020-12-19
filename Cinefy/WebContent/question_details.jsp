@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Question</title>
+<title>Question Details</title>
 <!-- linked CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <script src="js/jquery.min.js"></script>
@@ -56,7 +56,6 @@
 						<div class="col-md-6">
 							<div class="card">
 								<div class="card-body text-center">
-									<span class="myratings">Rate him</span>
 									<fieldset class="rating">
 										<input type="radio" id="star5" name="rating" value="5" /><label
 											class="full" for="star5" title="Awesome - 5 stars"></label> <input
@@ -70,7 +69,7 @@
 											class="full" for="star1" title="Sucks big time - 1 star"></label>
 									</fieldset>
 									<input name="BTNOK" type="submit" id="BTNOK" value="OK"
-										class="btn btnC">
+										class="signIn">
 								</div>
 							</div>
 						</div>
@@ -81,7 +80,7 @@
 				String log = (String) request.getAttribute("error");
 				if (log != null) {
 					if (log != null) {
-			%><h6 style="color: RED; text-align: center"><%=log%></h6>
+			%><h6 style="color: RED; text-align: center;"><%=log%></h6>
 			<%
 				}
 				}

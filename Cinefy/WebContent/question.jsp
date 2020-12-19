@@ -39,15 +39,6 @@
 			</ul>
 		</div>
 		<div class="splitRight">
-			<%
-				String log = (String) request.getAttribute("error");
-				if (log != null) {
-					if (log != null) {
-			%><h6 style="color: RED text-align: center;"><%=log%></h6>
-			<%
-				}
-				}
-			%>
 			<label class="textUp">Make a question to <%=AdS.getUsername()%></label><br>
 			<div class="cardContainer">
 				<img src="<%="img/profilePictures/" + AdS.getProfilePic()%>"
@@ -64,11 +55,19 @@
 				%><h3 class="headUser"><%=AdS.getProfession()%></h3>
 				<p class="bioP"><%=AdS.getBio()%></p>
 			</div>
+			<%
+				String log = (String) request.getAttribute("error");
+				if (log != null) {
+					if (log != null) {
+			%><h6 style="color: RED; text-align: center;"><%=log%></h6>
+			<%
+				}
+				}
+			%>
 			<form class="containerBio" action="MakeQuestionServlet" method="post">
 				<textarea name="question" id="question" class="quest"></textarea>
-				<br>
-				<br> <input name="make" id="make" type="submit" class="signIn"
-					value="Submit">
+				<br> <br> <input name="make" id="make" type="submit"
+					class="signIn" value="Submit">
 			</form>
 		</div>
 	</div>

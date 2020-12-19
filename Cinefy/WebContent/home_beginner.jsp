@@ -68,7 +68,7 @@
 				String log = (String) request.getAttribute("search");
 				if (log != null) {
 					if (log != null) {
-			%><h6 style="color: RED text-align: center;"><%=log%></h6>
+			%><h6 style="color: RED; margin-left: 30px;"><%=log%></h6>
 			<%
 				}
 				}
