@@ -3,6 +3,7 @@ package logic.view;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import logic.bean.AdvancedUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.GeneralUserBean;
+import logic.bean.RispostaBean;
 import logic.controllers.AskForQuestionsController;
 import logic.exceptions.AdvancedNotFoundException;
 
@@ -42,7 +44,11 @@ public class AskBeginnerServlet extends HttpServlet {
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 		try {
 			topAd = afc.leaderBoard();
-			request.setAttribute("topAd", topAd);
+			if (topAd == null) {
+				request.setAttribute("topAd", Collections.EMPTY_LIST);
+				request.setAttribute("errorx", "No advanced leaderboard");
+			} else
+				request.setAttribute("topAd", topAd);
 		} catch (SQLException e) {
 			request.setAttribute("error", e.getMessage());
 		} catch (AdvancedNotFoundException e) {
@@ -58,8 +64,27 @@ public class AskBeginnerServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		session.setAttribute("questions", questions);
 		if (request.getParameter("a") != null) {
 			rd = this.goToQuestion(session, request, afc);
+		} else if (request.getParameter("d") != null) {
+			int index = Integer.parseInt(request.getParameter("index2"));
+			DomandaBean db = (DomandaBean) questions.get(index);
+			RispostaBean r = new RispostaBean();
+			session.setAttribute("QU", db);
+			try {
+				r = afc.getAnswer(gub, db);
+				if (r == null) {
+					request.setAttribute("error", "No answer from this advanced");
+					rd = request.getRequestDispatcher("ask_beginner.jsp");
+				} else {
+					rd = request.getRequestDispatcher("QuestionDetailsServlet");
+				}
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				request.setAttribute("error", e.getMessage());
+			}
 		}
 		rd.forward(request, response);
 	}
