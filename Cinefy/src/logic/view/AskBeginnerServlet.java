@@ -50,7 +50,7 @@ public class AskBeginnerServlet extends HttpServlet {
 			} else
 				request.setAttribute("topAd", topAd);
 		} catch (SQLException e) {
-			request.setAttribute("error", e.getMessage());
+			request.setAttribute("errorx", e.getMessage());
 		} catch (AdvancedNotFoundException e) {
 			e.printStackTrace();
 		}

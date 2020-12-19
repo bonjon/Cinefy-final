@@ -58,7 +58,6 @@ public class QuestionDetailsServlet extends HttpServlet {
 	private RequestDispatcher voteAdvanced(HttpServletRequest request, HttpSession session,
 			AskForQuestionsController afc, AdvancedUserBean aub, GeneralUserBean gub) {
 		String rating = request.getParameter("rating");
-		System.out.println(request);
 		if (rating != null) {
 			aub.setVoto(Integer.parseInt(rating));
 			try {

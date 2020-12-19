@@ -53,11 +53,12 @@ public class MakeQuestionServlet extends HttpServlet {
 			afc.makeQuestion(db);
 		} catch (FieldTooLongException e) {
 			request.setAttribute("error", e.getMessage());
-			return request.getRequestDispatcher("AskBeginnerServlet");
+			return request.getRequestDispatcher("question.jsp");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (FieldEmptyException e) {
 			request.setAttribute("error", e.getMessage());
+			return request.getRequestDispatcher("question.jsp");
 		}
 		return request.getRequestDispatcher("AskBeginnerServlet");
 	}

@@ -52,5 +52,4 @@ public class SearchServlet extends HttpServlet {
 		}
 		rd.forward(request, response);
 	}
-
 }
