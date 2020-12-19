@@ -39,25 +39,25 @@
 						method="post">
 						<input type="submit" class="notSelected" value="Playlists">
 					</form></li>
-				<li class="liBtn"><form action="profile.jsp"
-						method="post">
+				<li class="liBtn"><form action="profile.jsp" method="post">
 						<input type="submit" class="notSelected" value="Profile">
 					</form></li>
 			</ul>
 		</div>
 		<div class="splitRight">
 			<label class="textUp">Top Advanced</label><br>
-			<%
-				String log = (String) request.getAttribute("error");
-				if (log != null) {
-					if (log != null) {
-			%><h6 style="color: RED;"><%=log%></h6>
-			<%
-				}
-				}
-			%>
 			<div>
+				<%
+					String logx = (String) request.getAttribute("errorx");
+					if (logx != null) {
+						if (logx != null) {
+				%><h6 style="color: RED; text-align: center"><%=logx%></h6>
+				<%
+					}
+					}
+				%>
 				<ul style="width: 900px; overflow: auto">
+
 					<%
 						for (i = 0; i < topAd.size(); i++) {
 					%><li class="itemAd">
@@ -86,6 +86,15 @@
 				<input name="searchString" type="text" class="text-box2"
 					aria-label="Search">
 			</form>
+			<%
+				String log = (String) request.getAttribute("error");
+				if (log != null) {
+					if (log != null) {
+			%><h6 style="color: RED text-align: center;"><%=log%></h6>
+			<%
+				}
+				}
+			%>
 			<br> <label class="textDown">Your last questions</label>
 			<div>
 				<ul style="height: 300px; overflow: auto">
