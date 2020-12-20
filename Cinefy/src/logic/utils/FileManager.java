@@ -9,17 +9,15 @@ import java.io.File;
 
 public class FileManager {
 
-//	private static String cinefy = "cinefy.git";
-	private static String cinefy = "cinefy";
+    private static String cinefy = "cinefy.git";
+	//private static String cinefy = "cinefy";
+	//public static final String PROJECT = System.getProperty("user.home") + File.separator + cinefy + File.separator
+		//	+ "trunk" + File.separator + "Cinefy" + File.separator + "res" + File.separator;
 	public static final String PROJECT = System.getProperty("user.home") + File.separator + cinefy + File.separator
-			+ "trunk" + File.separator + "Cinefy" + File.separator + "res" + File.separator;
-	public static final String WEB = System.getProperty("user.home") + File.separator + cinefy + File.separator
 			+ "trunk" + File.separator + "Cinefy" + File.separator + "WebContent" + File.separator + "img"
 			+ File.separator;
 	public static final String PROFILE = PROJECT + "profilePictures";
-	public static final String PROFWEB = WEB + "profilePictures";
 	public static final String PLAYLISTS = PROJECT + "playlistPictures";
-	public static final String PLAYWEB = WEB + "playlistPictures";
 	public static final String GREEN = PROJECT + "green.png";
 	public static final String RED = PROJECT + "red.png";
 	public static final String YELLOW = PROJECT + "yellow.png";
