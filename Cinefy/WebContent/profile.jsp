@@ -76,7 +76,7 @@
 			<label class="textUp">Profile</label><br>
 			<div class="cardContainer">
 				<img src="<%="img/profilePictures/" + aub.getProfilePic()%>"
-					class="circleImg" height="150" width="150" />
+					class="circleImg" height="150" width="150"/>
 				<h3 class="headUser"><%=aub.getUsername()%></h3>
 				<h6 class="headSmall"><%=aub.getVoto()%>
 					average
