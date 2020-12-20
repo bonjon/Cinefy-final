@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page
-	import="java.util.ArrayList, java.util.List, logic.bean.PlaylistBean, logic.bean.GeneralUserBean"%>
+	import="java.util.ArrayList, java.util.List, logic.bean.PlaylistBean, logic.bean.GeneralUserBean, logic.bean.FilmBean, logic.controllers.PlaylistDetailsController"%>
 <%
 	PlaylistBean P = (PlaylistBean) session.getAttribute("P");
+	PlaylistDetailsController pdc = new PlaylistDetailsController();
+	List<FilmBean> LF = pdc.getFilmPlaylist(P.getId());
+	int i;
 	GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 %>
 <!-- HTML5 -->
@@ -80,11 +83,21 @@
 				</h6>
 				<%
 					int vote = (int) Double.parseDouble(P.getVoto());
-					for (int i = 0; i < vote; i++) {
+					for (int j = 0; j < vote; j++) {
 				%><span class="fa">★</span>
 				<%
 					}
 				%>
+				<ul>
+					<%
+						for (i = 0; i < LF.size(); i++) {
+					%><li class="itemFilms"><a class="linkGo3"
+					href="<%=LF.get(i).getUrl()%>"><%=LF.get(i).getTitolo()%></a>
+				</li>
+					<%
+						}
+					%>
+				</ul>
 			</div>
 			<%
 				if (gub.getRole().equals("beginner")) {
@@ -97,23 +110,23 @@
 							<div class="card">
 								<div class="card-body text-center bigger">
 									<fieldset class="rating">
-									<input type="radio" id="star10" name="rating" value="10" /><label
-											class="full" for="star10" title="PERFECT - 10 stars"></label> 
-									<input type="radio" id="star9" name="rating" value="9" /><label
-											class="full" for="star9" title="Awesome - 9 stars"></label> 
-									<input type="radio" id="star8" name="rating" value="8" /><label
-											class="full" for="star8" title="Awesome - 8 stars"></label> 
-									<input type="radio" id="star7" name="rating" value="7" /><label
-											class="full" for="star7" title="Pretty Good - 7 stars"></label> 
-									<input type="radio" id="star6" name="rating" value="6" /><label
-											class="full" for="star6" title="Pretty Good - 6 stars"></label> 
+										<input type="radio" id="star10" name="rating" value="10" /><label
+											class="full" for="star10" title="PERFECT - 10 stars"></label>
+										<input type="radio" id="star9" name="rating" value="9" /><label
+											class="full" for="star9" title="Awesome - 9 stars"></label> <input
+											type="radio" id="star8" name="rating" value="8" /><label
+											class="full" for="star8" title="Awesome - 8 stars"></label> <input
+											type="radio" id="star7" name="rating" value="7" /><label
+											class="full" for="star7" title="Pretty Good - 7 stars"></label>
+										<input type="radio" id="star6" name="rating" value="6" /><label
+											class="full" for="star6" title="Pretty Good - 6 stars"></label>
 										<input type="radio" id="star5" name="rating" value="5" /><label
 											class="full" for="star5" title="Meh - 5 stars"></label> <input
 											type="radio" id="star4" name="rating" value="4" /><label
-											class="full" for="star4" title="Meh - 4 stars"></label>
-										<input type="radio" id="star3" name="rating" value="3" /><label
-											class="full" for="star3" title="Kinda bad - 3 stars"></label> <input
-											type="radio" id="star2" name="rating" value="2" /><label
+											class="full" for="star4" title="Meh - 4 stars"></label> <input
+											type="radio" id="star3" name="rating" value="3" /><label
+											class="full" for="star3" title="Kinda bad - 3 stars"></label>
+										<input type="radio" id="star2" name="rating" value="2" /><label
 											class="full" for="star2" title="Kinda bad - 2 stars"></label>
 										<input type="radio" id="star1" name="rating" value="1" /><label
 											class="full" for="star1" title="Sucks big time - 1 star"></label>

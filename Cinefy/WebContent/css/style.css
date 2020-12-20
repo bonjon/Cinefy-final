@@ -286,13 +286,13 @@ a.facebook {
 }
 
 .nameAd {
-	color: #f5c518;
+	color: #ffdf87;
 	font-family: Arial;
 	font-size: 15px;
 }
 
 .cardContainer {
-	color: #f5c518;
+	color: #ffdf87;
 	text-align: center;
 	padding-top: 20px;
 	margin-left: 400px;
@@ -306,7 +306,7 @@ a.facebook {
 }
 
 .circleImg {
-	border: 1px solid #f5c518;
+	border: 1px solid #ffdf87;
 	border-radius: 50%;
 	padding: 7px;
 }
@@ -536,4 +536,16 @@ h4 {
 
 .center{
 	margin-right: 80px;
+}
+
+.centro{
+	margin-left: 30px;
+}
+
+.linkGo3{
+	background-color: transparent;
+	color: #ffdf87;
+	font-family: Arial;
+	font-size: 14px;
+	margin-left: 150px;
 }
