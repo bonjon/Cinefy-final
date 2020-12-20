@@ -97,7 +97,7 @@
 									</font>
 								</Label>
 								<Label fx:id="playlistName" layoutX="290.0" layoutY="80.0"
-									text="Name" textFill="#f5c518" AnchorPane.topAnchor="100.0">
+									text="Name" textFill="#ffdf87" AnchorPane.topAnchor="100.0">
 									<font>
 										<Font name="Arial" size="17.0" />
 									</font>
@@ -109,7 +109,7 @@
 									</font>
 								</Label>
 								<Label fx:id="advancedName" layoutX="291.0"
-									layoutY="175.0" text="Name" textFill="#f5c518"
+									layoutY="175.0" text="Name" textFill="#ffdf87"
 									AnchorPane.topAnchor="180.0">
 									<font>
 										<Font name="Arial" size="17.0" />
@@ -123,7 +123,7 @@
 									</font>
 								</Label>
 								<Label fx:id="voto" layoutX="291.0" layoutY="200.0"
-									text="Name" textFill="#f5c518" AnchorPane.topAnchor="260.0">
+									text="Name" textFill="#ffdf87" AnchorPane.topAnchor="260.0">
 									<font>
 										<Font name="Arial" size="17.0" />
 									</font>
@@ -135,7 +135,7 @@
 									</font>
 								</Label>
 								<Label fx:id="playlistDate" layoutX="524.0"
-									layoutY="100.0" text="Name" textFill="#f5c518">
+									layoutY="100.0" text="Name" textFill="#ffdf87">
 									<font>
 										<Font name="Arial" size="17.0" />
 									</font>
