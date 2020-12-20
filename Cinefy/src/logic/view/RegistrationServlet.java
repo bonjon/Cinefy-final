@@ -78,7 +78,7 @@ public class RegistrationServlet extends HttpServlet {
 		if (Boolean.TRUE.equals(regResult)) {
 			request.setAttribute("reg", "Registered");
 			if (!fileName.equals("") && filePart != null) {
-				String path = FileManager.PROFWEB;
+				String path = FileManager.PROFILE;
 				File file = new File(path, fileName);
 				File newFile = new File(path, newFileName);
 				try (InputStream input = filePart.getInputStream()) {
