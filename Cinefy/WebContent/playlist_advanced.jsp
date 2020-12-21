@@ -115,7 +115,7 @@
 				}
 				}
 			%>
-			<form action="create_playlist.jsp" method="post">
+			<form action="CreatePlaylistServlet" method="post">
 				<input name="create" type="submit" id="create"
 					value="Create a playlist" class="signIn centro">
 			</form>

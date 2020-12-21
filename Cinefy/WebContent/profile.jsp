@@ -75,8 +75,19 @@
 			%>
 			<label class="textUp">Profile</label><br>
 			<div class="cardContainer">
+				<%
+					if (aub.getProfilePic() == null) {
+				%>
+				<img src="<%="img/profilePictures/" + "default.png"%>"
+					class="circleImg" height="150" width="150" />
+				<%
+					} else {
+				%>
 				<img src="<%="img/profilePictures/" + aub.getProfilePic()%>"
-					class="circleImg" height="150" width="150"/>
+					class="circleImg" height="150" width="150" />
+				<%
+					}
+				%>
 				<h3 class="headUser"><%=aub.getUsername()%></h3>
 				<h6 class="headSmall"><%=aub.getVoto()%>
 					average
@@ -98,8 +109,19 @@
 			%>
 			<label class="textUp">Profile</label><br>
 			<div class="cardContainer">
+				<%
+					if (bub.getProfilePic() == null) {
+				%>
+				<img src="<%="img/profilePictures/" + "default.png"%>"
+					class="circleImg" height="150" width="150" />
+				<%
+					} else {
+				%>
 				<img src="<%="img/profilePictures/" + bub.getProfilePic()%>"
 					class="circleImg" height="150" width="150" />
+				<%
+					}
+				%>
 				<h3 class="headUser"><%=bub.getUsername()%></h3>
 				<p class="bioP"><%=bub.getBio()%></p>
 			</div>
