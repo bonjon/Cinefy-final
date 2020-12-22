@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page
+	import="logic.utils.*, logic.bean.FilmBean, logic.bean.PlaylistBean"%>
+<%
+	PlaylistBean pb = (PlaylistBean) session.getAttribute("pb");
+%>
 <!-- HTML5 -->
 <!DOCTYPE html>
 <html>
 <head>
-<title>Create Playlist</title>
+<title>Films on Playlist</title>
 <!-- linked CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <script src="js/jquery.min.js"></script>
@@ -34,23 +39,24 @@
 			</ul>
 		</div>
 		<div class="splitRight">
-			<form action="CreatePlaylistServlet" method="post"
-				enctype='multipart/form-data'>
-				<label class="textUp">Name of the playlist and choose the
-					image</label><br> <br>
+			<form action="AddFilmServlet" method="post">
+				<label class="textUp">Name of the playlist and the image</label><br>
+				<br> <img
+					src="<%="img/playlistPictures/" + pb.getPlaylistPic()%>"
+					class="circleImg adjust" height="150" width="150" /><br> <label
+					class="headUser adjust"><%=pb.getName()%></label><br>
+				<br> <label class="textMiddle">Now search film and
+					press enter to add in the playlist</label><br> <br> <input
+					id="film" name="film" type="text" class="text-box left">
 				<%
-					String logx = (String) request.getAttribute("errorx");
-					if (logx != null) {
-						if (logx != null) {
-				%><h6 style="color: RED; margin-left: 30px;"><%=logx%></h6>
+					String log = (String) request.getAttribute("error");
+					if (log != null) {
+						if (log != null) {
+				%><h6 style="color: RED; margin-left: 30px"><%=log%></h6>
 				<%
 					}
 					}
 				%>
-				<input id="name" name="name" type="text" class="text-box left"><br>
-				<br> <input class="av2" type="file" id="avatar" name="avatar"
-					accept="image/png, image/jpeg"><br> <input
-					class="signIn left" id="ok" name="ok" type="submit" value="Ok">
 			</form>
 		</div>
 	</div>

@@ -49,7 +49,7 @@
 
 					<%
 						for (i = 0; i < topLP.size(); i++) {
-					%><li class="itemP">
+					%><li class="itemAd">
 						<form class="formCard" action="PlaylistsAdvancedServlet"
 							method="post">
 							<button type="submit" name="<%="a"%>"
@@ -85,7 +85,7 @@
 
 					<%
 						for (i = 0; i < LP.size(); i++) {
-					%><li class="itemP">
+					%><li class="itemAd">
 						<form class="formCard" action="PlaylistsAdvancedServlet"
 							method="post">
 							<button type="submit" name="<%="b"%>"
