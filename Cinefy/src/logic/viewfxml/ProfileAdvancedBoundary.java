@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import logic.bean.AdvancedUserBean;
 import logic.bean.GeneralUserBean;
 import logic.controllers.ProfileController;
@@ -43,6 +44,8 @@ public class ProfileAdvancedBoundary implements Initializable {
 	@FXML
 	private Label username;
 	@FXML
+	private Label laBioTitle;
+	@FXML
 	private Label bio;
 	@FXML
 	private Button btnLogout;
@@ -52,6 +55,8 @@ public class ProfileAdvancedBoundary implements Initializable {
 	private Label tokens;
 	@FXML
 	private Label role;
+	@FXML
+	private AnchorPane anchorPaneBio;
 
 	private AdvancedGraphicChange agc;
 	private AdvancedUserBean aub;
@@ -99,8 +104,10 @@ public class ProfileAdvancedBoundary implements Initializable {
 		this.voto.setText(aub.getVoto());
 		this.role.setText(aub.getProfession());
 		this.tokens.setText(aub.getTokens());
-		if (aub.getBio() == null) {
+		if (aub.getBio().isEmpty()) {
 			this.bio.setText("");
+			laBioTitle.setText("");
+			anchorPaneBio.setVisible(false);
 		} else {
 			this.bio.setText(aub.getBio());
 		}

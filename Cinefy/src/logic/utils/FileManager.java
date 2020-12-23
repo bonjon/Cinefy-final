@@ -9,8 +9,8 @@ import java.io.File;
 
 public class FileManager {
 
-    private static String cinefy = "cinefy.git";
-	//private static String cinefy = "cinefy";
+    //private static String cinefy = "cinefy.git";
+	private static String cinefy = "cinefy";
 	//public static final String PROJECT = System.getProperty("user.home") + File.separator + cinefy + File.separator
 		//	+ "trunk" + File.separator + "Cinefy" + File.separator + "res" + File.separator;
 	public static final String PROJECT = System.getProperty("user.home") + File.separator + cinefy + File.separator

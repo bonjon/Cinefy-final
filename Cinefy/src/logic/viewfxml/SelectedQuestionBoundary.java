@@ -58,6 +58,8 @@ public class SelectedQuestionBoundary implements Initializable  {
 	@FXML
 	private Label laBio;
 	@FXML
+	private Label laBioTitle;
+	@FXML
 	private Button btnSubmit;
 	@FXML
 	private Label submitError;
@@ -267,12 +269,18 @@ public class SelectedQuestionBoundary implements Initializable  {
 		
 		aub = aqc.getAdvanced(advancedName);
 		String bio = bub.getBio();
+		if(bio.isEmpty()) {
+			laBio.setVisible(false);
+			laBioTitle.setText("");;
+		}
+		else {
 		laBio.setText(bio);
+		}
 		profession = aub.getProfession();
 		laName.setText(profession+" to focus on");
 		
 		if (bub.getProfilePic()==null) {
-			begPicPath = FileManager.PROFILE + File.separator + "default.png";
+			begPicPath = FileManager.PROFILE + File.separator + FileManager.generateNewFileName("default.png",beginnerName);
 		}
 		else {
 			begPicPath = FileManager.PROFILE + File.separator + bub.getProfilePic();

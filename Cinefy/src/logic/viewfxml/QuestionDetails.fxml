@@ -11,116 +11,75 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
-	prefWidth="1480.0" xmlns="http://javafx.com/javafx/8.0.171"
-	xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1480.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<BorderPane AnchorPane.bottomAnchor="0.0"
-			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-			AnchorPane.topAnchor="0.0">
+		<BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<left>
-				<AnchorPane maxWidth="-Infinity" minWidth="-Infinity"
-					prefWidth="220.0" style="-fx-background-color: #121212;"
-					BorderPane.alignment="CENTER">
+				<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="220.0" style="-fx-background-color: #121212;" BorderPane.alignment="CENTER">
 					<children>
-						<Label layoutX="48.0" layoutY="14.0" text="Cinefy"
-							textFill="#f5c518" AnchorPane.topAnchor="14.0">
+						<Label layoutX="48.0" layoutY="14.0" text="Cinefy" textFill="#f5c518" AnchorPane.topAnchor="14.0">
 							<font>
 								<Font name="DejaVu Sans Mono Bold" size="33.0" />
 							</font>
 						</Label>
-						<Label fx:id="home" layoutX="75.0" layoutY="320.0"
-							onMouseClicked="#onHomeClicked" text="Home" textFill="#f5c518"
-							AnchorPane.bottomAnchor="500.0">
+						<Label fx:id="home" layoutX="75.0" layoutY="320.0" onMouseClicked="#onHomeClicked" text="Home" textFill="#f5c518" AnchorPane.bottomAnchor="500.0">
 							<font>
 								<Font name="Arial" size="25.0" />
 							</font>
 						</Label>
-						<Label fx:id="ask" layoutX="85.0" layoutY="351.0" text="Ask"
-							textFill="#f5c518" underline="true"
-							AnchorPane.bottomAnchor="340.0">
+						<Label fx:id="ask" layoutX="85.0" layoutY="351.0" text="Ask" textFill="#f5c518" underline="true" AnchorPane.bottomAnchor="340.0">
 							<font>
 								<Font name="Arial Bold Italic" size="25.0" />
 							</font>
 						</Label>
-						<Label fx:id="playlists" layoutX="62.0" layoutY="608.0"
-							onMouseClicked="#onPlaylistsClicked" text="Playlists"
-							textFill="#f5c518" AnchorPane.bottomAnchor="200.0">
+						<Label fx:id="playlists" layoutX="62.0" layoutY="608.0" onMouseClicked="#onPlaylistsClicked" text="Playlists" textFill="#f5c518" AnchorPane.bottomAnchor="200.0">
 							<font>
 								<Font name="Arial" size="25.0" />
 							</font>
 						</Label>
-						<Label fx:id="profile" layoutX="73.0" layoutY="676.0"
-							onMouseClicked="#onProfileClicked" text="Profile"
-							textFill="#f5c518" AnchorPane.bottomAnchor="60.0">
+						<Label fx:id="profile" layoutX="73.0" layoutY="676.0" onMouseClicked="#onProfileClicked" text="Profile" textFill="#f5c518" AnchorPane.bottomAnchor="60.0">
 							<font>
 								<Font name="Arial" size="25.0" />
 							</font>
 						</Label>
-						<Line endX="100.0" layoutX="110.0" layoutY="71.0"
-							startX="-100.0" stroke="#f5c518" />
+						<Line endX="100.0" layoutX="110.0" layoutY="71.0" startX="-100.0" stroke="#f5c518" />
 					</children>
 				</AnchorPane>
 			</left>
 			<center>
-				<AnchorPane style="-fx-background-color: #1c1c1c;"
-					BorderPane.alignment="CENTER">
+				<AnchorPane style="-fx-background-color: #1c1c1c;" BorderPane.alignment="CENTER">
 					<children>
-						<Label layoutX="6.0" layoutY="6.0" text="Question Details"
-							textFill="#f5c518" AnchorPane.leftAnchor="20.0"
-							AnchorPane.topAnchor="20.0">
+						<Label layoutX="6.0" layoutY="6.0" text="Question Details" textFill="#f5c518" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
 							<font>
 								<Font name="Arial Bold" size="17.0" />
 							</font>
 						</Label>
-						<ImageView fx:id="imageView" fitHeight="80.0"
-							fitWidth="80.0" layoutX="20.0" layoutY="40.0" pickOnBounds="true"
-							preserveRatio="true" AnchorPane.leftAnchor="40.0"
-							AnchorPane.topAnchor="80.0">
+						<ImageView fx:id="imageView" fitHeight="80.0" fitWidth="80.0" layoutX="20.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="80.0">
 							<image>
 								<Image url="@../../../res/yellow.png" />
 							</image>
 						</ImageView>
-						<Label fx:id="labelCheck" layoutX="100.0" layoutY="109.0"
-							text="Question state"
-							textFill="#ffdf87" AnchorPane.leftAnchor="140.0">
+						<Label fx:id="labelCheck" layoutX="100.0" layoutY="109.0" text="Question state" textFill="#ffdf87" AnchorPane.leftAnchor="140.0">
 							<font>
 								<Font name="Arial" size="19.0" />
 							</font>
 						</Label>
-						<Label layoutX="39.0" layoutY="526.0" text="Vote Advanced"
-							textFill="#f5c518">
+						<Label layoutX="39.0" layoutY="526.0" text="Vote Advanced" textFill="#f5c518">
 							<font>
 								<Font name="Arial Bold" size="17.0" />
 							</font>
 						</Label>
-						<Slider fx:id="sliderVote" blockIncrement="5.0"
-							layoutX="38.0" layoutY="546.0" majorTickUnit="1.0" max="5.0"
-							min="1.0" minorTickCount="5" prefHeight="50.0" prefWidth="250.0"
-							showTickLabels="true"
-							style="-fx-control-inner-background: #f5c518; -fx-color: #121212;" />
-						<Button fx:id="btnOk" layoutX="253.0" layoutY="605.0"
-							mnemonicParsing="false" onAction="#onOk"
-							style="-fx-background-color: #121212; -fx-background-radius: 30 30 30 30;"
-							text="Ok" textFill="#f5c518">
+						<Slider fx:id="sliderVote" blockIncrement="5.0" layoutX="38.0" layoutY="546.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="5" prefHeight="50.0" prefWidth="250.0" showTickLabels="true" style="-fx-control-inner-background: #f5c518; -fx-color: #121212;" />
+						<Button fx:id="btnOk" layoutX="253.0" layoutY="605.0" mnemonicParsing="false" onAction="#onOk" style="-fx-background-color: #121212; -fx-background-radius: 30 30 30 30;" text="Ok" textFill="#f5c518">
 							<font>
 								<Font name="Arial" size="13.0" />
 							</font>
 						</Button>
-						<ScrollPane layoutX="53.0" layoutY="201.0"
-							prefHeight="100.0" style="-fx-background-color: #1c1c1c;"
-							AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0"
-							AnchorPane.topAnchor="201.0">
+						<ScrollPane layoutX="53.0" layoutY="201.0" prefHeight="100.0" style="-fx-background-color: #1c1c1c;" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="201.0">
 							<content>
-								<AnchorPane minHeight="100.0" minWidth="0.0"
-									prefWidth="1180.0" style="-fx-background-color: #1c1c1c;">
+								<AnchorPane minHeight="100.0" minWidth="0.0" prefWidth="1180.0" style="-fx-background-color: #1c1c1c;">
 									<children>
-										<Label fx:id="labelQuestion" ellipsisString=""
-											layoutX="14.0" layoutY="14.0" prefWidth="700.0"
-											text="Domanda"
-											textFill="#ffdf87" textOverrun="CLIP" wrapText="true"
-											AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+										<Label fx:id="labelQuestion" ellipsisString="" layoutX="14.0" layoutY="14.0" prefWidth="700.0" text="Domanda" textFill="#ffdf87" textOverrun="CLIP" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 											<font>
 												<Font name="Arial Italic" size="19.0" />
 											</font>
@@ -129,30 +88,21 @@
 								</AnchorPane>
 							</content>
 						</ScrollPane>
-						<Label layoutX="40.0" layoutY="181.0" text="Your question"
-							textFill="#f5c518">
+						<Label layoutX="40.0" layoutY="181.0" text="Your question" textFill="#f5c518">
 							<font>
 								<Font name="Arial Bold" size="17.0" />
 							</font>
 						</Label>
-						<Label fx:id="labelName" layoutX="38.0" layoutY="334.0"
-							text="Answer" textFill="#f5c518" AnchorPane.topAnchor="334.0">
+						<Label fx:id="labelName" layoutX="38.0" layoutY="334.0" text="Answer" textFill="#f5c518" AnchorPane.topAnchor="334.0">
 							<font>
 								<Font name="Arial Bold" size="17.0" />
 							</font>
 						</Label>
-						<ScrollPane layoutX="40.0" layoutY="354.0"
-							prefHeight="100.0" style="-fx-background-color: #1c1c1c;"
-							AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
+						<ScrollPane layoutX="40.0" layoutY="354.0" prefHeight="100.0" style="-fx-background-color: #1c1c1c;" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
 							<content>
-								<AnchorPane minHeight="100.0" minWidth="0.0"
-									prefWidth="1180.0" style="-fx-background-color: #1c1c1c;">
+								<AnchorPane minHeight="100.0" minWidth="0.0" prefWidth="1180.0" style="-fx-background-color: #1c1c1c;">
 									<children>
-										<Label fx:id="labelAnswer" ellipsisString=""
-											layoutX="-32.0" layoutY="13.0" prefWidth="700.0"
-											text="Risposta"
-											textFill="#ffdf87" textOverrun="CLIP" wrapText="true"
-											AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+										<Label fx:id="labelAnswer" ellipsisString="" layoutX="-32.0" layoutY="13.0" prefWidth="700.0" text="Risposta" textFill="#ffdf87" textOverrun="CLIP" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 											<font>
 												<Font name="Arial Italic" size="19.0" />
 											</font>
@@ -161,19 +111,14 @@
 								</AnchorPane>
 							</content>
 						</ScrollPane>
-						<Label fx:id="labelError" layoutX="321.0" layoutY="551.0"
-							textFill="#f51818">
+						<Label fx:id="labelError" layoutX="321.0" layoutY="551.0" textFill="#f51818">
 							<font>
 								<Font name="Arial Bold" size="17.0" />
 							</font>
 						</Label>
-						<Button fx:id="btnBack" layoutX="1014.0" layoutY="17.0"
-							mnemonicParsing="false" onAction="#onBack"
-							style="-fx-background-color: #121212; -fx-background-radius: 30 30 30 30;"
-							text="Back" textFill="#f5c518" AnchorPane.rightAnchor="40.0"
-							AnchorPane.topAnchor="20.0">
+						<Button fx:id="btnBack" layoutX="1170.0" layoutY="18.0" mnemonicParsing="false" onAction="#onBack" style="-fx-background-color: #121212; -fx-background-radius: 30 30 30 30;" text="Back" textFill="#f5c518" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="18.0">
 							<font>
-								<Font name="Arial" size="13.0" />
+								<Font size="14.0" />
 							</font>
 						</Button>
 					</children>

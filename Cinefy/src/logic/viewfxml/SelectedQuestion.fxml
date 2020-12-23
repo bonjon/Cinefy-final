@@ -105,7 +105,7 @@
       						</Label>
                         <AnchorPane layoutX="350.0">
                            <children>
-                              <Label text="Bio" textFill="#f5c518">
+                              <Label fx:id="laBioTitle" text="Bio" textFill="#f5c518">
                                  <font>
                                     <Font size="17.0" />
                                  </font>

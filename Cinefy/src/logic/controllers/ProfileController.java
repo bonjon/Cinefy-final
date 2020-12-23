@@ -1,12 +1,19 @@
 package logic.controllers;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import logic.bean.AdvancedUserBean;
 import logic.bean.BeginnerUserBean;
+import logic.bean.DomandaBean;
+
+import logic.dao.DomandaDAO;
 import logic.dao.GeneralUserDAO;
 import logic.entities.AdvancedUser;
 import logic.entities.BeginnerUser;
+import logic.entities.Domanda;
 import logic.utils.Controller;
 
 /*
@@ -30,6 +37,70 @@ public class ProfileController extends Controller {
 		}
 		return bub;
 	}
+	
+	public List<DomandaBean> getQuestions(String beginner, String role) throws SQLException {
+		DomandaDAO dd = new DomandaDAO();
+		List<Domanda> ld = dd.getQuestions(beginner, role);
+		if (ld == null)
+			return Collections.emptyList();
+		return this.convertQuestionList(ld);
+	}
+	
+	public List<AdvancedUserBean> differentAdv(String beginner) {
+		
+		List<DomandaBean> ld = Collections.emptyList();
+		int i = 0;
+		
+		try {
+			ld=getQuestions(beginner, "beginner");
+		} catch (SQLException e) {
+			
+		}
+		
+		
+		List<AdvancedUserBean> contactedAdv = new ArrayList<AdvancedUserBean>();
+		List<AdvancedUserBean> differentAdv = new ArrayList<AdvancedUserBean>();
+
+			while(i<ld.size()) {				//prendo tutti gli advanced e li metto in una lista
+				AdvancedUserBean advanced = new AdvancedUserBean();
+
+				DomandaBean adv = ld.get(i);
+				advanced.setUsername(adv.getAdvancedName());
+				contactedAdv.add(advanced);
+				i++;
+				
+			}
+			
+			int y,z;
+			boolean control=true; //booleano: il primo tra i differentAdv che trovo uguale al contactedAdv che sto considerando lo setto true
+			
+			if(contactedAdv.isEmpty()) {
+				return differentAdv;
+			}
+			for(y=0;y<contactedAdv.size();y++) {
+				control=true;
+				if(differentAdv.isEmpty()) {
+					differentAdv.add(contactedAdv.get(y));
+				}
+				else {
+					
+					for(z=0;z<differentAdv.size();z++) {
+						
+						if(contactedAdv.get(y).getUsername().equals(differentAdv.get(z).getUsername())){
+								control=false;
+								break;
+						}
+					}
+					if(control==true) {
+						differentAdv.add(contactedAdv.get(y));
+						
+					}
+				}
+			}
+			
+			return differentAdv;
+}
+	
 
 	public AdvancedUserBean getUser2(String username, String role) {
 		GeneralUserDAO gud = new GeneralUserDAO();
