@@ -100,7 +100,7 @@
 								<Label fx:id="playlistName" layoutX="290.0" layoutY="80.0"
 									text="Name" textFill="#ffdf87" AnchorPane.topAnchor="100.0">
 									<font>
-										<Font name="Arial" size="17.0" />
+										<Font name="Arial" size="14.0" />
 									</font>
 								</Label>
 								<Label layoutX="290.0" layoutY="110.0" text="Created by"
@@ -113,7 +113,7 @@
 									layoutY="175.0" text="Name" textFill="#ffdf87"
 									AnchorPane.topAnchor="180.0">
 									<font>
-										<Font name="Arial" size="17.0" />
+										<Font name="Arial" size="14.0" />
 									</font>
 								</Label>
 								<Label layoutX="290.0" layoutY="175.0"
@@ -126,7 +126,7 @@
 								<Label fx:id="voto" layoutX="291.0" layoutY="200.0"
 									text="Name" textFill="#ffdf87" AnchorPane.topAnchor="260.0">
 									<font>
-										<Font name="Arial" size="17.0" />
+										<Font name="Arial" size="14.0" />
 									</font>
 								</Label>
 								<Slider fx:id="sliderVote" blockIncrement="5.0"
@@ -157,7 +157,7 @@
 								<Label fx:id="playlistDate" layoutX="482.0"
 									layoutY="100.0" text="Name" textFill="#ffdf87">
 									<font>
-										<Font name="Arial" size="17.0" />
+										<Font name="Arial" size="14.0" />
 									</font>
 								</Label>
 								<Label fx:id="labelError" layoutX="760.0" layoutY="210.0"

@@ -135,7 +135,7 @@
                            <children>
                               <ScrollPane prefHeight="59.0" prefWidth="352.0" style="-fx-background-color: #1c1c1c;">
                                  <content>
-                                  <AnchorPane prefHeight="58.0" prefWidth="350.0" style="-fx-background-color: #1c1c1c;">
+                                  <AnchorPane minHeight="58.0" prefWidth="350.0" style="-fx-background-color: #1c1c1c;">
                                        <children>
                                           <Label fx:id="laAdvList" alignment="TOP_LEFT" prefWidth="332.0" text="mario rossi, advanced, Robert De Niro" textFill="#ffe283d6" wrapText="true">
                                              <font>

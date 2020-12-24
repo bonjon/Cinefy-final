@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,13 +35,15 @@ public class QuestionsBoundary {
 	private AskForQuestionsController afc;
 
 	@FXML
-	private Label home, ask, playlists, profile, username, voto, role, bio, labelError;
+	private Label home, ask, playlists, profile, username, voto, role, bio, laBioTitle, labelError;
 	@FXML
 	private ImageView profilePic;
 	@FXML
 	private TextArea questionArea;
 	@FXML
 	private Button btnSubmit, btnBack;
+	@FXML
+	private ScrollPane paneBio;
 
 	public void init(AdvancedUserBean aub) {
 		selectedAdvanced = aub;
@@ -53,8 +56,10 @@ public class QuestionsBoundary {
 		File file = new File(path);
 		Image img = new Image(file.toURI().toString());
 		this.profilePic.setImage(img);
-		if (selectedAdvanced.getBio() == null) {
+		if (selectedAdvanced.getBio().isEmpty()) {
 			bio.setText("");
+			this.laBioTitle.setText("");
+			this.paneBio.setVisible(false);
 		} else {
 			bio.setText(selectedAdvanced.getBio());
 		}
