@@ -154,9 +154,9 @@
 								<Font name="Arial Bold" size="17.0" />
 							</font>
 						</Label>
-						<ScrollPane layoutX="777.0" layoutY="93.0"
-							prefHeight="175.0" prefWidth="306.0"
-							style="-fx-background-color: #1c1c1c;">
+						<ScrollPane fx:id="paneBio" layoutX="777.0"
+							layoutY="93.0" prefHeight="175.0" prefWidth="306.0"
+							style="-fx-background-color: #1c1c1c;" visible="false">
 							<content>
 								<AnchorPane prefHeight="174.0" prefWidth="304.0"
 									style="-fx-background-color: #1c1c1c;">

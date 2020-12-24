@@ -52,16 +52,21 @@ public class QuestionsBoundary {
 		username.setText(selectedAdvanced.getUsername());
 		voto.setText(selectedAdvanced.getVoto());
 		role.setText(selectedAdvanced.getProfession());
-		String path = FileManager.PROFILE + File.separator + aub.getProfilePic();
+		String path;
+		if (aub.getProfilePic() == null) {
+			path = FileManager.PROFILE + File.separator + "default.png";
+		} else {
+			path = FileManager.PROFILE + File.separator + aub.getProfilePic();
+		}
 		File file = new File(path);
 		Image img = new Image(file.toURI().toString());
 		this.profilePic.setImage(img);
 		if (selectedAdvanced.getBio().isEmpty()) {
 			bio.setText("");
 			this.laBioTitle.setText("");
-			this.paneBio.setVisible(false);
 		} else {
 			bio.setText(selectedAdvanced.getBio());
+			this.paneBio.setVisible(true);
 		}
 	}
 

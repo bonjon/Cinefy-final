@@ -118,7 +118,12 @@ public class AskBeginnerBoundary implements Initializable {
 							setText(null);
 							setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 						} else {
-							String path = FileManager.PROFILE + File.separator + item.getProfilePic();
+							String path;
+							if (item.getProfilePic() == null) {
+								path = FileManager.PROFILE + File.separator + "default.png";
+							} else {
+								path = FileManager.PROFILE + File.separator + item.getProfilePic();
+							}
 							File file = new File(path);
 							Image img = new Image(file.toURI().toString());
 							VBox vBox = new VBox(3);
@@ -166,7 +171,13 @@ public class AskBeginnerBoundary implements Initializable {
 						setText(null);
 						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 					} else {
-						String path = FileManager.PROFILE + File.separator + item.getProfilePic();
+						String path;
+						if (item.getProfilePic() == null) {
+							path = FileManager.PROFILE + File.separator + "default.png";
+						}
+						else {
+							path = FileManager.PROFILE + File.separator + item.getProfilePic();
+						}
 						File file = new File(path);
 						Image img = new Image(file.toURI().toString());
 						VBox vBox = new VBox(3);
@@ -213,7 +224,13 @@ public class AskBeginnerBoundary implements Initializable {
 						setText(null);
 						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 					} else {
-						String path = FileManager.PROFILE + File.separator + item.getProfilePic();
+						String path;
+						if (item.getProfilePic() == null) {
+							path = FileManager.PROFILE + File.separator + "default.png";
+						}
+						else {
+							path = FileManager.PROFILE + File.separator + item.getProfilePic();
+						}
 						File file = new File(path);
 						Image img = new Image(file.toURI().toString());
 						VBox vBox = new VBox(3);
@@ -260,7 +277,13 @@ public class AskBeginnerBoundary implements Initializable {
 						setText(null);
 						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 					} else {
-						String path = FileManager.PROFILE + File.separator + item.getProfilePic();
+						String path;
+						if (item.getProfilePic() == null) {
+							path = FileManager.PROFILE + File.separator + "default.png";
+						}
+						else {
+							path = FileManager.PROFILE + File.separator + item.getProfilePic();
+						}
 						File file = new File(path);
 						Image img = new Image(file.toURI().toString());
 						VBox vBox = new VBox(3);
@@ -307,7 +330,13 @@ public class AskBeginnerBoundary implements Initializable {
 						setText(null);
 						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 					} else {
-						String path = FileManager.PROFILE + File.separator + item.getProfilePic();
+						String path;
+						if (item.getProfilePic() == null) {
+							path = FileManager.PROFILE + File.separator + "default.png";
+						}
+						else {
+							path = FileManager.PROFILE + File.separator + item.getProfilePic();
+						}
 						File file = new File(path);
 						Image img = new Image(file.toURI().toString());
 						VBox vBox = new VBox(3);
@@ -354,7 +383,13 @@ public class AskBeginnerBoundary implements Initializable {
 						setText(null);
 						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 					} else {
-						String path = FileManager.PROFILE + File.separator + item.getProfilePic();
+						String path;
+						if (item.getProfilePic() == null) {
+							path = FileManager.PROFILE + File.separator + "default.png";
+						}
+						else {
+							path = FileManager.PROFILE + File.separator + item.getProfilePic();
+						}
 						File file = new File(path);
 						Image img = new Image(file.toURI().toString());
 						VBox vBox = new VBox(3);
@@ -416,11 +451,11 @@ public class AskBeginnerBoundary implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
-		
+
 		scrollPane.hvalueProperty().addListener(new ChangeOnceListener<>((observable, oldValue, newValue) -> {
-            scrollPane.setHvalue(0.0);
-        }));
-		
+			scrollPane.setHvalue(0.0);
+		}));
+
 		listSearch = FXCollections.observableArrayList();
 		listQuestions = FXCollections.observableArrayList();
 		this.afc = new AskForQuestionsController();
