@@ -238,11 +238,11 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <AnchorPane layoutY="35.0" prefHeight="307.0" prefWidth="254.0" style="-fx-background-color: #1c1c1c;">
+                        <AnchorPane layoutY="35.0" prefHeight="313.0" prefWidth="254.0" style="-fx-background-color: #1c1c1c;">
                            <children>
                               <ScrollPane prefHeight="175.0" prefWidth="306.0" style="-fx-background-color: #1c1c1c;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <content>
-                                    <AnchorPane prefHeight="306.0" prefWidth="253.0" style="-fx-background-color: #1c1c1c;">
+                                    <AnchorPane prefHeight="312.0" prefWidth="253.0" style="-fx-background-color: #1c1c1c;">
                                        <children>
                                           <Label fx:id="laSelquestion" alignment="TOP_LEFT" layoutY="5.0" prefWidth="235.0" style="-fx-background-color: #1c1c1c;" text="selected question..." textFill="#ffe283" wrapText="true">
                                              <font>
