@@ -4,6 +4,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -50,7 +51,7 @@
 				</AnchorPane>
 			</left>
 			<center>
-				<AnchorPane style="-fx-background-color: #1c1c1c;" BorderPane.alignment="CENTER">
+				<AnchorPane prefHeight="720.0" prefWidth="1232.0" style="-fx-background-color: #1c1c1c;" BorderPane.alignment="CENTER">
 					<children>
 						<Button fx:id="btnSubmit" layoutX="677.0" layoutY="657.0" mnemonicParsing="false" onAction="#onSubmitBtn" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;" text="Submit" textFill="#f5c518" AnchorPane.topAnchor="657.0">
 							<font>
@@ -110,11 +111,23 @@
                                     <Font size="17.0" />
                                  </font>
                               </Label>
-            						<Label fx:id="laBio" alignment="TOP_LEFT" layoutY="41.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="135.0" prefWidth="409.0" text="bio..." textFill="#ffe085d7" wrapText="true">
-            							<font>
-            								<Font size="15.0" />
-            							</font>
-            						</Label>
+                              <AnchorPane fx:id="anchorPaneBio" layoutY="34.0" prefHeight="149.0" prefWidth="408.0" style="-fx-background-color: #1c1c1c;">
+                                 <children>
+                                    <ScrollPane prefHeight="175.0" prefWidth="306.0" style="-fx-background-color: #1c1c1c;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <content>
+                                          <AnchorPane prefHeight="148.0" prefWidth="406.0" style="-fx-background-color: #1c1c1c;">
+                                             <children>
+                                                <Label fx:id="laBio" alignment="TOP_LEFT" layoutY="5.0" prefWidth="389.0" style="-fx-background-color: #1c1c1c;" text="bio..." textFill="#ffe283" wrapText="true">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </AnchorPane>
                      </children>
@@ -137,14 +150,11 @@
                                  <font>
                                     <Font size="14.0" />
                                  </font></CheckBox>
-                              <SplitMenuButton fx:id="splitMenuReason" layoutX="34.0" layoutY="106.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="251.0" text="Why I suggest this colleague">
+                              <SplitMenuButton fx:id="splitMenuReason" layoutX="34.0" layoutY="104.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="288.0" style="-fx-body-color: #121212; -fx-border-color: #f5c518#f5c518;" text="Why I suggest this colleague" textFill="#f5c518">
                                 <items>
                                   <MenuItem mnemonicParsing="false" onAction="#onReasonMenu" text="My personal knowledge" />
                                   <MenuItem mnemonicParsing="false" onAction="#onReasonMenu" text="Renowned person in this sector" />
                                 </items>
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
                               </SplitMenuButton>
                               <CheckBox fx:id="cbResources" layoutX="382.0" layoutY="7.0" mnemonicParsing="false" text="Suggest additional web resources:" textFill="#f5c518">
                                  <font>
@@ -221,21 +231,38 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="20.0" layoutY="295.0" prefHeight="320.0" prefWidth="295.0">
+                  <AnchorPane layoutX="20.0" layoutY="295.0" prefHeight="342.0" prefWidth="257.0">
                      <children>
                         <Label layoutY="4.0" text="The question" textFill="#f5c518">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <AnchorPane layoutY="36.0" prefHeight="284.0" prefWidth="295.0">
+                        <AnchorPane layoutY="35.0" prefHeight="307.0" prefWidth="254.0" style="-fx-background-color: #1c1c1c;">
                            <children>
-                              <Label fx:id="laSelquestion" alignment="TOP_LEFT" prefHeight="293.0" prefWidth="295.0" text="selected question..." textFill="#ffe085d7" wrapText="true" />
+                              <ScrollPane prefHeight="175.0" prefWidth="306.0" style="-fx-background-color: #1c1c1c;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <AnchorPane prefHeight="306.0" prefWidth="253.0" style="-fx-background-color: #1c1c1c;">
+                                       <children>
+                                          <Label fx:id="laSelquestion" alignment="TOP_LEFT" layoutY="5.0" prefWidth="235.0" style="-fx-background-color: #1c1c1c;" text="selected question..." textFill="#ffe283" wrapText="true">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
                   <Label fx:id="submitError" layoutX="782.0" layoutY="666.0" textFill="#ff0202" />
+                  <Button fx:id="btnBack" layoutX="1045.0" layoutY="17.0" mnemonicParsing="false" onAction="#onBack" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;" text="Back" textFill="#f5c518">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
 					</children>
 				</AnchorPane>
 			</center>

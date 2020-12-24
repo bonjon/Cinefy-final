@@ -98,6 +98,10 @@ public class SelectedQuestionBoundary implements Initializable  {
 	private Button btnSwitch;
 	@FXML
 	private Label laName;
+	@FXML
+	private AnchorPane anchorPaneBio;
+	@FXML
+	private Button btnBack;
 	
 	
 	private DomandaBean selectedQuestion;
@@ -133,6 +137,11 @@ public class SelectedQuestionBoundary implements Initializable  {
 	@FXML
 	public void onProfileClicked(MouseEvent event) throws IOException {
 		this.agc.toProfile(this.profile.getScene());
+	}
+	
+	@FXML
+	public void onBack(ActionEvent event) throws IOException {
+		this.agc.toAnswer(this.btnBack.getScene());
 	}
 	
 	@FXML
@@ -271,7 +280,8 @@ public class SelectedQuestionBoundary implements Initializable  {
 		String bio = bub.getBio();
 		if(bio.isEmpty()) {
 			laBio.setVisible(false);
-			laBioTitle.setText("");;
+			laBioTitle.setText("");
+			anchorPaneBio.setVisible(false);
 		}
 		else {
 		laBio.setText(bio);

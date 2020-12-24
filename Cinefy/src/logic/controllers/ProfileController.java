@@ -72,7 +72,7 @@ public class ProfileController extends Controller {
 			}
 			
 			int y,z;
-			boolean control=true; //booleano: il primo tra i differentAdv che trovo uguale al contactedAdv che sto considerando lo setto true
+			boolean control=true; //booleano: al primo tra i differentAdv che trovo uguale al contactedAdv che sto considerando, lo setto true
 			
 			if(contactedAdv.isEmpty()) {
 				return differentAdv;
