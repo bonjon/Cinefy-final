@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import logic.bean.AdvancedUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.GeneralUserBean;
+import logic.bean.RispostaBean;
 import logic.controllers.AskForQuestionsController;
 import logic.utils.FileManager;
 import logic.utils.SessionUser;
@@ -61,6 +62,7 @@ public class QuestionDetailsBoundary {
 
 	private BeginnerGraphicChange bgc;
 	private DomandaBean selectedQuestion;
+	private RispostaBean answer;
 	private AskForQuestionsController afc;
 
 	@FXML
@@ -85,7 +87,7 @@ public class QuestionDetailsBoundary {
 		aub.setUsername(this.selectedQuestion.getAdvancedName());
 		aub.setVoto(this.sliderVote.getValue());
 		try {
-			this.afc.voteAdvanced(aub, gub);
+			this.afc.voteAdvanced(aub, gub, answer);
 		} catch (SQLException e) {
 			this.labelError.setText(e.getMessage());
 		}
@@ -132,7 +134,8 @@ public class QuestionDetailsBoundary {
 				Image img = new Image(file.toURI().toString());
 				this.imageView.setImage(img);
 				this.labelCheck.setText("You have received an answer from " + this.selectedQuestion.getAdvancedName());
-				this.labelAnswer.setText(afc.getAnswer(gub, this.selectedQuestion).getContenuto());
+				this.answer = afc.getAnswer(gub, selectedQuestion);
+				this.labelAnswer.setText(this.answer.getContenuto());
 				this.labelName.setText("Answer from " + this.selectedQuestion.getAdvancedName());
 				this.sliderVote.setDisable(false);
 				this.btnOk.setDisable(false);
