@@ -50,18 +50,18 @@ public class QuestionDetailsServlet extends HttpServlet {
 		}
 		session.setAttribute("R", r);
 		if (request.getParameter("BTNOK") != null) {
-			rd = this.voteAdvanced(request, session, afc, aub, gub);
+			rd = this.voteAdvanced(request, session, afc, aub, gub, r);
 		}
 		rd.forward(request, response);
 	}
 
 	private RequestDispatcher voteAdvanced(HttpServletRequest request, HttpSession session,
-			AskForQuestionsController afc, AdvancedUserBean aub, GeneralUserBean gub) {
+			AskForQuestionsController afc, AdvancedUserBean aub, GeneralUserBean gub, RispostaBean r) {
 		String rating = request.getParameter("rating");
 		if (rating != null) {
 			aub.setVoto(Integer.parseInt(rating));
 			try {
-				afc.voteAdvanced(aub, gub);
+				afc.voteAdvanced(aub, gub, r);
 				request.setAttribute("error", "Advanced voted!");
 			} catch (SQLException e) {
 				request.setAttribute("error", "You Already vote this advanced");
