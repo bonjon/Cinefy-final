@@ -72,7 +72,7 @@ public class RispostaDAO {
 			s.setInt(2, idDomanda);
 			try (ResultSet rs = s.executeQuery()) {
 				if (!rs.first())
-					return null; 
+					return null;
 				int id = rs.getInt("id");
 				String contenuto = rs.getString("Contenuto");
 				String advancedName = rs.getString("AdvancedName");
@@ -108,5 +108,21 @@ public class RispostaDAO {
 			s.setInt(1, id);
 			s.executeUpdate();
 		}
+	}
+
+	public int checkVote(String beginnerName, String idRisposta) throws SQLException {
+		int i = 0;
+		Connection conn = ConnectionDB.getInstance();
+		String sql = "call CinefyDB.get_vote_answer(?,?);\r\n";
+		try (PreparedStatement s = conn.prepareStatement(sql)) {
+			s.setString(1, beginnerName);
+			s.setInt(2, Integer.parseInt(idRisposta));
+			try (ResultSet rs = s.executeQuery()){
+				if (!rs.first())
+					return 0;
+				i = rs.getInt("Voto");
+			}
+		}
+		return i;
 	}
 }
