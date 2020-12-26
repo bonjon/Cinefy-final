@@ -93,9 +93,9 @@ public class AskForQuestionsController extends Controller {
 		return this.convert(r);
 	}
 
-	public void voteAdvanced(AdvancedUserBean aub, GeneralUserBean gub) throws SQLException {
+	public void voteAdvanced(AdvancedUserBean aub, GeneralUserBean gub, RispostaBean rb) throws SQLException {
 		BeginnerUserDAO bud = new BeginnerUserDAO();
 		int a = (int) Double.parseDouble(aub.getVoto());
-		bud.voteAdvanced(aub.getUsername(), gub.getUsername(), a);
+		bud.voteAdvanced(aub.getUsername(), gub.getUsername(), a, rb.getId());
 	}
 }
