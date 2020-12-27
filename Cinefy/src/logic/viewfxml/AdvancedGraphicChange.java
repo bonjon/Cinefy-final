@@ -1,10 +1,12 @@
 package logic.viewfxml;
 
+
 import java.io.IOException;
 import java.sql.SQLException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import logic.bean.AdvancedUserBean;
 import logic.bean.BeginnerUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.PlaylistBean;
@@ -57,6 +59,14 @@ public class AdvancedGraphicChange extends GraphicChangeTemplate {
 		loader.setController(sqb);
 		scene.setRoot(loader.load());
 		sqb.init(selectedItem,bub);
+	}
+	
+	public void toQuestionsFromABeg(Scene scene, DomandaBean db, BeginnerUserBean bub, AdvancedUserBean aub) throws IOException, AdvancedNotFoundException, SQLException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("QuestionsFromABeginner.fxml"));
+		QuestionsFromBeginner qfb = new QuestionsFromBeginner();
+		loader.setController(qfb);
+		scene.setRoot(loader.load());
+		qfb.init(db,bub,aub);
 	}
 
 	public void toPlaylists(Scene scene) throws IOException {

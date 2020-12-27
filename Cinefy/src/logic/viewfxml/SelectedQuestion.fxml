@@ -53,7 +53,7 @@
 			<center>
 				<AnchorPane prefHeight="720.0" prefWidth="1232.0" style="-fx-background-color: #1c1c1c;" BorderPane.alignment="CENTER">
 					<children>
-						<Button fx:id="btnSubmit" layoutX="677.0" layoutY="657.0" mnemonicParsing="false" onAction="#onSubmitBtn" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;" text="Submit" textFill="#f5c518" AnchorPane.topAnchor="657.0">
+						<Button fx:id="btnSubmit" layoutX="677.0" layoutY="658.0" mnemonicParsing="false" onAction="#onSubmitBtn" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;" text="Submit" textFill="#f5c518" AnchorPane.topAnchor="658.0">
 							<font>
 								<Font size="18.0" />
 							</font>
@@ -259,6 +259,11 @@
                   </AnchorPane>
                   <Label fx:id="submitError" layoutX="782.0" layoutY="666.0" textFill="#ff0202" />
                   <Button fx:id="btnBack" layoutX="1045.0" layoutY="17.0" mnemonicParsing="false" onAction="#onBack" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;" text="Back" textFill="#f5c518">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnQuestionsFromABeg" layoutX="51.0" layoutY="660.0" mnemonicParsing="false" onAction="#onQuestionsFromABegPressed" prefHeight="28.0" prefWidth="195.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;" text="Questions from this user" textFill="#f5c518">
                      <font>
                         <Font size="14.0" />
                      </font>

@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.swing.text.Style;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,7 +19,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
-
+import javafx.scene.text.Text;
 import logic.bean.BeginnerUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.GeneralUserBean;
@@ -34,15 +36,24 @@ import logic.utils.SessionUser;
 public class AnswerAdvancedBoundary implements Initializable {
 
 	ObservableList<DomandaBean> listReceived;
-	ObservableList<RispostaBean> list2;
+	ObservableList<RispostaBean> listAnswers;
 	List<DomandaBean> lb;
+	List<RispostaBean> rb;
 
 	@FXML
-	private Label home, answer, playlists, profile;
+	private Label home;
+	@FXML
+	private Label answer; 
+	@FXML
+	private Label playlists;
+	@FXML
+	private Label profile;
 
 	
 	@FXML
 	private ListView<DomandaBean> questions;
+	@FXML
+	private ListView<RispostaBean> answers;
 
 	private AnswerQuestionsController aqc; 
 	private AdvancedGraphicChange agc;
@@ -86,7 +97,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
-		list2 = FXCollections.observableArrayList();
+		
 		listReceived = FXCollections.observableArrayList();
 		this.aqc = new AnswerQuestionsController();
 		this.agc = AdvancedGraphicChange.getInstance();
@@ -96,6 +107,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 		lb = aqc.getQuestions(gub.getUsername(), "advanced");
 		
 		if (lb != null) {
+			lb = aqc.deleteQuestion(lb, gub.getUsername());
 			listReceived.addAll(lb);}
 		
 		
@@ -105,6 +117,64 @@ public class AnswerAdvancedBoundary implements Initializable {
 		questions.setCellFactory(param -> new ListCell<DomandaBean>() {
 			@Override
 			protected void updateItem(DomandaBean item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null) {
+					setText(null);
+					setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+				}
+				else {
+				HBox hBox = new HBox(2);
+			
+				HBox headerBox = new HBox(1);
+				String begName = item.getBeginnerName();
+				Label header = new Label(begName);
+				header.setFont(Font.font("Arial", 15));
+				header.setStyle("-fx-font-weight: " + "bold" + ";"+"\n"+"-fx-font-style: " + "italic" + ";");
+				
+				
+				headerBox.setMaxWidth(200.0);
+				headerBox.setPrefWidth(200.0);
+				headerBox.getChildren().addAll(header);
+				
+				
+				
+				Label label = new Label(item.getContenuto());
+				label.setFont(Font.font("Arial", 15));
+				label.setMaxHeight(15.0);
+				label.setMaxWidth(810.0);
+				
+				
+			
+				hBox.getChildren().addAll(headerBox,label);
+				hBox.setAlignment(Pos.CENTER_LEFT);
+				setGraphic(hBox);
+				setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+				}
+			}
+		});
+		
+	}
+	catch(SQLException e) {
+		e.printStackTrace();
+	}
+		
+	
+		listAnswers = FXCollections.observableArrayList();
+		
+	    try { listAnswers.removeAll(listAnswers);
+	
+		rb = aqc.getAnswers(gub.getUsername(), "advanced");
+		
+		if (rb != null) {
+			listAnswers.addAll(rb);}
+		
+		
+		
+		answers.getItems().addAll(listAnswers);
+		
+		answers.setCellFactory(param -> new ListCell<RispostaBean>() {
+			@Override
+			protected void updateItem(RispostaBean item, boolean empty) {
 				super.updateItem(item, empty);
 				if (empty || item == null) {
 					setText(null);
@@ -128,5 +198,6 @@ public class AnswerAdvancedBoundary implements Initializable {
 	catch(SQLException e) {
 		e.printStackTrace();
 	}
+		
 	}
 }

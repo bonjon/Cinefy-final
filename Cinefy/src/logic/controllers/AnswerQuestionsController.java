@@ -1,6 +1,7 @@
 package logic.controllers;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -45,23 +46,31 @@ public class AnswerQuestionsController extends Controller{
 	
 	
 	//metodo che ci restituisce le domande che un beginner ha in coda verso uno specificato advanced;
-	public List<Domanda> questionsFromABeg (String advancedName, String beginnerName) throws SQLException {
+	public List<DomandaBean> questionsFromABeg (String advancedName, String beginnerName) throws SQLException {
 		
 		DomandaDAO dd = new DomandaDAO();
 		List<Domanda> ld = dd.getQuestionsFromABeg(advancedName, beginnerName);
+		if (ld == null)
+			return null;
+		return this.convertQuestionList(ld);
 		
-		return ld;
+		
 		}
+	
 	
 	public AdvancedUserBean queueCountFromABeg (String advancedName, String beginnerName) throws SQLException {
 		
 		int counter=0;
+		List<DomandaBean> db;
 		
 		DomandaDAO dd = new DomandaDAO();
 		AdvancedUserBean aub = new AdvancedUserBean();
 		List<Domanda> ld = dd.getQuestionsFromABeg(advancedName, beginnerName);
-		counter=ld.size();
+		db = convertQuestionList(ld);
 		
+		db = deleteQuestion(db,advancedName);
+		
+		counter=db.size();
 		
 		aub.setQueueCount(counter);
 		return aub;
@@ -132,6 +141,7 @@ public class AnswerQuestionsController extends Controller{
 		
 	}
 	
+	
 	public void fieldTooLongControls(RispostaBean rb) throws FieldTooLongException {
 		//general answer
 		//circa 182 caratteri vengono aggiunti nel caso peggiore (reason: renown....person in this sector)
@@ -190,9 +200,42 @@ public class AnswerQuestionsController extends Controller{
 		
 	}
 	
-	public void deleteQuestion() {
+	
+	public List<DomandaBean> deleteQuestion(List<DomandaBean> db,String advancedName) throws SQLException {
+		List<RispostaBean> rb = getAnswers(advancedName,"advanced");
+		List<RispostaBean> pending_rb = getAnswers(advancedName,"admin");
+		List<Integer> idList = new ArrayList<Integer>();
+	
 		
+		int i = 0;
+		while(i<rb.size()) {
+			RispostaBean temp = rb.get(i);
+			Integer id = Integer.parseInt(temp.getIdDomanda());
+			idList.add(id);
+			i++;
+		}
+		i=0;
+		while(i<pending_rb.size()) {
+			RispostaBean temp = pending_rb.get(i);
+			Integer id = Integer.parseInt(temp.getIdDomanda());
+			idList.add(id);
+			i++;
+		}
+		i=0;
+		
+		int y;
+		
+		for(y=0;y<db.size();y++) {
+		
+			int tempID = Integer.parseInt(db.get(y).getId());
+			if(idList.contains(tempID)) {
+				db.remove(db.get(y));
+			}
+		
+		}
+		return db;
 	}
+	
 	
 	public BeginnerUserBean getUser(String username, String role) {
 		GeneralUserDAO gud = new GeneralUserDAO();

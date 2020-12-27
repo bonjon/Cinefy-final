@@ -1,7 +1,7 @@
 package logic.viewfxml;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -13,9 +13,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
+
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+
 
 import javafx.event.ActionEvent;
 
@@ -28,7 +28,7 @@ import javafx.scene.layout.AnchorPane;
 import logic.bean.AdvancedUserBean;
 import logic.bean.BeginnerUserBean;
 import logic.bean.DomandaBean;
-//import logic.bean.GeneralUserBean;
+
 import logic.bean.RispostaBean;
 import logic.controllers.AnswerQuestionsController;
 import logic.exceptions.AdvancedNotFoundException;
@@ -36,11 +36,11 @@ import logic.exceptions.FieldEmptyException;
 import logic.exceptions.FieldTooLongException;
 import logic.utils.FileManager;
 import javafx.scene.input.KeyEvent;
-//import logic.utils.SessionUser;
+
 import javafx.scene.input.MouseEvent;
 
 
-public class SelectedQuestionBoundary implements Initializable  {
+public class SelectedQuestionBoundary  {
 	@FXML
 	private Label home;
 	@FXML
@@ -102,6 +102,8 @@ public class SelectedQuestionBoundary implements Initializable  {
 	private AnchorPane anchorPaneBio;
 	@FXML
 	private Button btnBack;
+	@FXML
+	private Button btnQuestionsFromABeg;
 	
 	
 	private DomandaBean selectedQuestion;
@@ -109,6 +111,7 @@ public class SelectedQuestionBoundary implements Initializable  {
 	private AnswerQuestionsController aqc;
 	private RispostaBean rb;
 	private AdvancedUserBean aub;
+	private BeginnerUserBean begub;
 	private String id;
 	
 	private String advancedName;
@@ -244,6 +247,12 @@ public class SelectedQuestionBoundary implements Initializable  {
 		}
 	}
 	
+	
+	@FXML
+	public void onQuestionsFromABegPressed(ActionEvent event) throws IOException, AdvancedNotFoundException, SQLException {
+		this.agc.toQuestionsFromABeg(this.btnQuestionsFromABeg.getScene(),selectedQuestion, begub,aub);
+	}
+	
 
 	public void init(DomandaBean db, BeginnerUserBean bub) throws AdvancedNotFoundException, SQLException, FileNotFoundException  {
 		
@@ -259,6 +268,8 @@ public class SelectedQuestionBoundary implements Initializable  {
 		advancedName = db.getAdvancedName();
 		aqc = new AnswerQuestionsController();
 		aub = new AdvancedUserBean();
+		begub=bub;
+		
 	
 		beginnerName = bub.getUsername();
 		
@@ -269,6 +280,7 @@ public class SelectedQuestionBoundary implements Initializable  {
 		auBean = aqc.queueCountFromABeg(advancedName, beginnerName);
 		queueCount=auBean.getQueueCount();
 		laNumber.setText(queueCount.toString());
+		aub.setQueueCount(queueCount);
 		
 		
 		this.selQuestion = selectedQuestion.getContenuto();
@@ -296,8 +308,6 @@ public class SelectedQuestionBoundary implements Initializable  {
 			begPicPath = FileManager.PROFILE + File.separator + bub.getProfilePic();
 		}
 		
-		
-		
 		InputStream input = new FileInputStream(begPicPath);
 		Image image = new Image(input);
 		ivBegPic.setImage(image);
@@ -305,22 +315,4 @@ public class SelectedQuestionBoundary implements Initializable  {
 	}
 
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
-		
-	/*	this.agc = AdvancedGraphicChange.getInstance();
-		advancedName = this.selectedQuestion.getAdvancedName();
-		aqc = new AnswerQuestionsController();
-		GeneralUserBean gub = SessionUser.getInstance().getSession();
-		beginnerName = selectedQuestion.getBeginnerName();
-		System.out.println(beginnerName);
-		laUsername.setText(beginnerName);
-		id = selectedQuestion.getId();*/
-		
-		
-		
-		
-		
-	}	
 }
