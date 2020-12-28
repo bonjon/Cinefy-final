@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.swing.text.Style;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,11 +16,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+
 import logic.bean.BeginnerUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.GeneralUserBean;
@@ -39,8 +38,10 @@ public class AnswerAdvancedBoundary implements Initializable {
 
 	ObservableList<DomandaBean> listReceived;
 	ObservableList<RispostaBean> listAnswers;
+	
 	List<DomandaBean> lb;
-	List<RispostaBean> rb;
+	
+	List<RispostaBean> rbTotal;
 
 	@FXML
 	private Label home;
@@ -94,7 +95,13 @@ public class AnswerAdvancedBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onSelectedAnswer(MouseEvent event) {
+	public void onSelectedAnswer(MouseEvent event) throws IOException, SQLException, AdvancedNotFoundException {
+		
+		if (!listAnswers.isEmpty()) {
+			RispostaBean clickedItem = this.answers.getSelectionModel().getSelectedItem();
+			System.out.println("sono in ansAdvBoundary"+clickedItem.getAdvancedName());
+			this.agc.toAnswerDetail(this.answers.getScene(), clickedItem);
+		}
 	}
 
 	@Override
@@ -166,13 +173,15 @@ public class AnswerAdvancedBoundary implements Initializable {
 	
 		listAnswers = FXCollections.observableArrayList();
 		
+		
 	    try { listAnswers.removeAll(listAnswers);
-	
-		rb = aqc.getAnswers(gub.getUsername(), "advanced");
+	    
+	    rbTotal=aqc.getAllAnswers(gub.getUsername());
+	    System.out.println(rbTotal);
 		
-		if (rb != null) {
-			listAnswers.addAll(rb);}
 		
+		if (rbTotal != null) {
+			listAnswers.addAll(rbTotal);}
 		
 		
 		answers.getItems().addAll(listAnswers);

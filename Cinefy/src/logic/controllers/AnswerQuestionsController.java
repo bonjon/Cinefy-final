@@ -2,12 +2,14 @@ package logic.controllers;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import java.util.List;
 
 
 import logic.bean.AdvancedUserBean;
 import logic.bean.BeginnerUserBean;
 import logic.bean.DomandaBean;
+
 import logic.bean.RispostaBean;
 import logic.dao.AdvancedUserDAO;
 import logic.dao.DomandaDAO;
@@ -44,6 +46,53 @@ public class AnswerQuestionsController extends Controller{
 		return this.convertAnswerList(ld);
 	}
 	
+	public List<RispostaBean> getAllAnswers(String advancedName) throws SQLException {
+		RispostaDAO rd = new RispostaDAO();
+		
+		List<Risposta> ld = rd.getAnswers(advancedName, "advanced");
+		List<Risposta> ldPending = rd.getAnswers(advancedName, "advanced2");
+		
+		List<Risposta> allAnswers = new ArrayList<>();
+		int y;
+		if(ld.size()==0) {
+			return null;
+		}
+		else {
+			for(y=0;y<ld.size();y++) {
+				allAnswers.add(ld.get(y));
+				System.out.println(ld.get(y).getAdvancedName());
+			}
+		}
+		
+		if(ldPending.size()==0) {
+			return null;
+		}
+		else {
+			for(y=0;y<ldPending.size();y++) {
+				allAnswers.add(ldPending.get(y));
+				System.out.println(ld.get(y).getAdvancedName());
+			}
+		}
+		
+		return this.convertAnswerList(allAnswers);
+	}
+	
+	
+	public DomandaBean getQuestion(int id) throws SQLException {
+		DomandaDAO dd = new DomandaDAO();
+		Domanda d = dd.getQuestion(id);
+		if (d == null)
+			return null;
+		return convert(d);
+	}
+		
+	public boolean checkAnswer(AdvancedUserBean aub, RispostaBean rb) throws NumberFormatException, SQLException {
+		RispostaDAO rd = new RispostaDAO();
+		if (rd.getAnswer(aub.getUsername(), Integer.parseInt(rb.getId())) == null)
+			return false;
+		return true;
+	}
+	
 	
 	//metodo che ci restituisce le domande che un beginner ha in coda verso uno specificato advanced;
 	public List<DomandaBean> questionsFromABeg (String advancedName, String beginnerName) throws SQLException {
@@ -58,13 +107,13 @@ public class AnswerQuestionsController extends Controller{
 		}
 	
 	
-	public AdvancedUserBean queueCountFromABeg (String advancedName, String beginnerName) throws SQLException {
+	public int queueCountFromABeg (String advancedName, String beginnerName) throws SQLException {
 		
 		int counter=0;
 		List<DomandaBean> db;
 		
 		DomandaDAO dd = new DomandaDAO();
-		AdvancedUserBean aub = new AdvancedUserBean();
+		
 		List<Domanda> ld = dd.getQuestionsFromABeg(advancedName, beginnerName);
 		db = convertQuestionList(ld);
 		
@@ -72,8 +121,7 @@ public class AnswerQuestionsController extends Controller{
 		
 		counter=db.size();
 		
-		aub.setQueueCount(counter);
-		return aub;
+		return counter;
 		
 		}
 	
@@ -253,12 +301,31 @@ public class AnswerQuestionsController extends Controller{
 	}
 
       
-      public AdvancedUserBean getAdvanced(String username) throws AdvancedNotFoundException, SQLException {
+    public AdvancedUserBean getAdvanced(String username) throws AdvancedNotFoundException, SQLException {
   		AdvancedUserDAO aud = new AdvancedUserDAO();
   		AdvancedUser au = aud.selectAdvancedByUsername(username);
   		return this.convert(au);
   	}
-
+    
+    public AdvancedUserBean getAdvanced(String username, String beginnerName) throws AdvancedNotFoundException, SQLException {
+  		AdvancedUserDAO aud = new AdvancedUserDAO();
+  		AdvancedUser au = aud.selectAdvancedByUsername(username);
+  		
+  		int questionsFromBeg = queueCountFromABeg(username,beginnerName);
+  		
+  		AdvancedUserBean aub = convert(au);
+  		aub.setQueueCount(questionsFromBeg);
+  		return aub;
+  	}
+    
+    
+    public RispostaBean getVoto(String beginnerName, String idRisposta) throws SQLException {
+    	RispostaDAO rd = new RispostaDAO();
+    	int voto = rd.checkVote(beginnerName, idRisposta);
+    	RispostaBean rb = new RispostaBean();
+    	rb.setVoto(voto);
+    	return rb;
+    }
 	
 	
 	public void acceptAnswer(RispostaBean rb) throws NumberFormatException, SQLException {

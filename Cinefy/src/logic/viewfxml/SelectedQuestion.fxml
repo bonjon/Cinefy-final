@@ -233,7 +233,7 @@
                   </AnchorPane>
                   <AnchorPane layoutX="20.0" layoutY="295.0" prefHeight="342.0" prefWidth="257.0">
                      <children>
-                        <Label layoutY="4.0" text="The question" textFill="#f5c518">
+                        <Label layoutY="4.0" text="Question" textFill="#f5c518">
                            <font>
                               <Font size="17.0" />
                            </font>

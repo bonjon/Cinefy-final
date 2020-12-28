@@ -26,6 +26,7 @@ public class RispostaBean implements Serializable {
 	private String explanation; 
 	private String profession;
 	private String choice;
+	private int voto;
 
 	public String getIdDomanda() {
 		return idDomanda;
@@ -162,6 +163,14 @@ public class RispostaBean implements Serializable {
 	
 	public String getChoice() {
 		return choice;
+	}
+	
+	public void setVoto(int voto) {
+		this.voto = voto;
+	}
+	
+	public int getVoto() {
+		return voto;
 	}
 }
 

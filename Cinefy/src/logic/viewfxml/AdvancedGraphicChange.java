@@ -6,10 +6,11 @@ import java.sql.SQLException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import logic.bean.AdvancedUserBean;
+
 import logic.bean.BeginnerUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.PlaylistBean;
+import logic.bean.RispostaBean;
 import logic.exceptions.AdvancedNotFoundException;
 import logic.utils.Roles;
 
@@ -61,12 +62,21 @@ public class AdvancedGraphicChange extends GraphicChangeTemplate {
 		sqb.init(selectedItem,bub);
 	}
 	
-	public void toQuestionsFromABeg(Scene scene, DomandaBean db, BeginnerUserBean bub, AdvancedUserBean aub) throws IOException, AdvancedNotFoundException, SQLException {
+	public void toAnswerDetail(Scene scene, RispostaBean selectedItem) throws IOException, SQLException, AdvancedNotFoundException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("AnswerDetails.fxml"));
+		AnswerDetailsBoundary adb = new AnswerDetailsBoundary();
+		
+		loader.setController(adb);
+		scene.setRoot(loader.load());
+		adb.init(selectedItem);
+	}
+	
+	public void toQuestionsFromABeg(Scene scene, DomandaBean db, RispostaBean rb, BeginnerUserBean bub) throws IOException, AdvancedNotFoundException, SQLException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("QuestionsFromABeginner.fxml"));
 		QuestionsFromBeginner qfb = new QuestionsFromBeginner();
 		loader.setController(qfb);
 		scene.setRoot(loader.load());
-		qfb.init(db,bub,aub);
+		qfb.init(db,rb,bub);
 	}
 
 	public void toPlaylists(Scene scene) throws IOException {

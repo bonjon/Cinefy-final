@@ -54,7 +54,7 @@ public class RispostaDAO {
 					String beginnerName = rs.getString("BeginnerName");
 					String advancedName = rs.getString("AdvancedName");
 					int idDomanda = rs.getInt("idDomanda");
-					lr.add(new Risposta(id, contenuto, beginnerName, advancedName, idDomanda));
+					lr.add(new Risposta(id, contenuto, advancedName, beginnerName, idDomanda));
 				} while (rs.next());
 			}
 		} finally {

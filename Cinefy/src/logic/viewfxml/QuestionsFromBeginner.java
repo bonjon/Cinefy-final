@@ -26,6 +26,7 @@ import javafx.scene.text.Font;
 import logic.bean.AdvancedUserBean;
 import logic.bean.BeginnerUserBean;
 import logic.bean.DomandaBean;
+import logic.bean.RispostaBean;
 import logic.controllers.AnswerQuestionsController;
 import logic.exceptions.AdvancedNotFoundException;
 import logic.utils.FileManager;
@@ -66,7 +67,9 @@ public class QuestionsFromBeginner {
 	private String advancedName;
 	ObservableList<DomandaBean> listReceived;
 	private BeginnerUserBean begub;
+	private AdvancedUserBean aub;
 	private DomandaBean selQuestion;
+	private RispostaBean selAnswer;
 	
 	
 	
@@ -90,7 +93,13 @@ public class QuestionsFromBeginner {
 	
 	@FXML
 	public void onBack(ActionEvent event) throws IOException, AdvancedNotFoundException, SQLException {
-		this.agc.toSelQuestionDetail(this.btnBack.getScene(),selQuestion ,begub);
+		if(selAnswer == null ) {
+			this.agc.toSelQuestionDetail(this.btnBack.getScene(),selQuestion ,begub);
+		}
+		else if (selQuestion == null) {
+			
+			this.agc.toAnswerDetail(this.btnBack.getScene(), selAnswer);
+		}
 	}
 	
 	@FXML
@@ -105,7 +114,7 @@ public class QuestionsFromBeginner {
 		}
 	}
 
-	public void init(DomandaBean db, BeginnerUserBean bub,AdvancedUserBean aub) throws AdvancedNotFoundException, SQLException, FileNotFoundException  {
+	public void init(DomandaBean db,RispostaBean rb, BeginnerUserBean bub) throws AdvancedNotFoundException, SQLException, FileNotFoundException  {
 		
 		
 		Integer queueCount;
@@ -118,15 +127,24 @@ public class QuestionsFromBeginner {
 		
 		begub=bub;
 		selQuestion = db;
+		selAnswer = rb;
 		
-		advancedName = aub.getUsername();
+		if(selAnswer == null ) {
+			advancedName = selQuestion.getAdvancedName();
+		}
+		else if (selQuestion == null) {
+			
+			advancedName = selAnswer.getAdvancedName();
+		}
+		
+		
 		beginnerName = bub.getUsername();
 		
 		laUsername.setText(beginnerName);
 		
-		AdvancedUserBean auBean = new AdvancedUserBean();
-		auBean = aqc.queueCountFromABeg(advancedName, beginnerName);
-		queueCount=auBean.getQueueCount();
+		aub = new AdvancedUserBean();
+		aub = aqc.getAdvanced(advancedName, beginnerName);
+		queueCount=aub.getQueueCount();
 		laNumber.setText(queueCount.toString());
 		
 		String bio = bub.getBio();

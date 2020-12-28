@@ -250,7 +250,7 @@ public class SelectedQuestionBoundary  {
 	
 	@FXML
 	public void onQuestionsFromABegPressed(ActionEvent event) throws IOException, AdvancedNotFoundException, SQLException {
-		this.agc.toQuestionsFromABeg(this.btnQuestionsFromABeg.getScene(),selectedQuestion, begub,aub);
+		this.agc.toQuestionsFromABeg(this.btnQuestionsFromABeg.getScene(),selectedQuestion, null,begub);
 	}
 	
 
@@ -276,9 +276,9 @@ public class SelectedQuestionBoundary  {
 		laUsername.setText(beginnerName);
 		id = db.getId();
 		
-		AdvancedUserBean auBean = new AdvancedUserBean();
-		auBean = aqc.queueCountFromABeg(advancedName, beginnerName);
-		queueCount=auBean.getQueueCount();
+
+		aub = aqc.getAdvanced(advancedName, beginnerName);
+		queueCount=aub.getQueueCount();
 		laNumber.setText(queueCount.toString());
 		aub.setQueueCount(queueCount);
 		
