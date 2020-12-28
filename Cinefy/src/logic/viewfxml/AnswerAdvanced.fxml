@@ -50,7 +50,21 @@
 								<Font name="Arial Bold" size="17.0" />
 							</font>
 						</Label>
-						<ListView fx:id="questions" layoutY="40.0" onMouseClicked="#onSelectedQuestion" prefHeight="300.0" prefWidth="1020.0" style="-fx-background-color: #1c1c1c;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
+						<ListView fx:id="questions" layoutY="95.0" onMouseClicked="#onSelectedQuestion" prefHeight="265.0" prefWidth="1220.0" style="-fx-background-color: #1c1c1c;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="95.0" />
+                  <AnchorPane layoutX="23.0" layoutY="74.0">
+                     <children>
+                        <Label text="Beginner user:" textFill="#ffdf87">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="201.0" text="Question:" textFill="#ffdf87">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
 						<Label layoutX="20.0" layoutY="360.0" text="Your answers " textFill="#f5c518" AnchorPane.topAnchor="380.0">
 							<font>
 								<Font name="Arial Bold" size="17.0" />

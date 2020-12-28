@@ -17,7 +17,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.bean.BeginnerUserBean;
@@ -54,6 +56,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 	private ListView<DomandaBean> questions;
 	@FXML
 	private ListView<RispostaBean> answers;
+	
 
 	private AnswerQuestionsController aqc; 
 	private AdvancedGraphicChange agc;
@@ -98,6 +101,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
 		
+		
 		listReceived = FXCollections.observableArrayList();
 		this.aqc = new AnswerQuestionsController();
 		this.agc = AdvancedGraphicChange.getInstance();
@@ -114,6 +118,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 		
 		questions.getItems().addAll(listReceived);
 		
+		
 		questions.setCellFactory(param -> new ListCell<DomandaBean>() {
 			@Override
 			protected void updateItem(DomandaBean item, boolean empty) {
@@ -129,7 +134,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 				String begName = item.getBeginnerName();
 				Label header = new Label(begName);
 				header.setFont(Font.font("Arial", 15));
-				header.setStyle("-fx-font-weight: " + "bold" + ";"+"\n"+"-fx-font-style: " + "italic" + ";");
+				header.setStyle("-fx-font-weight: " + "bold" + ";"+"\n");
 				
 				
 				headerBox.setMaxWidth(200.0);
