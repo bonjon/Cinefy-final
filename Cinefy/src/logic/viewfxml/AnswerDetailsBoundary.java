@@ -108,7 +108,7 @@ public class AnswerDetailsBoundary {
 		
 		aub = aqc.getAdvanced(advancedName,beginnerName);
 		
-		check = aqc.checkAnswer(aub,selAnswer);
+		check = aqc.checkAnswer(selAnswer);
 		if(check==true) {
 			String path = FileManager.MARK;
 			File file = new File(path);

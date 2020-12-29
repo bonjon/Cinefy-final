@@ -54,23 +54,17 @@ public class AnswerQuestionsController extends Controller{
 		
 		List<Risposta> allAnswers = new ArrayList<>();
 		int y;
-		if(ld.size()==0) {
-			return null;
-		}
-		else {
+		if(ld.size()!=0) {
 			for(y=0;y<ld.size();y++) {
 				allAnswers.add(ld.get(y));
-				System.out.println(ld.get(y).getAdvancedName());
+				
 			}
 		}
 		
-		if(ldPending.size()==0) {
-			return null;
-		}
-		else {
+		if(ldPending.size()!=0) {
 			for(y=0;y<ldPending.size();y++) {
 				allAnswers.add(ldPending.get(y));
-				System.out.println(ld.get(y).getAdvancedName());
+				
 			}
 		}
 		
@@ -86,9 +80,9 @@ public class AnswerQuestionsController extends Controller{
 		return convert(d);
 	}
 		
-	public boolean checkAnswer(AdvancedUserBean aub, RispostaBean rb) throws NumberFormatException, SQLException {
+	public boolean checkAnswer( RispostaBean rb) throws NumberFormatException, SQLException {
 		RispostaDAO rd = new RispostaDAO();
-		if (rd.getAnswer(aub.getUsername(), Integer.parseInt(rb.getId())) == null)
+		if (rd.getAnswer(rb.getBeginnerName(), Integer.parseInt(rb.getIdDomanda())) == null)
 			return false;
 		return true;
 	}
