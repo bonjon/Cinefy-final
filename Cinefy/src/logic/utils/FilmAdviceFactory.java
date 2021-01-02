@@ -16,7 +16,7 @@ public class FilmAdviceFactory implements AnswerAutomationFactory {
 	
 	public FilmAdviceFactory() {
 		this.header = "||FILM ADVICE||";
-		this.explanationHeader = "\nI adviced you this film because of the reason below.\n";
+		this.explanationHeader = "I adviced you this film because of the reason below.\n";
 		this.titleHeader = "Title: ";
 		this.genreHeader = "Genre: ";
 		
@@ -36,7 +36,7 @@ public class FilmAdviceFactory implements AnswerAutomationFactory {
 		
 		explanation = rb.getExplanation();
 		
-		row1 = header+"\n";
+		row1 = header+"\n"+"\n";
 		row1bis = "I suggest you to watch the following film:\n";
 		row2 = titleHeader+title+"\n"+partecipantHeader+partecipant+"\n"+genreHeader+genre+"\n"+"\n";
 		row3 = explanationHeader+explanation+"\n"+"\n"+"\n";

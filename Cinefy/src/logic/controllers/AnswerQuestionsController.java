@@ -20,8 +20,10 @@ import logic.entities.BeginnerUser;
 import logic.entities.Domanda;
 import logic.entities.Risposta;
 import logic.exceptions.AdvancedNotFoundException;
+import logic.exceptions.AnswersNotFoundException;
 import logic.exceptions.FieldEmptyException;
 import logic.exceptions.FieldTooLongException;
+
 import logic.utils.Controller;
 import logic.utils.FilmAdviceFactory;
 import logic.utils.GeneralAnswerFactory;
@@ -46,7 +48,7 @@ public class AnswerQuestionsController extends Controller{
 		return this.convertAnswerList(ld);
 	}
 	
-	public List<RispostaBean> getAllAnswers(String advancedName) throws SQLException {
+	public List<RispostaBean> getAllAnswers(String advancedName) throws SQLException, AnswersNotFoundException {
 		RispostaDAO rd = new RispostaDAO();
 		
 		List<Risposta> ld = rd.getAnswers(advancedName, "advanced");
@@ -66,6 +68,10 @@ public class AnswerQuestionsController extends Controller{
 				allAnswers.add(ldPending.get(y));
 				
 			}
+		}
+		
+		if (this.convertAnswerList(allAnswers).isEmpty()) {
+			throw new AnswersNotFoundException("You haven' t answered to any question yet");
 		}
 		
 		return this.convertAnswerList(allAnswers);
@@ -243,30 +249,34 @@ public class AnswerQuestionsController extends Controller{
 	}
 	
 	
-	public List<DomandaBean> deleteQuestion(List<DomandaBean> db,String advancedName) throws SQLException {
+	public List<DomandaBean> deleteQuestion(List<DomandaBean> lb,String advancedName) throws SQLException {
 		List<RispostaBean> rb = getAnswers(advancedName,"advanced");
 		List<RispostaBean> pending_rb = getAnswers(advancedName,"admin");
 		List<Integer> idList = new ArrayList<Integer>();
-	
+		List<DomandaBean> db = lb;
 		
 		int i = 0;
-		while(i<rb.size()) {
-			RispostaBean temp = rb.get(i);
-			Integer id = Integer.parseInt(temp.getIdDomanda());
-			idList.add(id);
-			i++;
+		if(rb!=null) {
+			while(i<rb.size()) {
+				RispostaBean temp = rb.get(i);
+				Integer id = Integer.parseInt(temp.getIdDomanda());
+				idList.add(id);
+				i++;
+			}
 		}
 		i=0;
-		while(i<pending_rb.size()) {
-			RispostaBean temp = pending_rb.get(i);
-			Integer id = Integer.parseInt(temp.getIdDomanda());
-			idList.add(id);
-			i++;
+		if(rb!=null) {
+			while(i<pending_rb.size()) {
+				RispostaBean temp = pending_rb.get(i);
+				Integer id = Integer.parseInt(temp.getIdDomanda());
+				idList.add(id);
+				i++;
+			}
 		}
 		i=0;
 		
 		int y;
-		
+		if(db==null) {return null;};
 		for(y=0;y<db.size();y++) {
 		
 			int tempID = Integer.parseInt(db.get(y).getId());
@@ -275,6 +285,7 @@ public class AnswerQuestionsController extends Controller{
 			}
 		
 		}
+		
 		return db;
 	}
 	

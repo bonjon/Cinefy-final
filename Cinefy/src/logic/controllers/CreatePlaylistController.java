@@ -17,10 +17,10 @@ public class CreatePlaylistController extends Controller {
 			throws FieldEmptyException, FieldTooLongException, SQLException {
 		PlaylistDAO pd = new PlaylistDAO();
 		if (text.isEmpty()) {
-			throw new FieldEmptyException("Insert the name");
+			throw new FieldEmptyException("Enter a name, please");
 		}
 		if (text.length() >= 45) {
-			throw new FieldTooLongException("Name too long");
+			throw new FieldTooLongException("Name is too long");
 		}
 		Playlist p = pd.addPlaylist(text, username, playlistPic);
 		return this.convert(p);

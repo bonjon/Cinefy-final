@@ -109,7 +109,6 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <Label fx:id="submitError" layoutX="782.0" layoutY="666.0" textFill="#ff0202" />
                   <Button fx:id="btnBack" layoutX="1045.0" layoutY="17.0" mnemonicParsing="false" onAction="#onBack" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;" text="Back" textFill="#f5c518">
                      <font>
                         <Font size="14.0" />
@@ -121,6 +120,7 @@
                      </font>
                   </Label>
                   <ListView fx:id="questions" layoutX="20.0" layoutY="342.0" onMouseClicked="#onSelectedQuestion" prefHeight="347.0" prefWidth="1080.0" style="-fx-background-color: #1c1c1c;" />
+                  <Label fx:id="labelErrorQuestions" layoutX="340.0" layoutY="302.0" textFill="#ff0202" />
 					</children>
 				</AnchorPane>
 			</center>

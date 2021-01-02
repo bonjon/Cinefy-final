@@ -57,12 +57,15 @@ public class QuestionsFromBeginner {
 	private Button btnBack;
 	@FXML
 	private ListView<DomandaBean> questions;
+	@FXML
+	private Label labelErrorQuestions;
 	
 	
 	private AdvancedGraphicChange agc;
 	private AnswerQuestionsController aqc;
 	
 	List<DomandaBean> questionsFromABeg;
+	List<DomandaBean> questionsFromABeg_del;
 	private String beginnerName;
 	private String advancedName;
 	ObservableList<DomandaBean> listReceived;
@@ -70,8 +73,6 @@ public class QuestionsFromBeginner {
 	private AdvancedUserBean aub;
 	private DomandaBean selQuestion;
 	private RispostaBean selAnswer;
-	
-	
 	
 	Image img;
 	
@@ -109,8 +110,10 @@ public class QuestionsFromBeginner {
 		if (!listReceived.isEmpty()) {
 		
 			DomandaBean clickedItem = this.questions.getSelectionModel().getSelectedItem();
-			
-			this.agc.toSelQuestionDetail(this.questions.getScene(),clickedItem,begub);
+			if(clickedItem!=null) {
+				this.agc.toSelQuestionDetail(this.questions.getScene(),clickedItem,begub);
+			}
+	
 		}
 	}
 
@@ -179,23 +182,27 @@ public class QuestionsFromBeginner {
 		
 		try { listReceived.removeAll(listReceived);
 	
+			questionsFromABeg_del = aqc.deleteQuestion(questionsFromABeg,advancedName);
+			
+			if (questionsFromABeg_del == null || questionsFromABeg_del.isEmpty()) {	
+			
+				labelErrorQuestions.setText("No received questions without answer");
+			}
 		
-		if (questionsFromABeg != null) {
-			questionsFromABeg = aqc.deleteQuestion(questionsFromABeg,advancedName);
-			listReceived.addAll(questionsFromABeg);}
+			else {
+			
+				listReceived.addAll(questionsFromABeg);
 		
+				questions.getItems().addAll(listReceived);
 		
-		
-		questions.getItems().addAll(listReceived);
-		
-		questions.setCellFactory(param -> new ListCell<DomandaBean>() {
-			@Override
-			protected void updateItem(DomandaBean item, boolean empty) {
-				super.updateItem(item, empty);
-				if (empty || item == null) {
-					setText(null);
-					setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-				}
+				questions.setCellFactory(param -> new ListCell<DomandaBean>() {
+					@Override
+					protected void updateItem(DomandaBean item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty || item == null) {
+							setText(null);
+							setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+						}
 				else {
 				HBox hBox = new HBox(2);
 			
@@ -209,7 +216,7 @@ public class QuestionsFromBeginner {
 				}
 			}
 		});
-		
+		}
 	}
 	catch(SQLException e) {
 		e.printStackTrace();

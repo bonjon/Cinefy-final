@@ -79,6 +79,14 @@ public class CreatePlaylistBoundary implements Initializable {
 	private Button btnAdd;
 	@FXML
 	private Button btnBack;
+	@FXML
+	private Label nameError;
+	@FXML
+	private Label laPicChange;
+	@FXML
+	private Label laPicChosen;
+	@FXML
+	private Label laCreate;
 
 	private AdvancedGraphicChange agc;
 	private CreatePlaylistController cpc;
@@ -142,13 +150,18 @@ public class CreatePlaylistBoundary implements Initializable {
 			this.pb = this.cpc.createPlaylist(this.playlistName.getText(), gub.getUsername(), pathPic);
 			this.btnAdd.setVisible(true);
 			this.btnOk.setVisible(false);
-			this.tvStatus.setText("Now you must insert films");
+			this.playlistName.setDisable(true);
+			this.imageView.setDisable(true);
+			this.laPicChange.setVisible(false);
+			this.laPicChosen.setVisible(true);
+			this.laCreate.setVisible(true);
+			this.tvStatus.setText("Now you can insert films");
 			this.movie.setVisible(true);
 			this.filmPlaylist.setVisible(true);
 		} catch (FieldEmptyException e) {
-			this.playlistName.setPromptText(e.getMessage());
+			this.nameError.setText(e.getMessage());
 		} catch (FieldTooLongException e) {
-			this.playlistName.setPromptText(e.getMessage());
+			this.nameError.setText(e.getMessage());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -216,10 +229,24 @@ public class CreatePlaylistBoundary implements Initializable {
 		fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG", "*.jpg"),
 				new FileChooser.ExtensionFilter("PNG", "*.png"));
 		this.imageFile = fc.showOpenDialog(new Stage());
-		InputStream input = new FileInputStream(this.imageFile);
-		Image image = new Image(input);
-		this.imageView.setImage(image);
-		return;
+		if(this.imageFile==null) {
+			String path = FileManager.PLAYLISTS + File.separator + "default2.jpg";
+			File file = new File(path);
+			Image img = new Image(file.toURI().toString());
+			this.imageView.setImage(img);
+		}
+		else {
+			InputStream input = new FileInputStream(this.imageFile);
+			Image image = new Image(input);
+			this.imageView.setImage(image);
+		}
+			return;
+	}
+	
+	public void keyPressed(KeyEvent event) {
+		if(event.getSource().equals(playlistName)) {
+			nameError.setText("");
+		}
 	}
 
 	@Override

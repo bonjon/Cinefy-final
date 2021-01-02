@@ -3,6 +3,7 @@ package logic.viewfxml;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -27,6 +28,7 @@ import logic.bean.GeneralUserBean;
 import logic.bean.RispostaBean;
 import logic.controllers.AnswerQuestionsController;
 import logic.exceptions.AdvancedNotFoundException;
+import logic.exceptions.AnswersNotFoundException;
 import logic.utils.SessionUser;
 
 /*
@@ -40,7 +42,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 	ObservableList<RispostaBean> listAnswers;
 	
 	List<DomandaBean> lb;
-	
+	List<DomandaBean> lb_del;
 	List<RispostaBean> rbTotal;
 
 	@FXML
@@ -57,10 +59,19 @@ public class AnswerAdvancedBoundary implements Initializable {
 	private ListView<DomandaBean> questions;
 	@FXML
 	private ListView<RispostaBean> answers;
+	@FXML
+	private Label labelErrorAnswers;
+	@FXML
+	private Label labelErrorQuestions;
+	@FXML
+	private Label laBeginner;
+	@FXML
+	private Label laQuestion;
 	
 
 	private AnswerQuestionsController aqc; 
 	private AdvancedGraphicChange agc;
+	
 	
 
 	@FXML
@@ -86,27 +97,35 @@ public class AnswerAdvancedBoundary implements Initializable {
 		if (!listReceived.isEmpty()) {
 		
 			DomandaBean clickedItem = this.questions.getSelectionModel().getSelectedItem();
-			BeginnerUserBean bub = new BeginnerUserBean();
-			String beginnerName = clickedItem.getBeginnerName();
-			bub = aqc.getUser(beginnerName, "beginner");
-			
-			this.agc.toSelQuestionDetail(this.questions.getScene(),clickedItem,bub);
+			if(clickedItem!=null) {
+				BeginnerUserBean bub = new BeginnerUserBean();
+				String beginnerName = clickedItem.getBeginnerName();
+				bub = aqc.getUser(beginnerName, "beginner");
+				this.agc.toSelQuestionDetail(this.questions.getScene(),clickedItem,bub);
+			}
 		}
 	}
 
+	
+	
 	@FXML
 	public void onSelectedAnswer(MouseEvent event) throws IOException, SQLException, AdvancedNotFoundException {
 		
+	
 		if (!listAnswers.isEmpty()) {
 			RispostaBean clickedItem = this.answers.getSelectionModel().getSelectedItem();
-			System.out.println("sono in ansAdvBoundary"+clickedItem.getAdvancedName());
-			this.agc.toAnswerDetail(this.answers.getScene(), clickedItem);
+			if(clickedItem!=null) {
+				this.agc.toAnswerDetail(this.answers.getScene(), clickedItem);
+			}
 		}
 	}
+	
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
+		
 		
 		
 		listReceived = FXCollections.observableArrayList();
@@ -116,38 +135,44 @@ public class AnswerAdvancedBoundary implements Initializable {
 		try { listReceived.removeAll(listReceived);
 	
 		lb = aqc.getQuestions(gub.getUsername(), "advanced");
+		lb_del = aqc.deleteQuestion(lb, gub.getUsername());
 		
-		if (lb != null) {
-			lb = aqc.deleteQuestion(lb, gub.getUsername());
-			listReceived.addAll(lb);}
+		if(lb_del==null||lb_del.isEmpty()) {
+			laBeginner.setVisible(false);
+			laQuestion.setVisible(false);
+			labelErrorQuestions.setText("No received questions without answer");
+		}
+		else {
+			
+			
+			listReceived.addAll(lb_del);
 		
+			questions.getItems().addAll(listReceived);
 		
-		
-		questions.getItems().addAll(listReceived);
-		
-		
-		questions.setCellFactory(param -> new ListCell<DomandaBean>() {
+			questions.setCellFactory(param -> new ListCell<DomandaBean>() {
 			@Override
 			protected void updateItem(DomandaBean item, boolean empty) {
 				super.updateItem(item, empty);
 				if (empty || item == null) {
+					
 					setText(null);
 					setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+					
 				}
 				else {
+				
 				HBox hBox = new HBox(2);
 			
 				HBox headerBox = new HBox(1);
 				String begName = item.getBeginnerName();
 				Label header = new Label(begName);
 				header.setFont(Font.font("Arial", 15));
-				header.setStyle("-fx-font-weight: " + "bold" + ";"+"\n");
 				
 				
-				headerBox.setMaxWidth(200.0);
-				headerBox.setPrefWidth(200.0);
+				
+				headerBox.setMaxWidth(255.0);
+				headerBox.setPrefWidth(255.0);
 				headerBox.getChildren().addAll(header);
-				
 				
 				
 				Label label = new Label(item.getContenuto());
@@ -161,15 +186,19 @@ public class AnswerAdvancedBoundary implements Initializable {
 				hBox.setAlignment(Pos.CENTER_LEFT);
 				setGraphic(hBox);
 				setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+				
 				}
+				
 			}
 		});
 		
+		
+		}
 	}
+	
 	catch(SQLException e) {
 		e.printStackTrace();
 	}
-		
 	
 		listAnswers = FXCollections.observableArrayList();
 		
@@ -177,7 +206,6 @@ public class AnswerAdvancedBoundary implements Initializable {
 	    try { listAnswers.removeAll(listAnswers);
 	    
 	    rbTotal=aqc.getAllAnswers(gub.getUsername());
-	    System.out.println(rbTotal);
 		
 		
 		if (rbTotal != null) {
@@ -186,13 +214,17 @@ public class AnswerAdvancedBoundary implements Initializable {
 		
 		answers.getItems().addAll(listAnswers);
 		
+		
+		
 		answers.setCellFactory(param -> new ListCell<RispostaBean>() {
 			@Override
 			protected void updateItem(RispostaBean item, boolean empty) {
 				super.updateItem(item, empty);
 				if (empty || item == null) {
+					
 					setText(null);
 					setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+					
 				}
 				else {
 				HBox hBox = new HBox(2);
@@ -209,9 +241,14 @@ public class AnswerAdvancedBoundary implements Initializable {
 		});
 		
 	}
-	catch(SQLException e) {
-		e.printStackTrace();
+	
+	catch(AnswersNotFoundException e) {
+		labelErrorAnswers.setText(e.getMessage());
 	}
-		
+	catch(SQLException e) {
+			e.printStackTrace();
+			labelErrorAnswers.setText("No answers found in our database");
+	}
+	    
 	}
 }

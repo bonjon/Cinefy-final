@@ -18,6 +18,7 @@ import logic.bean.DomandaBean;
 import logic.bean.RispostaBean;
 import logic.controllers.AnswerQuestionsController;
 import logic.exceptions.AdvancedNotFoundException;
+
 import logic.utils.FileManager;
 
 public class AnswerDetailsBoundary {
@@ -147,9 +148,12 @@ public class AnswerDetailsBoundary {
 			laTokensNumber.setText(String.valueOf(tokens));
 		}
 		else {
-			laVoteNumber.setText(String.valueOf(vote));
+			double voto ;
+			voto = vote;
+			laVoteNumber.setText(String.valueOf(voto));
 			tokens=vote;
 			laTokensNumber.setText(String.valueOf(tokens));
+			
 		}
 		
 		

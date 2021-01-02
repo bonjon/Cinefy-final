@@ -152,6 +152,8 @@ public class RegistrationBoundary implements Initializable {
 				ivProfilepic.setImage(image);
 				newFileName=null;
 				imageChanged=false; 
+				this.btnDefaultPic.setVisible(false);
+				this.laDefaultPic.setVisible(true);
 			
 			}
 			else {

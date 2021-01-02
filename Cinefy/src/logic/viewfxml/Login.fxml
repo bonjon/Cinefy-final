@@ -120,7 +120,7 @@
 								<Font name="Arial Bold" size="30.0" />
 							</font>
 						</Label>
-						<Label layoutX="32.0" layoutY="98.0" prefHeight="79.0" prefWidth="215.0" text="Welcome Back!&#10;Sign in to continue." textAlignment="CENTER" textFill="#f5c518" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="98.0">
+						<Label layoutX="32.0" layoutY="98.0" prefHeight="79.0" prefWidth="215.0" text="Welcome Back!&#10;Sign in to continue" textAlignment="CENTER" textFill="#f5c518" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="98.0">
 							<font>
 								<Font name="Arial Bold" size="20.0" />
 							</font>
