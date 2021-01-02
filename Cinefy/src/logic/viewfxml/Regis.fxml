@@ -123,11 +123,35 @@
 								</Label>
 							</children>
 						</AnchorPane>
-						<Button fx:id="btnBacktologin" layoutX="313.0" layoutY="632.0" mnemonicParsing="false" onAction="#onBackToLoginPressed" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;" text="Back to Login" textFill="#f5c518" underline="true">
+						<Button fx:id="btnBacktologin" layoutX="313.0" layoutY="632.0" mnemonicParsing="false" onAction="#onBackToLoginPressed" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;" text="Back to login" textFill="#f5c518" underline="true">
 							<font>
 								<Font name="Arial" size="14.0" />
 							</font>
 						</Button>
+                  <AnchorPane layoutX="78.0" layoutY="312.0">
+                     <children>
+                        <Label layoutY="144.0" prefHeight="76.0" prefWidth="238.0" text="Are you a cinema expert? &#10;Become an advanced user&#10;and gain tokens answering &#10;to beginner users's questions" textFill="#f5c518">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="324.0" prefHeight="98.0" prefWidth="261.0" text="Would you learn something about &#10;cinema? Have a great interaction &#10;with our cinema experts. Let they &#10;help you about several aspects of&#10;cinema production " textFill="#f5c518">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="324.0" layoutY="143.0" prefHeight="60.0" prefWidth="271.0" text="Register yourself as an advanced&#10;user. More tokens you'll gain, more&#10;you'll monetize!" textFill="#f5c518">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutY="1.0" text="Refer to our database of &#10;films' titles" textFill="#f5c518">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
 					</children>
 				</AnchorPane>
 			</left>

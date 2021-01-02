@@ -84,9 +84,12 @@ public class PlaylistBeginnerBoundary implements Initializable {
 
 	@FXML
 	public void onSelectedTopPl(MouseEvent event) throws IOException {
-		if (!this.listTop.isEmpty())
-			this.bgc.toViewPlaylist(this.topPlaylist.getScene(),
-					this.topPlaylist.getSelectionModel().getSelectedItem());
+		if (!this.listTop.isEmpty()) {
+			PlaylistBean topPlayItem = this.topPlaylist.getSelectionModel().getSelectedItem();
+			if(topPlayItem!=null) {
+				this.bgc.toViewPlaylist(this.topPlaylist.getScene(),topPlayItem);
+			}
+		}
 	}
 
 	@FXML
@@ -183,9 +186,13 @@ public class PlaylistBeginnerBoundary implements Initializable {
 
 	@FXML
 	public void onSelectedSearchPl(MouseEvent event) throws IOException {
-		if (!this.listPlay.isEmpty())
-			this.bgc.toViewPlaylist(this.playlistList.getScene(),
-					this.playlistList.getSelectionModel().getSelectedItem());
+		if (!this.listPlay.isEmpty()) {
+			PlaylistBean playItem =this.playlistList.getSelectionModel().getSelectedItem();
+			if(playItem != null) {
+				this.bgc.toViewPlaylist(this.playlistList.getScene(),
+					playItem);
+			}
+		}
 	}
 
 	@FXML

@@ -81,10 +81,19 @@ public class PlaylistAdvancedBoundary implements Initializable {
 
 	@FXML
 	public void onSelectedPlaylist(MouseEvent event) throws IOException {
-		if(!list.isEmpty())
-			this.agc.toPlaylistDetails(this.topPlaylist.getScene(), this.topPlaylist.getSelectionModel().getSelectedItem());
-		else if(!list2.isEmpty())
-			this.agc.toPlaylistDetails(this.playlistList.getScene(), this.playlistList.getSelectionModel().getSelectedItem());
+		
+		if(event.getSource()==topPlaylist && !list.isEmpty()) {
+			PlaylistBean topPlayItem = this.topPlaylist.getSelectionModel().getSelectedItem();
+			if(topPlayItem!=null) {
+				this.agc.toPlaylistDetails(this.topPlaylist.getScene(), topPlayItem);
+			}
+		}
+		else if(event.getSource()==playlistList && !list2.isEmpty()) {
+			PlaylistBean playItem = this.playlistList.getSelectionModel().getSelectedItem();
+			if(playItem !=null) {
+				this.agc.toPlaylistDetails(this.playlistList.getScene(),playItem );
+			}
+		}	
 	}
 
 	@FXML

@@ -10,143 +10,105 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1480.0"
-	xmlns="http://javafx.com/javafx/8.0.171"
-	xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="720.0" prefWidth="1480.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<BorderPane AnchorPane.bottomAnchor="0.0"
-			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-			AnchorPane.topAnchor="0.0">
+		<BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<left>
-				<AnchorPane maxWidth="-Infinity" minWidth="-Infinity"
-					prefWidth="220.0" style="-fx-background-color: #121212;"
-					BorderPane.alignment="CENTER">
+				<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="220.0" style="-fx-background-color: #121212;" BorderPane.alignment="CENTER">
 					<children>
-						<Label layoutX="50.0" layoutY="14.0" text="Cinefy"
-							textFill="#f5c518" AnchorPane.topAnchor="14.0">
+						<Label layoutX="50.0" layoutY="14.0" text="Cinefy" textFill="#f5c518" AnchorPane.topAnchor="14.0">
 							<font>
 								<Font name="DejaVu Sans Mono Bold" size="33.0" />
 							</font>
 						</Label>
-						<Label fx:id="home" layoutX="75.0" layoutY="320.0"
-							onMouseClicked="#onHomeClicked" text="Home" textFill="#f5c518"
-							AnchorPane.bottomAnchor="500.0">
+						<Label fx:id="home" layoutX="75.0" layoutY="320.0" onMouseClicked="#onHomeClicked" text="Home" textFill="#f5c518" AnchorPane.bottomAnchor="500.0">
 							<font>
 								<Font name="Arial" size="25.0" />
 							</font>
 						</Label>
-						<Label fx:id="answer" layoutX="68.0" layoutY="352.0"
-							onMouseClicked="#onAnswerClicked" text="Answer"
-							textFill="#f5c518" AnchorPane.bottomAnchor="338.0">
+						<Label fx:id="answer" layoutX="68.0" layoutY="352.0" onMouseClicked="#onAnswerClicked" text="Answer" textFill="#f5c518" AnchorPane.bottomAnchor="338.0">
 							<font>
 								<Font name="Arial" size="25.0" />
 							</font>
 						</Label>
-						<Label fx:id="playlists" layoutX="62.0" layoutY="608.0"
-							onMouseClicked="#onPlaylistsClicked" text="Playlists"
-							textFill="#f5c518" underline="true"
-							AnchorPane.bottomAnchor="200.0">
+						<Label fx:id="playlists" layoutX="62.0" layoutY="608.0" onMouseClicked="#onPlaylistsClicked" text="Playlists" textFill="#f5c518" underline="true" AnchorPane.bottomAnchor="200.0">
 							<font>
 								<Font name="Arial Bold Italic" size="25.0" />
 							</font>
 						</Label>
-						<Label fx:id="profile" layoutX="73.0" layoutY="676.0"
-							onMouseClicked="#onProfileClicked" text="Profile"
-							textFill="#f5c518" AnchorPane.bottomAnchor="60.0">
+						<Label fx:id="profile" layoutX="73.0" layoutY="676.0" onMouseClicked="#onProfileClicked" text="Profile" textFill="#f5c518" AnchorPane.bottomAnchor="60.0">
 							<font>
 								<Font name="Arial" size="25.0" />
 							</font>
 						</Label>
-						<Line endX="100.0" layoutX="110.0" layoutY="71.0"
-							startX="-100.0" stroke="#f5c518" />
+						<Line endX="100.0" layoutX="110.0" layoutY="71.0" startX="-100.0" stroke="#f5c518" />
 					</children>
 				</AnchorPane>
 			</left>
 			<center>
 				<AnchorPane BorderPane.alignment="CENTER">
 					<children>
-						<AnchorPane prefWidth="1250.0"
-							style="-fx-background-color: #1c1c1c;"
-							AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-							AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<AnchorPane prefWidth="1250.0" style="-fx-background-color: #1c1c1c;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<children>
-								<Label layoutY="14.0" text="Playlist Details"
-									textFill="#f5c518" AnchorPane.leftAnchor="20.0"
-									AnchorPane.topAnchor="20.0">
+								<Label layoutY="14.0" text="Playlist details" textFill="#f5c518" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
 									<font>
 										<Font name="Arial Bold" size="17.0" />
 									</font>
 								</Label>
-								<ListView fx:id="filmPlaylist" layoutX="20.0"
-									layoutY="316.0" orientation="VERTICAL" prefHeight="200.0"
-									prefWidth="1020.0" style="-fx-background-color: #1c1c1c;"
-									AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
-									AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="336.0" />
-								<ImageView fx:id="playlistPic" fitHeight="250.0"
-									fitWidth="300.0" layoutX="14.0" layoutY="40.0"
-									pickOnBounds="true" preserveRatio="true"
-									AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0">
-									<image>
-										<Image url="@../../../res/playlistPictures/default2.jpg" />
-									</image>
-								</ImageView>
-								<Label layoutX="270.0" layoutY="60.0" text="Name"
-									textFill="#f5c518" AnchorPane.leftAnchor="290.0">
-									<font>
-										<Font name="Arial Bold" size="17.0" />
-									</font>
-								</Label>
-								<Label fx:id="playlistName" layoutX="290.0" layoutY="80.0"
-									text="Name" textFill="#ffdf87" AnchorPane.topAnchor="100.0">
-									<font>
-										<Font name="Arial" size="14.0" />
-									</font>
-								</Label>
-								<Label layoutX="290.0" layoutY="110.0" text="Created by"
-									textFill="#f5c518" AnchorPane.topAnchor="140.0">
-									<font>
-										<Font name="Arial Bold" size="17.0" />
-									</font>
-								</Label>
-								<Label fx:id="advancedName" layoutX="291.0"
-									layoutY="175.0" text="Name" textFill="#ffdf87"
-									AnchorPane.topAnchor="180.0">
-									<font>
-										<Font name="Arial" size="14.0" />
-									</font>
-								</Label>
-								<Label layoutX="290.0" layoutY="175.0"
-									text="Average ratings" textFill="#f5c518"
-									AnchorPane.topAnchor="220.0">
-									<font>
-										<Font name="Arial Bold" size="17.0" />
-									</font>
-								</Label>
-								<Label fx:id="voto" layoutX="291.0" layoutY="200.0"
-									text="Name" textFill="#ffdf87" AnchorPane.topAnchor="260.0">
-									<font>
-										<Font name="Arial" size="14.0" />
-									</font>
-								</Label>
-								<Label layoutX="524.0" layoutY="60.0"
-									text="Date pubblication" textFill="#f5c518">
-									<font>
-										<Font name="Arial Bold" size="17.0" />
-									</font>
-								</Label>
-								<Label fx:id="playlistDate" layoutX="524.0"
-									layoutY="100.0" text="Name" textFill="#ffdf87">
-									<font>
-										<Font name="Arial" size="14.0" />
-									</font>
-								</Label>
+								<ListView fx:id="filmPlaylist" layoutX="20.0" layoutY="316.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="1020.0" style="-fx-background-color: #1c1c1c;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="336.0" />
+                        <AnchorPane layoutX="20.0" layoutY="60.0">
+                           <children>
+      								<ImageView fx:id="playlistPic" fitHeight="250.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+      									<image>
+      										<Image url="@../../../res/playlistPictures/default2.jpg" />
+      									</image>
+      								</ImageView>
+      								<Label layoutX="270.0" text="Name" textFill="#f5c518">
+      									<font>
+      										<Font name="Arial Bold" size="17.0" />
+      									</font>
+      								</Label>
+      								<Label fx:id="playlistName" layoutX="270.0" layoutY="40.0" text="Name" textFill="#ffdf87">
+      									<font>
+      										<Font name="Arial" size="14.0" />
+      									</font>
+      								</Label>
+      								<Label layoutX="270.0" layoutY="80.0" text="Created by" textFill="#f5c518">
+      									<font>
+      										<Font name="Arial Bold" size="17.0" />
+      									</font>
+      								</Label>
+      								<Label fx:id="advancedName" layoutX="271.0" layoutY="120.0" text="Name" textFill="#ffdf87">
+      									<font>
+      										<Font name="Arial" size="14.0" />
+      									</font>
+      								</Label>
+      								<Label layoutX="270.0" layoutY="160.0" text="Ratings average" textFill="#f5c518">
+      									<font>
+      										<Font name="Arial Bold" size="17.0" />
+      									</font>
+      								</Label>
+      								<Label fx:id="voto" layoutX="271.0" layoutY="200.0" text="Name" textFill="#ffdf87">
+      									<font>
+      										<Font name="Arial" size="14.0" />
+      									</font>
+      								</Label>
+      								<Label layoutX="504.0" text="Pubblication date" textFill="#f5c518">
+      									<font>
+      										<Font name="Arial Bold" size="17.0" />
+      									</font>
+      								</Label>
+      								<Label fx:id="playlistDate" layoutX="504.0" layoutY="40.0" text="Name" textFill="#ffdf87">
+      									<font>
+      										<Font name="Arial" size="14.0" />
+      									</font>
+      								</Label>
+                           </children>
+                        </AnchorPane>
+                        <Label fx:id="errorFilms" layoutX="171.0" layoutY="23.0" textFill="RED" />
 							</children>
 						</AnchorPane>
-						<Button fx:id="btnBack" layoutX="1221.0" layoutY="27.0"
-							mnemonicParsing="false" onAction="#onBack"
-							style="-fx-background-color: #121212; -fx-background-radius: 30 30 30 30;"
-							text="Back" textFill="#f5c518" AnchorPane.rightAnchor="20.0"
-							AnchorPane.topAnchor="20.0">
+						<Button fx:id="btnBack" layoutX="1221.0" layoutY="27.0" mnemonicParsing="false" onAction="#onBack" style="-fx-background-color: #121212; -fx-background-radius: 30 30 30 30;" text="Back" textFill="#f5c518" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
 							<font>
 								<Font name="Arial" size="13.0" />
 							</font>

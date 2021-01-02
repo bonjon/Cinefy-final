@@ -63,6 +63,9 @@ public class PlaylistDetailsBoundary {
 	private Button btnOk;
 	@FXML
 	private Button btnBack;
+	@FXML
+	private Label errorFilms;
+	
 
 	private BeginnerGraphicChange bgc;
 	private PlaylistBean selectedPlaylist;
@@ -139,7 +142,7 @@ public class PlaylistDetailsBoundary {
 				}
 			});
 		} catch (NumberFormatException | SQLException | FilmNotFoundException e) {
-			e.printStackTrace();
+			errorFilms.setText("This playlist does not contain any films");
 		}
 	}
 }

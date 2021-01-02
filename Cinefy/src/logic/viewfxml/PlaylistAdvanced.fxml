@@ -14,7 +14,7 @@
 			<left>
 				<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="220.0" style="-fx-background-color: #121212;" BorderPane.alignment="CENTER">
 					<children>
-						<Label layoutX="51.0" layoutY="14.0" text="Cinefy" textFill="#f5c518" AnchorPane.topAnchor="14.0">
+						<Label layoutX="50.0" layoutY="14.0" text="Cinefy" textFill="#f5c518" AnchorPane.topAnchor="14.0">
 							<font>
 								<Font name="DejaVu Sans Mono Bold" size="33.0" />
 							</font>
@@ -48,33 +48,51 @@
 					<children>
 						<AnchorPane prefWidth="1250.0" style="-fx-background-color: #1c1c1c;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<children>
-								<Label layoutY="14.0" text="Top rated playlists" textFill="#f5c518" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-									<font>
-										<Font name="Arial Bold" size="17.0" />
-									</font>
-								</Label>
-								<ListView fx:id="topPlaylist" layoutX="20.0" layoutY="40.0" onMouseClicked="#onSelectedPlaylist" orientation="HORIZONTAL" prefHeight="200.0" prefWidth="1020.0" style="-fx-background-color: #1c1c1c;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
-								<Label layoutX="20.0" layoutY="260.0" text="Your Playlists" textFill="#f5c518" AnchorPane.topAnchor="280.0">
-									<font>
-										<Font name="Arial Bold" size="17.0" />
-									</font>
-								</Label>
-								<ListView fx:id="playlistList" layoutX="20.0" layoutY="300.0" onMouseClicked="#onSelectedPlaylist" orientation="HORIZONTAL" prefHeight="200.0" prefWidth="1020.0" style="-fx-background-color: #1c1c1c;" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="320.0" />
-								<Button fx:id="btnCreate" layoutX="1043.0" layoutY="520.0" mnemonicParsing="false" onAction="#onCreatePlaylist" style="-fx-background-color: #121212; -fx-background-radius: 30 30 30 30;" text="Create a New Playlist" textFill="#f5c518" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="560.0">
-									<font>
-										<Font name="Arial" size="13.0" />
-									</font>
-								</Button>
+                        <AnchorPane layoutX="19.9501953125" layoutY="20.0">
+                           <children>
+      								<Label layoutX="0.0498046875" text="Top rated playlists" textFill="#f5c518">
+      									<font>
+      										<Font name="Arial Bold" size="17.0" />
+      									</font>
+      								</Label>
+      								<ListView fx:id="topPlaylist" layoutX="0.0498046875" layoutY="40.0" onMouseClicked="#onSelectedPlaylist" orientation="HORIZONTAL" prefHeight="200.0" prefWidth="1073.0" style="-fx-background-color: #1c1c1c;" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="20.0" layoutY="300.0">
+                           <children>
+      								<Label layoutX="0.033203125" text="Your playlists" textFill="#f5c518">
+      									<font>
+      										<Font name="Arial Bold" size="17.0" />
+      									</font>
+      								</Label>
+      								<ListView fx:id="playlistList" layoutY="40.0" onMouseClicked="#onSelectedPlaylist" orientation="HORIZONTAL" prefHeight="200.0" prefWidth="1075.0" style="-fx-background-color: #1c1c1c;" />
+      								<Button fx:id="btnCreate" layoutX="925.0" layoutY="1.0" mnemonicParsing="false" onAction="#onCreatePlaylist" style="-fx-background-color: #121212; -fx-background-radius: 30 30 30 30;" text="Create a new playlist" textFill="#f5c518">
+      									<font>
+      										<Font name="Arial" size="13.0" />
+      									</font>
+      								</Button>
+      								<Label fx:id="labelError2" layoutX="137.0" layoutY="3.0" textFill="RED" AnchorPane.leftAnchor="137.0">
+      									<font>
+      										<Font name="Arial" size="13.0" />
+      									</font>
+      								</Label>
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="20.0" layoutY="577.0" text="About playlists" textFill="#f5c518">
+                           <font>
+                              <Font name="Arial Bold" size="17.0" />
+                           </font>
+                        </Label>
 								<Label fx:id="labelError1" layoutX="171.0" layoutY="22.0" textFill="RED" AnchorPane.leftAnchor="201.0">
 									<font>
 										<Font name="Arial" size="13.0" />
 									</font>
 								</Label>
-								<Label fx:id="labelError2" layoutX="133.0" layoutY="282.0" textFill="RED" AnchorPane.leftAnchor="163.0">
-									<font>
-										<Font name="Arial" size="13.0" />
-									</font>
-								</Label>
+                        <Label layoutX="20.0" layoutY="612.0" text="Cinefy offers the possibility to create playlists of films to advanced users. When you create a playlist, every beginner user can find it and rate it expressing a vote from 1 to 10. &#10;Every time a beginner rate your playlist, you' ll receive a sum of tokens, according to the following scheme:&#10;-from 1 to 4 you'll gain 1 token&#10;-from 5 to 6 you'll gain 2 tokens&#10;-from 7 to 9 you'll gain 3 tokens&#10;-10 you'll gain 5 tokens." textFill="#ffe283">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
 							</children>
 						</AnchorPane>
 					</children>

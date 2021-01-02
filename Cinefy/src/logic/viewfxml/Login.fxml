@@ -21,26 +21,30 @@
                         <Image url="@../../../res/cinema.png" />
                      </image>
                   </ImageView>
-						<Label layoutX="99.0" layoutY="491.0" prefHeight="63.0" text="Have a great&#10;interaction with &#10;our cinema experts" textFill="#f5c518" AnchorPane.leftAnchor="99.0" AnchorPane.topAnchor="491.0">
-							<font>
-								<Font name="Arial" size="15.0" />
-							</font>
-						</Label>
-						<Label layoutX="496.0" layoutY="313.0" text="Let us help you about&#10;several aspects of&#10;cinema production " textFill="#f5c518" AnchorPane.leftAnchor="496.0">
-							<font>
-								<Font name="Arial" size="15.0" />
-							</font>
-						</Label>
-						<Label layoutX="496.0" layoutY="485.0" text="Are you a cinema &#10;expert? Become an &#10;advanced user and &#10;gain money with us" textFill="#f5c518" AnchorPane.rightAnchor="93.0" AnchorPane.topAnchor="485.0">
-							<font>
-								<Font name="Arial" size="15.0" />
-							</font>
-						</Label>
-						<Label layoutX="99.0" layoutY="325.0" text="Refer to our database &#10;of films' titles" textFill="#f5c518" AnchorPane.bottomAnchor="360.0" AnchorPane.leftAnchor="99.0">
-							<font>
-								<Font name="Arial" size="15.0" />
-							</font>
-						</Label>
+                  <AnchorPane layoutX="78.0" layoutY="312.0">
+                     <children>
+      						<Label layoutY="144.0" prefHeight="76.0" prefWidth="238.0" text="Are you a cinema expert? &#10;Become an advanced user&#10;and gain tokens answering &#10;to beginner users's questions" textFill="#f5c518">
+      							<font>
+      								<Font name="Arial" size="15.0" />
+      							</font>
+      						</Label>
+      						<Label layoutX="324.0" prefHeight="98.0" prefWidth="264.0" text="Would you learn something about &#10;cinema? Have a great interaction &#10;with our cinema experts. Let they &#10;help you about several aspects of&#10;cinema production " textFill="#f5c518">
+      							<font>
+      								<Font name="Arial" size="15.0" />
+      							</font>
+      						</Label>
+      						<Label layoutX="324.0" layoutY="143.0" prefHeight="60.0" prefWidth="274.0" text="Register yourself as an advanced&#10;user. More tokens you'll gain, more&#10;you'll monetize!" textFill="#f5c518">
+      							<font>
+      								<Font name="Arial" size="15.0" />
+      							</font>
+      						</Label>
+      						<Label layoutY="1.0" text="Refer to our database of &#10;films' titles" textFill="#f5c518">
+      							<font>
+      								<Font name="Arial" size="15.0" />
+      							</font>
+      						</Label>
+                     </children>
+                  </AnchorPane>
 						<Label layoutX="243.0" layoutY="616.0" text="Are you a new user? Click here:" textFill="#f5c518" AnchorPane.bottomAnchor="84.0">
 							<font>
 								<Font name="Arial" size="16.0" />
@@ -120,7 +124,7 @@
 								<Font name="Arial Bold" size="30.0" />
 							</font>
 						</Label>
-						<Label layoutX="32.0" layoutY="98.0" prefHeight="79.0" prefWidth="215.0" text="Welcome Back!&#10;Sign in to continue" textAlignment="CENTER" textFill="#f5c518" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="98.0">
+						<Label layoutX="32.0" layoutY="98.0" prefHeight="79.0" prefWidth="215.0" text="Welcome back!&#10;Sign in to continue" textAlignment="CENTER" textFill="#f5c518" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="98.0">
 							<font>
 								<Font name="Arial Bold" size="20.0" />
 							</font>
