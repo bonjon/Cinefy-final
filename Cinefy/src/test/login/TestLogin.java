@@ -1,5 +1,10 @@
 package test.login;
 
+/*
+ * Author: Jacopo Onorati
+ */
+
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -7,10 +12,6 @@ import org.junit.Test;
 import logic.bean.GeneralUserBean;
 import logic.controllers.LoginController;
 import logic.exceptions.FieldEmptyException;
-
-/*
- * Author: Jacopo Onorati
- */
 
 public class TestLogin {
 

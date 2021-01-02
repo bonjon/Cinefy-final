@@ -1,10 +1,10 @@
 package test.addquestion;
 
-import java.sql.SQLException;
-
 /*
  * Author: Giovanni Pica
  */
+
+import java.sql.SQLException;
 
 import org.junit.Test;
 
