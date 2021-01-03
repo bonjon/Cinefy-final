@@ -6,7 +6,7 @@ addons:
  sonarcloud:
   organization: bonjon
   token:
-   secure: 1554de0b0b69638b753ec2848add52bf24e55dbd
+   secure: e982d2623cb0d132f9a1dd5271f2819820fb8c8e 
 script: 
 - ant build
 - sonar-scanner
