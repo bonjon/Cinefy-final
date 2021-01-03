@@ -4,9 +4,9 @@ jdk:
 
 addons:
  sonarcloud:
-  organization: bonjon
+  organization: bonjon-2
   token:
-   secure: e982d2623cb0d132f9a1dd5271f2819820fb8c8e 
+   secure: 1f0ec5c72937993d38c74decd8c3d5f9ab6a5d28 
 script: 
 - ant build
 - sonar-scanner
