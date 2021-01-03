@@ -67,15 +67,16 @@
         <path refid="Web App Libraries.libraryclasspath"/>
         <path refid="EAR Libraries.libraryclasspath"/>
         <path refid="JUnit 5.libraryclasspath"/>
-        <pathelement location="../../../selenium-java-3.141.59/client-combined-3.141.59.jar"/>
-        <pathelement location="../../../selenium-java-3.141.59/client-combined-3.141.59-sources.jar"/>
-        <pathelement location="../../../selenium-java-3.141.59/libs/byte-buddy-1.8.15.jar"/>
-        <pathelement location="../../../selenium-java-3.141.59/libs/commons-exec-1.3.jar"/>
-        <pathelement location="../../../selenium-java-3.141.59/libs/guava-25.0-jre.jar"/>
-        <pathelement location="../../../selenium-java-3.141.59/libs/okhttp-3.11.0.jar"/>
-        <pathelement location="../../../selenium-java-3.141.59/libs/okio-1.14.0.jar"/>
         <pathelement location="lib/commons-lang3-3.11.jar"/>
         <pathelement location="lib/servlet-api.jar"/>
+        <pathelement location="lib/byte-buddy-1.8.15.jar"/>
+        <pathelement location="lib/commons-exec-1.3.jar"/>
+        <pathelement location="lib/guava-25.0-jre.jar"/>
+        <pathelement location="lib/junit.jar"/>
+        <pathelement location="lib/okhttp-3.11.0.jar"/>
+        <pathelement location="lib/okio-1.14.0.jar"/>
+        <pathelement location="lib/client-combined-3.141.59.jar"/>
+        <pathelement location="lib/client-combined-3.141.59-sources.jar"/>
     </path>
     <target name="init">
         <mkdir dir="build/classes"/>
