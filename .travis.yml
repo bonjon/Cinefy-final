@@ -1,4 +1,12 @@
 language: java
 jdk:
    - openjdk8
-script: ant build
+
+addons:
+ sonarcloud:
+  organization: bonjon
+  token:
+   secure: 1554de0b0b69638b753ec2848add52bf24e55dbd
+script: 
+- ant build
+- sonar-scanner
