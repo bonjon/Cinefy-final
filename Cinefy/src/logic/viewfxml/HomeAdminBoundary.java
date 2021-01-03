@@ -50,16 +50,23 @@ public class HomeAdminBoundary implements Initializable {
 
 	@FXML
 	public void onSelectedQuestion(MouseEvent event) throws IOException {
-		if (!this.list.isEmpty())
-			this.agc.toManageQuestion(this.listQuestions.getScene(),
-					this.listQuestions.getSelectionModel().getSelectedItem());
+		if (!this.list.isEmpty()) {
+			DomandaBean clicked = this.listQuestions.getSelectionModel().getSelectedItem();
+			if(clicked!=null) {
+				this.agc.toManageQuestion(this.listQuestions.getScene(),clicked);
+			}
+		}
 	}
 
 	@FXML
 	public void onSelectedAnswer(MouseEvent event) throws IOException {
-		if (!this.list2.isEmpty())
-			this.agc.toManageAnswer(this.listAnswers.getScene(),
-					this.listAnswers.getSelectionModel().getSelectedItem());
+		if (!this.list2.isEmpty()) {
+			RispostaBean clicked = this.listAnswers.getSelectionModel().getSelectedItem();
+			if (clicked!=null) {	
+				this.agc.toManageAnswer(this.listAnswers.getScene(),
+					clicked);
+			}
+		}
 	}
 
 	@Override

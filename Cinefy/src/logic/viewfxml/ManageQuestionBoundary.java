@@ -33,6 +33,8 @@ public class ManageQuestionBoundary {
 	private Button btnAccept;
 	@FXML
 	private Button btnReject;
+	@FXML
+	private Button btnBack;
 	
 	private AdminGraphicChange agc;
 	private DomandaBean selectedQuestion;
@@ -65,6 +67,11 @@ public class ManageQuestionBoundary {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	public void onBack(ActionEvent event) throws IOException {
+		this.agc.toHomepage(this.btnBack.getScene());
 	}
 	
 	public void init(DomandaBean db) {

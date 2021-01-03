@@ -28,6 +28,8 @@ public class ManageAnswerBoundary {
 	private Button btnAccept;
 	@FXML
 	private Button btnReject;
+	@FXML
+	private Button btnBack;
 
 	private AdminGraphicChange agc;
 	private RispostaBean selectedAnswer;
@@ -65,6 +67,11 @@ public class ManageAnswerBoundary {
 			e.printStackTrace();
 		}
 	
+	}
+	
+	@FXML
+	public void onBack(ActionEvent event) throws IOException {
+		this.agc.toHomepage(this.btnBack.getScene());
 	}
 	
 	public void init(RispostaBean rb) {
