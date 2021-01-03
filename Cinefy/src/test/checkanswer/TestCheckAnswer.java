@@ -22,6 +22,8 @@ public class TestCheckAnswer {
 		AskForQuestionsController afc = new AskForQuestionsController();
 		GeneralUserBean gub = new GeneralUserBean();
 		gub.setUsername(TEST);
+		gub.setPassword(TEST);
+		gub.setRole(TEST);
 		DomandaBean db = new DomandaBean();
 		db.setId(42);
 		boolean result = afc.checkAnswer(gub, db);
