@@ -8,6 +8,7 @@ services:
 before_install:
   - sudo apt update
   - sudo apt install openjfx
+  - javac -classpath /opt/apache-tomcat/lib/servlet-api.jar *.java
 
 install: true  
   
