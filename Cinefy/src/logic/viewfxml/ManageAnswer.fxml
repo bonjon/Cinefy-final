@@ -38,7 +38,7 @@
 					<children>
                   <AnchorPane layoutX="25.0" layoutY="21.0">
                      <children>
-      						<Label layoutY="4.0" text="Manage Answer" textFill="#f5c518">
+      						<Label layoutY="4.0" text="Manage answer" textFill="#f5c518">
       							<font>
       								<Font name="Arial Bold" size="17.0" />
       							</font>

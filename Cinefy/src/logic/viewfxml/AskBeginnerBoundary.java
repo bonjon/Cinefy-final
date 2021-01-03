@@ -89,7 +89,7 @@ public class AskBeginnerBoundary implements Initializable {
 
 	@FXML
 	public void onSelectedTopAd(MouseEvent event) throws IOException {
-		if (this.observable != null)
+		if (this.topAdvanced.getSelectionModel().getSelectedItem() != null)
 			this.bgc.toQuestion(this.topAdvanced.getScene(), topAdvanced.getSelectionModel().getSelectedItem());
 	}
 
@@ -174,8 +174,7 @@ public class AskBeginnerBoundary implements Initializable {
 						String path;
 						if (item.getProfilePic() == null) {
 							path = FileManager.PROFILE + File.separator + "default.png";
-						}
-						else {
+						} else {
 							path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						}
 						File file = new File(path);
@@ -227,8 +226,7 @@ public class AskBeginnerBoundary implements Initializable {
 						String path;
 						if (item.getProfilePic() == null) {
 							path = FileManager.PROFILE + File.separator + "default.png";
-						}
-						else {
+						} else {
 							path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						}
 						File file = new File(path);
@@ -280,8 +278,7 @@ public class AskBeginnerBoundary implements Initializable {
 						String path;
 						if (item.getProfilePic() == null) {
 							path = FileManager.PROFILE + File.separator + "default.png";
-						}
-						else {
+						} else {
 							path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						}
 						File file = new File(path);
@@ -333,8 +330,7 @@ public class AskBeginnerBoundary implements Initializable {
 						String path;
 						if (item.getProfilePic() == null) {
 							path = FileManager.PROFILE + File.separator + "default.png";
-						}
-						else {
+						} else {
 							path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						}
 						File file = new File(path);
@@ -386,8 +382,7 @@ public class AskBeginnerBoundary implements Initializable {
 						String path;
 						if (item.getProfilePic() == null) {
 							path = FileManager.PROFILE + File.separator + "default.png";
-						}
-						else {
+						} else {
 							path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						}
 						File file = new File(path);
@@ -417,7 +412,7 @@ public class AskBeginnerBoundary implements Initializable {
 
 	@FXML
 	public void onSelectedSearchAd(MouseEvent event) throws IOException {
-		if (!listSearch.isEmpty())
+		if (this.advanced.getSelectionModel().getSelectedItem() != null)
 			this.bgc.toQuestion(this.advanced.getScene(), this.advanced.getSelectionModel().getSelectedItem());
 	}
 
@@ -510,6 +505,8 @@ public class AskBeginnerBoundary implements Initializable {
 			ldb = afc.getQuestions(gub, "beginner");
 			if (ldb != null)
 				listQuestions.addAll(ldb);
+			if (lb == null & ldb == null)
+				this.labelError2.setText("No questions");
 			this.questions.getItems().addAll(listQuestions);
 			this.questions.setCellFactory(param -> new ListCell<DomandaBean>() {
 				@Override
