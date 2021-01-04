@@ -93,7 +93,7 @@ public class AskForQuestionsController extends Controller {
 		return this.convert(r);
 	}
 
-	public void voteAdvanced(int voto, String username, RispostaBean rb) throws SQLException {
+	public void voteAdvanced(String username, RispostaBean rb, int voto) throws SQLException {
 		BeginnerUserDAO bud = new BeginnerUserDAO();
 		bud.voteAdvanced(rb.getAdvancedName(), username, voto, Integer.parseInt(rb.getId()));
 	}
