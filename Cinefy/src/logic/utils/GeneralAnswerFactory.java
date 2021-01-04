@@ -8,7 +8,7 @@ public class GeneralAnswerFactory implements AnswerAutomationFactory {
 	String messageColleague;
 	String messageResource;
 	String answer;
-	static Boolean resSugg;
+	boolean resSugg;
 
 	public GeneralAnswerFactory() {
 
@@ -18,8 +18,10 @@ public class GeneralAnswerFactory implements AnswerAutomationFactory {
 
 	@Override
 	public String answerCreation(RispostaBean lb) {
-
-		RispostaBean rb = lb;
+		
+		RispostaBean rb = new RispostaBean();
+		rb=lb;
+		
 		answer = header + "\n" + "\n" + rb.getContenuto() + "\n" + "\n";
 
 		if (rb.isAColleagueSuggested() == true) {
@@ -32,8 +34,8 @@ public class GeneralAnswerFactory implements AnswerAutomationFactory {
 			answer = answer + messageColleague;
 		}
 
-		resSugg = rb.isAResourceSuggested();
-		if (resSugg.equals(Boolean.TRUE)) {
+		resSugg= rb.isAResourceSuggested();
+		if (resSugg ==true) {
 
 			messageResource = "I advise you to look at the following web contents:" + "\n";
 
@@ -55,5 +57,7 @@ public class GeneralAnswerFactory implements AnswerAutomationFactory {
 		return answer;
 
 	}
+	
+	
 
 }
