@@ -78,9 +78,9 @@ public class AskForQuestionsController extends Controller {
 		dd.manageQuestions(Integer.parseInt(db.getId()), DomandaDAO.REJECT);
 	}
 
-	public boolean checkAnswer(GeneralUserBean gub, DomandaBean db) throws NumberFormatException, SQLException {
+	public boolean checkAnswer(String username, String id) throws NumberFormatException, SQLException {
 		RispostaDAO rd = new RispostaDAO();
-		if (rd.getAnswer(gub.getUsername(), Integer.parseInt(db.getId())) == null)
+		if (rd.getAnswer(username, Integer.parseInt(id)) == null)
 			return false;
 		return true;
 	}
