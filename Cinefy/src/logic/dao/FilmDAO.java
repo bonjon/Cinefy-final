@@ -39,7 +39,7 @@ public class FilmDAO {
 				int anno = rs.getInt("Anno");
 				String nazione = rs.getString("Nazione");
 				String genere = rs.getString("Genere");
-				fm = new Film(filmId, filmName, url, regista, attore, anno, nazione, genere);
+				fm = new Film.FilmBuilder(filmId, filmName, url, regista).setAttore(attore).setGenere(genere).setAnno(anno).setNazione(nazione).build();
 			}
 		}
 		return fm;
@@ -120,7 +120,7 @@ public class FilmDAO {
 			int anno = rs.getInt("Anno");
 			String nazione = rs.getString("Nazione");
 			String genere = rs.getString("Genere");
-			Film temp = new Film(id, titolo, url, regista, attore, anno, nazione, genere);
+			Film temp = new Film.FilmBuilder(id, titolo, url, regista).setAnno(anno).setAttore(attore).setGenere(genere).setNazione(nazione).build();
 			fml.add(temp);
 		} while (rs.next());
 		return fml;
