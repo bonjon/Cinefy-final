@@ -12,43 +12,28 @@ import java.sql.SQLException;
 public class ConnectionDB {
 
 	// Dichiarazione variabili
-	private static ConnectionDB INSTANCE;
+	private static ConnectionDB instance;
 	private String username = "root";
-	//private String password = "password";
-	private String password = "Password_98";
-	//private String DB_URL = "jdbc:mysql://localhost:3306/CinefyDB";
-	private String DB_URL = "jdbc:mysql://localhost:3306/CinefyDB?useSSL=false";
-	private static String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
+	private String password = "password";
+	private String dbUrl = "jdbc:mysql://localhost:3306/CinefyDB?useSSL=false";
+	private static String driverClassName = "com.mysql.jdbc.Driver";
 
-	private ConnectionDB() {
+	private ConnectionDB() throws ClassNotFoundException {
 		// Loading Dinamico del server
-		try {
-			Class.forName(DRIVER_CLASS_NAME);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Class.forName(driverClassName);
 	}
 
-	public static synchronized Connection getInstance() throws SQLException {
+	public static synchronized Connection getInstance() throws SQLException, ClassNotFoundException {
 		// Si controlla che non ci sia un'altra istanza di connessione
-		if (INSTANCE == null) {
-			INSTANCE = new ConnectionDB();
+		if (instance == null) {
+			instance = new ConnectionDB();
 		}
-		try {
-			return DriverManager.getConnection(INSTANCE.DB_URL, INSTANCE.username, INSTANCE.password);
-		} catch (SQLException e) {
-			throw e;
-		}
+		return DriverManager.getConnection(instance.dbUrl, instance.username, instance.password);
 	}
 
-	public static void close(Connection c) {
-		try {
-			if (c != null) {
-				c.close();
-				c = null;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public static void close(Connection c) throws SQLException {
+		if (c != null) {
+			c.close();
 		}
 	}
 }
