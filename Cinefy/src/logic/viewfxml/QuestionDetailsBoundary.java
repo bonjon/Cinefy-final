@@ -135,7 +135,7 @@ public class QuestionDetailsBoundary {
 				Image img = new Image(file.toURI().toString());
 				this.imageView.setImage(img);
 				this.labelCheck.setText("You have received an answer from " + this.selectedQuestion.getAdvancedName());
-				this.answer = afc.getAnswer(gub.getUsername(), selectedQuestion);
+				this.answer = afc.getAnswer(gub.getUsername(), selectedQuestion.getId());
 				this.labelAnswer.setText(this.answer.getContenuto());
 				this.labelName.setText("Answer from " + this.selectedQuestion.getAdvancedName());
 				this.sliderVote.setDisable(false);
