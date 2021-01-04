@@ -88,7 +88,7 @@ public class QuestionDetailsBoundary {
 		aub.setVoto(this.sliderVote.getValue());
 		int a = (int) Double.parseDouble(aub.getVoto());
 		try {
-			this.afc.voteAdvanced(aub.getUsername(), a, gub, answer);
+			this.afc.voteAdvanced(aub.getUsername(), a, gub.getUsername(), answer.getId());
 		} catch (SQLException e) {
 			this.labelError.setText(e.getMessage());
 		}
