@@ -11,135 +11,113 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1480.0"
-	xmlns="http://javafx.com/javafx/8.0.171"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="logic.viewfxml.CreatePlaylistBoundary">
+<AnchorPane prefHeight="720.0" prefWidth="1480.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.viewfxml.CreatePlaylistBoundary">
 	<children>
-		<BorderPane AnchorPane.bottomAnchor="0.0"
-			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-			AnchorPane.topAnchor="0.0">
+		<BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<left>
-				<AnchorPane maxWidth="-Infinity" minWidth="-Infinity"
-					prefWidth="220.0" style="-fx-background-color: #121212;"
-					BorderPane.alignment="CENTER">
+				<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="220.0" style="-fx-background-color: #121212;" BorderPane.alignment="CENTER">
 					<children>
-						<Label layoutX="50.0" layoutY="14.0" text="Cinefy"
-							textFill="#f5c518" AnchorPane.topAnchor="14.0">
+						<Label layoutX="50.0" layoutY="14.0" text="Cinefy" textFill="#f5c518" AnchorPane.topAnchor="14.0">
 							<font>
 								<Font name="DejaVu Sans Mono Bold" size="33.0" />
 							</font>
 						</Label>
-						<Label fx:id="home" layoutX="75.0" layoutY="320.0"
-							onMouseClicked="#onHomeClicked" text="Home" textFill="#f5c518"
-							AnchorPane.bottomAnchor="500.0">
+						<Label fx:id="home" layoutX="75.0" layoutY="320.0" onMouseClicked="#onHomeClicked" text="Home" textFill="#f5c518" AnchorPane.bottomAnchor="500.0">
 							<font>
 								<Font name="Arial" size="25.0" />
 							</font>
 						</Label>
-						<Label fx:id="answer" layoutX="68.0" layoutY="352.0"
-							onMouseClicked="#onAnswerClicked" text="Answer"
-							textFill="#f5c518" AnchorPane.bottomAnchor="338.0">
+						<Label fx:id="answer" layoutX="68.0" layoutY="352.0" onMouseClicked="#onAnswerClicked" text="Answer" textFill="#f5c518" AnchorPane.bottomAnchor="338.0">
 							<font>
 								<Font name="Arial" size="25.0" />
 							</font>
 						</Label>
-						<Label fx:id="playlists" layoutX="62.0" layoutY="608.0"
-							onMouseClicked="#onPlaylistsClicked" text="Playlists"
-							textFill="#f5c518" underline="true"
-							AnchorPane.bottomAnchor="200.0">
+						<Label fx:id="playlists" layoutX="62.0" layoutY="608.0" onMouseClicked="#onPlaylistsClicked" text="Playlists" textFill="#f5c518" underline="true" AnchorPane.bottomAnchor="200.0">
 							<font>
 								<Font name="Arial Bold Italic" size="25.0" />
 							</font>
 						</Label>
-						<Label fx:id="profile" layoutX="73.0" layoutY="676.0"
-							onMouseClicked="#onProfileClicked" text="Profile"
-							textFill="#f5c518" AnchorPane.bottomAnchor="60.0">
+						<Label fx:id="profile" layoutX="73.0" layoutY="676.0" onMouseClicked="#onProfileClicked" text="Profile" textFill="#f5c518" AnchorPane.bottomAnchor="60.0">
 							<font>
 								<Font name="Arial" size="25.0" />
 							</font>
 						</Label>
-						<Line endX="100.0" layoutX="110.0" layoutY="71.0"
-							startX="-100.0" stroke="#f5c518" />
+						<Line endX="100.0" layoutX="110.0" layoutY="71.0" startX="-100.0" stroke="#f5c518" />
 					</children>
 				</AnchorPane>
 			</left>
 			<center>
 				<AnchorPane BorderPane.alignment="CENTER">
 					<children>
-						<AnchorPane prefWidth="1250.0"
-							style="-fx-background-color: #1c1c1c;"
-							AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-							AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<AnchorPane style="-fx-background-color: #1c1c1c;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<children>
-								<Label layoutY="14.0" text="Create Playlist"
-									textFill="#f5c518" AnchorPane.leftAnchor="20.0"
-									AnchorPane.topAnchor="20.0">
+								<Label layoutY="14.0" text="Create playlist" textFill="#f5c518" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
 									<font>
 										<Font name="Arial Bold" size="17.0" />
 									</font>
 								</Label>
-								<ListView fx:id="filmPlaylist" layoutX="20.0"
-									layoutY="316.0" onMouseClicked="#onSelectedFilm"
-									orientation="VERTICAL" prefHeight="200.0" prefWidth="1020.0"
-									style="-fx-background-color: #1c1c1c;"
-									AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
-									AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="336.0" />
-								<TextField fx:id="movie" layoutX="20.0"
-									layoutY="310.0" onKeyPressed="#onEnterPressed"
-									style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;"
-									AnchorPane.bottomAnchor="404.0" AnchorPane.topAnchor="290.0" />
-								<TextField fx:id="playlistName" layoutX="20.0"
-									layoutY="80.0"
-									style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;"
-									AnchorPane.topAnchor="110.0" />
-								<Label layoutX="20.0" layoutY="40.0" text="Playlist Name?"
-									textFill="#f5c518" AnchorPane.leftAnchor="20.0"
-									AnchorPane.topAnchor="80.0">
-									<font>
-										<Font name="Arial" size="17.0" />
-									</font>
-								</Label>
-								<Label fx:id="tvStatus" layoutX="22.0" layoutY="280.0"
-									text="Playlist Name?" textFill="#f5c518"
-									AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="260.0">
-									<font>
-										<Font name="Arial" size="17.0" />
-									</font>
-								</Label>
-								<Button fx:id="btnOk" layoutX="749.0" layoutY="178.0"
-									mnemonicParsing="false" onAction="#onOk" prefHeight="35.0"
-									prefWidth="50.0"
-									style="-fx-background-color: #121212; -fx-background-radius: 30 30 30 30;"
-									text="OK" textFill="#f5c518" AnchorPane.topAnchor="178.0">
+								<ListView fx:id="filmPlaylist" layoutX="20.0" layoutY="418.0" onMouseClicked="#onSelectedFilm" orientation="VERTICAL" prefHeight="282.0" prefWidth="1220.0" style="-fx-background-color: #1c1c1c;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="418.0" />
+                        <AnchorPane layoutX="20.0" layoutY="332.0">
+                           <children>
+      								<Label fx:id="tvStatus" layoutX="1.0" text="Film name" textFill="#f5c518">
+      									<font>
+      										<Font size="14.0" />
+      									</font>
+      								</Label>
+      								<TextField fx:id="movie" layoutX="1.0" layoutY="28.0" onKeyPressed="#onEnterPressed" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;" />
+      								<Button fx:id="btnAdd" layoutX="200.0" layoutY="30.0" mnemonicParsing="false" onAction="#onAdd" style="-fx-background-color: #121212; -fx-background-radius: 30 30 30 30;" text="Add on playlist" textFill="#f5c518">
+      									<font>
+      										<Font name="Arial" size="13.0" />
+      									</font>
+      								</Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="16.0" layoutY="73.0">
+                           <children>
+      								<TextField fx:id="playlistName" layoutX="4.0" layoutY="37.0" onKeyPressed="#keyPressed" style="-fx-background-color: #f5c518 ,  #1c1c1c,  #1c1c1c; -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1; -fx-text-fill: WHITE;" />
+      								<Label layoutX="4.0" layoutY="7.0" text="Playlist name" textFill="#f5c518">
+      									<font>
+      										<Font size="14.0" />
+      									</font>
+      								</Label>
+                              <Label fx:id="nameError" layoutY="69.0" textFill="RED" />
+      								<Button fx:id="btnOk" layoutX="856.0" layoutY="68.0" mnemonicParsing="false" onAction="#onOk" prefHeight="35.0" prefWidth="118.0" style="-fx-background-color: #121212; -fx-background-radius: 30 30 30 30;" text="Create playlist" textFill="#f5c518">
+      									<font>
+      										<Font name="Arial" size="13.0" />
+      									</font>
+      								</Button>
+                              <AnchorPane layoutX="302.0">
+                                 <children>
+            								<ImageView fx:id="imageView" fitHeight="150.0" fitWidth="150.0" layoutX="144.0" layoutY="30.0" onMouseClicked="#onImageClick" pickOnBounds="true" preserveRatio="true">
+            									<image>
+            										<Image url="@../../../res/playlistPictures/default2.jpg" />
+            									</image>
+            								</ImageView>
+            								<Label fx:id="laPicChange" alignment="CENTER" layoutX="-2.0" layoutY="1.0" text="Click on the image if you want to change the playlist' s picture" textAlignment="CENTER" textFill="#f5c518" AnchorPane.bottomAnchor="152.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="1.0">
+            									<font>
+            										<Font size="14.0" />
+            									</font>
+            								</Label>
+                                    <Label fx:id="laPicChosen" alignment="CENTER" layoutX="83.0" layoutY="6.0" text="You choose this image for your playlist" textAlignment="CENTER" textFill="#f5c518" visible="false">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+								<Label fx:id="labelError" layoutX="354.0" layoutY="363.0" textFill="RED" AnchorPane.leftAnchor="354.0" />
+								<Button fx:id="btnBack" layoutX="898.0" layoutY="27.0" mnemonicParsing="false" onAction="#onBack" style="-fx-background-color: #121212; -fx-background-radius: 30 30 30 30;" text="Back" textFill="#f5c518" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
 									<font>
 										<Font name="Arial" size="13.0" />
 									</font>
 								</Button>
-								<Button fx:id="btnAdd" layoutX="191.0" layoutY="290.0"
-									mnemonicParsing="false" onAction="#onAdd"
-									style="-fx-background-color: #121212; -fx-background-radius: 30 30 30 30;"
-									text="Add on playlist" textFill="#f5c518"
-									AnchorPane.leftAnchor="221.0">
-									<font>
-										<Font name="Arial" size="13.0" />
-									</font>
-								</Button>
-								<ImageView fx:id="imageView" fitHeight="150.0"
-									fitWidth="150.0" layoutX="463.0" layoutY="110.0"
-									onMouseClicked="#onImageClick" pickOnBounds="true"
-									preserveRatio="true" AnchorPane.topAnchor="110.0">
-									<image>
-										<Image url="@../../../res/playlistPictures/default2.jpg" />
-									</image>
-								</ImageView>
-								<Label layoutX="324.0" layoutY="80.0"
-									text="Click on the image if you want to change the Playlist Picture"
-									textFill="#f5c518">
-									<font>
-										<Font name="Arial" size="17.0" />
-									</font>
-								</Label>
+                        <Label fx:id="laCreate" layoutX="20.0" layoutY="309.0" text="You have just created a new playlist!" textFill="#f5c518" visible="false">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
 							</children>
 						</AnchorPane>
 					</children>

@@ -36,26 +36,39 @@
 			<center>
 				<AnchorPane style="-fx-background-color: #1c1c1c;" BorderPane.alignment="CENTER">
 					<children>
-						<Label layoutX="7.0" layoutY="6.0" text="Manage Answer" textFill="#f5c518" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0">
-							<font>
-								<Font name="Arial Bold" size="17.0" />
-							</font>
-						</Label>
-						<ScrollPane layoutX="25.0" layoutY="45.0" style="-fx-background-color: #1c1c1c;" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="105.0">
-							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="1180.0" style="-fx-background-color: #1c1c1c;">
-									<children>
-										<Label fx:id="labelAnswer" prefWidth="700.0" text="Con molta pratica" textFill="#f5c518" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-											<font>
-												<Font name="Arial Italic" size="19.0" />
-											</font>
-										</Label>
-									</children>
-								</AnchorPane>
-							</content>
-						</ScrollPane>
-						<Button fx:id="btnAccept" layoutX="16.0" layoutY="389.0" mnemonicParsing="false" onAction="#onAccept" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Accept" AnchorPane.leftAnchor="350.0" />
-						<Button fx:id="btnReject" layoutX="1123.0" layoutY="390.0" mnemonicParsing="false" onAction="#onReject" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: RED;" text="Reject" AnchorPane.rightAnchor="350.0" />
+                  <AnchorPane layoutX="25.0" layoutY="21.0">
+                     <children>
+      						<Label layoutY="4.0" text="Manage answer" textFill="#f5c518">
+      							<font>
+      								<Font name="Arial Bold" size="17.0" />
+      							</font>
+      						</Label>
+                        <AnchorPane layoutX="15.0" layoutY="84.0">
+                           <children>
+            						<ScrollPane prefHeight="100.0" style="-fx-background-color: #1c1c1c;">
+            							<content>
+            								<AnchorPane prefHeight="100.0" prefWidth="1048.0" style="-fx-background-color: #1c1c1c;">
+            									<children>
+            										<Label fx:id="labelAnswer" text="Risposta" textFill="#ffdf87" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="4.0">
+            											<font>
+            												<Font name="Arial Italic" size="19.0" />
+            											</font>
+            										</Label>
+            									</children>
+            								</AnchorPane>
+            							</content>
+            						</ScrollPane>
+            						<Button fx:id="btnAccept" layoutX="277.0" layoutY="285.0" mnemonicParsing="false" onAction="#onAccept" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Accept" textFill="WHITE" />
+            						<Button fx:id="btnReject" layoutX="710.0" layoutY="285.0" mnemonicParsing="false" onAction="#onReject" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: RED;" text="Reject" textFill="WHITE" />
+                           </children>
+                        </AnchorPane>
+                        <Button fx:id="btnBack" layoutX="1010.0" mnemonicParsing="false" onAction="#onBack" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;" text="Back" textFill="#f5c518">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
 					</children>
 				</AnchorPane>
 			</center>

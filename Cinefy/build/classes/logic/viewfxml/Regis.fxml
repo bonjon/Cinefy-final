@@ -83,7 +83,7 @@
 							</font>
 						</SplitMenuButton>
                   <Label fx:id="professionError" layoutX="356.0" layoutY="227.0" textFill="#ff0202" />
-						<ImageView fx:id="ivProfilepic" fitHeight="150.0" fitWidth="200.0" layoutX="24.0" layoutY="274.0" onMouseClicked="#onImagePressed" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="274.0">
+						<ImageView fx:id="ivProfilepic" fitHeight="150.0" fitWidth="171.0" layoutX="24.0" layoutY="274.0" onMouseClicked="#onImagePressed" pickOnBounds="true" AnchorPane.topAnchor="274.0">
 							<image>
 								<Image url="@../../../res/profilePictures/default.png" />
 							</image>
@@ -109,7 +109,7 @@
 			<left>
 				<AnchorPane prefHeight="720.0" prefWidth="740.0" style="-fx-background-color: #121212;" BorderPane.alignment="CENTER">
 					<children>
-						<ImageView blendMode="COLOR_DODGE" fitHeight="720.0" fitWidth="740.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<ImageView fx:id="cinema" blendMode="COLOR_DODGE" fitHeight="720.0" fitWidth="740.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<image>
 								<Image url="@../../../res/cinema.png" />
 							</image>
@@ -123,11 +123,35 @@
 								</Label>
 							</children>
 						</AnchorPane>
-						<Button fx:id="btnBacktologin" layoutX="313.0" layoutY="632.0" mnemonicParsing="false" onAction="#onBackToLoginPressed" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;" text="Back to Login" textFill="#f5c518" underline="true">
+						<Button fx:id="btnBacktologin" layoutX="313.0" layoutY="632.0" mnemonicParsing="false" onAction="#onBackToLoginPressed" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #121212;" text="Back to login" textFill="#f5c518" underline="true">
 							<font>
 								<Font name="Arial" size="14.0" />
 							</font>
 						</Button>
+                  <AnchorPane layoutX="78.0" layoutY="312.0">
+                     <children>
+                        <Label layoutY="144.0" prefHeight="76.0" prefWidth="238.0" text="Are you a cinema expert? &#10;Become an advanced user&#10;and gain tokens answering &#10;to beginner users' questions" textFill="#f5c518">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="324.0" prefHeight="98.0" prefWidth="261.0" text="Would you learn something about &#10;cinema? Have a great interaction &#10;with our advanced users. Let they &#10;help you about several aspects of&#10;cinema production " textFill="#f5c518">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="324.0" layoutY="143.0" prefHeight="60.0" prefWidth="271.0" text="Register yourself as an advanced&#10;user. The more you'll gain tokens, &#10;the more you'll monetize!" textFill="#f5c518">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutY="1.0" text="Refer to our database of &#10;film titles" textFill="#f5c518">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
 					</children>
 				</AnchorPane>
 			</left>
