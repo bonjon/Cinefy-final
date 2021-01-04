@@ -9,7 +9,6 @@ import logic.entities.Playlist;
 import logic.exceptions.PlaylistNotFoundException;
 import logic.utils.Controller;
 
-
 /*
  * Classe ViewPlaylistsController che avrà il compito di
  * coordinare il comportamento del caso d'uso
@@ -18,21 +17,22 @@ import logic.utils.Controller;
 
 public class ViewPlaylistsController extends Controller {
 
-	public List<PlaylistBean> getLeaderBoard() throws PlaylistNotFoundException, SQLException {
+	public List<PlaylistBean> getLeaderBoard() throws PlaylistNotFoundException, SQLException, ClassNotFoundException {
 		PlaylistDAO pd = new PlaylistDAO();
 		List<Playlist> lpb = pd.leaderBoardPl();
 		return this.convertPlaylistList(lpb);
 	}
 
-	public PlaylistBean getPlaylist(String p) throws SQLException, PlaylistNotFoundException {
+	public PlaylistBean getPlaylist(String p) throws SQLException, PlaylistNotFoundException, ClassNotFoundException {
 		PlaylistDAO pd = new PlaylistDAO();
 		Playlist pp = pd.selectPlaylistByName(p);
 		return this.convert(pp);
 	}
 
-	public List<PlaylistBean> getPlaylistByAd(String user) throws SQLException, PlaylistNotFoundException {
+	public List<PlaylistBean> getPlaylistByAd(String user)
+			throws SQLException, PlaylistNotFoundException, ClassNotFoundException {
 		PlaylistDAO pd = new PlaylistDAO();
 		List<Playlist> lp = pd.selectPlaylistByUsername(user);
 		return this.convertPlaylistList(lp);
-	}	
+	}
 }

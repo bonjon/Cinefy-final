@@ -17,37 +17,42 @@ import logic.utils.Controller;
 
 public class ViewListOfFilmsController extends Controller {
 
-	public FilmBean getFilm(String title) throws FilmNotFoundException, SQLException {
+	public FilmBean getFilm(String title) throws FilmNotFoundException, SQLException, ClassNotFoundException {
 		FilmDAO fd = new FilmDAO();
 		Film fm = fd.selectFilmByName(title);
 		return this.convert(fm);
 	}
 
-	public List<FilmBean> getFilmByDirector(String director) throws FilmNotFoundException, SQLException {
+	public List<FilmBean> getFilmByDirector(String director)
+			throws FilmNotFoundException, SQLException, ClassNotFoundException {
 		FilmDAO fd = new FilmDAO();
 		List<Film> fml = fd.selectFilmByDirector(director);
 		return this.convertFilmList(fml);
 	}
 
-	public List<FilmBean> getFilmByNation(String nation) throws FilmNotFoundException, SQLException {
+	public List<FilmBean> getFilmByNation(String nation)
+			throws FilmNotFoundException, SQLException, ClassNotFoundException {
 		FilmDAO fd = new FilmDAO();
 		List<Film> fml = fd.selectFilmByNation(nation);
 		return this.convertFilmList(fml);
 	}
 
-	public List<FilmBean> getFilmByActor(String actor) throws FilmNotFoundException, SQLException {
+	public List<FilmBean> getFilmByActor(String actor)
+			throws FilmNotFoundException, SQLException, ClassNotFoundException {
 		FilmDAO fd = new FilmDAO();
 		List<Film> fml = fd.selectFilmByActor(actor);
 		return this.convertFilmList(fml);
 	}
 
-	public List<FilmBean> getFilmByYear(String year) throws FilmNotFoundException, SQLException {
+	public List<FilmBean> getFilmByYear(String year)
+			throws FilmNotFoundException, SQLException, ClassNotFoundException {
 		FilmDAO fd = new FilmDAO();
 		List<Film> fml = fd.selectFilmByYear(year);
 		return this.convertFilmList(fml);
 	}
 
-	public List<FilmBean> getFilmByGenre(String genre) throws FilmNotFoundException, SQLException {
+	public List<FilmBean> getFilmByGenre(String genre)
+			throws FilmNotFoundException, SQLException, ClassNotFoundException {
 		FilmDAO fd = new FilmDAO();
 		List<Film> fml = fd.selectFilmByGenre(genre);
 		return this.convertFilmList(fml);

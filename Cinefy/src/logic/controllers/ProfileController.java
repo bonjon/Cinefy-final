@@ -23,7 +23,7 @@ import logic.utils.Controller;
 
 public class ProfileController extends Controller {
 
-	public BeginnerUserBean getUser(String username, String role) {
+	public BeginnerUserBean getUser(String username, String role) throws ClassNotFoundException {
 		GeneralUserDAO gud = new GeneralUserDAO();
 		BeginnerUserBean bub = new BeginnerUserBean();
 		try {
@@ -37,72 +37,70 @@ public class ProfileController extends Controller {
 		}
 		return bub;
 	}
-	
-	public List<DomandaBean> getQuestions(String beginner, String role) throws SQLException {
+
+	public List<DomandaBean> getQuestions(String beginner, String role) throws SQLException, ClassNotFoundException {
 		DomandaDAO dd = new DomandaDAO();
 		List<Domanda> ld = dd.getQuestions(beginner, role);
 		if (ld == null)
 			return Collections.emptyList();
 		return this.convertQuestionList(ld);
 	}
-	
-	public List<AdvancedUserBean> differentAdv(String beginner) {
-		
+
+	public List<AdvancedUserBean> differentAdv(String beginner) throws ClassNotFoundException {
+
 		List<DomandaBean> ld = Collections.emptyList();
 		int i = 0;
-		
+
 		try {
-			ld=getQuestions(beginner, "beginner");
+			ld = getQuestions(beginner, "beginner");
 		} catch (SQLException e) {
-			
+
 		}
-		
-		
+
 		List<AdvancedUserBean> contactedAdv = new ArrayList<AdvancedUserBean>();
 		List<AdvancedUserBean> differentAdv = new ArrayList<AdvancedUserBean>();
 
-			while(i<ld.size()) {				//prendo tutti gli advanced e li metto in una lista
-				AdvancedUserBean advanced = new AdvancedUserBean();
+		while (i < ld.size()) { // prendo tutti gli advanced e li metto in una lista
+			AdvancedUserBean advanced = new AdvancedUserBean();
 
-				DomandaBean adv = ld.get(i);
-				advanced.setUsername(adv.getAdvancedName());
-				contactedAdv.add(advanced);
-				i++;
-				
-			}
-			
-			int y,z;
-			boolean control=true; //booleano: al primo tra i differentAdv che trovo uguale al contactedAdv che sto considerando, lo setto true
-			
-			if(contactedAdv.isEmpty()) {
-				return differentAdv;
-			}
-			for(y=0;y<contactedAdv.size();y++) {
-				control=true;
-				if(differentAdv.isEmpty()) {
-					differentAdv.add(contactedAdv.get(y));
-				}
-				else {
-					
-					for(z=0;z<differentAdv.size();z++) {
-						
-						if(contactedAdv.get(y).getUsername().equals(differentAdv.get(z).getUsername())){
-								control=false;
-								break;
-						}
-					}
-					if(control==true) {
-						differentAdv.add(contactedAdv.get(y));
-						
-					}
-				}
-			}
-			
+			DomandaBean adv = ld.get(i);
+			advanced.setUsername(adv.getAdvancedName());
+			contactedAdv.add(advanced);
+			i++;
+
+		}
+
+		int y, z;
+		boolean control = true; // booleano: al primo tra i differentAdv che trovo uguale al contactedAdv che
+								// sto considerando, lo setto true
+
+		if (contactedAdv.isEmpty()) {
 			return differentAdv;
-}
-	
+		}
+		for (y = 0; y < contactedAdv.size(); y++) {
+			control = true;
+			if (differentAdv.isEmpty()) {
+				differentAdv.add(contactedAdv.get(y));
+			} else {
 
-	public AdvancedUserBean getUser2(String username, String role) {
+				for (z = 0; z < differentAdv.size(); z++) {
+
+					if (contactedAdv.get(y).getUsername().equals(differentAdv.get(z).getUsername())) {
+						control = false;
+						break;
+					}
+				}
+				if (control == true) {
+					differentAdv.add(contactedAdv.get(y));
+
+				}
+			}
+		}
+
+		return differentAdv;
+	}
+
+	public AdvancedUserBean getUser2(String username, String role) throws ClassNotFoundException {
 		GeneralUserDAO gud = new GeneralUserDAO();
 		AdvancedUserBean aub = new AdvancedUserBean();
 		try {
@@ -121,5 +119,4 @@ public class ProfileController extends Controller {
 		return aub;
 	}
 
-	
 }

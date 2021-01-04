@@ -28,27 +28,27 @@ import logic.utils.Controller;
 
 public class AskForQuestionsController extends Controller {
 
-	public AdvancedUserBean getAdvanced(AdvancedUserBean aub) throws AdvancedNotFoundException, SQLException {
+	public AdvancedUserBean getAdvanced(AdvancedUserBean aub) throws AdvancedNotFoundException, SQLException, ClassNotFoundException {
 		AdvancedUserDAO aud = new AdvancedUserDAO();
 		AdvancedUser au = aud.selectAdvancedByUsername(aub.getUsername());
 		return this.convert(au);
 	}
 
-	public List<AdvancedUserBean> leaderBoard() throws SQLException, AdvancedNotFoundException {
+	public List<AdvancedUserBean> leaderBoard() throws SQLException, AdvancedNotFoundException, ClassNotFoundException {
 		AdvancedUserDAO aud = new AdvancedUserDAO();
 		List<AdvancedUser> lau = aud.leaderBoardAd();
 		if (lau == null)
-			return null;
+			return Collections.emptyList();
 		return this.convertAdvancedList(lau);
 	}
 
-	public List<AdvancedUserBean> getAdvancedByRole(AdvancedUserBean aub) throws AdvancedNotFoundException, SQLException {
+	public List<AdvancedUserBean> getAdvancedByRole(AdvancedUserBean aub) throws AdvancedNotFoundException, SQLException, ClassNotFoundException {
 		AdvancedUserDAO aud = new AdvancedUserDAO();
 		List<AdvancedUser> lau = aud.selectAdvancedByRole(aub.getRole());
 		return this.convertAdvancedList(lau);
 	}
 
-	public List<DomandaBean> getQuestions(GeneralUserBean gub, String role) throws SQLException {
+	public List<DomandaBean> getQuestions(GeneralUserBean gub, String role) throws SQLException, ClassNotFoundException {
 		DomandaDAO dd = new DomandaDAO();
 		List<Domanda> ld = dd.getQuestions(gub.getUsername(), role);
 		if (ld == null)
@@ -57,7 +57,7 @@ public class AskForQuestionsController extends Controller {
 	}
 
 	public void makeQuestion(DomandaBean db)
-			throws FieldTooLongException, SQLException, FieldEmptyException {
+			throws FieldTooLongException, SQLException, FieldEmptyException, ClassNotFoundException {
 		DomandaDAO dd = new DomandaDAO();
 		if (db.getContenuto().length() >= 200) {
 			throw new FieldTooLongException("Question body can't be longer than 200 characters");
@@ -68,24 +68,25 @@ public class AskForQuestionsController extends Controller {
 		dd.addQuestion(db.getContenuto(), db.getBeginnerName(), db.getAdvancedName());
 	}
 
-	public void acceptQuestion(DomandaBean db) throws NumberFormatException, SQLException {
+	public void acceptQuestion(DomandaBean db) throws NumberFormatException, SQLException, ClassNotFoundException {
 		DomandaDAO dd = new DomandaDAO();
 		dd.manageQuestions(Integer.parseInt(db.getId()), DomandaDAO.ACCEPT);
 	}
 
-	public void rejectQuestion(DomandaBean db) throws NumberFormatException, SQLException {
+	public void rejectQuestion(DomandaBean db) throws NumberFormatException, SQLException, ClassNotFoundException {
 		DomandaDAO dd = new DomandaDAO();
 		dd.manageQuestions(Integer.parseInt(db.getId()), DomandaDAO.REJECT);
 	}
 
-	public boolean checkAnswer(String username, String id) throws NumberFormatException, SQLException {
+	public boolean checkAnswer(String username, String id) throws NumberFormatException, SQLException, ClassNotFoundException {
 		RispostaDAO rd = new RispostaDAO();
+		boolean j = true;
 		if (rd.getAnswer(username, Integer.parseInt(id)) == null)
-			return false;
-		return true;
+			j = false;
+		return j;
 	}
 
-	public RispostaBean getAnswer(String username, String idDomanda) throws NumberFormatException, SQLException {
+	public RispostaBean getAnswer(String username, String idDomanda) throws NumberFormatException, SQLException, ClassNotFoundException {
 		RispostaDAO rd = new RispostaDAO();
 		Risposta r = rd.getAnswer(username, Integer.parseInt(idDomanda));
 		if (r == null)
@@ -93,7 +94,8 @@ public class AskForQuestionsController extends Controller {
 		return this.convert(r);
 	}
 
-	public boolean voteAdvanced(String username, RispostaBean rb, int voto) throws SQLException {
+	public boolean voteAdvanced(String username, RispostaBean rb, int voto)
+			throws SQLException, NumberFormatException, ClassNotFoundException {
 		BeginnerUserDAO bud = new BeginnerUserDAO();
 		bud.voteAdvanced(rb.getAdvancedName(), username, voto, Integer.parseInt(rb.getId()));
 		return true;

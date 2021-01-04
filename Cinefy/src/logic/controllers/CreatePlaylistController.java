@@ -14,7 +14,7 @@ import logic.utils.Controller;
 public class CreatePlaylistController extends Controller {
 
 	public PlaylistBean createPlaylist(String text, String username, String playlistPic)
-			throws FieldEmptyException, FieldTooLongException, SQLException {
+			throws FieldEmptyException, FieldTooLongException, SQLException, ClassNotFoundException {
 		PlaylistDAO pd = new PlaylistDAO();
 		if (text.isEmpty()) {
 			throw new FieldEmptyException("Enter a name, please");
@@ -26,7 +26,8 @@ public class CreatePlaylistController extends Controller {
 		return this.convert(p);
 	}
 
-	public void addFilm(int id, FilmBean selected) throws NumberFormatException, SQLException, FieldEmptyException {
+	public void addFilm(int id, FilmBean selected)
+			throws NumberFormatException, SQLException, FieldEmptyException, ClassNotFoundException {
 		AdvancedUserDAO aud = new AdvancedUserDAO();
 		if (selected == null)
 			throw new FieldEmptyException("You press add without select any film");
