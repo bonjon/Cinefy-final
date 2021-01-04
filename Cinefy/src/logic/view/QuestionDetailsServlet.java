@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import logic.bean.AdvancedUserBean;
+//import logic.bean.AdvancedUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.GeneralUserBean;
 import logic.bean.RispostaBean;
@@ -58,16 +58,16 @@ public class QuestionDetailsServlet extends HttpServlet {
 		if (rating != null) {
 			GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 			RispostaBean r = (RispostaBean) session.getAttribute("R");
-			AdvancedUserBean aub = new AdvancedUserBean();
+			//AdvancedUserBean aub = new AdvancedUserBean();
 			AskForQuestionsController afc = new AskForQuestionsController();
-			aub.setUsername(r.getAdvancedName());
-			aub.setVoto(Integer.parseInt(rating));
+			//aub.setUsername(r.getAdvancedName());
+			//aub.setVoto(Integer.parseInt(rating));
 			//String username = aub.getUsername();
 			String name = gub.getUsername();
 			//int id = Integer.parseInt(r.getId());
 			//int a = (int) Double.parseDouble(aub.getVoto());
 			try {
-				afc.voteAdvanced(aub, name, r);
+				afc.voteAdvanced(Integer.parseInt(rating), name, r);
 				request.setAttribute("error", "Advanced voted!");
 			} catch (SQLException e) {
 				request.setAttribute("error", "You Already vote this advanced");
