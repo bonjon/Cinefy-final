@@ -65,7 +65,7 @@ public class QuestionDetailsServlet extends HttpServlet {
 			String id = r.getId();
 			int a = (int) Double.parseDouble(aub.getVoto());
 			try {
-				afc.voteAdvanced(username, a, name, id);
+				afc.voteAdvanced(username, name, id, a);
 				request.setAttribute("error", "Advanced voted!");
 			} catch (SQLException e) {
 				request.setAttribute("error", "You Already vote this advanced");
