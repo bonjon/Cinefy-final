@@ -29,14 +29,14 @@ public class BeginnerUserDAO {
 		}
 	}
 
-	public void voteAdvanced(String username, String beginnerName, int voto, String idRisposta) throws SQLException {
+	public void voteAdvanced(String username, String beginnerName, int voto, int idRisposta) throws SQLException {
 		Connection conn = ConnectionDB.getInstance();
 		String sql = "call CinefyDB.vota_advanced(?,?,?,?);\r\n";
 		try (PreparedStatement s = conn.prepareStatement(sql)) {
 			s.setString(1, username);
 			s.setString(2, beginnerName);
 			s.setInt(3, voto);
-			s.setInt(4, Integer.parseInt(idRisposta));
+			s.setInt(4, idRisposta);
 			s.executeUpdate();
 		}
 	}
