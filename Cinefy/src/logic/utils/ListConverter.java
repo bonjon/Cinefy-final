@@ -9,38 +9,38 @@ public class ListConverter {
 	
 	//classe che si occupa di trasformare liste di oggetti in stringhe in formato "elenco"
 	
+	private ListConverter() {
+		
+	}
 	
 	public static String converter(List<AdvancedUserBean> adv) {
 		List<String> list = new ArrayList<>();
 		int i=0;
 		int y=0;
-		String result="";
+		StringBuilder result;
+		String final_result;
 		
-		
+		result = new StringBuilder("");
 		
 		while(i<adv.size()) {
 			list.add(adv.get(i).getUsername());
 			i++;
 		}
-		if(list.isEmpty()) {
-			result="";
-		}
-		else {
+		if(!list.isEmpty()) {
 			while(y<list.size()) {
-				if(result.isEmpty()) {
-					result=list.get(y);
+				if(result.toString().equals("")) {
+					result.append(list.get(y));
 				}
 				else {
-					result=result+", ";
-					String elem = list.get(y);
-					result=result+elem;
+					result.append(", ");
+					result.append(list.get(y));
 				}
 				y++;
 			}
 		}
 		
-		
-		return result;
+		final_result=result.toString();
+		return final_result;
 	}
 
 }
