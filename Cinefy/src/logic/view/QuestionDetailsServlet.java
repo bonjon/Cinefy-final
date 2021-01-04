@@ -64,10 +64,10 @@ public class QuestionDetailsServlet extends HttpServlet {
 			aub.setVoto(Integer.parseInt(rating));
 			String username = aub.getUsername();
 			String name = gub.getUsername();
-			int id = Integer.parseInt(r.getId());
+			//int id = Integer.parseInt(r.getId());
 			int a = (int) Double.parseDouble(aub.getVoto());
 			try {
-				afc.voteAdvanced(a, id, username, name);
+				afc.voteAdvanced(username, name, a, r);
 				request.setAttribute("error", "Advanced voted!");
 			} catch (SQLException e) {
 				request.setAttribute("error", "You Already vote this advanced");
