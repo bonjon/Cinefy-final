@@ -85,18 +85,16 @@ public class AskForQuestionsController extends Controller {
 		return true;
 	}
 
-	public RispostaBean getAnswer(GeneralUserBean gub, DomandaBean db) throws NumberFormatException, SQLException {
+	public RispostaBean getAnswer(String username, DomandaBean db) throws NumberFormatException, SQLException {
 		RispostaDAO rd = new RispostaDAO();
-		Risposta r = rd.getAnswer(gub.getUsername(), Integer.parseInt(db.getId()));
+		Risposta r = rd.getAnswer(username, Integer.parseInt(db.getId()));
 		if (r == null)
 			return null;
 		return this.convert(r);
 	}
 
-	public void voteAdvanced(AdvancedUserBean aub, GeneralUserBean gub, RispostaBean rb) throws SQLException {
+	public void voteAdvanced(String b, int a, GeneralUserBean gub, RispostaBean rb) throws SQLException {
 		BeginnerUserDAO bud = new BeginnerUserDAO();
-		int a = (int) Double.parseDouble(aub.getVoto());
-		String b = aub.getUsername();
 		bud.voteAdvanced(b, gub.getUsername(), a, rb.getId());
 	}
 }
