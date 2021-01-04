@@ -63,7 +63,7 @@ public class QuestionDetailsServlet extends HttpServlet {
 			aub.setVoto(Integer.parseInt(rating));
 			String username = aub.getUsername();
 			String name = gub.getUsername();
-			String id = r.getId();
+			int id = Integer.parseInt(r.getId());
 			int a = (int) Double.parseDouble(aub.getVoto());
 			try {
 				afc.voteAdvanced(username, name, id, a);
