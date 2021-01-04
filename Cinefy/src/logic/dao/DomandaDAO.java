@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import logic.connection.ConnectionDB;
@@ -19,6 +20,8 @@ public class DomandaDAO {
 
 	public static final String ACCEPT = "accept";
 	public static final String REJECT = "reject";
+	public static final String BEGINNER = "BeginnerName";
+	public static final String ADVANCED = "AdvancedName";
 
 	@SuppressWarnings("resource")
 	public List<Domanda> getQuestions(String username, String role) throws SQLException, ClassNotFoundException {
@@ -52,12 +55,12 @@ public class DomandaDAO {
 			}
 			try (ResultSet rs = s.executeQuery()) {
 				if (!rs.first())
-					return null;
+					return Collections.emptyList();
 				do {
 					int id = rs.getInt("id");
 					String contenuto = rs.getString("contenuto");
-					String beginnerName = rs.getString("BeginnerName");
-					String advancedName = rs.getString("AdvancedName");
+					String beginnerName = rs.getString(BEGINNER);
+					String advancedName = rs.getString(ADVANCED);
 					ld.add(new Domanda(id, contenuto, beginnerName, advancedName));
 				} while (rs.next());
 			}
@@ -77,12 +80,12 @@ public class DomandaDAO {
 			s.setString(2, beginnerName);
 			try (ResultSet rs = s.executeQuery()) {
 				if (!rs.first())
-					return null;
+					return Collections.emptyList();
 				do {
 					int id = rs.getInt("id");
 					String contenuto = rs.getString("Contenuto");
-					String begName = rs.getString("BeginnerName");
-					String adName = rs.getString("AdvancedName");
+					String begName = rs.getString(BEGINNER);
+					String adName = rs.getString(ADVANCED);
 					ld.add(new Domanda(id, contenuto, begName, adName));
 				} while (rs.next());
 			}
@@ -127,8 +130,8 @@ public class DomandaDAO {
 				if (!rs.first())
 					return null;
 				String contenuto = rs.getString("Contenuto");
-				String beginnerName = rs.getString("BeginnerName");
-				String advancedName = rs.getString("AdvancedName");
+				String beginnerName = rs.getString(BEGINNER);
+				String advancedName = rs.getString(ADVANCED);
 				d = new Domanda(id, contenuto, beginnerName, advancedName);
 			}
 		}

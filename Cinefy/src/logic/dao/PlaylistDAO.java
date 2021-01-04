@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logic.connection.ConnectionDB;
-import logic.entities.Film;
 import logic.entities.Playlist;
 import logic.exceptions.PlaylistNotFoundException;
 
@@ -19,6 +18,13 @@ import logic.exceptions.PlaylistNotFoundException;
  */
 
 public class PlaylistDAO {
+
+	public static final String ADVANCED = "AdvancedName";
+	public static final String ID = "idPlaylist";
+	public static final String DATA = "DataPubblicazione";
+	public static final String NUMERO = "numerodivoti";
+	public static final String PIC = "playlistPic";
+	public static final String AD = "Advanced";
 
 	public Playlist addPlaylist(String name, String username, String playlistPic)
 			throws SQLException, ClassNotFoundException {
@@ -31,13 +37,13 @@ public class PlaylistDAO {
 			s.setString(3, playlistPic);
 			try (ResultSet rs = s.executeQuery()) {
 				if (!rs.first())
-					System.out.println("Error");
-				int id = rs.getInt("idPlaylist");
-				String advanced = rs.getString("AdvancedName");
+					return null;
+				int id = rs.getInt(ID);
+				String advanced = rs.getString(ADVANCED);
 				double voto = rs.getDouble("Voto");
-				Date data = rs.getDate("DataPubblicazione");
-				int numerodivoti = rs.getInt("numerodivoti");
-				String playlistPath = rs.getString("playlistPic");
+				Date data = rs.getDate(DATA);
+				int numerodivoti = rs.getInt(NUMERO);
+				String playlistPath = rs.getString(PIC);
 				p = new Playlist(id, advanced, voto, numerodivoti, data, name, playlistPath);
 			}
 		}
@@ -56,12 +62,12 @@ public class PlaylistDAO {
 			try (ResultSet rs = s.executeQuery()) {
 				if (!rs.first())
 					throw new PlaylistNotFoundException("No playlist found with this name");
-				int id = rs.getInt("idPlaylist");
-				String advanced = rs.getString("AdvancedName");
+				int id = rs.getInt(ID);
+				String advanced = rs.getString(ADVANCED);
 				double voto = rs.getDouble("Voto");
-				Date data = rs.getDate("DataPubblicazione");
-				int numerodivoti = rs.getInt("numerodivoti");
-				String playlistPic = rs.getString("playlistPic");
+				Date data = rs.getDate(DATA);
+				int numerodivoti = rs.getInt(NUMERO);
+				String playlistPic = rs.getString(PIC);
 				p = new Playlist(id, advanced, voto, numerodivoti, data, name, playlistPic);
 			}
 		}
@@ -70,7 +76,7 @@ public class PlaylistDAO {
 
 	public List<Playlist> selectPlaylistByUsername(String username)
 			throws SQLException, PlaylistNotFoundException, ClassNotFoundException {
-		return this.queryDatabase(username, "Advanced");
+		return this.queryDatabase(username, AD);
 	}
 
 	@SuppressWarnings("resource")
@@ -80,7 +86,7 @@ public class PlaylistDAO {
 		List<Playlist> pl = new ArrayList<>();
 		PreparedStatement s = null;
 		try {
-			if (type.equals("Advanced")) {
+			if (type.equals(AD)) {
 				conn = ConnectionDB.getInstance();
 				String sql = "call CinefyDB.stampa_playlist_username(?)\r\n";
 				s = conn.prepareStatement(sql);
@@ -107,18 +113,19 @@ public class PlaylistDAO {
 	private List<Playlist> unpackResultSet(ResultSet rs, String type) throws SQLException, PlaylistNotFoundException {
 		List<Playlist> pl = new ArrayList<>();
 		if (!rs.first())
-			if (type.equals("Advanced"))
+			if (type.equals(AD)) {
 				throw new PlaylistNotFoundException("No playlist found with this advanced name");
-			else
+			} else {
 				throw new PlaylistNotFoundException("No playlists in leaderboard");
+			}
 		do {
-			int id = rs.getInt("idPlaylist");
-			String advanced = rs.getString("AdvancedName");
+			int id = rs.getInt(ID);
+			String advanced = rs.getString(ADVANCED);
 			double voto = rs.getDouble("Voto");
-			Date data = rs.getDate("DataPubblicazione");
-			int numerodivoti = rs.getInt("numerodivoti");
+			Date data = rs.getDate(DATA);
+			int numerodivoti = rs.getInt(NUMERO);
 			String name = rs.getString("Nome");
-			String playlistPic = rs.getString("playlistPic");
+			String playlistPic = rs.getString(PIC);
 			Playlist temp = new Playlist(id, advanced, voto, numerodivoti, data, name, playlistPic);
 			pl.add(temp);
 		} while (rs.next());
@@ -136,9 +143,5 @@ public class PlaylistDAO {
 			s.setInt(1, id);
 			s.executeUpdate();
 		}
-	}
-
-	public void addFilms(List<Film> lf) {
-
 	}
 }

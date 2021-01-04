@@ -18,6 +18,8 @@ import logic.exceptions.FilmNotFoundException;
 
 public class FilmDAO {
 
+	public static final String PLAYLIST = "Playlist";
+
 	public Film selectFilmByName(String filmName) throws SQLException, FilmNotFoundException, ClassNotFoundException {
 		Connection conn = null;
 		Film fm = null;
@@ -87,7 +89,7 @@ public class FilmDAO {
 				s = conn.prepareStatement(sql);
 				s.setString(1, string);
 			}
-			if (type.equals("Playlist")) {
+			if (type.equals(PLAYLIST)) {
 				conn = ConnectionDB.getInstance();
 				int a = Integer.parseInt(string);
 				String sql = "call CinefyDB.stampa_film_playlist(?);\r\n";
@@ -110,7 +112,7 @@ public class FilmDAO {
 	private List<Film> unpackResultSet(ResultSet rs, String type) throws SQLException, FilmNotFoundException {
 		List<Film> fml = new ArrayList<>();
 		if (!rs.first()) {
-			if (type.equals("Playlist"))
+			if (type.equals(PLAYLIST))
 				throw new FilmNotFoundException("No film found in this playlist");
 			else
 				throw new FilmNotFoundException("No film found with this " + type);
@@ -154,6 +156,6 @@ public class FilmDAO {
 	}
 
 	public List<Film> selectFilmPlaylist(int id) throws SQLException, FilmNotFoundException, ClassNotFoundException {
-		return this.queryDatabase(Integer.toString(id), "Playlist");
+		return this.queryDatabase(Integer.toString(id), PLAYLIST);
 	}
 }

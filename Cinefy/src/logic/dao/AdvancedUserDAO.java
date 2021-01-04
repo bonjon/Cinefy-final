@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import logic.connection.ConnectionDB;
@@ -18,7 +19,8 @@ import logic.exceptions.AdvancedNotFoundException;
 
 public class AdvancedUserDAO {
 
-	public AdvancedUser selectAdvancedByUsername(String name) throws SQLException, AdvancedNotFoundException, ClassNotFoundException {
+	public AdvancedUser selectAdvancedByUsername(String name)
+			throws SQLException, AdvancedNotFoundException, ClassNotFoundException {
 		Connection conn = null;
 		AdvancedUser au = null;
 		String sql = null;
@@ -41,7 +43,8 @@ public class AdvancedUserDAO {
 		return au;
 	}
 
-	public List<AdvancedUser> selectAdvancedByRole(String role) throws SQLException, AdvancedNotFoundException, ClassNotFoundException {
+	public List<AdvancedUser> selectAdvancedByRole(String role)
+			throws SQLException, AdvancedNotFoundException, ClassNotFoundException {
 		return this.queryDatabase(role, "Role");
 	}
 
@@ -83,7 +86,7 @@ public class AdvancedUserDAO {
 			if (type.equals("Role"))
 				throw new AdvancedNotFoundException("No advanced with this role");
 			else
-				return null;
+				return Collections.emptyList();
 		}
 		do {
 			String name = rs.getString("username");
@@ -117,11 +120,11 @@ public class AdvancedUserDAO {
 	public List<AdvancedUser> leaderBoardAd() throws SQLException, AdvancedNotFoundException, ClassNotFoundException {
 		return this.queryDatabase(null, "Rewards");
 	}
-	
+
 	public boolean addFilmPlaylist(int id, int film) throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		String sql = "call CinefyDB.aggiungi_film_playlist(?,?);\r\n";
-		try (PreparedStatement stm = conn.prepareStatement(sql)){
+		try (PreparedStatement stm = conn.prepareStatement(sql)) {
 			stm.setInt(1, id);
 			stm.setInt(2, film);
 			stm.executeUpdate();
