@@ -60,9 +60,12 @@ public class QuestionDetailsServlet extends HttpServlet {
 			AdvancedUserBean aub = new AdvancedUserBean();
 			aub.setUsername(r.getAdvancedName());
 			aub.setVoto(Integer.parseInt(rating));
+			String username = aub.getUsername();
+			String name = gub.getUsername();
+			String id = r.getId();
 			int a = (int) Double.parseDouble(aub.getVoto());
 			try {
-				afc.voteAdvanced(aub.getUsername(), a, gub.getUsername(), r.getId());
+				afc.voteAdvanced(username, a, name, id);
 				request.setAttribute("error", "Advanced voted!");
 			} catch (SQLException e) {
 				request.setAttribute("error", "You Already vote this advanced");
