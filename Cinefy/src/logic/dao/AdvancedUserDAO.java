@@ -21,10 +21,9 @@ public class AdvancedUserDAO {
 
 	public AdvancedUser selectAdvancedByUsername(String name)
 			throws SQLException, AdvancedNotFoundException, ClassNotFoundException {
-		Connection conn = null;
 		AdvancedUser au = null;
 		String sql = null;
-		conn = ConnectionDB.getInstance();
+		Connection conn = ConnectionDB.getInstance();
 		sql = "call CinefyDB.stampa_advanced_nome(?);\r\n";
 		try (PreparedStatement s = conn.prepareStatement(sql)) {
 			s.setString(1, name);
@@ -48,21 +47,18 @@ public class AdvancedUserDAO {
 		return this.queryDatabase(role, "Role");
 	}
 
-	@SuppressWarnings("resource")
 	private List<AdvancedUser> queryDatabase(String string, String type)
 			throws SQLException, AdvancedNotFoundException, ClassNotFoundException {
-		Connection conn = null;
+		Connection conn = ConnectionDB.getInstance();
 		List<AdvancedUser> aul = new ArrayList<>();
 		PreparedStatement s = null;
 		try {
 			if (type.equals("Role")) {
-				conn = ConnectionDB.getInstance();
 				String sql = "call CinefyDB.stampa_advanced_ruolo(?);\r\n";
 				s = conn.prepareStatement(sql);
 				s.setString(1, string);
 			}
-			if (type.equals("Rewards")) {
-				conn = ConnectionDB.getInstance();
+			else if (type.equals("Rewards")) {
 				String sql = "call CinefyDB.classifica_advanced();\r\n";
 				s = conn.prepareStatement(sql);
 			}
