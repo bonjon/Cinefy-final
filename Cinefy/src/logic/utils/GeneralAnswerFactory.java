@@ -33,7 +33,8 @@ public class GeneralAnswerFactory implements AnswerAutomationFactory{
 			answer = answer +messageColleague;
 		}
 		
-		if (rb.isAResourceSuggested()==true) {
+		boolean resSugg = rb.isAResourceSuggested();
+		if (resSugg==true) {
 			
 			messageResource = "I advise you to look at the following web contents:"+"\n";
 			
