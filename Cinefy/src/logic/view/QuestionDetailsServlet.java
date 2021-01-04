@@ -40,7 +40,7 @@ public class QuestionDetailsServlet extends HttpServlet {
 		DomandaBean db = (DomandaBean) session.getAttribute("QU");
 		RispostaBean r = new RispostaBean();
 		try {
-			r = afc.getAnswer(gub.getUsername(), db);
+			r = afc.getAnswer(gub.getUsername(), db.getId());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
