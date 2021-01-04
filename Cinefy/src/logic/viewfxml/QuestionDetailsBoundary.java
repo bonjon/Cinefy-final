@@ -86,9 +86,9 @@ public class QuestionDetailsBoundary {
 		AdvancedUserBean aub = new AdvancedUserBean();
 		aub.setUsername(this.selectedQuestion.getAdvancedName());
 		aub.setVoto(this.sliderVote.getValue());
-		int a = (int) Double.parseDouble(aub.getVoto());
+		//int a = (int) Double.parseDouble(aub.getVoto());
 		try {
-			this.afc.voteAdvanced(aub.getUsername(), gub.getUsername(), a, this.answer);
+			this.afc.voteAdvanced(aub, gub.getUsername(), this.answer);
 		} catch (SQLException e) {
 			this.labelError.setText(e.getMessage());
 		}
