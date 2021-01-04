@@ -22,7 +22,7 @@ public class RispostaDAO {
 	public static final String REJECT = "reject";
 
 	@SuppressWarnings("resource")
-	public List<Risposta> getAnswers(String username, String role) throws SQLException {
+	public List<Risposta> getAnswers(String username, String role) throws SQLException, ClassNotFoundException {
 		Connection conn = null;
 		String sql = null;
 		PreparedStatement s = null;
@@ -63,7 +63,7 @@ public class RispostaDAO {
 		return lr;
 	}
 
-	public Risposta getAnswer(String beginnerName, int idDomanda) throws SQLException {
+	public Risposta getAnswer(String beginnerName, int idDomanda) throws SQLException, ClassNotFoundException {
 		Risposta r = null;
 		Connection conn = ConnectionDB.getInstance();
 		String sql = "call CinefyDB.stampa_risposta(?,?);\r\n";
@@ -83,7 +83,7 @@ public class RispostaDAO {
 	}
 
 	public boolean addAnswer(String contenuto, String beginnerName, String advancedName, int idDomanda)
-			throws SQLException {
+			throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		String sql = "call aggiungi_nuova_risposta(?,?,?,?);\r\n";
 		try (PreparedStatement s = conn.prepareStatement(sql)) {
@@ -96,7 +96,7 @@ public class RispostaDAO {
 		}
 	}
 
-	public void manageAnswers(int id, String action) throws SQLException {
+	public void manageAnswers(int id, String action) throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		String sql = null;
 		if (action.equals(ACCEPT)) {
@@ -110,14 +110,14 @@ public class RispostaDAO {
 		}
 	}
 
-	public int checkVote(String beginnerName, String idRisposta) throws SQLException {
+	public int checkVote(String beginnerName, String idRisposta) throws SQLException, ClassNotFoundException {
 		int i = 0;
 		Connection conn = ConnectionDB.getInstance();
 		String sql = "call CinefyDB.get_vote_answer(?,?);\r\n";
 		try (PreparedStatement s = conn.prepareStatement(sql)) {
 			s.setString(1, beginnerName);
 			s.setInt(2, Integer.parseInt(idRisposta));
-			try (ResultSet rs = s.executeQuery()){
+			try (ResultSet rs = s.executeQuery()) {
 				if (!rs.first())
 					return 0;
 				i = rs.getInt("Voto");

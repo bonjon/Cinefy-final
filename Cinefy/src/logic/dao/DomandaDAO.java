@@ -21,7 +21,7 @@ public class DomandaDAO {
 	public static final String REJECT = "reject";
 
 	@SuppressWarnings("resource")
-	public List<Domanda> getQuestions(String username, String role) throws SQLException {
+	public List<Domanda> getQuestions(String username, String role) throws SQLException, ClassNotFoundException {
 		Connection conn = null;
 		String sql = null;
 		PreparedStatement s = null;
@@ -67,7 +67,8 @@ public class DomandaDAO {
 		return ld;
 	}
 
-	public List<Domanda> getQuestionsFromABeg(String advancedName, String beginnerName) throws SQLException {
+	public List<Domanda> getQuestionsFromABeg(String advancedName, String beginnerName)
+			throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		List<Domanda> ld = new ArrayList<>();
 		String sql = "call CinefyDB.stampa_domande_ad_beg(?,?);\r\n";
@@ -89,7 +90,8 @@ public class DomandaDAO {
 		return ld;
 	}
 
-	public boolean addQuestion(String contenuto, String beginnerName, String advancedName) throws SQLException {
+	public boolean addQuestion(String contenuto, String beginnerName, String advancedName)
+			throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		String sql = "call aggiungi_nuova_domanda(?,?,?);\r\n";
 		try (PreparedStatement s = conn.prepareStatement(sql)) {
@@ -101,7 +103,7 @@ public class DomandaDAO {
 		}
 	}
 
-	public void manageQuestions(int id, String action) throws SQLException {
+	public void manageQuestions(int id, String action) throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		String sql = null;
 		if (action.equals(ACCEPT)) {
@@ -115,7 +117,7 @@ public class DomandaDAO {
 		}
 	}
 
-	public Domanda getQuestion(int id) throws SQLException {
+	public Domanda getQuestion(int id) throws SQLException, ClassNotFoundException {
 		Domanda d = null;
 		Connection conn = ConnectionDB.getInstance();
 		String sql = "call CinefyDB.stampa_domanda(?);\r\n";

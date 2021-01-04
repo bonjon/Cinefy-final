@@ -18,7 +18,7 @@ import logic.exceptions.AdvancedNotFoundException;
 
 public class AdvancedUserDAO {
 
-	public AdvancedUser selectAdvancedByUsername(String name) throws SQLException, AdvancedNotFoundException {
+	public AdvancedUser selectAdvancedByUsername(String name) throws SQLException, AdvancedNotFoundException, ClassNotFoundException {
 		Connection conn = null;
 		AdvancedUser au = null;
 		String sql = null;
@@ -41,13 +41,13 @@ public class AdvancedUserDAO {
 		return au;
 	}
 
-	public List<AdvancedUser> selectAdvancedByRole(String role) throws SQLException, AdvancedNotFoundException {
+	public List<AdvancedUser> selectAdvancedByRole(String role) throws SQLException, AdvancedNotFoundException, ClassNotFoundException {
 		return this.queryDatabase(role, "Role");
 	}
 
 	@SuppressWarnings("resource")
 	private List<AdvancedUser> queryDatabase(String string, String type)
-			throws SQLException, AdvancedNotFoundException {
+			throws SQLException, AdvancedNotFoundException, ClassNotFoundException {
 		Connection conn = null;
 		List<AdvancedUser> aul = new ArrayList<>();
 		PreparedStatement s = null;
@@ -100,7 +100,7 @@ public class AdvancedUserDAO {
 	}
 
 	public boolean createAdvancedUser(String username, String password, String role, String bio, String profilePic)
-			throws SQLException {
+			throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		String sql = "call CinefyDB.aggiungi_advanced(?,?,?,?,?);\r\n";
 		try (PreparedStatement s = conn.prepareStatement(sql)) {
@@ -114,11 +114,11 @@ public class AdvancedUserDAO {
 		}
 	}
 
-	public List<AdvancedUser> leaderBoardAd() throws SQLException, AdvancedNotFoundException {
+	public List<AdvancedUser> leaderBoardAd() throws SQLException, AdvancedNotFoundException, ClassNotFoundException {
 		return this.queryDatabase(null, "Rewards");
 	}
 	
-	public boolean addFilmPlaylist(int id, int film) throws SQLException {
+	public boolean addFilmPlaylist(int id, int film) throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		String sql = "call CinefyDB.aggiungi_film_playlist(?,?);\r\n";
 		try (PreparedStatement stm = conn.prepareStatement(sql)){

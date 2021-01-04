@@ -18,7 +18,7 @@ import logic.exceptions.FilmNotFoundException;
 
 public class FilmDAO {
 
-	public Film selectFilmByName(String filmName) throws SQLException, FilmNotFoundException {
+	public Film selectFilmByName(String filmName) throws SQLException, FilmNotFoundException, ClassNotFoundException {
 		Connection conn = null;
 		Film fm = null;
 		String sql = null;
@@ -44,12 +44,14 @@ public class FilmDAO {
 	}
 
 	// Query che ritorna un film se si è scelto come filtro Director
-	public List<Film> selectFilmByDirector(String director) throws SQLException, FilmNotFoundException {
+	public List<Film> selectFilmByDirector(String director)
+			throws SQLException, FilmNotFoundException, ClassNotFoundException {
 		return this.queryDatabase(director, "Director");
 	}
 
 	@SuppressWarnings("resource")
-	private List<Film> queryDatabase(String string, String type) throws SQLException, FilmNotFoundException {
+	private List<Film> queryDatabase(String string, String type)
+			throws SQLException, FilmNotFoundException, ClassNotFoundException {
 		Connection conn = null;
 		List<Film> fml = new ArrayList<>();
 		PreparedStatement s = null;
@@ -129,26 +131,29 @@ public class FilmDAO {
 	}
 
 	// Query che ritorna un film se si è scelto come filtro Actor
-	public List<Film> selectFilmByActor(String actor) throws SQLException, FilmNotFoundException {
+	public List<Film> selectFilmByActor(String actor)
+			throws SQLException, FilmNotFoundException, ClassNotFoundException {
 		return this.queryDatabase(actor, "Actor");
 	}
 
 	// Query che ritorna un film se si è scelto come filtro Nation
-	public List<Film> selectFilmByNation(String nation) throws SQLException, FilmNotFoundException {
+	public List<Film> selectFilmByNation(String nation)
+			throws SQLException, FilmNotFoundException, ClassNotFoundException {
 		return this.queryDatabase(nation, "Nation");
 	}
 
 	// Query che ritorna un film se si è scelto come filtro Director
-	public List<Film> selectFilmByYear(String year) throws SQLException, FilmNotFoundException {
+	public List<Film> selectFilmByYear(String year) throws SQLException, FilmNotFoundException, ClassNotFoundException {
 		return this.queryDatabase(year, "Year");
 	}
 
 	// Query che ritorna un film se si è scelto come filtro Director
-	public List<Film> selectFilmByGenre(String genre) throws SQLException, FilmNotFoundException {
+	public List<Film> selectFilmByGenre(String genre)
+			throws SQLException, FilmNotFoundException, ClassNotFoundException {
 		return this.queryDatabase(genre, "Genre");
 	}
 
-	public List<Film> selectFilmPlaylist(int id) throws SQLException, FilmNotFoundException {
+	public List<Film> selectFilmPlaylist(int id) throws SQLException, FilmNotFoundException, ClassNotFoundException {
 		return this.queryDatabase(Integer.toString(id), "Playlist");
 	}
 }

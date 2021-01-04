@@ -34,15 +34,15 @@ public class GeneralUserDAO {
 		}
 		return u;
 	}
-	
-	public BeginnerUser findByName(String username, String role) throws SQLException {
+
+	public BeginnerUser findByName(String username, String role) throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		BeginnerUser bu = null;
 		String sql = "call CinefyDB.get_by_username(?,?);\r\n";
-		try (PreparedStatement stm = conn.prepareStatement(sql)){
+		try (PreparedStatement stm = conn.prepareStatement(sql)) {
 			stm.setString(1, role);
 			stm.setString(2, username);
-			try (ResultSet rs = stm.executeQuery()){
+			try (ResultSet rs = stm.executeQuery()) {
 				if (!rs.first())
 					return null;
 				String bio = rs.getString("bio");
@@ -52,15 +52,15 @@ public class GeneralUserDAO {
 		}
 		return bu;
 	}
-	
-	public AdvancedUser findByName2(String username, String role) throws SQLException {
+
+	public AdvancedUser findByName2(String username, String role) throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		AdvancedUser bu = null;
 		String sql = "call CinefyDB.get_by_username(?,?);\r\n";
-		try (PreparedStatement stm = conn.prepareStatement(sql)){
+		try (PreparedStatement stm = conn.prepareStatement(sql)) {
 			stm.setString(1, role);
 			stm.setString(2, username);
-			try (ResultSet rs = stm.executeQuery()){
+			try (ResultSet rs = stm.executeQuery()) {
 				if (!rs.first())
 					return null;
 				String bio = rs.getString("bio");

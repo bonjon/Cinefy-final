@@ -14,22 +14,23 @@ import logic.connection.ConnectionDB;
 public class BeginnerUserDAO {
 
 	public boolean createBeginnerUser(String username, String password, String bio, String profilePic)
-			throws SQLException {
+			throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
-		
+
 		String sql = "call CinefyDB.aggiungi_beginner(?,?,?,?);\r\n";
 		try (PreparedStatement s = conn.prepareStatement(sql)) {
 			s.setString(1, username);
 			s.setString(2, password);
 			s.setString(3, bio);
 			s.setString(4, profilePic);
-			
+
 			s.executeUpdate();
 			return true;
 		}
 	}
 
-	public void voteAdvanced(String username, String beginnerName, int voto, int idRisposta) throws SQLException {
+	public void voteAdvanced(String username, String beginnerName, int voto, int idRisposta)
+			throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		String sql = "call CinefyDB.vota_advanced(?,?,?,?);\r\n";
 		try (PreparedStatement s = conn.prepareStatement(sql)) {
@@ -41,7 +42,7 @@ public class BeginnerUserDAO {
 		}
 	}
 
-	public void votePlaylist(int voto, int idPlaylist, String beginner) throws SQLException {
+	public void votePlaylist(int voto, int idPlaylist, String beginner) throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		String sql = "call CinefyDB.vota_playlist(?,?,?);\r\n";
 		try (PreparedStatement s = conn.prepareStatement(sql)) {

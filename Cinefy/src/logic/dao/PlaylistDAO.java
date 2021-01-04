@@ -20,7 +20,8 @@ import logic.exceptions.PlaylistNotFoundException;
 
 public class PlaylistDAO {
 
-	public Playlist addPlaylist(String name, String username, String playlistPic) throws SQLException {
+	public Playlist addPlaylist(String name, String username, String playlistPic)
+			throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		Playlist p = null;
 		String sql = "call CinefyDB.aggiungi_playlist(?,?,?);\r\n";
@@ -29,7 +30,7 @@ public class PlaylistDAO {
 			s.setString(2, username);
 			s.setString(3, playlistPic);
 			try (ResultSet rs = s.executeQuery()) {
-				if(!rs.first())
+				if (!rs.first())
 					System.out.println("Error");
 				int id = rs.getInt("idPlaylist");
 				String advanced = rs.getString("AdvancedName");
@@ -43,7 +44,8 @@ public class PlaylistDAO {
 		return p;
 	}
 
-	public Playlist selectPlaylistByName(String name) throws SQLException, PlaylistNotFoundException {
+	public Playlist selectPlaylistByName(String name)
+			throws SQLException, PlaylistNotFoundException, ClassNotFoundException {
 		Connection conn = null;
 		Playlist p = null;
 		String sql = null;
@@ -66,12 +68,14 @@ public class PlaylistDAO {
 		return p;
 	}
 
-	public List<Playlist> selectPlaylistByUsername(String username) throws SQLException, PlaylistNotFoundException {
+	public List<Playlist> selectPlaylistByUsername(String username)
+			throws SQLException, PlaylistNotFoundException, ClassNotFoundException {
 		return this.queryDatabase(username, "Advanced");
 	}
 
 	@SuppressWarnings("resource")
-	private List<Playlist> queryDatabase(String string, String type) throws SQLException, PlaylistNotFoundException {
+	private List<Playlist> queryDatabase(String string, String type)
+			throws SQLException, PlaylistNotFoundException, ClassNotFoundException {
 		Connection conn = null;
 		List<Playlist> pl = new ArrayList<>();
 		PreparedStatement s = null;
@@ -121,11 +125,11 @@ public class PlaylistDAO {
 		return pl;
 	}
 
-	public List<Playlist> leaderBoardPl() throws SQLException, PlaylistNotFoundException {
+	public List<Playlist> leaderBoardPl() throws SQLException, PlaylistNotFoundException, ClassNotFoundException {
 		return this.queryDatabase(null, "Rewards");
 	}
 
-	public void assignToken(int id) throws SQLException, PlaylistNotFoundException {
+	public void assignToken(int id) throws SQLException, PlaylistNotFoundException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		String sql = "call CinefyDB.assegna_token_playlist(?);\r\n";
 		try (PreparedStatement s = conn.prepareStatement(sql)) {
