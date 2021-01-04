@@ -17,14 +17,13 @@ public class GeneralAnswerFactory implements AnswerAutomationFactory {
 	}
 
 	@Override
-	public String answerCreation(RispostaBean lb) {
+	public String answerCreation(RispostaBean rb) {
 		
-		RispostaBean rb = new RispostaBean();
-		rb=lb;
+		
 		
 		answer = header + "\n" + "\n" + rb.getContenuto() + "\n" + "\n";
 
-		if (rb.isAColleagueSuggested() == true) {
+		if (rb.isAColleagueSuggested()) {
 			String reasonChoice = rb.getReasonChoice();
 			String firstLetter = reasonChoice.substring(0, 1);
 			String newReasonChoice = reasonChoice.replaceFirst(firstLetter, firstLetter.toLowerCase());
@@ -35,17 +34,17 @@ public class GeneralAnswerFactory implements AnswerAutomationFactory {
 		}
 
 		
-		if (rb.isAResourceSuggested() ==true) {
+		if (rb.isAResourceSuggested()) {
 
 			messageResource = "I advise you to look at the following web contents:" + "\n";
 
-			if (rb.getWikiLink().isEmpty() == false) {
+			if (!rb.getWikiLink().isEmpty()) {
 
 				String wikiRow = "Wikipedia - " + rb.getWikiLink() + "\n";
 				messageResource = messageResource + wikiRow;
 			}
 
-			if (rb.getYoutubeLink().isEmpty() == false) {
+			if (!rb.getYoutubeLink().isEmpty()) {
 
 				String youtubeRow = "YouTube - " + rb.getYoutubeLink() + "\n" + "\n" + "\n";
 				messageResource = messageResource + youtubeRow;

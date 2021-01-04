@@ -11,7 +11,10 @@ public class FilmAdviceFactory implements AnswerAutomationFactory {
 	String partecipantHeader;
 	String genreHeader;
 
-	String title, genre, partecipant,explanation;
+	String title; 
+	String genre; 
+	String partecipant;
+	String explanation;
 	
 	
 	public FilmAdviceFactory() {
@@ -27,7 +30,10 @@ public class FilmAdviceFactory implements AnswerAutomationFactory {
 	@Override
 	public String answerCreation(RispostaBean rb) {
 		String result="";
-		String row1,row2,row3,row1bis;
+		String row1;
+		String row2;
+		String row3; 
+		String row1bis;
 		
 		partecipantHeader = rb.getProfession()+" to focus on: ";
 		title = rb.getFilm();
