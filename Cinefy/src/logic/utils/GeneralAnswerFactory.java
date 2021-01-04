@@ -17,8 +17,9 @@ public class GeneralAnswerFactory implements AnswerAutomationFactory {
 	}
 
 	@Override
-	public String answerCreation(RispostaBean rb) {
+	public String answerCreation(RispostaBean lb) {
 
+		RispostaBean rb = lb;
 		answer = header + "\n" + "\n" + rb.getContenuto() + "\n" + "\n";
 
 		if (rb.isAColleagueSuggested() == true) {
