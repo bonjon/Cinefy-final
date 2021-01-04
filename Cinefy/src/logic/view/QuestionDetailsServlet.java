@@ -62,12 +62,12 @@ public class QuestionDetailsServlet extends HttpServlet {
 			AskForQuestionsController afc = new AskForQuestionsController();
 			aub.setUsername(r.getAdvancedName());
 			aub.setVoto(Integer.parseInt(rating));
-			String username = aub.getUsername();
+			//String username = aub.getUsername();
 			String name = gub.getUsername();
 			//int id = Integer.parseInt(r.getId());
-			int a = (int) Double.parseDouble(aub.getVoto());
+			//int a = (int) Double.parseDouble(aub.getVoto());
 			try {
-				afc.voteAdvanced(username, name, a, r);
+				afc.voteAdvanced(aub, name, r);
 				request.setAttribute("error", "Advanced voted!");
 			} catch (SQLException e) {
 				request.setAttribute("error", "You Already vote this advanced");
