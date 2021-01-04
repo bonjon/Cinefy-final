@@ -10,16 +10,6 @@ before_install:
   - sudo apt install openjfx
 
 install: true  
-
-addons:
-    apt:
-      packages:
-        ant
-    sonarcloud:
-      organization: bonjon
-      token:
-        secure: d904d8d4da9708ba0d128546e7a3e2625ae41e1b
   
 script: 
 - ant -buildfile Cinefy/build.xml
-- sonar-scanner
