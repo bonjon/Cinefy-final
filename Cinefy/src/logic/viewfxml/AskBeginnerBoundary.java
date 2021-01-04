@@ -427,7 +427,7 @@ public class AskBeginnerBoundary implements Initializable {
 							this.questions.getSelectionModel().getSelectedItem(), color);
 				}
 				if (ldb.contains(this.questions.getSelectionModel().getSelectedItem())) {
-					if (!this.afc.checkAnswer(gub, this.questions.getSelectionModel().getSelectedItem())) {
+					if (!this.afc.checkAnswer(gub.getUsername(), this.questions.getSelectionModel().getSelectedItem().getId())) {
 						color = "g";
 						this.bgc.toQuestionDetails(this.questions.getScene(),
 								this.questions.getSelectionModel().getSelectedItem(), color);
@@ -534,7 +534,7 @@ public class AskBeginnerBoundary implements Initializable {
 						}
 						if (ldb != null && ldb.contains(item)) {
 							try {
-								if (!afc.checkAnswer(gub, item)) {
+								if (!afc.checkAnswer(gub.getUsername(), item.getId())) {
 									String path = FileManager.GREEN;
 									File file = new File(path);
 									Image img = new Image(file.toURI().toString());
