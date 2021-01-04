@@ -8,7 +8,7 @@ public class GeneralAnswerFactory implements AnswerAutomationFactory {
 	String messageColleague;
 	String messageResource;
 	String answer;
-	boolean resSugg;
+	
 
 	public GeneralAnswerFactory() {
 
@@ -34,8 +34,8 @@ public class GeneralAnswerFactory implements AnswerAutomationFactory {
 			answer = answer + messageColleague;
 		}
 
-		resSugg= rb.isAResourceSuggested();
-		if (resSugg ==true) {
+		
+		if (rb.isAResourceSuggested() ==true) {
 
 			messageResource = "I advise you to look at the following web contents:" + "\n";
 
