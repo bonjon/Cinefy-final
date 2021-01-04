@@ -39,8 +39,6 @@ public class QuestionDetailsServlet extends HttpServlet {
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 		DomandaBean db = (DomandaBean) session.getAttribute("QU");
 		RispostaBean r = new RispostaBean();
-		AdvancedUserBean aub = new AdvancedUserBean();
-		aub.setUsername(db.getAdvancedName());
 		try {
 			r = afc.getAnswer(gub, db);
 		} catch (NumberFormatException e) {
@@ -50,15 +48,17 @@ public class QuestionDetailsServlet extends HttpServlet {
 		}
 		session.setAttribute("R", r);
 		if (request.getParameter("BTNOK") != null) {
-			rd = this.voteAdvanced(request, session, afc, aub, gub, r);
+			rd = this.voteAdvanced(request, session, afc, gub, r);
 		}
 		rd.forward(request, response);
 	}
 
 	private RequestDispatcher voteAdvanced(HttpServletRequest request, HttpSession session,
-			AskForQuestionsController afc, AdvancedUserBean aub, GeneralUserBean gub, RispostaBean r) {
+			AskForQuestionsController afc, GeneralUserBean gub, RispostaBean r) {
 		String rating = request.getParameter("rating");
 		if (rating != null) {
+			AdvancedUserBean aub = new AdvancedUserBean();
+			aub.setUsername(r.getAdvancedName());
 			aub.setVoto(Integer.parseInt(rating));
 			try {
 				afc.voteAdvanced(aub, gub, r);
