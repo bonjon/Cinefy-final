@@ -85,9 +85,9 @@ public class AskForQuestionsController extends Controller {
 		return true;
 	}
 
-	public RispostaBean getAnswer(String username, DomandaBean db) throws NumberFormatException, SQLException {
+	public RispostaBean getAnswer(String username, String idDomanda) throws NumberFormatException, SQLException {
 		RispostaDAO rd = new RispostaDAO();
-		Risposta r = rd.getAnswer(username, Integer.parseInt(db.getId()));
+		Risposta r = rd.getAnswer(username, Integer.parseInt(idDomanda));
 		if (r == null)
 			return null;
 		return this.convert(r);
