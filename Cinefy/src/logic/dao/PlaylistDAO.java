@@ -112,12 +112,13 @@ public class PlaylistDAO {
 
 	private List<Playlist> unpackResultSet(ResultSet rs, String type) throws SQLException, PlaylistNotFoundException {
 		List<Playlist> pl = new ArrayList<>();
-		if (!rs.first())
+		if (!rs.first()) {
 			if (type.equals(AD)) {
 				throw new PlaylistNotFoundException("No playlist found with this advanced name");
 			} else {
 				throw new PlaylistNotFoundException("No playlists in leaderboard");
 			}
+		}
 		do {
 			int id = rs.getInt(ID);
 			String advanced = rs.getString(ADVANCED);

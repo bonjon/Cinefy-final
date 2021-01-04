@@ -25,30 +25,23 @@ public class DomandaDAO {
 
 	@SuppressWarnings("resource")
 	public List<Domanda> getQuestions(String username, String role) throws SQLException, ClassNotFoundException {
-		Connection conn = null;
+		Connection conn = ConnectionDB.getInstance();
 		String sql = null;
 		PreparedStatement s = null;
 		List<Domanda> ld = new ArrayList<>();
 		try {
 			if (role.equals("admin")) {
-				conn = ConnectionDB.getInstance();
 				sql = "call CinefyDB.stampa_domande_in_coda();\r\n";
 				s = conn.prepareStatement(sql);
-			}
-			if (role.equals("beginner")) {
-				conn = ConnectionDB.getInstance();
+			} else if (role.equals("beginner")) {
 				sql = "call CinefyDB.stampa_domande(?);\r\n";
 				s = conn.prepareStatement(sql);
 				s.setString(1, username);
-			}
-			if (role.equals("beginner2")) {
-				conn = ConnectionDB.getInstance();
+			} else if (role.equals("beginner2")) {
 				sql = "call CinefyDB.get_pending(?);\r\n";
 				s = conn.prepareStatement(sql);
 				s.setString(1, username);
-			}
-			if (role.equals("advanced")) {
-				conn = ConnectionDB.getInstance();
+			} else if (role.equals("advanced")) {
 				sql = "call CinefyDB.stampa_domande_ad(?);\r\n";
 				s = conn.prepareStatement(sql);
 				s.setString(1, username);

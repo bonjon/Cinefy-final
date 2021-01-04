@@ -54,43 +54,37 @@ public class FilmDAO {
 	@SuppressWarnings("resource")
 	private List<Film> queryDatabase(String string, String type)
 			throws SQLException, FilmNotFoundException, ClassNotFoundException {
-		Connection conn = null;
+		Connection conn = ConnectionDB.getInstance();
 		List<Film> fml = new ArrayList<>();
 		PreparedStatement s = null;
 		try {
 			if (type.equals("Director")) {
-				conn = ConnectionDB.getInstance();
 				String sql = "call CinefyDB.stampa_film_regista(?);\r\n";
 				s = conn.prepareStatement(sql);
 				s.setString(1, string);
 			}
-			if (type.equals("Actor")) {
-				conn = ConnectionDB.getInstance();
+			else if (type.equals("Actor")) {
 				String sql = "call CinefyDB.stampa_film_attore(?);\r\n";
 				s = conn.prepareStatement(sql);
 				s.setString(1, string);
 			}
-			if (type.equals("Nation")) {
-				conn = ConnectionDB.getInstance();
+			else if (type.equals("Nation")) {
 				String sql = "call CinefyDB.stampa_film_nazione(?);\r\n";
 				s = conn.prepareStatement(sql);
 				s.setString(1, string);
 			}
-			if (type.equals("Year")) {
-				conn = ConnectionDB.getInstance();
+			else if (type.equals("Year")) {
 				int a = Integer.parseInt(string);
 				String sql = "call CinefyDB.stampa_film_anno(?);\r\n";
 				s = conn.prepareStatement(sql);
 				s.setInt(1, a);
 			}
-			if (type.equals("Genre")) {
-				conn = ConnectionDB.getInstance();
+			else if (type.equals("Genre")) {
 				String sql = "call CinefyDB.stampa_film_genere(?);\r\n";
 				s = conn.prepareStatement(sql);
 				s.setString(1, string);
 			}
-			if (type.equals(PLAYLIST)) {
-				conn = ConnectionDB.getInstance();
+			else if (type.equals(PLAYLIST)) {
 				int a = Integer.parseInt(string);
 				String sql = "call CinefyDB.stampa_film_playlist(?);\r\n";
 				s = conn.prepareStatement(sql);

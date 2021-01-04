@@ -23,25 +23,23 @@ public class RispostaDAO {
 
 	@SuppressWarnings("resource")
 	public List<Risposta> getAnswers(String username, String role) throws SQLException, ClassNotFoundException {
-		Connection conn = null;
-		String sql = null;
-		PreparedStatement s = null;
 		List<Risposta> lr = new ArrayList<>();
+		PreparedStatement s = null;
 		try {
 			if (role.equals("admin")) {
-				conn = ConnectionDB.getInstance();
-				sql = "call CinefyDB.stampa_risposte_in_coda();\r\n";
+				Connection conn = ConnectionDB.getInstance();
+				String sql = "call CinefyDB.stampa_risposte_in_coda();\r\n";
 				s = conn.prepareStatement(sql);
 			}
-			if (role.equals("advanced")) {
-				conn = ConnectionDB.getInstance();
-				sql = "call CinefyDB.stampa_risposte(?);\r\n";
+			else if (role.equals("advanced")) {
+				Connection conn = ConnectionDB.getInstance();
+				String sql = "call CinefyDB.stampa_risposte(?);\r\n";
 				s = conn.prepareStatement(sql);
 				s.setString(1, username);
 			}
-			if (role.equals("advanced2")) {
-				conn = ConnectionDB.getInstance();
-				sql = "call CinefyDB.get_pending_risp(?);\r\n";
+			else if (role.equals("advanced2")) {
+				Connection conn = ConnectionDB.getInstance();
+				String sql = "call CinefyDB.get_pending_risp(?);\r\n";
 				s = conn.prepareStatement(sql);
 				s.setString(1, username);
 			}
