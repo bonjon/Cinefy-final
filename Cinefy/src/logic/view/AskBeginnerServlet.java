@@ -73,7 +73,7 @@ public class AskBeginnerServlet extends HttpServlet {
 			RispostaBean r = new RispostaBean();
 			session.setAttribute("QU", db);
 			try {
-				r = afc.getAnswer(gub, db);
+				r = afc.getAnswer(gub.getUsername(), db);
 				if (r == null) {
 					request.setAttribute("error", "No answer from this advanced");
 					rd = request.getRequestDispatcher("ask_beginner.jsp");

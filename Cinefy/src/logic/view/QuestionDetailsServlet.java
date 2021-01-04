@@ -40,7 +40,7 @@ public class QuestionDetailsServlet extends HttpServlet {
 		DomandaBean db = (DomandaBean) session.getAttribute("QU");
 		RispostaBean r = new RispostaBean();
 		try {
-			r = afc.getAnswer(gub, db);
+			r = afc.getAnswer(gub.getUsername(), db);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -60,8 +60,9 @@ public class QuestionDetailsServlet extends HttpServlet {
 			AdvancedUserBean aub = new AdvancedUserBean();
 			aub.setUsername(r.getAdvancedName());
 			aub.setVoto(Integer.parseInt(rating));
+			int a = (int) Double.parseDouble(aub.getVoto());
 			try {
-				afc.voteAdvanced(aub, gub, r);
+				afc.voteAdvanced(aub.getUsername(),a, gub, r);
 				request.setAttribute("error", "Advanced voted!");
 			} catch (SQLException e) {
 				request.setAttribute("error", "You Already vote this advanced");
