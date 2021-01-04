@@ -56,22 +56,22 @@ public class QuestionDetailsServlet extends HttpServlet {
 	private RequestDispatcher voteAdvanced(HttpServletRequest request, HttpSession session) {
 		String rating = request.getParameter("rating");
 		if (rating != null) {
-			GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
+			//GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 			RispostaBean r = (RispostaBean) session.getAttribute("R");
 			AdvancedUserBean aub = new AdvancedUserBean();
-			AskForQuestionsController afc = new AskForQuestionsController();
+			//AskForQuestionsController afc = new AskForQuestionsController();
 			aub.setUsername(r.getAdvancedName());
 			aub.setVoto(Integer.parseInt(rating));
-			String username = aub.getUsername();
-			String name = gub.getUsername();
-			int id = Integer.parseInt(r.getId());
-			int a = (int) Double.parseDouble(aub.getVoto());
-			try {
+			//String username = aub.getUsername();
+			//String name = gub.getUsername();
+			//int id = Integer.parseInt(r.getId());
+			//int a = (int) Double.parseDouble(aub.getVoto());
+			/*try {
 				afc.voteAdvanced(a, id, username, name);
 				request.setAttribute("error", "Advanced voted!");
 			} catch (SQLException e) {
 				request.setAttribute("error", "You Already vote this advanced");
-			}
+			}*/
 		}
 		return request.getRequestDispatcher("question_details.jsp");
 	}
