@@ -9,12 +9,9 @@ public class ListConverter {
 	
 	//classe che si occupa di trasformare liste di oggetti in stringhe in formato "elenco"
 	
-	public ListConverter() {
-		
-	}
 	
-	public static String Converter(List<AdvancedUserBean> adv) {
-		List<String> list = new ArrayList<String>();
+	public static String converter(List<AdvancedUserBean> adv) {
+		List<String> list = new ArrayList<>();
 		int i=0;
 		int y=0;
 		String result="";
@@ -34,7 +31,9 @@ public class ListConverter {
 					result=list.get(y);
 				}
 				else {
-					result=result+", "+list.get(y);
+					result=result+", ";
+					String elem = list.get(y);
+					result=result+elem;
 				}
 				y++;
 			}
