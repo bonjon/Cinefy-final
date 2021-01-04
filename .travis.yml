@@ -18,7 +18,7 @@ addons:
     sonarcloud:
       organization: bonjon
       token:
-        secure: 39189a7b64e32c31837101132874618a74f4bce3
+        secure: fcb6b92f4cc60f4bed3b4fa6b2c0139891da33e1
 
 script: 
 - ant -buildfile Cinefy/build.xml
