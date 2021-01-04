@@ -96,6 +96,7 @@ public class AskForQuestionsController extends Controller {
 	public void voteAdvanced(AdvancedUserBean aub, GeneralUserBean gub, RispostaBean rb) throws SQLException {
 		BeginnerUserDAO bud = new BeginnerUserDAO();
 		int a = (int) Double.parseDouble(aub.getVoto());
-		bud.voteAdvanced(aub.getUsername(), gub.getUsername(), a, rb.getId());
+		String b = aub.getUsername();
+		bud.voteAdvanced(b, gub.getUsername(), a, rb.getId());
 	}
 }
