@@ -48,15 +48,16 @@ public class QuestionDetailsServlet extends HttpServlet {
 		}
 		session.setAttribute("R", r);
 		if (request.getParameter("BTNOK") != null) {
-			rd = this.voteAdvanced(request, session, gub, r);
+			rd = this.voteAdvanced(request, session);
 		}
 		rd.forward(request, response);
 	}
 
-	private RequestDispatcher voteAdvanced(HttpServletRequest request, HttpSession session, GeneralUserBean gub,
-			RispostaBean r) {
+	private RequestDispatcher voteAdvanced(HttpServletRequest request, HttpSession session) {
 		String rating = request.getParameter("rating");
 		if (rating != null) {
+			GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
+			RispostaBean r = (RispostaBean) session.getAttribute("R");
 			AdvancedUserBean aub = new AdvancedUserBean();
 			AskForQuestionsController afc = new AskForQuestionsController();
 			aub.setUsername(r.getAdvancedName());
