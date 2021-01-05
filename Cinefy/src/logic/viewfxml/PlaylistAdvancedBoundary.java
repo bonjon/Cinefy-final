@@ -116,7 +116,7 @@ public class PlaylistAdvancedBoundary implements Initializable {
 			List<PlaylistBean> lpb = vpc.getLeaderBoard();
 			list.addAll(lpb);
 			this.topPlaylist.getItems().addAll(lpb);
-			setCellsPlaylist();
+			setCellsPlaylist(1);
 		} catch (PlaylistNotFoundException e) {
 			this.labelError1.setText(e.getMessage());
 		} catch (SQLException | ClassNotFoundException e) {
@@ -127,7 +127,7 @@ public class PlaylistAdvancedBoundary implements Initializable {
 			List<PlaylistBean> lp = vpc.getPlaylistByAd(gub.getUsername());
 			list2.addAll(lp);
 			this.playlistList.getItems().addAll(lp);
-			setCellsPlaylistAd();
+			setCellsPlaylist(2);
 		} catch (PlaylistNotFoundException e) {
 			this.labelError2.setText(e.getMessage());
 		} catch (SQLException | ClassNotFoundException e) {
@@ -135,43 +135,14 @@ public class PlaylistAdvancedBoundary implements Initializable {
 		}
 	}
 
-	private void setCellsPlaylistAd() {
-		this.playlistList.setCellFactory(param -> new ListCell<PlaylistBean>() {
-			@Override
-			protected void updateItem(PlaylistBean item, boolean empty) {
-				super.updateItem(item, empty);
-				if (empty || item == null) {
-					setText(null);
-					setStyle(BACK + COLOR + ";");
-				} else {
-					String path;
-					ImageView iv;
-					VBox vBox;
-					Label name;
-					Label voto;
-					path = FileManager.PLAYLISTS + File.separator + item.getPlaylistPic();
-					iv = new ImageView(new Image(new File(path).toURI().toString()));
-					vBox = new VBox(3);
-					name = new Label(item.getName());
-					voto = new Label(item.getVoto() + "/10.0");
-					name.setFont(Font.font(FONT, 13));
-					voto.setFont(Font.font(FONT, 13));
-					name.setStyle(TEXTFILL + TEXTCOLOR + ";");
-					voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
-					iv.setFitHeight(150);
-					iv.setFitWidth(150);
-					iv.setPreserveRatio(false);
-					vBox.setAlignment(Pos.CENTER);
-					vBox.getChildren().addAll(iv, name, voto);
-					setGraphic(vBox);
-					setStyle(BACK + COLOR + ";");
-				}
-			}
-		});		
-	}
-
-	private void setCellsPlaylist() {
-		this.topPlaylist.setCellFactory(param -> new ListCell<PlaylistBean>() {
+	private void setCellsPlaylist(int i) {
+		ListView<PlaylistBean> playlist;
+		if (i == 1) {
+			playlist = this.topPlaylist;
+		} else {
+			playlist = this.playlistList;
+		}
+		playlist.setCellFactory(param -> new ListCell<PlaylistBean>() {
 			@Override
 			protected void updateItem(PlaylistBean item, boolean empty) {
 				super.updateItem(item, empty);
@@ -202,6 +173,6 @@ public class PlaylistAdvancedBoundary implements Initializable {
 					setStyle(BACK + COLOR + ";");
 				}
 			}
-		});		
+		});
 	}
 }

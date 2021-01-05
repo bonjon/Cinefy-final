@@ -78,11 +78,6 @@ public class PlaylistBeginnerBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onProfileClicked(MouseEvent event) throws IOException {
-		this.bgc.toProfile(this.profile.getScene());
-	}
-
-	@FXML
 	public void onSelectedTopPl(MouseEvent event) throws IOException {
 		if (!this.listTop.isEmpty()) {
 			PlaylistBean topPlayItem = this.topPlaylist.getSelectionModel().getSelectedItem();
@@ -91,9 +86,14 @@ public class PlaylistBeginnerBoundary implements Initializable {
 			}
 		}
 	}
+	
+	@FXML
+	public void onProfileClicked(MouseEvent event) throws IOException {
+		this.bgc.toProfile(this.profile.getScene());
+	}
 
 	@FXML
-	public void onEnterPressed(KeyEvent event) throws SQLException {
+	public void onEnterPressed(KeyEvent event) throws SQLException, ClassNotFoundException {
 		this.playlistList.getItems().clear();
 		this.labelError1.setText("");
 		if (start == 0) {
@@ -109,35 +109,7 @@ public class PlaylistBeginnerBoundary implements Initializable {
 					PlaylistBean pb = vpc.getPlaylist(p);
 					listPlay.add(pb);
 					this.playlistList.getItems().addAll(listPlay);
-					this.playlistList.setCellFactory(param -> new ListCell<PlaylistBean>() {
-						@Override
-						protected void updateItem(PlaylistBean item, boolean empty) {
-							super.updateItem(item, empty);
-							if (empty || item == null) {
-								setText(null);
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-							} else {
-								String path = FileManager.PLAYLISTS + File.separator + item.getPlaylistPic();
-								File file = new File(path);
-								Image img = new Image(file.toURI().toString());
-								ImageView iv = new ImageView(img);
-								VBox vBox = new VBox(3);
-								Label name = new Label(item.getName());
-								Label voto = new Label(item.getVoto() + "/10.0");
-								name.setFont(Font.font("Arial", 13));
-								voto.setFont(Font.font("Arial", 13));
-								name.setStyle("-fx-text-fill: " + "#f5c518" + ";");
-								voto.setStyle("-fx-text-fill: " + "#f5c518" + ";");
-								iv.setFitHeight(150);
-								iv.setFitWidth(150);
-								iv.setPreserveRatio(false);
-								vBox.setAlignment(Pos.CENTER);
-								vBox.getChildren().addAll(iv, name, voto);
-								setGraphic(vBox);
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-							}
-						}
-					});
+					setCellPlaylist(1);
 				} catch (PlaylistNotFoundException e) {
 					labelError1.setText(e.getMessage());
 				}
@@ -148,40 +120,53 @@ public class PlaylistBeginnerBoundary implements Initializable {
 					List<PlaylistBean> pb = vpc.getPlaylistByAd(user);
 					listPlay.addAll(pb);
 					this.playlistList.getItems().addAll(listPlay);
-					this.playlistList.setCellFactory(param -> new ListCell<PlaylistBean>() {
-						@Override
-						protected void updateItem(PlaylistBean item, boolean empty) {
-							super.updateItem(item, empty);
-							if (empty || item == null) {
-								setText(null);
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-							} else {
-								String path = FileManager.PLAYLISTS + File.separator + item.getPlaylistPic();
-								File file = new File(path);
-								Image img = new Image(file.toURI().toString());
-								ImageView iv = new ImageView(img);
-								VBox vBox = new VBox(3);
-								Label name = new Label(item.getName());
-								Label voto = new Label(item.getVoto() + "/10.0");
-								name.setFont(Font.font("Arial", 13));
-								voto.setFont(Font.font("Arial", 13));
-								name.setStyle("-fx-text-fill: " + "#f5c518" + ";");
-								voto.setStyle("-fx-text-fill: " + "#f5c518" + ";");
-								iv.setFitHeight(150);
-								iv.setFitWidth(150);
-								iv.setPreserveRatio(false);
-								vBox.setAlignment(Pos.CENTER);
-								vBox.getChildren().addAll(iv, name, voto);
-								setGraphic(vBox);
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-							}
-						}
-					});
+					setCellPlaylist(1);
 				} catch (PlaylistNotFoundException e) {
 					labelError1.setText(e.getMessage());
 				}
 			}
 		}
+	}
+
+	private void setCellPlaylist(int i) {
+		ListView<PlaylistBean> playlistL;
+		if (i == 1) {
+			playlistL = this.playlistList;
+		} else {
+			playlistL = this.topPlaylist;
+		}
+		playlistL.setCellFactory(param -> new ListCell<PlaylistBean>() {
+			@Override
+			protected void updateItem(PlaylistBean item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null) {
+					setText(null);
+					setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+				} else {
+					String path;
+					ImageView iv;
+					VBox vBox;
+					Label voto;
+					Label name;
+					path = FileManager.PLAYLISTS + File.separator + item.getPlaylistPic();
+					iv = new ImageView(new Image(new File(path).toURI().toString()));
+					vBox = new VBox(3);
+					name = new Label(item.getName());
+					voto = new Label(item.getVoto() + "/10.0");
+					name.setFont(Font.font("Arial", 13));
+					voto.setFont(Font.font("Arial", 13));
+					name.setStyle("-fx-text-fill: " + "#f5c518" + ";");
+					voto.setStyle("-fx-text-fill: " + "#f5c518" + ";");
+					iv.setFitHeight(150);
+					iv.setFitWidth(150);
+					iv.setPreserveRatio(false);
+					vBox.setAlignment(Pos.CENTER);
+					vBox.getChildren().addAll(iv, name, voto);
+					setGraphic(vBox);
+					setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+				}
+			}
+		});		
 	}
 
 	@FXML
@@ -212,39 +197,11 @@ public class PlaylistBeginnerBoundary implements Initializable {
 			List<PlaylistBean> lpb = vpc.getLeaderBoard();
 			listTop.addAll(lpb);
 			this.topPlaylist.getItems().addAll(lpb);
-			this.topPlaylist.setCellFactory(param -> new ListCell<PlaylistBean>() {
-				@Override
-				protected void updateItem(PlaylistBean item, boolean empty) {
-					super.updateItem(item, empty);
-					if (empty || item == null) {
-						setText(null);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-					} else {
-						String path = FileManager.PLAYLISTS + File.separator + item.getPlaylistPic();
-						File file = new File(path);
-						Image img = new Image(file.toURI().toString());
-						ImageView iv = new ImageView(img);
-						VBox vBox = new VBox(3);
-						Label name = new Label(item.getName());
-						Label voto = new Label(item.getVoto() + "/10.0");
-						name.setFont(Font.font("Arial", 13));
-						voto.setFont(Font.font("Arial", 13));
-						name.setStyle("-fx-text-fill: " + "#f5c518" + ";");
-						voto.setStyle("-fx-text-fill: " + "#f5c518" + ";");
-						iv.setFitHeight(150);
-						iv.setFitWidth(150);
-						iv.setPreserveRatio(false);
-						vBox.setAlignment(Pos.CENTER);
-						vBox.getChildren().addAll(iv, name, voto);
-						setGraphic(vBox);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-					}
-				}
-			});
+			setCellPlaylist(2);
 		} catch (PlaylistNotFoundException e) {
 			this.labelError3.setText(e.getMessage());
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-		}
+		} 
 	}
 }
