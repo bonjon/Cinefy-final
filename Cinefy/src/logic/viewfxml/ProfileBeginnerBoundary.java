@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 
@@ -72,8 +74,9 @@ public class ProfileBeginnerBoundary implements Initializable {
 	private AnchorPane anchorPaneAdv;
 
 	private BeginnerGraphicChange bgc;
-	private BeginnerUserBean bub;
-	private ProfileController pc;
+	
+	
+	private static final Logger logger = Logger.getLogger(ProfileBeginnerBoundary.class.getName());
 
 	@FXML
 	public void onHomeClicked(MouseEvent event) throws IOException {
@@ -98,13 +101,20 @@ public class ProfileBeginnerBoundary implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		BeginnerUserBean bub;
+		ProfileController pc;
+		
 		Integer questionsNum=0;
 		int advCounter=0;
 		
+		try {
+		
 		this.bgc = BeginnerGraphicChange.getInstance();
-		this.pc = new ProfileController();
+		pc = new ProfileController();
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
-		this.bub = pc.getUser(gub.getUsername(), gub.getRole());
+		
+			bub = pc.getUser(gub.getUsername(), gub.getRole());
+		
 		this.username.setText(bub.getUsername());
 		if (bub.getProfilePic() == null) {
 			String path = FileManager.PROFILE + File.separator + FileManager.generateNewFileName("default.png",gub.getUsername());
@@ -127,11 +137,10 @@ public class ProfileBeginnerBoundary implements Initializable {
 			this.bio.setText(begBio);
 		}
 		
-		try {
-				questionsNum=pc.getQuestions(gub.getUsername(), "beginner").size();
-		} catch (SQLException e) {
-				
-		}
+		
+		questionsNum=pc.getQuestions(gub.getUsername(), "beginner").size();
+		
+		
 		laQuestionsNum.setText(questionsNum.toString());
 		if(questionsNum==0) {			//se il num di domande accettate è zero, le label della colonna centrale scompaiono
 			laAdvNumTitle.setVisible(false);
@@ -141,8 +150,10 @@ public class ProfileBeginnerBoundary implements Initializable {
 			anchorPaneAdv.setVisible(false);
 		}
 		else {
-			List<AdvancedUserBean> advList = new ArrayList<AdvancedUserBean>();
+			List<AdvancedUserBean> advList = new ArrayList<>();
+			
 			advList = pc.differentAdv(gub.getUsername());
+			
 			advCounter=advList.size();				//numero di adv differenti contattati
 			laAdvNum.setText(String.valueOf(advCounter));
 			if(advList.isEmpty()) {					//lista di adv differenti contattati
@@ -156,6 +167,10 @@ public class ProfileBeginnerBoundary implements Initializable {
 				laAdvList.setText(elenco);
 			}
 		
+		}
+		} catch (SQLException | ClassNotFoundException e) {
+			logger.log(Level.WARNING, "db error or class not found exception detected");
+			e.printStackTrace();
 		}
 		
 	}
