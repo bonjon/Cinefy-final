@@ -46,16 +46,12 @@ public class ProfileController extends Controller {
 		return this.convertQuestionList(ld);
 	}
 
-	public List<AdvancedUserBean> differentAdv(String beginner) throws ClassNotFoundException {
+	public List<AdvancedUserBean> differentAdv(String beginner) throws ClassNotFoundException, SQLException {
 
 		List<DomandaBean> ld = Collections.emptyList();
 		int i = 0;
 
-		try {
-			ld = getQuestions(beginner, "beginner");
-		} catch (SQLException e) {
-
-		}
+		ld = getQuestions(beginner, "beginner");
 
 		List<AdvancedUserBean> contactedAdv = new ArrayList<AdvancedUserBean>();
 		List<AdvancedUserBean> differentAdv = new ArrayList<AdvancedUserBean>();
@@ -70,7 +66,8 @@ public class ProfileController extends Controller {
 
 		}
 
-		int y, z;
+		int y;
+		int z;
 		boolean control = true; // booleano: al primo tra i differentAdv che trovo uguale al contactedAdv che
 								// sto considerando, lo setto true
 
@@ -90,7 +87,7 @@ public class ProfileController extends Controller {
 						break;
 					}
 				}
-				if (control == true) {
+				if (control) {
 					differentAdv.add(contactedAdv.get(y));
 
 				}
