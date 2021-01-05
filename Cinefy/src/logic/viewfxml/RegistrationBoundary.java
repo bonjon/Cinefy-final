@@ -298,6 +298,7 @@ public class RegistrationBoundary implements Initializable {
 		
 	}
 
+	@FXML
 	public void onBeginnerPressed(ActionEvent event) {
 
 		splitMenu.setText("Beginner");
@@ -310,6 +311,7 @@ public class RegistrationBoundary implements Initializable {
 
 	}
 
+	@FXML
 	public void onAdvancedPressed(ActionEvent event) {
 
 		splitMenu.setText("Advanced");
@@ -319,6 +321,7 @@ public class RegistrationBoundary implements Initializable {
 
 	}
 	
+	@FXML
 	public void onProfButtonPressed(ActionEvent event) {
 		
 			MenuItem pressedButton = (MenuItem)event.getSource();
@@ -328,6 +331,7 @@ public class RegistrationBoundary implements Initializable {
 						
 	}
 	
+	@FXML
 	public void keyPressed(KeyEvent event) {
 			if(event.getSource().equals(tfUser)) {
 				userError.setText("");
