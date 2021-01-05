@@ -37,7 +37,7 @@ public class AskForQuestionsController extends Controller {
 	public List<AdvancedUserBean> leaderBoard() throws SQLException, AdvancedNotFoundException, ClassNotFoundException {
 		AdvancedUserDAO aud = new AdvancedUserDAO();
 		List<AdvancedUser> lau = aud.leaderBoardAd();
-		if (lau == null)
+		if (lau.isEmpty())
 			return Collections.emptyList();
 		return this.convertAdvancedList(lau);
 	}
@@ -51,7 +51,7 @@ public class AskForQuestionsController extends Controller {
 	public List<DomandaBean> getQuestions(GeneralUserBean gub, String role) throws SQLException, ClassNotFoundException {
 		DomandaDAO dd = new DomandaDAO();
 		List<Domanda> ld = dd.getQuestions(gub.getUsername(), role);
-		if (ld == null)
+		if (ld.isEmpty())
 			return Collections.emptyList();
 		return this.convertQuestionList(ld);
 	}
