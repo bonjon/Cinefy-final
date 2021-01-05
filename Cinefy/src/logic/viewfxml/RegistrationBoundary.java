@@ -38,6 +38,7 @@ import logic.bean.BeginnerUserBean;
 import logic.controllers.RegistrationController;
 import logic.exceptions.FieldEmptyException;
 import logic.exceptions.FieldTooLongException;
+import logic.utils.ExceptionInfo;
 import logic.utils.FileManager;
 import logic.utils.Roles;
 
@@ -172,7 +173,7 @@ public class RegistrationBoundary implements Initializable {
 		}
 
 	
-	public void onSignUpPressed(ActionEvent event)  throws IOException, SQLException{
+	public void onSignUpPressed(ActionEvent event)  throws IOException, SQLException, ClassNotFoundException{
 
 
 		RegistrationController controller = new RegistrationController();
@@ -263,36 +264,36 @@ public class RegistrationBoundary implements Initializable {
 		
 		catch (FieldEmptyException | FieldTooLongException e) {
 			
-			if (FieldEmptyException.EMPTYUSERNAME==true) {
+			if (ExceptionInfo.EMPTYUSERNAME==true) {
 				this.userError.setText(e.getMessage());
-				FieldEmptyException.EMPTYUSERNAME=false;
+				ExceptionInfo.EMPTYUSERNAME=false;
 			}
-			if (FieldEmptyException.EMPTYPASSWORD==true) {
+			if (ExceptionInfo.EMPTYPASSWORD==true) {
 				this.passwordError.setText(e.getMessage());
-				FieldEmptyException.EMPTYPASSWORD=false;
+				ExceptionInfo.EMPTYPASSWORD=false;
 			}
-			if (FieldEmptyException.EMPTYROLE==true) {
+			if (ExceptionInfo.EMPTYROLE==true) {
 				this.userTypeError.setText(e.getMessage());
-				FieldEmptyException.EMPTYROLE=false;
+				ExceptionInfo.EMPTYROLE=false;
 			}
-			if (FieldEmptyException.EMPTYPROFESSION==true) {
+			if (ExceptionInfo.EMPTYPROFESSION==true) {
 				this.professionError.setText(e.getMessage());
-				FieldEmptyException.EMPTYPROFESSION=false;
+				ExceptionInfo.EMPTYPROFESSION=false;
 			}
-			if (FieldTooLongException.USERTOOLONG==true) {
+			if (ExceptionInfo.USERTOOLONG==true) {
 				this.userError.setText(e.getMessage());
 				this.userTooLongError.setVisible(true);
-				FieldTooLongException.USERTOOLONG=false;
+				ExceptionInfo.USERTOOLONG=false;
 			}
-			if(FieldTooLongException.PASSTOOLONG==true) {
+			if(ExceptionInfo.PASSTOOLONG==true) {
 				this.passwordError.setText(e.getMessage());
 				this.passwordTooLongError.setVisible(true);
-				FieldTooLongException.PASSTOOLONG=false;
+				ExceptionInfo.PASSTOOLONG=false;
 			}
-			if(FieldTooLongException.BIOTOOLONG==true) {
+			if(ExceptionInfo.BIOTOOLONG==true) {
 				this.bioError.setText(e.getMessage());
 				this.bioTooLongError.setVisible(true);
-				FieldTooLongException.BIOTOOLONG=false;
+				ExceptionInfo.BIOTOOLONG=false;
 			}
 		}
 			
