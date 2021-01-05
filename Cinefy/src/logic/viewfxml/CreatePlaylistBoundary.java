@@ -56,11 +56,11 @@ public class CreatePlaylistBoundary implements Initializable {
 	@FXML
 	private Label home;
 	@FXML
-	private Label answer;
-	@FXML
 	private Label playlists;
 	@FXML
 	private Label profile;
+	@FXML
+	private Label answer;
 	@FXML
 	private Label labelError;
 	@FXML
@@ -99,23 +99,23 @@ public class CreatePlaylistBoundary implements Initializable {
 	private static final Logger logger = Logger.getLogger(CreatePlaylistBoundary.class.getName());
 
 	@FXML
+	public void onPlaylistsClicked(MouseEvent event) throws IOException {
+		this.agc.toPlaylists(this.playlists.getScene());
+	}
+	
+	@FXML
 	public void onHomeClicked(MouseEvent event) throws IOException {
 		this.agc.toHomepage(this.home.getScene());
 	}
 
 	@FXML
-	public void onAnswerClicked(MouseEvent event) throws IOException {
-		this.agc.toAnswer(this.answer.getScene());
-	}
-
-	@FXML
-	public void onPlaylistsClicked(MouseEvent event) throws IOException {
-		this.agc.toPlaylists(this.playlists.getScene());
-	}
-
-	@FXML
 	public void onProfileClicked(MouseEvent event) throws IOException {
 		this.agc.toProfile(this.profile.getScene());
+	}
+	
+	@FXML
+	public void onAnswerClicked(MouseEvent event) throws IOException {
+		this.agc.toAnswer(this.answer.getScene());
 	}
 
 	@FXML
@@ -203,12 +203,11 @@ public class CreatePlaylistBoundary implements Initializable {
 					@Override
 					protected void updateItem(FilmBean item, boolean empty) {
 						super.updateItem(item, empty);
+						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 						if (empty || item == null || item.getTitolo() == null) {
 							setText(null);
-							setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 						} else {
 							setText(item.getTitolo());
-							setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 						}
 					}
 				});

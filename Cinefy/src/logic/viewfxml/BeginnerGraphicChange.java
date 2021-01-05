@@ -17,17 +17,17 @@ import logic.utils.Roles;
 
 public class BeginnerGraphicChange extends GraphicChangeTemplate {
 
-	private static BeginnerGraphicChange INSTANCE = null;
+	private static BeginnerGraphicChange instance = null;
 
 	private BeginnerGraphicChange() {
 		whoAmI = Roles.BEGINNERUSER;
 	}
 
 	public static BeginnerGraphicChange getInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new BeginnerGraphicChange();
+		if (instance == null) {
+			instance = new BeginnerGraphicChange();
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 	@Override

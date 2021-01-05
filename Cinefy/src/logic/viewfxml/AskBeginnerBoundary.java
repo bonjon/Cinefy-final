@@ -344,13 +344,13 @@ public class AskBeginnerBoundary implements Initializable {
 					HBox hBox;
 					if (lb.contains(item)) {
 						path = FileManager.YELLOW;
-						hBox = new HBox(2);
 						iv = new ImageView(new Image(new File(path).toURI().toString()));
-						label = new Label(item.getContenuto());
-						label.setFont(Font.font(FONT, 15));
+						iv.setPreserveRatio(false);
 						iv.setFitHeight(50);
 						iv.setFitWidth(50);
-						iv.setPreserveRatio(false);
+						label = new Label(item.getContenuto());
+						label.setFont(Font.font(FONT, 15));
+						hBox = new HBox(2);
 						hBox.getChildren().addAll(iv, label);
 						hBox.setAlignment(Pos.CENTER_LEFT);
 						setGraphic(hBox);
