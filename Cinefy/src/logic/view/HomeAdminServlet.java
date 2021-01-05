@@ -41,16 +41,16 @@ public class HomeAdminServlet extends HttpServlet {
 			questionsList = afc.getQuestions(gub, gub.getRole());
 			if (questionsList == null)
 				request.setAttribute("error", "No questions");
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		if(request.getParameter("d") != null)
-			rd = this.manage(request, session, afc);
+			rd = this.manage(request, session);
 		session.setAttribute("questionsList", questionsList);
 		rd.forward(request, response);
 	}
 
-	private RequestDispatcher manage(HttpServletRequest request, HttpSession session, AskForQuestionsController afc) {
+	private RequestDispatcher manage(HttpServletRequest request, HttpSession session) {
 		int index = Integer.parseInt(request.getParameter("index2"));
 		@SuppressWarnings("unchecked")
 		List<DomandaBean> list = (List<DomandaBean>) session.getAttribute("questionsList");

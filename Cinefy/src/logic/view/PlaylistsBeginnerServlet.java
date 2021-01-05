@@ -27,6 +27,7 @@ import logic.exceptions.PlaylistNotFoundException;
 public class PlaylistsBeginnerServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	public static final String TOPLP = "topLP";
 
 	public PlaylistsBeginnerServlet() {
 		super();
@@ -40,24 +41,23 @@ public class PlaylistsBeginnerServlet extends HttpServlet {
 		List<PlaylistBean> topLP = new ArrayList<>();
 		try {
 			topLP = vpc.getLeaderBoard();
-			request.setAttribute("topLP", topLP);
+			request.setAttribute(TOPLP, topLP);
 		} catch (PlaylistNotFoundException e) {
-			request.setAttribute("topLP", Collections.EMPTY_LIST);
+			request.setAttribute(TOPLP, Collections.emptyList());
 			request.setAttribute("errorx", e.getMessage());
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		session.setAttribute("topLP", topLP);
+		session.setAttribute(TOPLP, topLP);
 		if (request.getParameter("a") != null)
-			rd = this.goToPlaylist(session, request, vpc);
+			rd = this.goToPlaylist(session, request);
 		rd.forward(request, response);
 	}
 
-	private RequestDispatcher goToPlaylist(HttpSession session, HttpServletRequest request,
-			ViewPlaylistsController vpc) {
+	private RequestDispatcher goToPlaylist(HttpSession session, HttpServletRequest request) {
 		int index = Integer.parseInt(request.getParameter("index"));
 		@SuppressWarnings("unchecked")
-		List<PlaylistBean> topLP = (List<PlaylistBean>) session.getAttribute("topLP");
+		List<PlaylistBean> topLP = (List<PlaylistBean>) session.getAttribute(TOPLP);
 		PlaylistBean pb = topLP.get(index);
 		session.setAttribute("P", pb);
 		return request.getRequestDispatcher("playlist.jsp");

@@ -2,7 +2,6 @@ package logic.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -26,6 +25,9 @@ public class HomeBeginnerServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final String SEARCHSTRING = "searchString";
+	public static final String USERPROF = "userProf";
+	public static final String FILMLIST = "filmList";
+	public static final String FILTER = "film_filter.jsp";
 
 	public HomeBeginnerServlet() {
 		super();
@@ -36,56 +38,54 @@ public class HomeBeginnerServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		RequestDispatcher rd = null;
 		ViewListOfFilmsController vfc = new ViewListOfFilmsController();
-		FilmBean listFilms = new FilmBean();
-		List<FilmBean> filmList = new ArrayList<>();
 		String searchString = request.getParameter(SEARCHSTRING);
-		String userProf = request.getParameter("userProf");
+		String userProf = request.getParameter(USERPROF);
 		if (searchString == null) {
 			searchString = (String) request.getAttribute(SEARCHSTRING);
 		}
 		request.setAttribute(SEARCHSTRING, searchString);
 		try {
 			if (userProf.equals("Name")) {
-				listFilms = vfc.getFilm(searchString);
+				FilmBean listFilms = vfc.getFilm(searchString);
 				session.setAttribute(SEARCHSTRING, searchString);
-				session.setAttribute("userProf", userProf);
+				session.setAttribute(USERPROF, userProf);
 				session.setAttribute("listFilms", listFilms);
 				rd = request.getRequestDispatcher("film_result.jsp");
-			} else if(userProf.equals("Actor")) {
-				filmList = vfc.getFilmByActor(searchString);
+			} else if (userProf.equals("Actor")) {
+				List<FilmBean> filmList = vfc.getFilmByActor(searchString);
 				session.setAttribute(SEARCHSTRING, searchString);
-				session.setAttribute("userProf", userProf);
-				session.setAttribute("filmList", filmList);
-				rd = request.getRequestDispatcher("film_filter.jsp");
-			} else if(userProf.equals("Director")) {
-				filmList = vfc.getFilmByDirector(searchString);
+				session.setAttribute(USERPROF, userProf);
+				session.setAttribute(FILMLIST, filmList);
+				rd = request.getRequestDispatcher(FILTER);
+			} else if (userProf.equals("Director")) {
+				List<FilmBean> filmList = vfc.getFilmByDirector(searchString);
 				session.setAttribute(SEARCHSTRING, searchString);
-				session.setAttribute("userProf", userProf);
-				session.setAttribute("filmList", filmList);
-				rd = request.getRequestDispatcher("film_filter.jsp");
-			} else if(userProf.equals("Year")) {
-				filmList = vfc.getFilmByYear(searchString);
+				session.setAttribute(USERPROF, userProf);
+				session.setAttribute(FILMLIST, filmList);
+				rd = request.getRequestDispatcher(FILTER);
+			} else if (userProf.equals("Year")) {
+				List<FilmBean> filmList = vfc.getFilmByYear(searchString);
 				session.setAttribute(SEARCHSTRING, searchString);
-				session.setAttribute("userProf", userProf);
-				session.setAttribute("filmList", filmList);
-				rd = request.getRequestDispatcher("film_filter.jsp");
-			} else if(userProf.equals("Genre")) {
-				filmList = vfc.getFilmByGenre(searchString);
+				session.setAttribute(USERPROF, userProf);
+				session.setAttribute(FILMLIST, filmList);
+				rd = request.getRequestDispatcher(FILTER);
+			} else if (userProf.equals("Genre")) {
+				List<FilmBean> filmList = vfc.getFilmByGenre(searchString);
 				session.setAttribute(SEARCHSTRING, searchString);
-				session.setAttribute("userProf", userProf);
-				session.setAttribute("filmList", filmList);
-				rd = request.getRequestDispatcher("film_filter.jsp");
-			} else if(userProf.equals("Nation")) {
-				filmList = vfc.getFilmByNation(searchString);
+				session.setAttribute(USERPROF, userProf);
+				session.setAttribute(FILMLIST, filmList);
+				rd = request.getRequestDispatcher(FILTER);
+			} else if (userProf.equals("Nation")) {
+				List<FilmBean> filmList = vfc.getFilmByNation(searchString);
 				session.setAttribute(SEARCHSTRING, searchString);
-				session.setAttribute("userProf", userProf);
-				session.setAttribute("filmList", filmList);
-				rd = request.getRequestDispatcher("film_filter.jsp");
+				session.setAttribute(USERPROF, userProf);
+				session.setAttribute(FILMLIST, filmList);
+				rd = request.getRequestDispatcher(FILTER);
 			}
 		} catch (FilmNotFoundException e) {
 			request.setAttribute("search", e.getMessage());
 			rd = request.getRequestDispatcher("home_beginner.jsp");
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		rd.forward(request, response);

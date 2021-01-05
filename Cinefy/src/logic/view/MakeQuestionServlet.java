@@ -24,7 +24,9 @@ import logic.exceptions.FieldTooLongException;
 
 @WebServlet("/MakeQuestionServlet")
 public class MakeQuestionServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
+	public static final String QUESTION = "question.jsp";
 
 	public MakeQuestionServlet() {
 		super();
@@ -33,7 +35,7 @@ public class MakeQuestionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		RequestDispatcher rd = request.getRequestDispatcher("question.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher(QUESTION);
 		AskForQuestionsController afc = new AskForQuestionsController();
 		if (request.getParameter("make") != null)
 			rd = this.makeQuestion(request, session, afc);
@@ -51,14 +53,11 @@ public class MakeQuestionServlet extends HttpServlet {
 		db.setBeginnerName(gub.getUsername());
 		try {
 			afc.makeQuestion(db);
-		} catch (FieldTooLongException e) {
+		} catch (FieldTooLongException | FieldEmptyException e) {
 			request.setAttribute("error", e.getMessage());
-			return request.getRequestDispatcher("question.jsp");
-		} catch (SQLException e) {
+			return request.getRequestDispatcher(QUESTION);
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-		} catch (FieldEmptyException e) {
-			request.setAttribute("error", e.getMessage());
-			return request.getRequestDispatcher("question.jsp");
 		}
 		return request.getRequestDispatcher("AskBeginnerServlet");
 	}

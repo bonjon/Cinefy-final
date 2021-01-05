@@ -28,6 +28,7 @@ import logic.exceptions.PlaylistNotFoundException;
 public class PlaylistsAdvancedServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	public static final String TOPLP = "topLP";
 
 	public PlaylistsAdvancedServlet() {
 		super();
@@ -39,37 +40,36 @@ public class PlaylistsAdvancedServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("playlist_advanced.jsp");
 		ViewPlaylistsController vpc = new ViewPlaylistsController();
 		List<PlaylistBean> topLP = new ArrayList<>();
-		List<PlaylistBean> LP = new ArrayList<>();
+		List<PlaylistBean> Lp = new ArrayList<>();
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 		try {
 			topLP = vpc.getLeaderBoard();
-			request.setAttribute("topLP", topLP);
+			request.setAttribute(TOPLP, topLP);
 		} catch (PlaylistNotFoundException e) {
-			request.setAttribute("topLP", Collections.EMPTY_LIST);
+			request.setAttribute(TOPLP, Collections.emptyList());
 			request.setAttribute("errorx", e.getMessage());
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		session.setAttribute("topLP", topLP);
+		session.setAttribute(TOPLP, topLP);
 		try {
-			LP = vpc.getPlaylistByAd(gub.getUsername());
-			request.setAttribute("LP", LP);
-		} catch (SQLException e) {
+			Lp = vpc.getPlaylistByAd(gub.getUsername());
+			request.setAttribute("LP", Lp);
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (PlaylistNotFoundException e) {
-			request.setAttribute("LP", Collections.EMPTY_LIST);
+			request.setAttribute("LP", Collections.emptyList());
 			request.setAttribute("errorx", e.getMessage());
 		}
-		session.setAttribute("LP", LP);
+		session.setAttribute("LP", Lp);
 		if (request.getParameter("a") != null)
-			rd = this.goToPlaylist(session, request, vpc, topLP);
+			rd = this.goToPlaylist(session, request, topLP);
 		if (request.getParameter("b") != null)
-			rd = this.goToPlaylist(session, request, vpc, LP);
+			rd = this.goToPlaylist(session, request, Lp);
 		rd.forward(request, response);
 	}
 
-	private RequestDispatcher goToPlaylist(HttpSession session, HttpServletRequest request,
-			ViewPlaylistsController vpc, List<PlaylistBean> topLP) {
+	private RequestDispatcher goToPlaylist(HttpSession session, HttpServletRequest request, List<PlaylistBean> topLP) {
 		int index = Integer.parseInt(request.getParameter("index"));
 		PlaylistBean pb = topLP.get(index);
 		session.setAttribute("P", pb);

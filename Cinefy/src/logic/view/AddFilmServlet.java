@@ -19,44 +19,54 @@ import logic.exceptions.FieldEmptyException;
 import logic.exceptions.FilmNotFoundException;
 
 /**
- * Servlet implementation class AddFilmServlet per aggiungere i film in playlist.
+ * Servlet implementation class AddFilmServlet per aggiungere i film in
+ * playlist.
  */
 
 @WebServlet("/AddFilmServlet")
 public class AddFilmServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
-    
+	public static final String ADDFILM = "add_film.jsp";
+	public static final String ERROR = "";
+
 	public AddFilmServlet() {
-        super();
-    }
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		super();
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		RequestDispatcher rd = request.getRequestDispatcher("add_film.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher(ADDFILM);
 		CreatePlaylistController cpc = new CreatePlaylistController();
 		ViewListOfFilmsController vfc = new ViewListOfFilmsController();
 		PlaylistBean pb = (PlaylistBean) session.getAttribute("pb");
-		FilmBean F = new FilmBean();
+		FilmBean Fb = new FilmBean();
 		String film = (String) request.getParameter("film");
 		try {
-			F = vfc.getFilm(film);
-			try {
-				cpc.addFilm(Integer.parseInt(pb.getId()), F);
-				request.setAttribute("error", "Film added in Playlist!");
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			} catch (FieldEmptyException e) {
-				request.setAttribute("error", e.getMessage());
-				rd = request.getRequestDispatcher("add_film.jsp");
-			}
-			rd = request.getRequestDispatcher("add_film.jsp");
+			Fb = vfc.getFilm(film);
+			addFilm(cpc, pb, Fb, request, rd);
+			rd = request.getRequestDispatcher(ADDFILM);
 		} catch (FilmNotFoundException e) {
-			request.setAttribute("error", e.getMessage());
-			rd = request.getRequestDispatcher("add_film.jsp");
+			request.setAttribute(ERROR, e.getMessage());
+			rd = request.getRequestDispatcher(ADDFILM);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
 		}
 		rd.forward(request, response);
+	}
+
+	private void addFilm(CreatePlaylistController cpc, PlaylistBean pb, FilmBean fb, HttpServletRequest request,
+			RequestDispatcher rd) {
+		try {
+			cpc.addFilm(Integer.parseInt(pb.getId()), fb);
+			request.setAttribute(ERROR, "Film added in Playlist!");
+		} catch (NumberFormatException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} catch (FieldEmptyException e) {
+			request.setAttribute(ERROR, e.getMessage());
+		} 
 	}
 }

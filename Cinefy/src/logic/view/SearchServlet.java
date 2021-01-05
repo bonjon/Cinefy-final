@@ -21,33 +21,34 @@ import logic.exceptions.AdvancedNotFoundException;
 
 @WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
-       
-    public SearchServlet() {
-        super();
-    }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private static final long serialVersionUID = 1L;
+	public static final String SEARCHSTRING = "searchString";
+
+	public SearchServlet() {
+		super();
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		RequestDispatcher rd = request.getRequestDispatcher("ask-beginner.jsp");
+		RequestDispatcher rd = null;
 		AskForQuestionsController afc = new AskForQuestionsController();
-		AdvancedUserBean aub = (AdvancedUserBean) session.getAttribute("AdS");
-		String searchString = (String) request.getParameter("searchString");
-		if(searchString == null) {
-			searchString = (String) request.getAttribute("searchString");
+		String searchString = (String) request.getParameter(SEARCHSTRING);
+		if (searchString == null) {
+			searchString = (String) request.getAttribute(SEARCHSTRING);
 		}
-		request.setAttribute("searchString", searchString);
+		request.setAttribute(SEARCHSTRING, searchString);
 		AdvancedUserBean au = new AdvancedUserBean();
 		au.setUsername(searchString);
 		try {
-			aub = afc.getAdvanced(au);
+			AdvancedUserBean aub = afc.getAdvanced(au);
 			session.setAttribute("AdS", aub);
 			rd = request.getRequestDispatcher("question.jsp");
 		} catch (AdvancedNotFoundException e) {
 			request.setAttribute("error", e.getMessage());
 			rd = request.getRequestDispatcher("AskBeginnerServlet");
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		rd.forward(request, response);

@@ -15,38 +15,40 @@ import logic.bean.PlaylistBean;
 import logic.controllers.PlaylistDetailsController;
 
 /**
- * Servlet implementation class PlaylistDetailsServlet della view PlaylistDetails.
+ * Servlet implementation class PlaylistDetailsServlet della view
+ * PlaylistDetails.
  */
 
 @WebServlet("/PlaylistDetailsServlet")
 public class PlaylistDetailsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-       
-    public PlaylistDetailsServlet() {
-        super();
-    }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public PlaylistDetailsServlet() {
+		super();
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		RequestDispatcher rd = request.getRequestDispatcher("playlist.jsp");
 		PlaylistDetailsController pdc = new PlaylistDetailsController();
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
-		PlaylistBean P = (PlaylistBean) session.getAttribute("P");
+		PlaylistBean Pb = (PlaylistBean) session.getAttribute("P");
 		if (request.getParameter("BTNOK") != null) {
-			rd = this.votePlaylist(request, response, pdc, gub, P);
+			rd = this.votePlaylist(request, pdc, gub, Pb);
 		}
 		rd.forward(request, response);
 	}
 
-	private RequestDispatcher votePlaylist(HttpServletRequest request, HttpServletResponse response,
-			PlaylistDetailsController pdc, GeneralUserBean gub, PlaylistBean p) {
+	private RequestDispatcher votePlaylist(HttpServletRequest request, PlaylistDetailsController pdc,
+			GeneralUserBean gub, PlaylistBean p) {
 		String rating = request.getParameter("rating");
-		if(rating != null) {
+		if (rating != null) {
 			try {
 				pdc.votePlaylist(Integer.parseInt(rating), p.getId(), gub.getUsername());
 				request.setAttribute("error", "Playlist voted!");
-			} catch (NumberFormatException e) {
+			} catch (NumberFormatException | ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (SQLException e) {
 				request.setAttribute("error", "You've already voted this playlist");

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-//import logic.bean.AdvancedUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.GeneralUserBean;
 import logic.bean.RispostaBean;
@@ -41,9 +40,7 @@ public class QuestionDetailsServlet extends HttpServlet {
 		RispostaBean r = new RispostaBean();
 		try {
 			r = afc.getAnswer(gub.getUsername(), db.getId());
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (NumberFormatException | ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 		session.setAttribute("R", r);
@@ -58,20 +55,16 @@ public class QuestionDetailsServlet extends HttpServlet {
 		if (rating != null) {
 			GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 			RispostaBean r = (RispostaBean) session.getAttribute("R");
-			//AdvancedUserBean aub = new AdvancedUserBean();
 			AskForQuestionsController afc = new AskForQuestionsController();
-			//aub.setUsername(r.getAdvancedName());
-			//aub.setVoto(Integer.parseInt(rating));
-			//String username = aub.getUsername();
 			String name = gub.getUsername();
-			//int id = Integer.parseInt(r.getId());
-			//int a = (int) Double.parseDouble(aub.getVoto());
 			try {
 				afc.voteAdvanced(name, r, Integer.parseInt(rating));
 				request.setAttribute("error", "Advanced voted!");
 			} catch (SQLException e) {
 				request.setAttribute("error", "You Already vote this advanced");
-			}
+			} catch (NumberFormatException | ClassNotFoundException e) {
+				e.printStackTrace();
+			} 
 		}
 		return request.getRequestDispatcher("question_details.jsp");
 	}

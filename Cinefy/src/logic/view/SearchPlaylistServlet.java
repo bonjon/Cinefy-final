@@ -21,28 +21,29 @@ import logic.exceptions.PlaylistNotFoundException;
 
 @WebServlet("/SearchPlaylistServlet")
 public class SearchPlaylistServlet extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
-       
-    public SearchPlaylistServlet() {
-        super();
-    }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private static final long serialVersionUID = 1L;
+	public static final String SEARCHSTRING = "searchString";
+	
+	public SearchPlaylistServlet() {
+		super();
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		RequestDispatcher rd = request.getRequestDispatcher("playlist_beginner.jsp");
+		RequestDispatcher rd = null;
 		ViewPlaylistsController vpc = new ViewPlaylistsController();
-		PlaylistBean pb = (PlaylistBean) session.getAttribute("P");
-		String searchString = (String) request.getParameter("searchString");
-		if(searchString == null) {
-			searchString = (String) request.getAttribute("searchString");
+		String searchString = (String) request.getParameter(SEARCHSTRING);
+		if (searchString == null) {
+			searchString = (String) request.getAttribute(SEARCHSTRING);
 		}
-		request.setAttribute("searchString", searchString);
+		request.setAttribute(SEARCHSTRING, searchString);
 		try {
-			pb = vpc.getPlaylist(searchString);
+			PlaylistBean pb = vpc.getPlaylist(searchString);
 			session.setAttribute("P", pb);
 			rd = request.getRequestDispatcher("playlist.jsp");
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (PlaylistNotFoundException e) {
 			request.setAttribute("error", e.getMessage());

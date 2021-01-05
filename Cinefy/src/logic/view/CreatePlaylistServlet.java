@@ -36,7 +36,9 @@ public class CreatePlaylistServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(CreatePlaylistServlet.class.getName());
-	
+	public static final String CREATE = "create_playlist.jsp";
+	public static final String ERRORX = "errorx";
+
 	public CreatePlaylistServlet() {
 		super();
 	}
@@ -44,15 +46,20 @@ public class CreatePlaylistServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		RequestDispatcher rd = request.getRequestDispatcher("create_playlist.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher(CREATE);
 		CreatePlaylistController cpc = new CreatePlaylistController();
 		if (request.getParameter("ok") != null) {
-			rd = this.create(request, session, cpc);
+			try {
+				rd = this.create(request, session, cpc);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 		rd.forward(request, response);
 	}
 
-	private RequestDispatcher create(HttpServletRequest request, HttpSession session, CreatePlaylistController cpc) {
+	private RequestDispatcher create(HttpServletRequest request, HttpSession session, CreatePlaylistController cpc)
+			throws ClassNotFoundException {
 		String name = (String) request.getParameter("name");
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 		PlaylistBean pb = new PlaylistBean();
@@ -61,10 +68,8 @@ public class CreatePlaylistServlet extends HttpServlet {
 		Part filePart = null;
 		try {
 			filePart = request.getPart("avatar");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ServletException e) {
-			e.printStackTrace();
+		} catch (IOException | ServletException e1) {
+			e1.printStackTrace();
 		}
 		if (filePart != null) {
 			fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
@@ -76,26 +81,28 @@ public class CreatePlaylistServlet extends HttpServlet {
 				String path = FileManager.PLAYLISTS;
 				File file = new File(path, fileName);
 				File newFile = new File(path, newFileName);
-				try (InputStream input = filePart.getInputStream()) {
-					Files.copy(input, file.toPath());
-				} catch (Exception e) {
-					logger.log(Level.WARNING, e.toString());
-				}
+				copyFile(filePart, file);
 				if (!file.renameTo(newFile)) {
 					logger.log(Level.WARNING, "Unable to rename: {0}", fileName);
 				}
 			}
-		} catch (FieldEmptyException e) {
-			request.setAttribute("errorx", e.getMessage());
-			return request.getRequestDispatcher("create_playlist.jsp");
-		} catch (FieldTooLongException e) {
-			request.setAttribute("errorx", e.getMessage());
-			return request.getRequestDispatcher("create_playlist.jsp");
+		} catch (FieldEmptyException | FieldTooLongException e) {
+			request.setAttribute(ERRORX, e.getMessage());
+			return request.getRequestDispatcher(CREATE);
 		} catch (SQLException e) {
-			request.setAttribute("errorx", "Name already taken");
-			return request.getRequestDispatcher("create_playlist.jsp");
+			request.setAttribute(ERRORX, "Name already taken");
+			return request.getRequestDispatcher(CREATE);
 		}
 		session.setAttribute("pb", pb);
 		return request.getRequestDispatcher("AddFilmServlet");
 	}
+
+	private void copyFile(Part filePart, File file) {
+		try (InputStream input = filePart.getInputStream()) {
+			Files.copy(input, file.toPath());
+		} catch (Exception e) {
+			logger.log(Level.WARNING, e.toString());
+		}
+	}
+
 }

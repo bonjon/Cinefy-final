@@ -15,7 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import logic.bean.AdvancedUserBean;
@@ -38,6 +37,7 @@ public class RegistrationServlet extends HttpServlet {
 	private static final String REGIS = "registration.jsp";
 	private static final String REGB = "registration";
 	private static final Logger logger = Logger.getLogger(RegistrationServlet.class.getName());
+	public static final String FIELD = "field";
 
 	public RegistrationServlet() {
 		super();
@@ -45,16 +45,14 @@ public class RegistrationServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		RequestDispatcher rd = request.getRequestDispatcher(REGIS);
 		RegistrationController controller = new RegistrationController();
 		if (request.getParameter(REGB) != null)
-			rd = this.register(request, session, controller);
+			rd = this.register(request, controller);
 		rd.forward(request, response);
 	}
 
-	private RequestDispatcher register(HttpServletRequest request, HttpSession session,
-			RegistrationController controller) {
+	private RequestDispatcher register(HttpServletRequest request, RegistrationController controller) {
 		Boolean regResult = true;
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -65,9 +63,7 @@ public class RegistrationServlet extends HttpServlet {
 		Part filePart = null;
 		try {
 			filePart = request.getPart("avatar");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ServletException e) {
+		} catch (IOException | ServletException e) {
 			e.printStackTrace();
 		}
 		if (filePart != null) {
@@ -107,10 +103,10 @@ public class RegistrationServlet extends HttpServlet {
 			bub.setProfilePic(newFileName);
 			try {
 				return controller.createBeginnerUser(bub);
-			} catch (FieldEmptyException e) {
-				request.setAttribute("field", e.getMessage());
-			} catch (FieldTooLongException e) {
-				request.setAttribute("field", e.getMessage());
+			} catch (FieldEmptyException | FieldTooLongException e) {
+				request.setAttribute(FIELD, e.getMessage());
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
 			}
 		} else if (userType.equals("Advanced")) {
 			String profession = request.getParameter("userProf");
@@ -122,10 +118,10 @@ public class RegistrationServlet extends HttpServlet {
 			aub.setProfilePic(newFileName);
 			try {
 				return controller.createAdvancedUser(aub);
-			} catch (FieldEmptyException e) {
-				request.setAttribute("field", e.getMessage());
-			} catch (FieldTooLongException e) {
-				request.setAttribute("field", e.getMessage());
+			} catch (FieldEmptyException | FieldTooLongException e) {
+				request.setAttribute(FIELD, e.getMessage());
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
 			}
 		}
 		return false;

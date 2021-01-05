@@ -29,6 +29,8 @@ import logic.exceptions.AdvancedNotFoundException;
 public class AskBeginnerServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	public static final String TOPAD = "topAd";
+	public static final String ERROR = "error";
 
 	public AskBeginnerServlet() {
 		super();
@@ -44,24 +46,25 @@ public class AskBeginnerServlet extends HttpServlet {
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 		try {
 			topAd = afc.leaderBoard();
-			if (topAd == null) {
-				request.setAttribute("topAd", Collections.EMPTY_LIST);
+			if (topAd.isEmpty()) {
+				request.setAttribute(TOPAD, Collections.emptyList());
 				request.setAttribute("errorx", "No advanced leaderboard");
-			} else
-				request.setAttribute("topAd", topAd);
+			} else {
+				request.setAttribute(TOPAD, topAd);
+			}
 		} catch (SQLException e) {
 			request.setAttribute("errorx", e.getMessage());
-		} catch (AdvancedNotFoundException e) {
+		} catch (AdvancedNotFoundException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		session.setAttribute("topAd", topAd);
+		session.setAttribute(TOPAD, topAd);
 		try {
 			questions = afc.getQuestions(gub, gub.getRole());
 			if (questions == null)
-				request.setAttribute("error", "No questions list");
+				request.setAttribute(ERROR, "No questions list");
 			else
 				request.setAttribute("questions", questions);
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		session.setAttribute("questions", questions);
@@ -75,15 +78,15 @@ public class AskBeginnerServlet extends HttpServlet {
 			try {
 				r = afc.getAnswer(gub.getUsername(), db.getId());
 				if (r == null) {
-					request.setAttribute("error", "No answer from this advanced");
+					request.setAttribute(ERROR, "No answer from this advanced");
 					rd = request.getRequestDispatcher("ask_beginner.jsp");
 				} else {
 					rd = request.getRequestDispatcher("QuestionDetailsServlet");
 				}
-			} catch (NumberFormatException e) {
+			} catch (NumberFormatException | ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (SQLException e) {
-				request.setAttribute("error", e.getMessage());
+				request.setAttribute(ERROR, e.getMessage());
 			}
 		}
 		rd.forward(request, response);
@@ -93,7 +96,7 @@ public class AskBeginnerServlet extends HttpServlet {
 			AskForQuestionsController afc) {
 		int index = Integer.parseInt(request.getParameter("index"));
 		@SuppressWarnings("unchecked")
-		List<AdvancedUserBean> topAd = (List<AdvancedUserBean>) session.getAttribute("topAd");
+		List<AdvancedUserBean> topAd = (List<AdvancedUserBean>) session.getAttribute(TOPAD);
 		AdvancedUserBean aub = (AdvancedUserBean) topAd.get(index);
 		session.setAttribute("AdS", aub);
 		return request.getRequestDispatcher("question.jsp");
