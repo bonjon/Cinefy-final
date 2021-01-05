@@ -101,23 +101,25 @@ public class RegistrationBoundary implements Initializable {
 	private Label bioTooLongError;
 	
 
-	public File imageFile ;
+	private File imageFile ;
 
 	public String fileName;
 	
-	public String profession = null;
+	private String profession = null;
 
-	public Roles role = null;
+	private Roles role = null;
 	
-	public String noSelRole = "noSelRole"; 
+	private String noSelRole = "noSelRole"; 
 	
 	private boolean imageChanged = false; //booleano: true se l' immagine è diversa da quella di default, false altrimenti
 	
-	private String defaultPath = FileManager.PROFILE+File.separator+"default.png";
+	private String defaultPic = "default.png";
+	
+	private String defaultPath = FileManager.PROFILE+File.separator+defaultPic;
 	
 	private static final Logger logger = Logger.getLogger(RegistrationBoundary.class.getName());
 
-	public String newFileName;
+	private String newFileName;
 	
 	private String usernameAlreadyUsed = "This username has been already used";
 	
@@ -168,7 +170,7 @@ public class RegistrationBoundary implements Initializable {
 				imageChanged=true; 
 			}
 		
-		return ;
+		
 		
 		}
 
@@ -233,8 +235,8 @@ public class RegistrationBoundary implements Initializable {
 					
 
 					if(!imageChanged) {
-						newFileName=FileManager.generateNewFileName("default.png", username);
-						fileName="default.png";
+						newFileName=FileManager.generateNewFileName(defaultPic, username);
+						fileName=defaultPic;
 						File file = new File(path, fileName);
 						File newFile = new File(path, newFileName);
 						InputStream input = new FileInputStream(file);
@@ -264,8 +266,8 @@ public class RegistrationBoundary implements Initializable {
 			}
 		
 		catch (FieldEmptyException | FieldTooLongException e) {
-			ExceptionInfo ei = new ExceptionInfo();
-			ei = controller.getExceptionInfo();
+
+			ExceptionInfo ei = controller.getExceptionInfo();
 			if (ei.getEmptyUsername()) {
 				this.userError.setText(e.getMessage());
 				
