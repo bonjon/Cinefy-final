@@ -22,17 +22,17 @@ import logic.utils.Roles;
 
 public class AdvancedGraphicChange extends GraphicChangeTemplate {
 
-	private static AdvancedGraphicChange INSTANCE = null;
+	private static AdvancedGraphicChange instance = null;
 
 	private AdvancedGraphicChange() {
 		whoAmI = Roles.ADVANCEDUSER;
 	}
 
 	public static AdvancedGraphicChange getInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new AdvancedGraphicChange();
+		if (instance == null) {
+			instance = new AdvancedGraphicChange();
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 	@Override

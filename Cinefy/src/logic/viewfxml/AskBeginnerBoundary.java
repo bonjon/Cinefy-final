@@ -49,9 +49,27 @@ public class AskBeginnerBoundary implements Initializable {
 	ObservableList<DomandaBean> listQuestions;
 	List<DomandaBean> ldb;
 	List<DomandaBean> lb; // Domande in coda, cioè che devono essere accettate
+	public static final String FXBACK = "-fx-control-inner-background: ";
+	public static final String COLOR = " #1c1c1c";
+	public static final String DEFAULT = "default.png";
+	public static final String FONT = "Arial";
+	public static final String TEXTCOLOR = "#f5c518";
+	public static final String TEXTFILL = "-fx-text-fill: ";
 
 	@FXML
-	private Label home, ask, playlists, profile, labelError1, labelError2, labelError3;
+	private Label home;
+	@FXML
+	private Label ask;
+	@FXML
+	private Label playlists;
+	@FXML
+	private Label profile;
+	@FXML
+	private Label labelError1;
+	@FXML
+	private Label labelError2;
+	@FXML
+	private Label labelError3;
 	@FXML
 	private TextField adText;
 	@FXML
@@ -65,8 +83,6 @@ public class AskBeginnerBoundary implements Initializable {
 	@FXML
 	private ScrollPane scrollPane;
 
-	private ObservableAdTopList observable;
-	private TopRatedPanel tp;
 	private AskForQuestionsController afc;
 	private BeginnerGraphicChange bgc;
 	int start;
@@ -94,7 +110,7 @@ public class AskBeginnerBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onEnterPressed(KeyEvent event) throws SQLException {
+	public void onEnterPressed(KeyEvent event) throws SQLException, ClassNotFoundException {
 		this.advanced.getItems().clear();
 		this.labelError1.setText("");
 		if (start == 1) {
@@ -116,31 +132,33 @@ public class AskBeginnerBoundary implements Initializable {
 						super.updateItem(item, empty);
 						if (empty || item == null) {
 							setText(null);
-							setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+							setStyle(FXBACK + COLOR + ";");
 						} else {
 							String path;
+							Label username;
+							Label voto;
+							VBox vBox;
+							ImageView iv;
 							if (item.getProfilePic() == null) {
-								path = FileManager.PROFILE + File.separator + "default.png";
+								path = FileManager.PROFILE + File.separator + DEFAULT;
 							} else {
 								path = FileManager.PROFILE + File.separator + item.getProfilePic();
 							}
-							File file = new File(path);
-							Image img = new Image(file.toURI().toString());
-							VBox vBox = new VBox(3);
-							ImageView iv = new ImageView(img);
-							Label username = new Label(item.getUsername());
-							Label voto = new Label(item.getVoto() + "/5.0");
-							username.setFont(Font.font("Arial", 13));
-							voto.setFont(Font.font("Arial", 13));
-							username.setStyle("-fx-text-fill: " + "#f5c518" + ";");
-							voto.setStyle("-fx-text-fill: " + "#f5c518" + ";");
+							vBox = new VBox(3);
+							iv = new ImageView(new Image(new File(path).toURI().toString()));
+							username = new Label(item.getUsername());
+							voto = new Label(item.getVoto() + "/5.0");
+							username.setFont(Font.font(FONT, 13));
+							voto.setFont(Font.font(FONT, 13));
+							username.setStyle(TEXTFILL + TEXTCOLOR + ";");
+							voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
 							iv.setFitHeight(150);
 							iv.setFitWidth(150);
 							iv.setPreserveRatio(false);
 							vBox.setAlignment(Pos.CENTER);
 							vBox.getChildren().addAll(iv, username, voto);
 							setGraphic(vBox);
-							setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+							setStyle(FXBACK + COLOR + ";");
 						}
 					}
 				});
@@ -151,7 +169,7 @@ public class AskBeginnerBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onDirectorPressed(ActionEvent event) throws SQLException {
+	public void onDirectorPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
 		this.splitMenu.setText("Director");
 		this.advanced.getItems().clear();
 		start = 1;
@@ -169,11 +187,11 @@ public class AskBeginnerBoundary implements Initializable {
 					super.updateItem(item, empty);
 					if (empty || item == null) {
 						setText(null);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+						setStyle(FXBACK + COLOR + ";");
 					} else {
 						String path;
 						if (item.getProfilePic() == null) {
-							path = FileManager.PROFILE + File.separator + "default.png";
+							path = FileManager.PROFILE + File.separator + DEFAULT;
 						} else {
 							path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						}
@@ -183,17 +201,17 @@ public class AskBeginnerBoundary implements Initializable {
 						ImageView iv = new ImageView(img);
 						Label username = new Label(item.getUsername());
 						Label voto = new Label(item.getVoto() + "/5.0");
-						username.setFont(Font.font("Arial", 13));
-						voto.setFont(Font.font("Arial", 13));
-						username.setStyle("-fx-text-fill: " + "#f5c518" + ";");
-						voto.setStyle("-fx-text-fill: " + "#f5c518" + ";");
+						username.setFont(Font.font(FONT, 13));
+						voto.setFont(Font.font(FONT, 13));
+						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
+						voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
 						iv.setFitHeight(150);
 						iv.setFitWidth(150);
 						iv.setPreserveRatio(false);
 						vBox.setAlignment(Pos.CENTER);
 						vBox.getChildren().addAll(iv, username, voto);
 						setGraphic(vBox);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+						setStyle(FXBACK + COLOR + ";");
 					}
 				}
 			});
@@ -203,7 +221,7 @@ public class AskBeginnerBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onProductorPressed(ActionEvent event) throws SQLException {
+	public void onProductorPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
 		this.splitMenu.setText("Productor");
 		this.advanced.getItems().clear();
 		start = 1;
@@ -221,11 +239,11 @@ public class AskBeginnerBoundary implements Initializable {
 					super.updateItem(item, empty);
 					if (empty || item == null) {
 						setText(null);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+						setStyle(FXBACK + COLOR + ";");
 					} else {
 						String path;
 						if (item.getProfilePic() == null) {
-							path = FileManager.PROFILE + File.separator + "default.png";
+							path = FileManager.PROFILE + File.separator + DEFAULT;
 						} else {
 							path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						}
@@ -235,17 +253,17 @@ public class AskBeginnerBoundary implements Initializable {
 						ImageView iv = new ImageView(img);
 						Label username = new Label(item.getUsername());
 						Label voto = new Label(item.getVoto() + "/5.0");
-						username.setFont(Font.font("Arial", 13));
-						voto.setFont(Font.font("Arial", 13));
-						username.setStyle("-fx-text-fill: " + "#f5c518" + ";");
-						voto.setStyle("-fx-text-fill: " + "#f5c518" + ";");
+						username.setFont(Font.font(FONT, 13));
+						voto.setFont(Font.font(FONT, 13));
+						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
+						voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
 						iv.setFitHeight(150);
 						iv.setFitWidth(150);
 						iv.setPreserveRatio(false);
 						vBox.setAlignment(Pos.CENTER);
 						vBox.getChildren().addAll(iv, username, voto);
 						setGraphic(vBox);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+						setStyle(FXBACK + COLOR + ";");
 					}
 				}
 			});
@@ -255,7 +273,7 @@ public class AskBeginnerBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onActorPressed(ActionEvent event) throws SQLException {
+	public void onActorPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
 		this.splitMenu.setText("Actor");
 		this.advanced.getItems().clear();
 		start = 1;
@@ -273,11 +291,11 @@ public class AskBeginnerBoundary implements Initializable {
 					super.updateItem(item, empty);
 					if (empty || item == null) {
 						setText(null);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+						setStyle(FXBACK + COLOR + ";");
 					} else {
 						String path;
 						if (item.getProfilePic() == null) {
-							path = FileManager.PROFILE + File.separator + "default.png";
+							path = FileManager.PROFILE + File.separator + DEFAULT;
 						} else {
 							path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						}
@@ -287,17 +305,17 @@ public class AskBeginnerBoundary implements Initializable {
 						ImageView iv = new ImageView(img);
 						Label username = new Label(item.getUsername());
 						Label voto = new Label(item.getVoto() + "/5.0");
-						username.setFont(Font.font("Arial", 13));
-						voto.setFont(Font.font("Arial", 13));
-						username.setStyle("-fx-text-fill: " + "#f5c518" + ";");
-						voto.setStyle("-fx-text-fill: " + "#f5c518" + ";");
+						username.setFont(Font.font(FONT, 13));
+						voto.setFont(Font.font(FONT, 13));
+						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
+						voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
 						iv.setFitHeight(150);
 						iv.setFitWidth(150);
 						iv.setPreserveRatio(false);
 						vBox.setAlignment(Pos.CENTER);
 						vBox.getChildren().addAll(iv, username, voto);
 						setGraphic(vBox);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+						setStyle(FXBACK + COLOR + ";");
 					}
 				}
 			});
@@ -307,7 +325,7 @@ public class AskBeginnerBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onScreenwriterPressed(ActionEvent event) throws SQLException {
+	public void onScreenwriterPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
 		this.splitMenu.setText("Screenwriter");
 		this.advanced.getItems().clear();
 		start = 1;
@@ -325,11 +343,11 @@ public class AskBeginnerBoundary implements Initializable {
 					super.updateItem(item, empty);
 					if (empty || item == null) {
 						setText(null);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+						setStyle(FXBACK + COLOR + ";");
 					} else {
 						String path;
 						if (item.getProfilePic() == null) {
-							path = FileManager.PROFILE + File.separator + "default.png";
+							path = FileManager.PROFILE + File.separator + DEFAULT;
 						} else {
 							path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						}
@@ -339,17 +357,17 @@ public class AskBeginnerBoundary implements Initializable {
 						ImageView iv = new ImageView(img);
 						Label username = new Label(item.getUsername());
 						Label voto = new Label(item.getVoto() + "/5.0");
-						username.setFont(Font.font("Arial", 13));
-						voto.setFont(Font.font("Arial", 13));
-						username.setStyle("-fx-text-fill: " + "#f5c518" + ";");
-						voto.setStyle("-fx-text-fill: " + "#f5c518" + ";");
+						username.setFont(Font.font(FONT, 13));
+						voto.setFont(Font.font(FONT, 13));
+						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
+						voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
 						iv.setFitHeight(150);
 						iv.setFitWidth(150);
 						iv.setPreserveRatio(false);
 						vBox.setAlignment(Pos.CENTER);
 						vBox.getChildren().addAll(iv, username, voto);
 						setGraphic(vBox);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+						setStyle(FXBACK + COLOR + ";");
 					}
 				}
 			});
@@ -359,7 +377,7 @@ public class AskBeginnerBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onFilmeditorPressed(ActionEvent event) throws SQLException {
+	public void onFilmeditorPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
 		this.splitMenu.setText("Film editor");
 		this.advanced.getItems().clear();
 		start = 1;
@@ -377,11 +395,11 @@ public class AskBeginnerBoundary implements Initializable {
 					super.updateItem(item, empty);
 					if (empty || item == null) {
 						setText(null);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+						setStyle(FXBACK + COLOR + ";");
 					} else {
 						String path;
 						if (item.getProfilePic() == null) {
-							path = FileManager.PROFILE + File.separator + "default.png";
+							path = FileManager.PROFILE + File.separator + DEFAULT;
 						} else {
 							path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						}
@@ -391,17 +409,17 @@ public class AskBeginnerBoundary implements Initializable {
 						ImageView iv = new ImageView(img);
 						Label username = new Label(item.getUsername());
 						Label voto = new Label(item.getVoto() + "/5.0");
-						username.setFont(Font.font("Arial", 13));
-						voto.setFont(Font.font("Arial", 13));
-						username.setStyle("-fx-text-fill: " + "#f5c518" + ";");
-						voto.setStyle("-fx-text-fill: " + "#f5c518" + ";");
+						username.setFont(Font.font(FONT, 13));
+						voto.setFont(Font.font(FONT, 13));
+						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
+						voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
 						iv.setFitHeight(150);
 						iv.setFitWidth(150);
 						iv.setPreserveRatio(false);
 						vBox.setAlignment(Pos.CENTER);
 						vBox.getChildren().addAll(iv, username, voto);
 						setGraphic(vBox);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+						setStyle(FXBACK + COLOR + ";");
 					}
 				}
 			});
@@ -417,7 +435,7 @@ public class AskBeginnerBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onSelectedQuestion(MouseEvent event) throws IOException {
+	public void onSelectedQuestion(MouseEvent event) throws IOException, NumberFormatException, ClassNotFoundException {
 		if (!listQuestions.isEmpty()) {
 			GeneralUserBean gub = SessionUser.getInstance().getSession();
 			try {
@@ -427,7 +445,8 @@ public class AskBeginnerBoundary implements Initializable {
 							this.questions.getSelectionModel().getSelectedItem(), color);
 				}
 				if (ldb.contains(this.questions.getSelectionModel().getSelectedItem())) {
-					if (!this.afc.checkAnswer(gub.getUsername(), this.questions.getSelectionModel().getSelectedItem().getId())) {
+					if (!this.afc.checkAnswer(gub.getUsername(),
+							this.questions.getSelectionModel().getSelectedItem().getId())) {
 						color = "g";
 						this.bgc.toQuestionDetails(this.questions.getScene(),
 								this.questions.getSelectionModel().getSelectedItem(), color);
@@ -447,9 +466,8 @@ public class AskBeginnerBoundary implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
 
-		scrollPane.hvalueProperty().addListener(new ChangeOnceListener<>((observable, oldValue, newValue) -> {
-			scrollPane.setHvalue(0.0);
-		}));
+		scrollPane.hvalueProperty()
+				.addListener(new ChangeOnceListener<>((observable, oldValue, newValue) -> scrollPane.setHvalue(0.0)));
 
 		listSearch = FXCollections.observableArrayList();
 		listQuestions = FXCollections.observableArrayList();
@@ -457,15 +475,11 @@ public class AskBeginnerBoundary implements Initializable {
 		this.bgc = BeginnerGraphicChange.getInstance();
 		try {
 			List<AdvancedUserBean> aub = afc.leaderBoard();
-			if (aub != null) {
-				this.observable = new ObservableAdTopList(aub);
-				this.tp = new TopRatedPanel(observable, this);
-				this.observable.attach(tp);
-				try {
-					this.observable.notifyObservers();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+			if (!aub.isEmpty()) {
+				ObservableAdTopList observable = new ObservableAdTopList(aub);
+				TopRatedPanel tp = new TopRatedPanel(observable, this);
+				observable.attach(tp);
+				observable.notifyObservers();
 			} else {
 				this.labelError3.setText("No leaderboard");
 			}
@@ -475,7 +489,7 @@ public class AskBeginnerBoundary implements Initializable {
 					super.updateItem(item, empty);
 					if (empty || item == null) {
 						setText(null);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+						setStyle(FXBACK + COLOR + ";");
 					} else {
 						String path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						File file = new File(path);
@@ -484,100 +498,103 @@ public class AskBeginnerBoundary implements Initializable {
 						ImageView iv = new ImageView(img);
 						Label username = new Label(item.getUsername());
 						Label voto = new Label(item.getVoto() + "/5.0");
-						username.setFont(Font.font("Arial", 13));
-						voto.setFont(Font.font("Arial", 13));
-						username.setStyle("-fx-text-fill: " + "#f5c518" + ";");
-						voto.setStyle("-fx-text-fill: " + "#f5c518" + ";");
+						username.setFont(Font.font(FONT, 13));
+						voto.setFont(Font.font(FONT, 13));
+						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
+						voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
 						iv.setFitHeight(150);
 						iv.setFitWidth(150);
 						iv.setPreserveRatio(false);
 						vBox.setAlignment(Pos.CENTER);
 						vBox.getChildren().addAll(iv, username, voto);
 						setGraphic(vBox);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+						setStyle(FXBACK + COLOR + ";");
 					}
 				}
 			});
 			listQuestions.removeAll(listQuestions);
 			lb = afc.getQuestions(gub, "beginner2"); // Domande in coda
-			if (lb != null)
+			if (!lb.isEmpty())
 				listQuestions.addAll(lb);
 			ldb = afc.getQuestions(gub, "beginner");
-			if (ldb != null)
+			if (!ldb.isEmpty())
 				listQuestions.addAll(ldb);
-			if (lb == null & ldb == null)
+			if (lb.isEmpty() & ldb.isEmpty())
 				this.labelError2.setText("No questions");
 			this.questions.getItems().addAll(listQuestions);
-			this.questions.setCellFactory(param -> new ListCell<DomandaBean>() {
-				@Override
-				protected void updateItem(DomandaBean item, boolean empty) {
-					super.updateItem(item, empty);
-					if (empty || item == null) {
-						setText(null);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-					} else {
-						if (lb != null && lb.contains(item)) {
-							String path = FileManager.YELLOW;
-							File file = new File(path);
-							Image img = new Image(file.toURI().toString());
-							HBox hBox = new HBox(2);
-							ImageView iv = new ImageView(img);
-							Label label = new Label(item.getContenuto());
-							label.setFont(Font.font("Arial", 15));
-							iv.setFitHeight(50);
-							iv.setFitWidth(50);
-							iv.setPreserveRatio(false);
-							hBox.getChildren().addAll(iv, label);
-							hBox.setAlignment(Pos.CENTER_LEFT);
-							setGraphic(hBox);
-							setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-						}
-						if (ldb != null && ldb.contains(item)) {
-							try {
-								if (!afc.checkAnswer(gub.getUsername(), item.getId())) {
-									String path = FileManager.GREEN;
-									File file = new File(path);
-									Image img = new Image(file.toURI().toString());
-									HBox hBox = new HBox(2);
-									ImageView iv = new ImageView(img);
-									Label label = new Label(item.getContenuto());
-									label.setFont(Font.font("Arial", 15));
-									iv.setFitHeight(50);
-									iv.setFitWidth(50);
-									iv.setPreserveRatio(false);
-									hBox.getChildren().addAll(iv, label);
-									hBox.setAlignment(Pos.CENTER_LEFT);
-									setGraphic(hBox);
-									setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-								} else {
-									String path = FileManager.MARK;
-									File file = new File(path);
-									Image img = new Image(file.toURI().toString());
-									HBox hBox = new HBox(2);
-									ImageView iv = new ImageView(img);
-									Label label = new Label(item.getContenuto());
-									label.setFont(Font.font("Arial", 15));
-									iv.setFitHeight(50);
-									iv.setFitWidth(50);
-									iv.setPreserveRatio(false);
-									hBox.getChildren().addAll(iv, label);
-									hBox.setAlignment(Pos.CENTER_LEFT);
-									setGraphic(hBox);
-									setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-								}
-							} catch (NumberFormatException e) {
-								e.printStackTrace();
-							} catch (SQLException e) {
-								e.printStackTrace();
+			setCells(questions, ldb, lb);
+		} catch (AdvancedNotFoundException e) {
+			this.labelError3.setText(e.getMessage());
+		} catch (SQLException | ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void setCells(ListView<DomandaBean> questions, List<DomandaBean> ldb, List<DomandaBean> lb) {
+		GeneralUserBean gub = SessionUser.getInstance().getSession();
+		this.questions.setCellFactory(param -> new ListCell<DomandaBean>() {
+			@Override
+			protected void updateItem(DomandaBean item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null) {
+					setText(null);
+					setStyle(FXBACK + COLOR + ";");
+				} else {
+					if (!lb.isEmpty() && lb.contains(item)) {
+						String path = FileManager.YELLOW;
+						File file = new File(path);
+						Image img = new Image(file.toURI().toString());
+						HBox hBox = new HBox(2);
+						ImageView iv = new ImageView(img);
+						Label label = new Label(item.getContenuto());
+						label.setFont(Font.font(FONT, 15));
+						iv.setFitHeight(50);
+						iv.setFitWidth(50);
+						iv.setPreserveRatio(false);
+						hBox.getChildren().addAll(iv, label);
+						hBox.setAlignment(Pos.CENTER_LEFT);
+						setGraphic(hBox);
+						setStyle(FXBACK + COLOR + ";");
+					}
+					if (!ldb.isEmpty() && ldb.contains(item)) {
+						try {
+							if (!afc.checkAnswer(gub.getUsername(), item.getId())) {
+								String path = FileManager.GREEN;
+								File file = new File(path);
+								Image img = new Image(file.toURI().toString());
+								HBox hBox = new HBox(2);
+								ImageView iv = new ImageView(img);
+								Label label = new Label(item.getContenuto());
+								label.setFont(Font.font(FONT, 15));
+								iv.setFitHeight(50);
+								iv.setFitWidth(50);
+								iv.setPreserveRatio(false);
+								hBox.getChildren().addAll(iv, label);
+								hBox.setAlignment(Pos.CENTER_LEFT);
+								setGraphic(hBox);
+								setStyle(FXBACK + COLOR + ";");
+							} else {
+								String path = FileManager.MARK;
+								File file = new File(path);
+								Image img = new Image(file.toURI().toString());
+								HBox hBox = new HBox(2);
+								ImageView iv = new ImageView(img);
+								Label label = new Label(item.getContenuto());
+								label.setFont(Font.font(FONT, 15));
+								iv.setFitHeight(50);
+								iv.setFitWidth(50);
+								iv.setPreserveRatio(false);
+								hBox.getChildren().addAll(iv, label);
+								hBox.setAlignment(Pos.CENTER_LEFT);
+								setGraphic(hBox);
+								setStyle(FXBACK + COLOR + ";");
 							}
+						} catch (NumberFormatException | SQLException | ClassNotFoundException e) {
+							e.printStackTrace();
 						}
 					}
 				}
-			});
-		} catch (AdvancedNotFoundException e) {
-			this.labelError3.setText(e.getMessage());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			}
+		});	
 	}
 }

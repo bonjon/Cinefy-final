@@ -16,17 +16,17 @@ import logic.utils.Roles;
 
 public class AdminGraphicChange extends GraphicChangeTemplate {
 
-	private static AdminGraphicChange INSTANCE = null;
+	private static AdminGraphicChange instance = null;
 
 	private AdminGraphicChange() {
 		whoAmI = Roles.ADMIN;
 	}
 
 	public static AdminGraphicChange getInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new AdminGraphicChange();
+		if (instance == null) {
+			instance = new AdminGraphicChange();
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 	@Override
