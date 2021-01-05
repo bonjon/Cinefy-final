@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -150,9 +149,7 @@ public class ProfileBeginnerBoundary implements Initializable {
 			anchorPaneAdv.setVisible(false);
 		}
 		else {
-			List<AdvancedUserBean> advList = new ArrayList<>();
-			
-			advList = pc.differentAdv(gub.getUsername());
+			List<AdvancedUserBean> advList = pc.differentAdv(gub.getUsername());
 			
 			advCounter=advList.size();				//numero di adv differenti contattati
 			laAdvNum.setText(String.valueOf(advCounter));

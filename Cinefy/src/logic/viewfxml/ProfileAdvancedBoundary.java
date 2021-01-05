@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 
@@ -31,16 +33,17 @@ import logic.utils.SessionUser;
 
 public class ProfileAdvancedBoundary implements Initializable {
 
-	@FXML
-	private Label home;
+	
 	@FXML
 	private Label answer;
 	@FXML
-	private Label playlists;
+	private Label home;
 	@FXML
 	private Label profile;
 	@FXML
 	private ImageView profilePic;
+	@FXML
+	private Label playlists;
 	@FXML
 	private Label username;
 	@FXML
@@ -59,8 +62,8 @@ public class ProfileAdvancedBoundary implements Initializable {
 	private AnchorPane anchorPaneBio;
 
 	private AdvancedGraphicChange agc;
-	private AdvancedUserBean aub;
-	private ProfileController pc;
+	
+	private static final Logger logger = Logger.getLogger(ProfileAdvancedBoundary.class.getName());
 
 	@FXML
 	public void onHomeClicked(MouseEvent event) throws IOException {
@@ -68,7 +71,7 @@ public class ProfileAdvancedBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onAskClicked(MouseEvent event) throws IOException {
+	public void onAnswerClicked(MouseEvent event) throws IOException {
 		this.agc.toAnswer(this.answer.getScene());
 	}
 
@@ -85,10 +88,16 @@ public class ProfileAdvancedBoundary implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		try {
+		AdvancedUserBean aub;
+		ProfileController pc;
 		this.agc = AdvancedGraphicChange.getInstance();
-		this.pc = new ProfileController();
+		pc = new ProfileController();
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
-		this.aub = pc.getUser2(gub.getUsername(), gub.getRole());
+		
+		aub = pc.getUser2(gub.getUsername(), gub.getRole());
+		
 		this.username.setText(aub.getUsername());
 		if (aub.getProfilePic() == null) {
 			String path = FileManager.PROFILE + File.separator + "default.png";
@@ -110,6 +119,10 @@ public class ProfileAdvancedBoundary implements Initializable {
 			anchorPaneBio.setVisible(false);
 		} else {
 			this.bio.setText(aub.getBio());
+		}
+		} catch (ClassNotFoundException e) {
+			logger.log(Level.WARNING, "class not found exception detected");
+			e.printStackTrace();
 		}
 	}
 }
