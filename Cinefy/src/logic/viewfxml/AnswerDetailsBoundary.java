@@ -104,7 +104,7 @@ public class AnswerDetailsBoundary {
 		
 		
 		String beginnerName=selAnswer.getBeginnerName();
-		bub = aqc.getUser(beginnerName, "beginner");	
+		bub = aqc.getBeginnerUser(beginnerName, "beginner");	
 		idRisposta = selAnswer.getId();
 		
 		aub = aqc.getAdvanced(advancedName,beginnerName);

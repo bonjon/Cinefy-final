@@ -100,7 +100,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 			if(clickedItem!=null) {
 				BeginnerUserBean bub = new BeginnerUserBean();
 				String beginnerName = clickedItem.getBeginnerName();
-				bub = aqc.getUser(beginnerName, "beginner");
+				bub = aqc.getBeginnerUser(beginnerName, "beginner");
 				this.agc.toSelQuestionDetail(this.questions.getScene(),clickedItem,bub);
 			}
 		}

@@ -29,7 +29,7 @@ import logic.utils.GeneralAnswerFactory;
 
 public class AnswerQuestionsController extends Controller {
 
-	public String answer;
+	private String answer;
 
 	public List<DomandaBean> getQuestions(String username, String role) throws SQLException, ClassNotFoundException {
 		DomandaDAO dd = new DomandaDAO();
@@ -92,8 +92,7 @@ public class AnswerQuestionsController extends Controller {
 		return true;
 	}
 
-	// metodo che ci restituisce le domande che un beginner ha in coda verso uno
-	// specificato advanced;
+	// metodo che ci restituisce le domande che un beginner ha in coda verso uno specificato ad;
 	public List<DomandaBean> questionsFromABeg(String advancedName, String beginnerName)
 			throws SQLException, ClassNotFoundException {
 
@@ -135,7 +134,7 @@ public class AnswerQuestionsController extends Controller {
 			if (rb.getContenuto().isEmpty()) {
 				throw new FieldEmptyException("Please, write something in the answer box");
 			}
-			if (rb.isAColleagueSuggested() == true && rb.isAResourceSuggested() == true) {
+			if (rb.isAColleagueSuggested() && rb.isAResourceSuggested()) {
 				if (rb.getColleagueName().isEmpty() && (rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty())) {
 					throw new FieldEmptyException("Please, suggest the colleague and web \nresources you thinked of");
 				} else if (rb.getReasonChoice() == null
@@ -143,7 +142,7 @@ public class AnswerQuestionsController extends Controller {
 					throw new FieldEmptyException("Please, suggest the colleague and web \nresources you thinked of");
 				}
 			}
-			if (rb.isAColleagueSuggested() == true) {
+			if (rb.isAColleagueSuggested()) {
 				if (rb.getColleagueName().isEmpty()) {
 					throw new FieldEmptyException("Please, write the name of a colleague");
 				}
@@ -151,7 +150,7 @@ public class AnswerQuestionsController extends Controller {
 					throw new FieldEmptyException("Please, tell why you suggest this colleague");
 				}
 			}
-			if (rb.isAResourceSuggested() == true) {
+			if (rb.isAResourceSuggested()) {
 				if (rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty()) {
 					throw new FieldEmptyException("Please, enter a Wikipedia or YouTube's URL at least");
 				}
@@ -181,6 +180,8 @@ public class AnswerQuestionsController extends Controller {
 	}
 
 	public void fieldTooLongControls(RispostaBean rb) throws FieldTooLongException {
+		String characters = " characters)";
+		
 		// general answer
 		// circa 182 caratteri vengono aggiunti nel caso peggiore (reason:
 		// renown....person in this sector)
@@ -205,22 +206,22 @@ public class AnswerQuestionsController extends Controller {
 
 			if (rb.getContenuto().length() > genAnswerSize) {
 				throw new FieldTooLongException(
-						"Answer box text is too long \n(max " + genAnswerSize.toString() + " characters)");
+						"Answer box text is too long \n(max " + genAnswerSize.toString() + characters);
 			}
-			if (rb.isAColleagueSuggested() == true) {
+			if (rb.isAColleagueSuggested()) {
 				if (rb.getColleagueName().length() > colleagueSize) {
 					throw new FieldTooLongException("Suggested advanced user' s name is too long \n(max "
-							+ colleagueSize.toString() + " characters)");
+							+ colleagueSize.toString() + characters);
 				}
 			}
-			if (rb.isAResourceSuggested() == true) {
+			if (rb.isAResourceSuggested()) {
 				if (rb.getWikiLink().length() > wikiSize) {
 					throw new FieldTooLongException(
-							"The entered Wiki's URL is too long \n(max " + wikiSize.toString() + " characters)");
+							"The entered Wiki's URL is too long \n(max " + wikiSize.toString() + characters);
 				}
 				if (rb.getYoutubeLink().length() > youTubeSize) {
 					throw new FieldTooLongException(
-							"The entered YouTube's URL is too long \n(max " + youTubeSize.toString() + " characters)");
+							"The entered YouTube's URL is too long \n(max " + youTubeSize.toString() + characters);
 				}
 			}
 
@@ -228,19 +229,19 @@ public class AnswerQuestionsController extends Controller {
 
 			if (rb.getFilm().length() > filmSize) {
 				throw new FieldTooLongException(
-						"The entered film's title is too long \n(max " + filmSize.toString() + " characters)");
+						"The entered film's title is too long \n(max " + filmSize.toString() + characters);
 			}
 			if (rb.getPartecipant().length() > partecipantSize) {
 				throw new FieldTooLongException("The entered " + rb.getProfession().toLowerCase()
-						+ "'s name is too long \n(max " + partecipantSize.toString() + " characters)");
+						+ "'s name is too long \n(max " + partecipantSize.toString() + characters);
 			}
 			if (rb.getGenre().length() > genreSize) {
 				throw new FieldTooLongException(
-						"The entered film's title is too long \n(max " + filmSize.toString() + " characters)");
+						"The entered film's title is too long \n(max " + filmSize.toString() + characters);
 			}
 			if (rb.getExplanation().length() > explanationSize) {
 				throw new FieldTooLongException("The explanation of the film advice is too long \n(max "
-						+ explanationSize.toString() + " characters)");
+						+ explanationSize.toString() + characters);
 			}
 		}
 
@@ -249,8 +250,8 @@ public class AnswerQuestionsController extends Controller {
 	public List<DomandaBean> deleteQuestion(List<DomandaBean> lb, String advancedName)
 			throws SQLException, ClassNotFoundException {
 		List<RispostaBean> rb = getAnswers(advancedName, "advanced");
-		List<RispostaBean> pending_rb = getAnswers(advancedName, "admin");
-		List<Integer> idList = new ArrayList<Integer>();
+		List<RispostaBean> pendingRb = getAnswers(advancedName, "admin");
+		List<Integer> idList = new ArrayList<>();
 		List<DomandaBean> db = lb;
 
 		int i = 0;
@@ -264,20 +265,20 @@ public class AnswerQuestionsController extends Controller {
 		}
 		i = 0;
 		if (rb != null) {
-			while (i < pending_rb.size()) {
-				RispostaBean temp = pending_rb.get(i);
+			while (i < pendingRb.size()) {
+				RispostaBean temp = pendingRb.get(i);
 				Integer id = Integer.parseInt(temp.getIdDomanda());
 				idList.add(id);
 				i++;
 			}
 		}
-		i = 0;
+		
 
 		int y;
 		if (db == null) {
 			return null;
 		}
-		;
+		
 		for (y = 0; y < db.size(); y++) {
 
 			int tempID = Integer.parseInt(db.get(y).getId());
@@ -290,7 +291,7 @@ public class AnswerQuestionsController extends Controller {
 		return db;
 	}
 
-	public BeginnerUserBean getUser(String username, String role) throws ClassNotFoundException {
+	public BeginnerUserBean getBeginnerUser(String username, String role) throws ClassNotFoundException {
 		GeneralUserDAO gud = new GeneralUserDAO();
 		BeginnerUserBean bub = new BeginnerUserBean();
 		try {
