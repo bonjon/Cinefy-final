@@ -9,6 +9,8 @@ import java.net.URL;
 import java.nio.file.Files;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -243,30 +245,39 @@ public class RegistrationBoundary implements Initializable {
 		catch (FieldEmptyException | FieldTooLongException e) {
 
 			ExceptionInfo ei = controller.getExceptionInfo();
-			if (ei.getEmptyUsername()) {
-				this.userError.setText(e.getMessage());
+			int y=0;
+			boolean tooLong = false;
+		
+			List<Label> labels = new ArrayList<>();
+			labels.add(userError);
+			labels.add(passwordError);
+			labels.add(userTypeError);
+			labels.add(professionError);
+			labels.add(userTooLongError);
+			labels.add(passwordTooLongError);
+			labels.add(bioTooLongError);
+			
+			List<Boolean> info = new ArrayList<>();
+			info.add(ei.getEmptyUsername());
+			info.add(ei.getEmptyPassword());
+			info.add(ei.getEmptyRole());
+			info.add(ei.getEmptyProfession());
+			info.add(ei.getTooLongUser());
+			info.add(ei.getTooLongPassword());
+			info.add(ei.getTooLongBio());
+			
+			
+			while(y<info.size()) {
+				if(info.get(y).equals(true)) {
+					labels.get(y).setText(e.getMessage());
+					tooLong = true;
+				}
+				if(tooLong) { 
+					labels.get(y).setVisible(true);
+					tooLong = false;
+				}
 				
-			}
-			else if (ei.getEmptyPassword()) {
-				this.passwordError.setText(e.getMessage());
-			}
-			else if (ei.getEmptyRole()) {
-				this.userTypeError.setText(e.getMessage());
-			}
-			else if (ei.getEmptyProfession()) {
-				this.professionError.setText(e.getMessage());
-			}
-			else if (ei.getTooLongUser()) {
-				this.userError.setText(e.getMessage());
-				this.userTooLongError.setVisible(true);
-			}
-			else if(ei.getTooLongPassword()) {
-				this.passwordError.setText(e.getMessage());
-				this.passwordTooLongError.setVisible(true);
-			}
-			else if(ei.getTooLongBio()) {
-				this.bioError.setText(e.getMessage());
-				this.bioTooLongError.setVisible(true);
+				y++;
 			}
 		}
 			
