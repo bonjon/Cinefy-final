@@ -174,7 +174,7 @@ public class RegistrationBoundary implements Initializable {
 		
 		}
 
-	
+	@FXML
 	public void onSignUpPressed(ActionEvent event)  throws IOException, SQLException, ClassNotFoundException{
 
 
@@ -347,7 +347,8 @@ public class RegistrationBoundary implements Initializable {
 			    bioTooLongError.setVisible(false);
 			}
 	}
-			
+	
+	@FXML
 	public void onDefaultPicButton(ActionEvent event) throws FileNotFoundException {
 		this.btnDefaultPic.setVisible(false);
 		this.laDefaultPic.setVisible(true);
