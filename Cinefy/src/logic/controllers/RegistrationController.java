@@ -36,7 +36,7 @@ public class RegistrationController {
 			beanCheck = true;
 		}
 
-		if (beanCheck == true) {
+		if (beanCheck) {
 			beanCheck = false;
 			throw new FieldEmptyException("This field cannot be empty");
 		}
@@ -73,13 +73,13 @@ public class RegistrationController {
 			beanCheck = true;
 		}
 
-		if (beanCheck == true) {
+		if (beanCheck) {
 			beanCheck = false;
 			throw new FieldEmptyException("This field cannot be empty");
 		}
 
 		boolean lengthControl = fieldTooLongControls(aub, aub.getBio());
-		if (lengthControl == true) {
+		if (lengthControl) {
 			throw new FieldTooLongException("Too many characters for this field");
 		}
 
@@ -111,11 +111,7 @@ public class RegistrationController {
 			beanLengthCheck = true;
 		}
 
-		if (beanLengthCheck == true) {
-			return true;
-		} else {
-			return false;
-		}
+		return beanLengthCheck;
 
 	}
 	
