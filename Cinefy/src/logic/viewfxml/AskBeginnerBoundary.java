@@ -144,19 +144,19 @@ public class AskBeginnerBoundary implements Initializable {
 							if (item.getProfilePic() != null) {
 								path = FileManager.PROFILE + File.separator + item.getProfilePic();
 							}
+							vBox = new VBox(3);
 							username = new Label(item.getUsername());
 							voto = new Label(item.getVoto() + "/5.0");
 							username.setFont(Font.font(FONT, 13));
 							voto.setFont(Font.font(FONT, 13));
 							username.setStyle(TEXTFILL + TEXTCOLOR + ";");
 							voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
-							vBox = new VBox(3);
 							iv = new ImageView(new Image(new File(path).toURI().toString()));
-							iv.setFitHeight(150);
 							iv.setFitWidth(150);
 							iv.setPreserveRatio(false);
-							vBox.setAlignment(Pos.CENTER);
+							iv.setFitHeight(150);			
 							vBox.getChildren().addAll(iv, username, voto);
+							vBox.setAlignment(Pos.CENTER);
 							setGraphic(vBox);
 							setStyle(FXBACK + COLOR + ";");
 						}
@@ -200,7 +200,6 @@ public class AskBeginnerBoundary implements Initializable {
 						} else {
 							path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						}
-						vBox = new VBox(3);
 						iv = new ImageView(new Image(new File(path).toURI().toString()));
 						username = new Label(item.getUsername());
 						voto = new Label(item.getVoto() + "/5.0");
@@ -208,9 +207,10 @@ public class AskBeginnerBoundary implements Initializable {
 						voto.setFont(Font.font(FONT, 13));
 						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
 						voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
+						vBox = new VBox(3);
+						iv.setPreserveRatio(false);
 						iv.setFitHeight(150);
 						iv.setFitWidth(150);
-						iv.setPreserveRatio(false);
 						vBox.setAlignment(Pos.CENTER);
 						vBox.getChildren().addAll(iv, username, voto);
 						setGraphic(vBox);
@@ -297,12 +297,12 @@ public class AskBeginnerBoundary implements Initializable {
 						voto.setFont(Font.font(FONT, 13));
 						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
 						voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
-						path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						vBox = new VBox(3);
+						path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						iv = new ImageView(new Image(new File(path).toURI().toString()));
 						iv.setFitHeight(150);
-						iv.setFitWidth(150);
 						iv.setPreserveRatio(false);
+						iv.setFitWidth(150);
 						vBox.setAlignment(Pos.CENTER);
 						vBox.getChildren().addAll(iv, username, voto);
 						setGraphic(vBox);
