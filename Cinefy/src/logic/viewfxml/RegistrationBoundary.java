@@ -41,7 +41,7 @@ import logic.exceptions.FieldEmptyException;
 import logic.exceptions.FieldTooLongException;
 import logic.utils.ExceptionInfo;
 import logic.utils.FileManager;
-import logic.utils.Roles;
+
 
 public class RegistrationBoundary implements Initializable {
 
@@ -109,9 +109,7 @@ public class RegistrationBoundary implements Initializable {
 	
 	private String profession = null;
 
-	private Roles role = null;
-	
-	private String noSelRole = "noSelRole"; 
+	private String role = null;
 	
 	private boolean imageChanged = false; //booleano: true se l' immagine è diversa da quella di default, false altrimenti
 	
@@ -201,9 +199,9 @@ public class RegistrationBoundary implements Initializable {
 
 			
 			
-				if (role == Roles.BEGINNERUSER || role==null) {
+				if (role.equals("beginner") || role==null) {
 					BeginnerUserBean bub = new BeginnerUserBean();
-					if(role==null) { bub.setRole(noSelRole); }
+					
 					bub.setUsername(username);
 					bub.setPassword(this.tfPass.getText());
 					bub.setBio(this.tfTellus.getText());
@@ -213,7 +211,7 @@ public class RegistrationBoundary implements Initializable {
 					
 				}
 			
-				else if (role == Roles.ADVANCEDUSER) {
+				else if (role.equals("advanced")) {
 					AdvancedUserBean aub = new AdvancedUserBean();
 					aub.setUsername(username);
 					aub.setPassword(this.tfPass.getText());
@@ -323,7 +321,7 @@ public class RegistrationBoundary implements Initializable {
 	public void onBeginnerPressed(ActionEvent event) {
 
 		splitMenu.setText("Beginner");
-		role = Roles.BEGINNERUSER;
+		role = "beginner";
 		this.splitMenuProf.setText("Your profession:");
 		profession=null;
 	    this.userTypeError.setText("");
@@ -336,7 +334,7 @@ public class RegistrationBoundary implements Initializable {
 	public void onAdvancedPressed(ActionEvent event) {
 
 		splitMenu.setText("Advanced");
-		role = Roles.ADVANCEDUSER;
+		role = "advanced";
 		this.userTypeError.setText("");
 		splitMenuProf.visibleProperty().set(true);
 
