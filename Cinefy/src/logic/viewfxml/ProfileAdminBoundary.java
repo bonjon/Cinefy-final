@@ -33,7 +33,7 @@ public class ProfileAdminBoundary implements Initializable {
 	private ImageView profilePic;
 
 	private AdminGraphicChange agc;
-	private GeneralUserBean gub;
+	
 
 	@FXML
 	public void onHomeClicked(MouseEvent event) throws IOException {
@@ -48,9 +48,11 @@ public class ProfileAdminBoundary implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		GeneralUserBean gub;
 		this.agc = AdminGraphicChange.getInstance();
-		this.gub = SessionUser.getInstance().getSession();
-		this.username.setText(this.gub.getUsername());
+		gub = SessionUser.getInstance().getSession();
+		this.username.setText(gub.getUsername());
 		String path = FileManager.PROFILE + File.separator + "default.png";
 		File file = new File(path);
 		Image img = new Image(file.toURI().toString());
