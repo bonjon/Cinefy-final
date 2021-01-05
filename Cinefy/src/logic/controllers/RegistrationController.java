@@ -42,7 +42,7 @@ public class RegistrationController {
 		}
 
 		boolean lengthControl = fieldTooLongControls(bub, bub.getBio());
-		if (lengthControl == true) {
+		if (lengthControl) {
 			throw new FieldTooLongException("Too many characters for this field");
 		}
 
