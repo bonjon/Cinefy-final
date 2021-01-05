@@ -48,13 +48,13 @@ public class ProfileController extends Controller {
 
 	public List<AdvancedUserBean> differentAdv(String beginner) throws ClassNotFoundException, SQLException {
 
-		List<DomandaBean> ld = Collections.emptyList();
+		List<DomandaBean> ld;
 		int i = 0;
 
 		ld = getQuestions(beginner, "beginner");
 
-		List<AdvancedUserBean> contactedAdv = new ArrayList<AdvancedUserBean>();
-		List<AdvancedUserBean> differentAdv = new ArrayList<AdvancedUserBean>();
+		List<AdvancedUserBean> contactedAdv = new ArrayList<>();
+		List<AdvancedUserBean> differentAdv = new ArrayList<>();
 
 		while (i < ld.size()) { // prendo tutti gli advanced e li metto in una lista
 			AdvancedUserBean advanced = new AdvancedUserBean();
