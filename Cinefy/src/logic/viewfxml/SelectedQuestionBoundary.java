@@ -52,11 +52,11 @@ public class SelectedQuestionBoundary  {
 	@FXML
 	private ImageView ivBegPic;
 	@FXML
-	private Label laUsername;
+	private Label laBio;
 	@FXML
 	private Label laNumber;
 	@FXML
-	private Label laBio;
+	private Label laUsername;
 	@FXML
 	private Label laBioTitle;
 	@FXML
@@ -176,7 +176,7 @@ public class SelectedQuestionBoundary  {
 				
 				rb.setColleagueFlag(colleague);
 				rb.setColleagueName(colleagueName);
-				if(!buttonFocused) {reasonChoice=null;};
+				if(!buttonFocused) {reasonChoice=null;}
 				rb.setReasonChoice(reasonChoice);
 			}
 			
@@ -237,7 +237,7 @@ public class SelectedQuestionBoundary  {
 	@FXML
 	public void onSwitchPressed(ActionEvent event) {
 		this.submitError.setText("");
-		if(change==true) {
+		if(change) {
 			laType.setText("General answer");
 			technicalPane.setVisible(true);
 			advicePane.setVisible(false);
@@ -273,7 +273,7 @@ public class SelectedQuestionBoundary  {
 		this.agc = AdvancedGraphicChange.getInstance();
 		advancedName = db.getAdvancedName();
 		aqc = new AnswerQuestionsController();
-		aub = new AdvancedUserBean();
+		
 		begub=bub;
 		
 	
