@@ -18,7 +18,7 @@ public class TestAddQuestion {
 	private static final String TEST = "test";
 
 	@Test(expected = FieldTooLongException.class)
-	public void testAddQuestionTooLong() throws FieldTooLongException, SQLException, FieldEmptyException {
+	public void testAddQuestionTooLong() throws FieldTooLongException, SQLException, FieldEmptyException, ClassNotFoundException {
 		AskForQuestionsController afc = new AskForQuestionsController();
 		StringBuilder bld = new StringBuilder();
 		for (int i = 0; i < 200; i++) {

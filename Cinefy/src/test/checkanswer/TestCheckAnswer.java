@@ -18,7 +18,7 @@ public class TestCheckAnswer {
 	private static final String TEST = "test";
 	
 	@Test
-	public void testCheckAnswer() throws NumberFormatException, SQLException {
+	public void testCheckAnswer() throws NumberFormatException, SQLException, ClassNotFoundException {
 		AskForQuestionsController afc = new AskForQuestionsController();
 		GeneralUserBean gub = new GeneralUserBean();
 		gub.setUsername(TEST);
