@@ -121,7 +121,7 @@ public class RegistrationBoundary implements Initializable {
 	
 	private static final Logger logger = Logger.getLogger(RegistrationBoundary.class.getName());
 
-	private String newFileName;
+	private String newFileName = null;
 	
 	private String usernameAlreadyUsed = "This username has been already used";
 	
@@ -191,9 +191,7 @@ public class RegistrationBoundary implements Initializable {
 		
 		try {
 		
-		if(!imageChanged) { newFileName = null;}
-		
-		else {
+		if(imageChanged) {
 		
 			fileName=this.imageFile.getName();
 			nomeFile=fileName;
@@ -243,6 +241,9 @@ public class RegistrationBoundary implements Initializable {
 			}
 		
 		catch (FieldEmptyException | FieldTooLongException e) {
+			
+			//ad ogni indice della lista delle labels corrisponde un indice della lista dei booleani che descrivono
+			//il tipo d errore
 
 			ExceptionInfo ei = controller.getExceptionInfo();
 			int y=0;
@@ -269,6 +270,7 @@ public class RegistrationBoundary implements Initializable {
 			
 			while(y<info.size()) {
 				if(info.get(y).equals(true)) {
+					//se il booleano di info torna true setto il messaggio d' errore sulla label corrispondente
 					labels.get(y).setText(e.getMessage());
 					tooLong = true;
 				}
