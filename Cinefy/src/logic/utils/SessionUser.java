@@ -12,17 +12,17 @@ import logic.bean.GeneralUserBean;
 public class SessionUser {
 
 	private GeneralUserBean userSession = null;
-	private static SessionUser INSTANCE = null;
+	private static SessionUser instance = null;
 
 	private SessionUser() {
 
 	}
 
 	public static SessionUser getInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new SessionUser();
+		if (instance == null) {
+			instance = new SessionUser();
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 	public void setSession(GeneralUserBean userSession) {
