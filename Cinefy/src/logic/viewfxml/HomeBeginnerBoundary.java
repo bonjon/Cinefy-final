@@ -215,12 +215,11 @@ public class HomeBeginnerBoundary implements Initializable {
 			@Override
 			protected void updateItem(FilmBean item, boolean empty) {
 				super.updateItem(item, empty);
+				setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 				if (empty || item == null || item.getTitolo() == null) {
 					setText(null);
-					setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 				} else {
 					setText(item.getTitolo());
-					setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 				}
 			}
 		});

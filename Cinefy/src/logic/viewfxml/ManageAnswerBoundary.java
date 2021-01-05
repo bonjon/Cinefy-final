@@ -16,7 +16,6 @@ import javafx.scene.input.MouseEvent;
 import logic.bean.RispostaBean;
 import logic.controllers.AnswerQuestionsController;
 
-
 public class ManageAnswerBoundary {
 	@FXML
 	private Label home;
@@ -40,40 +39,32 @@ public class ManageAnswerBoundary {
 		this.agc.toProfile(this.profile.getScene());
 
 	}
-	
 
-     public void onAccept(ActionEvent event) throws IOException {
+	@FXML
+	public void onAccept(ActionEvent event) throws IOException, ClassNotFoundException {
 		try {
 			this.aqc.acceptAnswer(this.selectedAnswer);
 			this.agc.toHomepage(this.btnAccept.getScene());
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
 
 	@FXML
-	public void onReject(ActionEvent event) throws IOException  {
+	public void onReject(ActionEvent event) throws IOException, ClassNotFoundException {
 		try {
-		this.aqc.rejectAnswer(this.selectedAnswer);
-		this.agc.toHomepage(this.btnReject.getScene());
-		}
-		catch (NumberFormatException e) {
-			e.printStackTrace();
-		} 
-		catch (SQLException e) {
+			this.aqc.rejectAnswer(this.selectedAnswer);
+			this.agc.toHomepage(this.btnReject.getScene());
+		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();
 		}
-	
 	}
-	
+
 	@FXML
 	public void onBack(ActionEvent event) throws IOException {
 		this.agc.toHomepage(this.btnBack.getScene());
 	}
-	
+
 	public void init(RispostaBean rb) {
 		this.selectedAnswer = rb;
 		this.agc = AdminGraphicChange.getInstance();
