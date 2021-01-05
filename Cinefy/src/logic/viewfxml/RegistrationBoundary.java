@@ -103,7 +103,7 @@ public class RegistrationBoundary implements Initializable {
 
 	private File imageFile ;
 
-	public String fileName;
+	
 	
 	private String profession = null;
 
@@ -201,7 +201,7 @@ public class RegistrationBoundary implements Initializable {
 			
 				if (role == Roles.BEGINNERUSER || role==null) {
 					BeginnerUserBean bub = new BeginnerUserBean();
-					if(role==null) { bub.setRole(noSelRole); };
+					if(role==null) { bub.setRole(noSelRole); }
 					bub.setUsername(username);
 					bub.setPassword(this.tfPass.getText());
 					bub.setBio(this.tfTellus.getText());
@@ -272,24 +272,24 @@ public class RegistrationBoundary implements Initializable {
 				this.userError.setText(e.getMessage());
 				
 			}
-			if (ei.getEmptyPassword()) {
+			else if (ei.getEmptyPassword()) {
 				this.passwordError.setText(e.getMessage());
 			}
-			if (ei.getEmptyRole()) {
+			else if (ei.getEmptyRole()) {
 				this.userTypeError.setText(e.getMessage());
 			}
-			if (ei.getEmptyProfession()) {
+			else if (ei.getEmptyProfession()) {
 				this.professionError.setText(e.getMessage());
 			}
-			if (ei.getTooLongUser()) {
+			else if (ei.getTooLongUser()) {
 				this.userError.setText(e.getMessage());
 				this.userTooLongError.setVisible(true);
 			}
-			if(ei.getTooLongPassword()) {
+			else if(ei.getTooLongPassword()) {
 				this.passwordError.setText(e.getMessage());
 				this.passwordTooLongError.setVisible(true);
 			}
-			if(ei.getTooLongBio()) {
+			else if(ei.getTooLongBio()) {
 				this.bioError.setText(e.getMessage());
 				this.bioTooLongError.setVisible(true);
 			}
