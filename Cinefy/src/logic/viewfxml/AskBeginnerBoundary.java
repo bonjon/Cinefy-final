@@ -504,7 +504,8 @@ public class AskBeginnerBoundary implements Initializable {
 						Label username;
 						Label voto;
 						VBox vBox;
-						String path = FileManager.PROFILE + File.separator + item.getProfilePic();
+						String path;
+						path = FileManager.PROFILE + File.separator + item.getProfilePic();
 						vBox = new VBox(3);
 						iv = new ImageView(new Image(new File(path).toURI().toString()));
 						username = new Label(item.getUsername());
@@ -555,7 +556,7 @@ public class AskBeginnerBoundary implements Initializable {
 					ImageView iv;
 					Label label;
 					HBox hBox;
-					if (!lb.isEmpty() && lb.contains(item)) {
+					if (lb.contains(item)) {
 						path = FileManager.YELLOW;
 						hBox = new HBox(2);
 						iv = new ImageView(new Image(new File(path).toURI().toString()));
@@ -568,8 +569,7 @@ public class AskBeginnerBoundary implements Initializable {
 						hBox.setAlignment(Pos.CENTER_LEFT);
 						setGraphic(hBox);
 						setStyle(FXBACK + COLOR + ";");
-					}
-					if (!ldb.isEmpty() && ldb.contains(item)) {
+					} else if (ldb.contains(item)) {
 						controlAnswer(item, gub);
 					}
 				}
@@ -580,34 +580,22 @@ public class AskBeginnerBoundary implements Initializable {
 				ImageView iv;
 				Label label;
 				HBox hBox;
+				path = FileManager.MARK;
 				try {
 					if (!afc.checkAnswer(gub.getUsername(), item.getId())) {
 						path = FileManager.GREEN;
-						hBox = new HBox(2);
-						iv = new ImageView(new Image(new File(path).toURI().toString()));
-						label = new Label(item.getContenuto());
-						label.setFont(Font.font(FONT, 15));
-						iv.setFitHeight(50);
-						iv.setFitWidth(50);
-						iv.setPreserveRatio(false);
-						hBox.getChildren().addAll(iv, label);
-						hBox.setAlignment(Pos.CENTER_LEFT);
-						setGraphic(hBox);
-						setStyle(FXBACK + COLOR + ";");
-					} else {
-						path = FileManager.MARK;
-						hBox = new HBox(2);
-						iv = new ImageView(new Image(new File(path).toURI().toString()));
-						label = new Label(item.getContenuto());
-						label.setFont(Font.font(FONT, 15));
-						iv.setFitHeight(50);
-						iv.setFitWidth(50);
-						iv.setPreserveRatio(false);
-						hBox.getChildren().addAll(iv, label);
-						hBox.setAlignment(Pos.CENTER_LEFT);
-						setGraphic(hBox);
-						setStyle(FXBACK + COLOR + ";");
 					}
+					hBox = new HBox(2);
+					iv = new ImageView(new Image(new File(path).toURI().toString()));
+					label = new Label(item.getContenuto());
+					label.setFont(Font.font(FONT, 15));
+					iv.setFitHeight(50);
+					iv.setFitWidth(50);
+					iv.setPreserveRatio(false);
+					hBox.getChildren().addAll(iv, label);
+					hBox.setAlignment(Pos.CENTER_LEFT);
+					setGraphic(hBox);
+					setStyle(FXBACK + COLOR + ";");
 				} catch (NumberFormatException | SQLException | ClassNotFoundException e) {
 					e.printStackTrace();
 				}
