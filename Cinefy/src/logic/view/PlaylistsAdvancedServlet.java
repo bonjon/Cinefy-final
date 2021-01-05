@@ -40,7 +40,7 @@ public class PlaylistsAdvancedServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("playlist_advanced.jsp");
 		ViewPlaylistsController vpc = new ViewPlaylistsController();
 		List<PlaylistBean> topLP = new ArrayList<>();
-		List<PlaylistBean> Lp = new ArrayList<>();
+		List<PlaylistBean> lp = new ArrayList<>();
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 		try {
 			topLP = vpc.getLeaderBoard();
@@ -53,19 +53,19 @@ public class PlaylistsAdvancedServlet extends HttpServlet {
 		}
 		session.setAttribute(TOPLP, topLP);
 		try {
-			Lp = vpc.getPlaylistByAd(gub.getUsername());
-			request.setAttribute("LP", Lp);
+			lp = vpc.getPlaylistByAd(gub.getUsername());
+			request.setAttribute("LP", lp);
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (PlaylistNotFoundException e) {
 			request.setAttribute("LP", Collections.emptyList());
 			request.setAttribute("errorx", e.getMessage());
 		}
-		session.setAttribute("LP", Lp);
+		session.setAttribute("LP", lp);
 		if (request.getParameter("a") != null)
 			rd = this.goToPlaylist(session, request, topLP);
 		if (request.getParameter("b") != null)
-			rd = this.goToPlaylist(session, request, Lp);
+			rd = this.goToPlaylist(session, request, lp);
 		rd.forward(request, response);
 	}
 

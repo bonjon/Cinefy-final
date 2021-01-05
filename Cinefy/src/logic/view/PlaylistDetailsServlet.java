@@ -34,9 +34,9 @@ public class PlaylistDetailsServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("playlist.jsp");
 		PlaylistDetailsController pdc = new PlaylistDetailsController();
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
-		PlaylistBean Pb = (PlaylistBean) session.getAttribute("P");
+		PlaylistBean pb = (PlaylistBean) session.getAttribute("P");
 		if (request.getParameter("BTNOK") != null) {
-			rd = this.votePlaylist(request, pdc, gub, Pb);
+			rd = this.votePlaylist(request, pdc, gub, pb);
 		}
 		rd.forward(request, response);
 	}

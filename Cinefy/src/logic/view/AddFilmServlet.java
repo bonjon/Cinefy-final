@@ -28,7 +28,7 @@ public class AddFilmServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	public static final String ADDFILM = "add_film.jsp";
-	public static final String ERROR = "";
+	public static final String ERROR = "error";
 
 	public AddFilmServlet() {
 		super();
@@ -41,11 +41,11 @@ public class AddFilmServlet extends HttpServlet {
 		CreatePlaylistController cpc = new CreatePlaylistController();
 		ViewListOfFilmsController vfc = new ViewListOfFilmsController();
 		PlaylistBean pb = (PlaylistBean) session.getAttribute("pb");
-		FilmBean Fb = new FilmBean();
+		FilmBean fb = new FilmBean();
 		String film = (String) request.getParameter("film");
 		try {
-			Fb = vfc.getFilm(film);
-			addFilm(cpc, pb, Fb, request, rd);
+			fb = vfc.getFilm(film);
+			addFilm(cpc, pb, fb, request);
 			rd = request.getRequestDispatcher(ADDFILM);
 		} catch (FilmNotFoundException e) {
 			request.setAttribute(ERROR, e.getMessage());
@@ -58,8 +58,7 @@ public class AddFilmServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	private void addFilm(CreatePlaylistController cpc, PlaylistBean pb, FilmBean fb, HttpServletRequest request,
-			RequestDispatcher rd) {
+	private void addFilm(CreatePlaylistController cpc, PlaylistBean pb, FilmBean fb, HttpServletRequest request) {
 		try {
 			cpc.addFilm(Integer.parseInt(pb.getId()), fb);
 			request.setAttribute(ERROR, "Film added in Playlist!");
@@ -67,6 +66,6 @@ public class AddFilmServlet extends HttpServlet {
 			e.printStackTrace();
 		} catch (FieldEmptyException e) {
 			request.setAttribute(ERROR, e.getMessage());
-		} 
+		}
 	}
 }

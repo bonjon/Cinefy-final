@@ -62,7 +62,7 @@ public class CreatePlaylistServlet extends HttpServlet {
 			throws ClassNotFoundException {
 		String name = (String) request.getParameter("name");
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
-		PlaylistBean pb = new PlaylistBean();
+		PlaylistBean pb;
 		String newFileName = null;
 		String fileName = "";
 		Part filePart = null;

@@ -52,9 +52,7 @@ public class AskBeginnerServlet extends HttpServlet {
 			} else {
 				request.setAttribute(TOPAD, topAd);
 			}
-		} catch (SQLException e) {
-			request.setAttribute("errorx", e.getMessage());
-		} catch (AdvancedNotFoundException | ClassNotFoundException e) {
+		} catch (AdvancedNotFoundException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		session.setAttribute(TOPAD, topAd);
@@ -69,31 +67,34 @@ public class AskBeginnerServlet extends HttpServlet {
 		}
 		session.setAttribute("questions", questions);
 		if (request.getParameter("a") != null) {
-			rd = this.goToQuestion(session, request, afc);
+			rd = this.goToQuestion(session, request);
 		} else if (request.getParameter("d") != null) {
 			int index = Integer.parseInt(request.getParameter("index2"));
 			DomandaBean db = (DomandaBean) questions.get(index);
-			RispostaBean r = new RispostaBean();
 			session.setAttribute("QU", db);
-			try {
-				r = afc.getAnswer(gub.getUsername(), db.getId());
-				if (r == null) {
-					request.setAttribute(ERROR, "No answer from this advanced");
-					rd = request.getRequestDispatcher("ask_beginner.jsp");
-				} else {
-					rd = request.getRequestDispatcher("QuestionDetailsServlet");
-				}
-			} catch (NumberFormatException | ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				request.setAttribute(ERROR, e.getMessage());
-			}
+			getAnswer(gub, db, rd, request);
 		}
 		rd.forward(request, response);
 	}
 
-	private RequestDispatcher goToQuestion(HttpSession session, HttpServletRequest request,
-			AskForQuestionsController afc) {
+	private void getAnswer(GeneralUserBean gub, DomandaBean db, RequestDispatcher rd, HttpServletRequest request) {
+		try {
+			AskForQuestionsController afc = new AskForQuestionsController();
+			RispostaBean r = afc.getAnswer(gub.getUsername(), db.getId());
+			if (r == null) {
+				request.setAttribute(ERROR, "No answer from this advanced");
+				rd = request.getRequestDispatcher("ask_beginner.jsp");
+			} else {
+				rd = request.getRequestDispatcher("QuestionDetailsServlet");
+			}
+		} catch (NumberFormatException | ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			request.setAttribute(ERROR, e.getMessage());
+		}		
+	}
+
+	private RequestDispatcher goToQuestion(HttpSession session, HttpServletRequest request) {
 		int index = Integer.parseInt(request.getParameter("index"));
 		@SuppressWarnings("unchecked")
 		List<AdvancedUserBean> topAd = (List<AdvancedUserBean>) session.getAttribute(TOPAD);
