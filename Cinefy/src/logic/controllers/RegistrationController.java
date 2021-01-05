@@ -15,7 +15,7 @@ import logic.utils.ExceptionInfo;
 
 public class RegistrationController {
 	
-	ExceptionInfo ei;
+	ExceptionInfo ei = new ExceptionInfo();
 
 	public Boolean createBeginnerUser(BeginnerUserBean bub)
 			throws FieldEmptyException, FieldTooLongException, ClassNotFoundException {

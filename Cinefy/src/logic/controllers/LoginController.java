@@ -6,8 +6,11 @@ import logic.bean.GeneralUserBean;
 import logic.dao.GeneralUserDAO;
 import logic.entities.GeneralUser;
 import logic.exceptions.FieldEmptyException;
+import logic.utils.ExceptionInfo;
 
 public class LoginController {
+	
+	ExceptionInfo ei= new ExceptionInfo();
 
 	public GeneralUserBean login(GeneralUserBean userBean) throws 
 	FieldEmptyException, ClassNotFoundException {
@@ -15,14 +18,14 @@ public class LoginController {
 		
 
 		if (userBean.getUsername().equals("")) {
-			FieldEmptyException.EMPTYUSERNAME = true;
+			ei.EMPTYUSERNAME = true;
 			beanCheck=true;
 		}
 		if (userBean.getPassword().equals("")) {
-			FieldEmptyException.EMPTYPASSWORD = true;
+			ei.EMPTYPASSWORD = true;
 			beanCheck=true;
 		}
-		if(beanCheck==true) {
+		if(beanCheck) {
 			beanCheck=false;
 			throw new FieldEmptyException("This field cannot be empty");
 		}
@@ -41,5 +44,9 @@ public class LoginController {
 		catch(SQLException | NullPointerException e) {
 			return null;
 		}
+	}
+	
+	public ExceptionInfo getExceptionInfo() {
+		return ei;
 	}
 }

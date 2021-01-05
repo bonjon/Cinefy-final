@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import logic.bean.GeneralUserBean;
 import logic.controllers.LoginController;
 import logic.exceptions.FieldEmptyException;
+import logic.utils.ExceptionInfo;
 import logic.utils.FileManager;
 import logic.utils.SessionUser;
 import javafx.event.ActionEvent;
@@ -42,7 +43,10 @@ public class LoginBoundary implements Initializable {
 	@FXML
 	private Label userPassInvalid;
 	@FXML
-	private ImageView cinema, facebook;
+	private ImageView cinema;
+	
+	@FXML
+	private ImageView facebook;
 
 	
 	@FXML
@@ -91,13 +95,15 @@ public class LoginBoundary implements Initializable {
 			}
 		}
 			catch (FieldEmptyException e) {
-				if (FieldEmptyException.EMPTYUSERNAME==true) {
+				ExceptionInfo info = new ExceptionInfo();
+				info = controller.getExceptionInfo();
+				if (info.EMPTYUSERNAME) {
 					this.userError.setText(e.getMessage());
-					FieldEmptyException.EMPTYUSERNAME=false;
+					
 				}
-				if (FieldEmptyException.EMPTYPASSWORD==true) {
+				if (info.EMPTYPASSWORD) {
 					this.passwordError.setText(e.getMessage());
-					FieldEmptyException.EMPTYPASSWORD=false;
+					
 				}
 			}
 		}
@@ -107,14 +113,12 @@ public class LoginBoundary implements Initializable {
 
 	@FXML
 	public void onRegistrationPressed(ActionEvent event) throws IOException {
-		try {
+		
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Regis.fxml"));
 
 			Scene sc = ((Node) event.getSource()).getScene();
 			sc.setRoot(loader.load());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 
 	}
 	
@@ -128,7 +132,7 @@ public class LoginBoundary implements Initializable {
 		    passwordError.setText("");
 		    userPassInvalid.setVisible(false);
 		}
-		return;
+		
 }
 
 
