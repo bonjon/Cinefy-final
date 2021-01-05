@@ -88,7 +88,7 @@ public abstract class Controller {
 		return ldb;
 	}
 
-	protected DomandaBean convert(Domanda d) {
+	public DomandaBean convert(Domanda d) {
 		DomandaBean db = new DomandaBean();
 		db.setId(d.getId());
 		db.setAdvancedName(d.getAdvancedName());
@@ -119,7 +119,7 @@ public abstract class Controller {
 		return lpb;
 	}
 
-	protected RispostaBean convert(Risposta r) {
+	public RispostaBean convert(Risposta r) {
 		RispostaBean rb = new RispostaBean();
 		rb.setAdvancedName(r.getAdvancedName());
 		rb.setBeginnerName(r.getBeginnerName());
