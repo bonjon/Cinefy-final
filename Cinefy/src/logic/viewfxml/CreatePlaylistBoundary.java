@@ -93,9 +93,10 @@ public class CreatePlaylistBoundary implements Initializable {
 	private PlaylistBean pb;
 	private FilmBean selected;
 	private File imageFile;
-	private String pathPic;
+	
+	private String defaultPic = "default2.jpg";
 
-	private static final Logger logger = Logger.getLogger(RegistrationBoundary.class.getName());
+	private static final Logger logger = Logger.getLogger(CreatePlaylistBoundary.class.getName());
 
 	@FXML
 	public void onHomeClicked(MouseEvent event) throws IOException {
@@ -123,20 +124,20 @@ public class CreatePlaylistBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onOk(ActionEvent event) throws IOException {
+	public void onOk(ActionEvent event) throws IOException, ClassNotFoundException {
 		try {
 			GeneralUserBean gub = SessionUser.getInstance().getSession();
-			String fileName;
+			String pathPic;
+			String fileName = "";
 			String newFileName;
 			String playlist = this.playlistName.getText();
 			if (this.imageFile == null) {
-				fileName = "";
-				newFileName = "default2.jpg";
-				this.pathPic = newFileName;
+				newFileName = defaultPic;
+				pathPic = newFileName;
 			} else {
 				fileName = this.imageFile.getName();
 				newFileName = playlist + fileName;
-				this.pathPic = newFileName;
+				pathPic = newFileName;
 				String path = FileManager.PLAYLISTS;
 				fileName = imageFile.getName();
 				File file = new File(path, fileName);
@@ -158,10 +159,9 @@ public class CreatePlaylistBoundary implements Initializable {
 			this.tvStatus.setText("Now you can insert films");
 			this.movie.setVisible(true);
 			this.filmPlaylist.setVisible(true);
-		} catch (FieldEmptyException e) {
+		} catch (FieldEmptyException | FieldTooLongException e) {
 			this.nameError.setText(e.getMessage());
-		} catch (FieldTooLongException e) {
-			this.nameError.setText(e.getMessage());
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -173,7 +173,7 @@ public class CreatePlaylistBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onAdd(ActionEvent event) throws NumberFormatException, SQLException {
+	public void onAdd(ActionEvent event) throws NumberFormatException, SQLException, ClassNotFoundException {
 		try {
 			this.cpc.addFilm(Integer.parseInt(this.pb.getId()), this.selected);
 		} catch (FieldEmptyException e) {
@@ -184,7 +184,7 @@ public class CreatePlaylistBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onEnterPressed(KeyEvent event) {
+	public void onEnterPressed(KeyEvent event) throws ClassNotFoundException {
 		this.filmPlaylist.getItems().clear();
 		this.labelError.setText("");
 		ViewListOfFilmsController vfc = new ViewListOfFilmsController();
@@ -230,7 +230,7 @@ public class CreatePlaylistBoundary implements Initializable {
 				new FileChooser.ExtensionFilter("PNG", "*.png"));
 		this.imageFile = fc.showOpenDialog(new Stage());
 		if(this.imageFile==null) {
-			String path = FileManager.PLAYLISTS + File.separator + "default2.jpg";
+			String path = FileManager.PLAYLISTS + File.separator + defaultPic;
 			File file = new File(path);
 			Image img = new Image(file.toURI().toString());
 			this.imageView.setImage(img);
@@ -240,7 +240,7 @@ public class CreatePlaylistBoundary implements Initializable {
 			Image image = new Image(input);
 			this.imageView.setImage(image);
 		}
-			return;
+			
 	}
 	
 	public void keyPressed(KeyEvent event) {
@@ -251,14 +251,14 @@ public class CreatePlaylistBoundary implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		String path = FileManager.PLAYLISTS + File.separator + "default2.jpg";
+		String path = FileManager.PLAYLISTS + File.separator + defaultPic;
 		File file = new File(path);
 		Image img = new Image(file.toURI().toString());
 		this.imageView.setImage(img);
 		this.agc = AdvancedGraphicChange.getInstance();
 		this.cpc = new CreatePlaylistController();
 		list = FXCollections.observableArrayList();
-		;
+		
 		this.tvStatus.setText("");
 		this.movie.setVisible(false);
 		this.btnAdd.setVisible(false);
