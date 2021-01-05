@@ -284,11 +284,11 @@ public class RegistrationBoundary implements Initializable {
 		
 	}
 	
-	private void imageCopy(String fName, String username) throws IOException {
+	private void imageCopy(String fileName, String username) throws IOException {
 		//copia dell' immagine nella cartella "img"
 		
 		String path = FileManager.PROFILE;
-		
+		String fName = fileName;
 
 		if(!imageChanged) {
 			newFileName=FileManager.generateNewFileName(defaultPic, username);
