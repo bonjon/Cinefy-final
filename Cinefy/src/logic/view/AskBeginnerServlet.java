@@ -72,26 +72,31 @@ public class AskBeginnerServlet extends HttpServlet {
 			int index = Integer.parseInt(request.getParameter("index2"));
 			DomandaBean db = (DomandaBean) questions.get(index);
 			session.setAttribute("QU", db);
-			getAnswer(gub, db, rd, request);
+			int i = getAnswer(gub, db, request);
+			if (i == 0) {
+				rd = request.getRequestDispatcher("QuestionDetailsServlet");
+			} else {
+				rd = request.getRequestDispatcher("ask_beginner.jsp");
+			}
 		}
 		rd.forward(request, response);
 	}
 
-	private void getAnswer(GeneralUserBean gub, DomandaBean db, RequestDispatcher rd, HttpServletRequest request) {
+	private int getAnswer(GeneralUserBean gub, DomandaBean db, HttpServletRequest request) {
+		int i = 0;
 		try {
 			AskForQuestionsController afc = new AskForQuestionsController();
 			RispostaBean r = afc.getAnswer(gub.getUsername(), db.getId());
 			if (r == null) {
 				request.setAttribute(ERROR, "No answer from this advanced");
-				rd = request.getRequestDispatcher("ask_beginner.jsp");
-			} else {
-				rd = request.getRequestDispatcher("QuestionDetailsServlet");
+				i = 1;
 			}
 		} catch (NumberFormatException | ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			request.setAttribute(ERROR, e.getMessage());
-		}		
+		}
+		return i;
 	}
 
 	private RequestDispatcher goToQuestion(HttpSession session, HttpServletRequest request) {
