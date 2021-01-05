@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import logic.bean.AdvancedUserBean;
 import logic.bean.BeginnerUserBean;
@@ -22,6 +24,8 @@ import logic.utils.Controller;
  */
 
 public class ProfileController extends Controller {
+	
+	private static final Logger logger = Logger.getLogger(ProfileController.class.getName());
 
 	public BeginnerUserBean getUser(String username, String role) throws ClassNotFoundException {
 		GeneralUserDAO gud = new GeneralUserDAO();
@@ -34,6 +38,8 @@ public class ProfileController extends Controller {
 			bub.setProfilePic(gu.getProfilePic());
 		} catch (SQLException e) {
 			e.printStackTrace();
+			logger.log(Level.WARNING, "db error");
+			
 		}
 		return bub;
 	}

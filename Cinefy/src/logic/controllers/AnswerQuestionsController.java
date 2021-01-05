@@ -291,18 +291,15 @@ public class AnswerQuestionsController extends Controller {
 		return db;
 	}
 
-	public BeginnerUserBean getBeginnerUser(String username, String role) throws ClassNotFoundException {
+	public BeginnerUserBean getBeginnerUser(String username, String role) throws ClassNotFoundException, SQLException {
 		GeneralUserDAO gud = new GeneralUserDAO();
 		BeginnerUserBean bub = new BeginnerUserBean();
-		try {
-			BeginnerUser gu = gud.findByName(username, role);
-			bub.setUsername(gu.getUsername());
-			bub.setPassword(gu.getPassword());
-			bub.setBio(gu.getBio());
-			bub.setProfilePic(gu.getProfilePic());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		BeginnerUser gu = gud.findByName(username, role);
+		bub.setUsername(gu.getUsername());
+		bub.setPassword(gu.getPassword());
+		bub.setBio(gu.getBio());
+		bub.setProfilePic(gu.getProfilePic());
+		
 		return bub;
 	}
 
