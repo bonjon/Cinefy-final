@@ -46,7 +46,7 @@ public class SelectedQuestionBoundary  {
 	@FXML
 	private Label answer;
 	@FXML
-	private Label playlists;
+	private CheckBox cbColleague;
 	@FXML
 	private Label profile;
 	@FXML
@@ -67,8 +67,9 @@ public class SelectedQuestionBoundary  {
 	private AnchorPane technicalPane;
 	@FXML
 	private TextArea taAnswer;
+	
 	@FXML
-	private CheckBox cbColleague;
+	private Label playlists;
 	@FXML
 	private CheckBox cbResources;
 	@FXML
@@ -109,14 +110,13 @@ public class SelectedQuestionBoundary  {
 	private DomandaBean selectedQuestion;
 	private AdvancedGraphicChange agc;
 	private AnswerQuestionsController aqc;
-	private RispostaBean rb;
-	private AdvancedUserBean aub;
+	
 	private BeginnerUserBean begub;
 	private String id;
 	
 	private String advancedName;
 	private String beginnerName;
-	private String selQuestion;
+	
 	private String profession;
 	private String general = "general";
 	private String filmAdvice = "film";
@@ -131,6 +131,10 @@ public class SelectedQuestionBoundary  {
 		this.agc.toHomepage(this.home.getScene());
 	}
 	
+	@FXML
+	public void onBack(ActionEvent event) throws IOException {
+		this.agc.toAnswer(this.btnBack.getScene());
+	}
 	
 	@FXML
 	public void onPlaylistsClicked(MouseEvent event) throws IOException {
@@ -142,13 +146,13 @@ public class SelectedQuestionBoundary  {
 		this.agc.toProfile(this.profile.getScene());
 	}
 	
-	@FXML
-	public void onBack(ActionEvent event) throws IOException {
-		this.agc.toAnswer(this.btnBack.getScene());
-	}
+	
 	
 	@FXML
-	public void onSubmitBtn(ActionEvent event) throws NumberFormatException, SQLException, IOException {
+	public void onSubmitBtn(ActionEvent event) throws NumberFormatException, SQLException, IOException, ClassNotFoundException {
+		
+		RispostaBean rb;
+		
 		rb = new RispostaBean();
 		rb.setAdvancedName(advancedName);
 		rb.setBeginnerName(beginnerName);
@@ -156,7 +160,7 @@ public class SelectedQuestionBoundary  {
 		
 		try {
 		
-		if(change==false) {
+		if(!change) {
 			//caso in cui la grafica è general answer
 			String generalAnswer = taAnswer.getText();
 			boolean colleague = cbColleague.isSelected();
@@ -166,17 +170,17 @@ public class SelectedQuestionBoundary  {
 			
 			rb.setContenuto(generalAnswer);
 			
-			if(colleague==true) {
+			if(colleague) {
 				String reasonChoice = splitMenuReason.getText();
 				String colleagueName = tfColleague.getText();
 				
 				rb.setColleagueFlag(colleague);
 				rb.setColleagueName(colleagueName);
-				if(buttonFocused==false) {reasonChoice=null;};
+				if(!buttonFocused) {reasonChoice=null;};
 				rb.setReasonChoice(reasonChoice);
 			}
 			
-			if(resources==true) {
+			if(resources) {
 				String wiki= tfWiki.getText();
 				String youtube = tfYoutube.getText();
 				
@@ -254,14 +258,16 @@ public class SelectedQuestionBoundary  {
 	}
 	
 
-	public void init(DomandaBean db, BeginnerUserBean bub) throws AdvancedNotFoundException, SQLException, FileNotFoundException  {
+	public void init(DomandaBean db, BeginnerUserBean bub) throws AdvancedNotFoundException, SQLException, FileNotFoundException, ClassNotFoundException  {
 		
+		AdvancedUserBean aub;
 		
 		Integer queueCount;
 		
 		selectedQuestion = db;
 		
 		String begPicPath;
+		String selQuestion;
 		
 		
 		this.agc = AdvancedGraphicChange.getInstance();
@@ -283,7 +289,7 @@ public class SelectedQuestionBoundary  {
 		aub.setQueueCount(queueCount);
 		
 		
-		this.selQuestion = selectedQuestion.getContenuto();
+		selQuestion = selectedQuestion.getContenuto();
 		laSelquestion.setText(selQuestion);
 		laType.setText("General answer");
 		
