@@ -95,8 +95,7 @@ public class LoginBoundary implements Initializable {
 			}
 		}
 			catch (FieldEmptyException e) {
-				ExceptionInfo info = new ExceptionInfo();
-				info = controller.getExceptionInfo();
+				ExceptionInfo info = controller.getExceptionInfo();
 				if (info.getEmptyUsername()) {
 					this.userError.setText(e.getMessage());
 					
