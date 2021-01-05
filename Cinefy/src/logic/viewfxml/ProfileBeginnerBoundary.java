@@ -151,7 +151,7 @@ public class ProfileBeginnerBoundary implements Initializable {
 			
 			}
 			else {
-				String elenco = ListConverter.Converter(advList);
+				String elenco = ListConverter.converter(advList);
 				
 				laAdvList.setText(elenco);
 			}
