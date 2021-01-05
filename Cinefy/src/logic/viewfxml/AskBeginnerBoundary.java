@@ -16,6 +16,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
@@ -89,8 +90,8 @@ public class AskBeginnerBoundary implements Initializable {
 	String col;
 
 	@FXML
-	public void onHomeClicked(MouseEvent event) throws IOException {
-		this.bgc.toHomepage(this.home.getScene());
+	public void onProfileClicked(MouseEvent event) throws IOException {
+		this.bgc.toProfile(this.profile.getScene());
 	}
 
 	@FXML
@@ -99,8 +100,8 @@ public class AskBeginnerBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onProfileClicked(MouseEvent event) throws IOException {
-		this.bgc.toProfile(this.profile.getScene());
+	public void onHomeClicked(MouseEvent event) throws IOException {
+		this.bgc.toHomepage(this.home.getScene());
 	}
 
 	@FXML
@@ -168,8 +169,9 @@ public class AskBeginnerBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onDirectorPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
-		this.splitMenu.setText("Director");
+	public void onFilterPressed(ActionEvent event) throws ClassNotFoundException, SQLException {
+		MenuItem item = (MenuItem) event.getSource();
+		this.splitMenu.setText(item.getText());
 		this.advanced.getItems().clear();
 		start = 1;
 		String a = this.splitMenu.getText().toString();
@@ -192,222 +194,6 @@ public class AskBeginnerBoundary implements Initializable {
 						Label username;
 						Label voto;
 						ImageView iv;
-						VBox vBox;
-						if (item.getProfilePic() == null) {
-							path = FileManager.PROFILE + File.separator + DEFAULT;
-						} else {
-							path = FileManager.PROFILE + File.separator + item.getProfilePic();
-						}
-						vBox = new VBox(3);
-						iv = new ImageView(new Image(new File(path).toURI().toString()));
-						username = new Label(item.getUsername());
-						voto = new Label(item.getVoto() + "/5.0");
-						username.setFont(Font.font(FONT, 13));
-						voto.setFont(Font.font(FONT, 13));
-						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
-						voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
-						iv.setFitHeight(150);
-						iv.setFitWidth(150);
-						iv.setPreserveRatio(false);
-						vBox.setAlignment(Pos.CENTER);
-						vBox.getChildren().addAll(iv, username, voto);
-						setGraphic(vBox);
-						setStyle(FXBACK + COLOR + ";");
-					}
-				}
-			});
-		} catch (AdvancedNotFoundException e) {
-			this.labelError1.setText(e.getMessage());
-		}
-	}
-
-	@FXML
-	public void onProductorPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
-		this.splitMenu.setText("Productor");
-		this.advanced.getItems().clear();
-		start = 1;
-		String a = this.splitMenu.getText().toString();
-		listSearch.removeAll(listSearch);
-		AdvancedUserBean ab = new AdvancedUserBean();
-		ab.setRole(a);
-		try {
-			List<AdvancedUserBean> aub = afc.getAdvancedByRole(ab);
-			listSearch.addAll(aub);
-			this.advanced.getItems().addAll(listSearch);
-			this.advanced.setCellFactory(param -> new ListCell<AdvancedUserBean>() {
-				@Override
-				protected void updateItem(AdvancedUserBean item, boolean empty) {
-					super.updateItem(item, empty);
-					if (empty || item == null) {
-						setText(null);
-						setStyle(FXBACK + COLOR + ";");
-					} else {
-						String path;
-						ImageView iv;
-						Label username;
-						Label voto;
-						VBox vBox;
-						if (item.getProfilePic() == null) {
-							path = FileManager.PROFILE + File.separator + DEFAULT;
-						} else {
-							path = FileManager.PROFILE + File.separator + item.getProfilePic();
-						}
-						vBox = new VBox(3);
-						iv = new ImageView(new Image(new File(path).toURI().toString()));
-						username = new Label(item.getUsername());
-						voto = new Label(item.getVoto() + "/5.0");
-						username.setFont(Font.font(FONT, 13));
-						voto.setFont(Font.font(FONT, 13));
-						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
-						voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
-						iv.setFitHeight(150);
-						iv.setFitWidth(150);
-						iv.setPreserveRatio(false);
-						vBox.setAlignment(Pos.CENTER);
-						vBox.getChildren().addAll(iv, username, voto);
-						setGraphic(vBox);
-						setStyle(FXBACK + COLOR + ";");
-					}
-				}
-			});
-		} catch (AdvancedNotFoundException e) {
-			this.labelError1.setText(e.getMessage());
-		}
-	}
-
-	@FXML
-	public void onActorPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
-		this.splitMenu.setText("Actor");
-		this.advanced.getItems().clear();
-		start = 1;
-		String a = this.splitMenu.getText().toString();
-		listSearch.removeAll(listSearch);
-		AdvancedUserBean ab = new AdvancedUserBean();
-		ab.setRole(a);
-		try {
-			List<AdvancedUserBean> aub = afc.getAdvancedByRole(ab);
-			listSearch.addAll(aub);
-			this.advanced.getItems().addAll(listSearch);
-			this.advanced.setCellFactory(param -> new ListCell<AdvancedUserBean>() {
-				@Override
-				protected void updateItem(AdvancedUserBean item, boolean empty) {
-					super.updateItem(item, empty);
-					if (empty || item == null) {
-						setText(null);
-						setStyle(FXBACK + COLOR + ";");
-					} else {
-						String path;
-						ImageView iv;
-						Label username;
-						Label voto;
-						VBox vBox;
-						if (item.getProfilePic() == null) {
-							path = FileManager.PROFILE + File.separator + DEFAULT;
-						} else {
-							path = FileManager.PROFILE + File.separator + item.getProfilePic();
-						}
-						vBox = new VBox(3);
-						iv = new ImageView(new Image(new File(path).toURI().toString()));
-						username = new Label(item.getUsername());
-						voto = new Label(item.getVoto() + "/5.0");
-						username.setFont(Font.font(FONT, 13));
-						voto.setFont(Font.font(FONT, 13));
-						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
-						voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
-						iv.setFitHeight(150);
-						iv.setFitWidth(150);
-						iv.setPreserveRatio(false);
-						vBox.setAlignment(Pos.CENTER);
-						vBox.getChildren().addAll(iv, username, voto);
-						setGraphic(vBox);
-						setStyle(FXBACK + COLOR + ";");
-					}
-				}
-			});
-		} catch (AdvancedNotFoundException e) {
-			this.labelError1.setText(e.getMessage());
-		}
-	}
-
-	@FXML
-	public void onScreenwriterPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
-		this.splitMenu.setText("Screenwriter");
-		this.advanced.getItems().clear();
-		start = 1;
-		String a = this.splitMenu.getText().toString();
-		listSearch.removeAll(listSearch);
-		AdvancedUserBean ab = new AdvancedUserBean();
-		ab.setRole(a);
-		try {
-			List<AdvancedUserBean> aub = afc.getAdvancedByRole(ab);
-			listSearch.addAll(aub);
-			this.advanced.getItems().addAll(listSearch);
-			this.advanced.setCellFactory(param -> new ListCell<AdvancedUserBean>() {
-				@Override
-				protected void updateItem(AdvancedUserBean item, boolean empty) {
-					super.updateItem(item, empty);
-					if (empty || item == null) {
-						setText(null);
-						setStyle(FXBACK + COLOR + ";");
-					} else {
-						String path;
-						ImageView iv;
-						Label username;
-						Label voto;
-						VBox vBox;
-						if (item.getProfilePic() == null) {
-							path = FileManager.PROFILE + File.separator + DEFAULT;
-						} else {
-							path = FileManager.PROFILE + File.separator + item.getProfilePic();
-						}
-						vBox = new VBox(3);
-						iv = new ImageView(new Image(new File(path).toURI().toString()));
-						username = new Label(item.getUsername());
-						voto = new Label(item.getVoto() + "/5.0");
-						username.setFont(Font.font(FONT, 13));
-						voto.setFont(Font.font(FONT, 13));
-						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
-						voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
-						iv.setFitHeight(150);
-						iv.setFitWidth(150);
-						iv.setPreserveRatio(false);
-						vBox.setAlignment(Pos.CENTER);
-						vBox.getChildren().addAll(iv, username, voto);
-						setGraphic(vBox);
-						setStyle(FXBACK + COLOR + ";");
-					}
-				}
-			});
-		} catch (AdvancedNotFoundException e) {
-			this.labelError1.setText(e.getMessage());
-		}
-	}
-
-	@FXML
-	public void onFilmeditorPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
-		this.splitMenu.setText("Film editor");
-		this.advanced.getItems().clear();
-		start = 1;
-		String a = this.splitMenu.getText().toString();
-		listSearch.removeAll(listSearch);
-		AdvancedUserBean ab = new AdvancedUserBean();
-		ab.setRole(a);
-		try {
-			List<AdvancedUserBean> aub = afc.getAdvancedByRole(ab);
-			listSearch.addAll(aub);
-			this.advanced.getItems().addAll(listSearch);
-			this.advanced.setCellFactory(param -> new ListCell<AdvancedUserBean>() {
-				@Override
-				protected void updateItem(AdvancedUserBean item, boolean empty) {
-					super.updateItem(item, empty);
-					if (empty || item == null) {
-						setText(null);
-						setStyle(FXBACK + COLOR + ";");
-					} else {
-						String path;
-						ImageView iv;
-						Label username;
-						Label voto;
 						VBox vBox;
 						if (item.getProfilePic() == null) {
 							path = FileManager.PROFILE + File.separator + DEFAULT;
@@ -581,24 +367,27 @@ public class AskBeginnerBoundary implements Initializable {
 				Label label;
 				HBox hBox;
 				path = FileManager.MARK;
+				boolean j = false;
 				try {
-					if (!afc.checkAnswer(gub.getUsername(), item.getId())) {
-						path = FileManager.GREEN;
-					}
-					hBox = new HBox(2);
-					iv = new ImageView(new Image(new File(path).toURI().toString()));
-					label = new Label(item.getContenuto());
-					label.setFont(Font.font(FONT, 15));
-					iv.setFitHeight(50);
-					iv.setFitWidth(50);
-					iv.setPreserveRatio(false);
-					hBox.getChildren().addAll(iv, label);
-					hBox.setAlignment(Pos.CENTER_LEFT);
-					setGraphic(hBox);
-					setStyle(FXBACK + COLOR + ";");
-				} catch (NumberFormatException | SQLException | ClassNotFoundException e) {
+					j = afc.checkAnswer(gub.getUsername(), item.getId());
+				} catch (NumberFormatException | ClassNotFoundException | SQLException e) {
 					e.printStackTrace();
 				}
+				if (!j) {
+					path = FileManager.GREEN;
+				}
+				hBox = new HBox(2);
+				iv = new ImageView(new Image(new File(path).toURI().toString()));
+				label = new Label(item.getContenuto());
+				label.setFont(Font.font(FONT, 15));
+				iv.setFitHeight(50);
+				iv.setFitWidth(50);
+				iv.setPreserveRatio(false);
+				hBox.getChildren().addAll(iv, label);
+				hBox.setAlignment(Pos.CENTER_LEFT);
+				setGraphic(hBox);
+				setStyle(FXBACK + COLOR + ";");
+
 			}
 		});
 	}

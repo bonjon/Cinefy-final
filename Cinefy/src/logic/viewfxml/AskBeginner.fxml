@@ -66,11 +66,11 @@
 								<ListView fx:id="advanced" layoutX="20.0" layoutY="346.0" onMouseClicked="#onSelectedSearchAd" orientation="HORIZONTAL" prefHeight="200.0" prefWidth="1020.0" style="-fx-background-color: #1c1c1c;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="366.0" />
 								<SplitMenuButton fx:id="splitMenu" layoutX="191.0" layoutY="320.0" mnemonicParsing="false" style="-fx-body-color: #121212; -fx-border-color: #f5c518#f5c518;" text="Search by:" textFill="#f5c518" AnchorPane.leftAnchor="211.0">
 									<items>
-										<MenuItem mnemonicParsing="false" onAction="#onDirectorPressed" text="Director" />
-										<MenuItem mnemonicParsing="false" onAction="#onProductorPressed" text="Productor" />
-										<MenuItem mnemonicParsing="false" onAction="#onActorPressed" text="Actor" />
-										<MenuItem mnemonicParsing="false" onAction="#onScreenwriterPressed" text="Screenwriter" />
-										<MenuItem mnemonicParsing="false" onAction="#onFilmeditorPressed" text="Film editor" />
+										<MenuItem mnemonicParsing="false" onAction="#onFilterPressed" text="Director" />
+										<MenuItem mnemonicParsing="false" onAction="#onFilterPressed" text="Productor" />
+										<MenuItem mnemonicParsing="false" onAction="#onFilterPressed" text="Actor" />
+										<MenuItem mnemonicParsing="false" onAction="#onFilterPressed" text="Screenwriter" />
+										<MenuItem mnemonicParsing="false" onAction="#onFilterPressed" text="Film editor" />
 									</items>
 									<font>
 										<Font name="Arial Bold" size="13.0" />
