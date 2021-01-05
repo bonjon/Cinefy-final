@@ -8,9 +8,7 @@ package logic.exceptions;
 
 public class FieldTooLongException extends Exception {
 
-	public boolean USERTOOLONG = false;
-	public boolean PASSTOOLONG = false;
-	public boolean BIOTOOLONG = false;
+	
 	
 	private static final long serialVersionUID = 1L;
 
