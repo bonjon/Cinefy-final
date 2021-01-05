@@ -73,27 +73,18 @@ public class ProfileController extends Controller {
 		}
 
 		int y;
-		int z;
-		boolean control = true; // booleano: al primo tra i differentAdv che trovo uguale al contactedAdv che
-								// sto considerando, lo setto true
-
+		
 		if (contactedAdv.isEmpty()) {
 			return differentAdv;
 		}
 		for (y = 0; y < contactedAdv.size(); y++) {
-			control = true;
+			
 			if (differentAdv.isEmpty()) {
 				differentAdv.add(contactedAdv.get(y));
 			} else {
 
-				for (z = 0; z < differentAdv.size(); z++) {
-
-					if (contactedAdv.get(y).getUsername().equals(differentAdv.get(z).getUsername())) {
-						control = false;
-						break;
-					}
-				}
-				if (control) {
+				if (!differentAdv.contains(contactedAdv.get(y))) {
+				
 					differentAdv.add(contactedAdv.get(y));
 
 				}
