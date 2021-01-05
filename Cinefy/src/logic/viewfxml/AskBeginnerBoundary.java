@@ -135,23 +135,23 @@ public class AskBeginnerBoundary implements Initializable {
 							setText(null);
 							setStyle(FXBACK + COLOR + ";");
 						} else {
+							VBox vBox;
+							ImageView iv;
 							String path;
 							Label username;
 							Label voto;
-							VBox vBox;
-							ImageView iv;
 							path = FileManager.PROFILE + File.separator + DEFAULT;
 							if (item.getProfilePic() != null) {
 								path = FileManager.PROFILE + File.separator + item.getProfilePic();
 							}
-							vBox = new VBox(3);
-							iv = new ImageView(new Image(new File(path).toURI().toString()));
 							username = new Label(item.getUsername());
 							voto = new Label(item.getVoto() + "/5.0");
 							username.setFont(Font.font(FONT, 13));
 							voto.setFont(Font.font(FONT, 13));
 							username.setStyle(TEXTFILL + TEXTCOLOR + ";");
 							voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
+							vBox = new VBox(3);
+							iv = new ImageView(new Image(new File(path).toURI().toString()));
 							iv.setFitHeight(150);
 							iv.setFitWidth(150);
 							iv.setPreserveRatio(false);
@@ -291,15 +291,15 @@ public class AskBeginnerBoundary implements Initializable {
 						Label voto;
 						VBox vBox;
 						String path;
-						path = FileManager.PROFILE + File.separator + item.getProfilePic();
-						vBox = new VBox(3);
-						iv = new ImageView(new Image(new File(path).toURI().toString()));
 						username = new Label(item.getUsername());
 						voto = new Label(item.getVoto() + "/5.0");
 						username.setFont(Font.font(FONT, 13));
 						voto.setFont(Font.font(FONT, 13));
 						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
 						voto.setStyle(TEXTFILL + TEXTCOLOR + ";");
+						path = FileManager.PROFILE + File.separator + item.getProfilePic();
+						vBox = new VBox(3);
+						iv = new ImageView(new Image(new File(path).toURI().toString()));
 						iv.setFitHeight(150);
 						iv.setFitWidth(150);
 						iv.setPreserveRatio(false);
@@ -334,7 +334,7 @@ public class AskBeginnerBoundary implements Initializable {
 			@Override
 			protected void updateItem(DomandaBean item, boolean empty) {
 				super.updateItem(item, empty);
-				if (empty || item == null) {
+				if (empty) {
 					setText(null);
 					setStyle(FXBACK + COLOR + ";");
 				} else {
@@ -387,7 +387,6 @@ public class AskBeginnerBoundary implements Initializable {
 				hBox.setAlignment(Pos.CENTER_LEFT);
 				setGraphic(hBox);
 				setStyle(FXBACK + COLOR + ";");
-
 			}
 		});
 	}
