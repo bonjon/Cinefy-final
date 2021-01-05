@@ -65,19 +65,13 @@ public class HomeAdvancedBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onPlaylistsClicked(MouseEvent event) throws IOException {
-		this.agc.toPlaylists(this.playlists.getScene());
-	}
-
-	@FXML
 	public void onProfileClicked(MouseEvent event) throws IOException {
 		this.agc.toProfile(this.profile.getScene());
 	}
-
+	
 	@FXML
-	public void onDirectorPressed(ActionEvent event) {
-		itemSelected = 1;
-		this.splitMenu.setText("Director");
+	public void onPlaylistsClicked(MouseEvent event) throws IOException {
+		this.agc.toPlaylists(this.playlists.getScene());
 	}
 
 	@FXML
@@ -86,22 +80,29 @@ public class HomeAdvancedBoundary implements Initializable {
 		this.splitMenu.setText("Nation");
 	}
 
+	
 	@FXML
 	public void onActorPressed(ActionEvent event) {
 		itemSelected = 3;
 		this.splitMenu.setText("Actor");
 	}
-
+	
 	@FXML
-	public void onYearPressed(ActionEvent event) {
-		itemSelected = 4;
-		this.splitMenu.setText("Year");
+	public void onDirectorPressed(ActionEvent event) {
+		itemSelected = 1;
+		this.splitMenu.setText("Director");
 	}
 
 	@FXML
 	public void onGenrePressed(ActionEvent event) {
 		itemSelected = 5;
 		this.splitMenu.setText("Genre");
+	}
+
+	@FXML
+	public void onYearPressed(ActionEvent event) {
+		itemSelected = 4;
+		this.splitMenu.setText("Year");
 	}
 
 	@FXML
@@ -186,24 +187,7 @@ public class HomeAdvancedBoundary implements Initializable {
 				try {
 					List<FilmBean> mlb = vfc.getFilmByGenre(a);
 					list.addAll(mlb);
-					this.listView.getItems().addAll(list);
-					/*
-					 * Utilizziamo una setCellFactory per stampare i nomi dei film, infatti essa
-					 * serve a specificare come popolare le celle con una singola colonna
-					 */
-					this.listView.setCellFactory(param -> new ListCell<FilmBean>() {
-						@Override
-						protected void updateItem(FilmBean item, boolean empty) {
-							super.updateItem(item, empty);
-							if (empty || item == null || item.getTitolo() == null) {
-								setText(null);
-								setStyle(BACK + COLOR + ";");
-							} else {
-								setText(item.getTitolo());
-								setStyle(BACK + COLOR + ";");
-							}
-						}
-					});
+					setCellsFilm();
 				} catch (FilmNotFoundException e) {
 					this.errorLabel.setText(e.getMessage());
 				}
