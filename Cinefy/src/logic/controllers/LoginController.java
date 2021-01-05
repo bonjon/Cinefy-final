@@ -18,11 +18,11 @@ public class LoginController {
 		
 
 		if (userBean.getUsername().equals("")) {
-			ei.EMPTYUSERNAME = true;
+			ei.setEmptyUsername(true);
 			beanCheck=true;
 		}
 		if (userBean.getPassword().equals("")) {
-			ei.EMPTYPASSWORD = true;
+			ei.setEmptyPassword(true);
 			beanCheck=true;
 		}
 		if(beanCheck) {

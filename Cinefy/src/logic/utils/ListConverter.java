@@ -18,7 +18,7 @@ public class ListConverter {
 		int i=0;
 		int y=0;
 		StringBuilder result;
-		String final_result;
+		String finalResult;
 		
 		result = new StringBuilder("");
 		
@@ -39,8 +39,8 @@ public class ListConverter {
 			}
 		}
 		
-		final_result=result.toString();
-		return final_result;
+		finalResult=result.toString();
+		return finalResult;
 	}
 
 }

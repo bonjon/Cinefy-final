@@ -266,28 +266,28 @@ public class RegistrationBoundary implements Initializable {
 		catch (FieldEmptyException | FieldTooLongException e) {
 			ExceptionInfo ei = new ExceptionInfo();
 			ei = controller.getExceptionInfo();
-			if (ei.EMPTYUSERNAME) {
+			if (ei.getEmptyUsername()) {
 				this.userError.setText(e.getMessage());
 				
 			}
-			if (ei.EMPTYPASSWORD) {
+			if (ei.getEmptyPassword()) {
 				this.passwordError.setText(e.getMessage());
 			}
-			if (ei.EMPTYROLE) {
+			if (ei.getEmptyRole()) {
 				this.userTypeError.setText(e.getMessage());
 			}
-			if (ei.EMPTYPROFESSION) {
+			if (ei.getEmptyProfession()) {
 				this.professionError.setText(e.getMessage());
 			}
-			if (ei.USERTOOLONG) {
+			if (ei.getTooLongUser()) {
 				this.userError.setText(e.getMessage());
 				this.userTooLongError.setVisible(true);
 			}
-			if(ei.PASSTOOLONG) {
+			if(ei.getTooLongPassword()) {
 				this.passwordError.setText(e.getMessage());
 				this.passwordTooLongError.setVisible(true);
 			}
-			if(ei.BIOTOOLONG) {
+			if(ei.getTooLongBio()) {
 				this.bioError.setText(e.getMessage());
 				this.bioTooLongError.setVisible(true);
 			}

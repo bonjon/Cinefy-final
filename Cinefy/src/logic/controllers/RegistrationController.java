@@ -23,15 +23,15 @@ public class RegistrationController {
 		
 		
 		if (bub.getUsername().equals("")) {
-			ei.EMPTYUSERNAME = true;
+			ei.setEmptyUsername(true);
 			beanCheck = true;
 		}
 		if (bub.getPassword().equals("")) {
-			ei.EMPTYPASSWORD = true;
+			ei.setEmptyPassword(true);
 			beanCheck = true;
 		}
 		if (bub.getRole() == "noSelRole") {
-			ei.EMPTYROLE = true;
+			ei.setEmptyRole(true);
 
 			beanCheck = true;
 		}
@@ -61,15 +61,15 @@ public class RegistrationController {
 		boolean beanCheck = false;
 
 		if (aub.getUsername().equals("")) {
-			ei.EMPTYUSERNAME = true;
+			ei.setEmptyUsername(true);
 			beanCheck = true;
 		}
 		if (aub.getPassword().equals("")) {
-			ei.EMPTYPASSWORD = true;
+			ei.setEmptyPassword(true);
 			beanCheck = true;
 		}
 		if (aub.getProfession() == null) {
-			ei.EMPTYPROFESSION = true;
+			ei.setEmptyProfession(true);
 			beanCheck = true;
 		}
 
@@ -99,15 +99,15 @@ public class RegistrationController {
 		boolean beanLengthCheck = false; // booleano: true se uno dei campi della bean è troppo lungo, false altrimenti.
 
 		if (gub.getUsername().length() > userLength) {
-			ei.USERTOOLONG = true;
+			ei.setTooLongUser(true);
 			beanLengthCheck = true;
 		}
 		if (gub.getPassword().length() > passwordLength) {
-			ei.PASSTOOLONG = true;
+			ei.setTooLongPass(true);
 			beanLengthCheck = true;
 		}
 		if (bio.length() > bioLength) {
-			ei.BIOTOOLONG = true;
+			ei.setTooLongBio(true);
 			beanLengthCheck = true;
 		}
 
