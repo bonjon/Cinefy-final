@@ -59,8 +59,6 @@ public class PlaylistDetailsADBoundary {
 	private Label errorFilms;
 
 	private AdvancedGraphicChange agc;
-	private PlaylistBean selectedPlaylist;
-	private PlaylistDetailsController pdc;
 
 	@FXML
 	public void onHomeClicked(MouseEvent event) throws IOException {
@@ -73,11 +71,6 @@ public class PlaylistDetailsADBoundary {
 	}
 
 	@FXML
-	public void onPlaylistsClicked(MouseEvent event) throws IOException {
-		this.agc.toPlaylists(this.playlists.getScene());
-	}
-
-	@FXML
 	public void onProfileClicked(MouseEvent event) throws IOException {
 		this.agc.toProfile(this.profile.getScene());
 	}
@@ -87,24 +80,24 @@ public class PlaylistDetailsADBoundary {
 		this.agc.toPlaylists(this.btnBack.getScene());
 	}
 	
-	public void init(PlaylistBean pb) {
-		this.pdc = new PlaylistDetailsController();
+	public void init(PlaylistBean pb) throws ClassNotFoundException {
+		PlaylistDetailsController pdc = new PlaylistDetailsController();
 		this.agc = AdvancedGraphicChange.getInstance();
-		this.selectedPlaylist = pb;
+		PlaylistBean selectedPlaylist = pb;
 		this.playlistName.setText(pb.getName());
 		this.advancedName.setText(pb.getAdvancedName());
 		this.voto.setText(pb.getVoto());
 		this.playlistDate.setText(pb.getDate());
 		this.filmPlaylist.setMouseTransparent(true);
 		this.filmPlaylist.setFocusTraversable(false);
-		String path = FileManager.PLAYLISTS + File.separator + this.selectedPlaylist.getPlaylistPic();
+		String path = FileManager.PLAYLISTS + File.separator + selectedPlaylist.getPlaylistPic();
 		File file = new File(path);
 		Image img = new Image(file.toURI().toString());
 		this.playlistPic.setImage(img);
 		list = FXCollections.observableArrayList();
 		list.removeAll(list);
 		try {
-			List<FilmBean> lfb = pdc.getFilmPlaylist(this.selectedPlaylist.getId());
+			List<FilmBean> lfb = pdc.getFilmPlaylist(selectedPlaylist.getId());
 			list.addAll(lfb);
 			this.filmPlaylist.getItems().addAll(list);
 			this.filmPlaylist.setCellFactory(param -> new ListCell<FilmBean>() {

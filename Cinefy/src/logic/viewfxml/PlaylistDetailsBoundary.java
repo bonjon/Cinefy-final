@@ -83,17 +83,12 @@ public class PlaylistDetailsBoundary {
 	}
 
 	@FXML
-	public void onPlaylistsClicked(MouseEvent event) throws IOException {
-		this.bgc.toPlaylists(this.playlists.getScene());
-	}
-
-	@FXML
 	public void onProfileClicked(MouseEvent event) throws IOException {
 		this.bgc.toProfile(this.profile.getScene());
 	}
 
 	@FXML
-	public void onOk(ActionEvent event) {
+	public void onOk(ActionEvent event) throws ClassNotFoundException {
 		vote = (int) this.sliderVote.getValue();
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
 		try {
@@ -108,10 +103,7 @@ public class PlaylistDetailsBoundary {
 		this.bgc.toPlaylists(this.btnBack.getScene());
 	}
 
-	public void init(PlaylistBean pb) {
-		this.bgc = BeginnerGraphicChange.getInstance();
-		this.pdc = new PlaylistDetailsController();
-		this.selectedPlaylist = pb;
+	public void init(PlaylistBean pb) throws ClassNotFoundException {
 		this.playlistName.setText(pb.getName());
 		this.advancedName.setText(pb.getAdvancedName());
 		this.voto.setText(pb.getVoto());
@@ -119,6 +111,9 @@ public class PlaylistDetailsBoundary {
 		this.filmPlaylist.setMouseTransparent(true);
 		this.filmPlaylist.setFocusTraversable(false);
 		String path = FileManager.PLAYLISTS + File.separator + this.selectedPlaylist.getPlaylistPic();
+		this.bgc = BeginnerGraphicChange.getInstance();
+		this.pdc = new PlaylistDetailsController();
+		this.selectedPlaylist = pb;
 		File file = new File(path);
 		Image img = new Image(file.toURI().toString());
 		this.playlistPic.setImage(img);
