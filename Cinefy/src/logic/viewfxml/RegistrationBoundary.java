@@ -7,8 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
-//import java.nio.file.Files;
-//import java.util.logging.Level;
+
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -66,7 +65,10 @@ public class RegistrationBoundary implements Initializable {
 	private SplitMenuButton splitMenuProf;
 
 	@FXML
-	private ImageView ivProfilepic, cinema;
+	private ImageView ivProfilepic;
+	
+	@FXML
+	private ImageView cinema;
 	
 	@FXML
 	private Label userError;
@@ -125,15 +127,13 @@ public class RegistrationBoundary implements Initializable {
 	@FXML
 	public void onBackToLoginPressed(ActionEvent event) throws IOException {
 
-		try {
+		
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
 
 			Scene sc = ((Node) event.getSource()).getScene();
 			sc.setRoot(loader.load());
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	@FXML
@@ -182,9 +182,10 @@ public class RegistrationBoundary implements Initializable {
 		String username;
 		
 		
+		
 		username=this.tfUser.getText();
 		
-		if(imageChanged==false) { newFileName = null;}
+		if(!imageChanged) { newFileName = null;}
 		
 		else {
 		
@@ -231,7 +232,7 @@ public class RegistrationBoundary implements Initializable {
 					String path = FileManager.PROFILE;
 					
 
-					if(imageChanged==false) {
+					if(!imageChanged) {
 						newFileName=FileManager.generateNewFileName("default.png", username);
 						fileName="default.png";
 						File file = new File(path, fileName);
@@ -263,37 +264,32 @@ public class RegistrationBoundary implements Initializable {
 			}
 		
 		catch (FieldEmptyException | FieldTooLongException e) {
-			
-			if (ExceptionInfo.EMPTYUSERNAME==true) {
+			ExceptionInfo ei = new ExceptionInfo();
+			ei = controller.getExceptionInfo();
+			if (ei.EMPTYUSERNAME) {
 				this.userError.setText(e.getMessage());
-				ExceptionInfo.EMPTYUSERNAME=false;
+				
 			}
-			if (ExceptionInfo.EMPTYPASSWORD==true) {
+			if (ei.EMPTYPASSWORD) {
 				this.passwordError.setText(e.getMessage());
-				ExceptionInfo.EMPTYPASSWORD=false;
 			}
-			if (ExceptionInfo.EMPTYROLE==true) {
+			if (ei.EMPTYROLE) {
 				this.userTypeError.setText(e.getMessage());
-				ExceptionInfo.EMPTYROLE=false;
 			}
-			if (ExceptionInfo.EMPTYPROFESSION==true) {
+			if (ei.EMPTYPROFESSION) {
 				this.professionError.setText(e.getMessage());
-				ExceptionInfo.EMPTYPROFESSION=false;
 			}
-			if (ExceptionInfo.USERTOOLONG==true) {
+			if (ei.USERTOOLONG) {
 				this.userError.setText(e.getMessage());
 				this.userTooLongError.setVisible(true);
-				ExceptionInfo.USERTOOLONG=false;
 			}
-			if(ExceptionInfo.PASSTOOLONG==true) {
+			if(ei.PASSTOOLONG) {
 				this.passwordError.setText(e.getMessage());
 				this.passwordTooLongError.setVisible(true);
-				ExceptionInfo.PASSTOOLONG=false;
 			}
-			if(ExceptionInfo.BIOTOOLONG==true) {
+			if(ei.BIOTOOLONG) {
 				this.bioError.setText(e.getMessage());
 				this.bioTooLongError.setVisible(true);
-				ExceptionInfo.BIOTOOLONG=false;
 			}
 		}
 			
@@ -309,7 +305,6 @@ public class RegistrationBoundary implements Initializable {
 	    this.userTypeError.setText("");
 	    this.professionError.setText("");
 		splitMenuProf.visibleProperty().set(false);
-		return;
 
 	}
 
@@ -319,7 +314,6 @@ public class RegistrationBoundary implements Initializable {
 		role = Roles.ADVANCEDUSER;
 		this.userTypeError.setText("");
 		splitMenuProf.visibleProperty().set(true);
-		return;
 
 	}
 	
@@ -329,10 +323,7 @@ public class RegistrationBoundary implements Initializable {
 			profession = pressedButton.getText();
 			splitMenuProf.setText(profession);
 			this.professionError.setText("");
-			
-			
-			return;
-			
+						
 	}
 	
 	public void keyPressed(KeyEvent event) {
@@ -349,7 +340,6 @@ public class RegistrationBoundary implements Initializable {
 			    bioError.setText("");
 			    bioTooLongError.setVisible(false);
 			}
-			return;
 	}
 			
 	public void onDefaultPicButton(ActionEvent event) throws FileNotFoundException {

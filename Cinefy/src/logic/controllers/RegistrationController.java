@@ -11,23 +11,27 @@ import logic.dao.AdvancedUserDAO;
 import logic.dao.BeginnerUserDAO;
 import logic.exceptions.FieldEmptyException;
 import logic.exceptions.FieldTooLongException;
+import logic.utils.ExceptionInfo;
 
 public class RegistrationController {
+	
+	ExceptionInfo ei;
 
 	public Boolean createBeginnerUser(BeginnerUserBean bub)
 			throws FieldEmptyException, FieldTooLongException, ClassNotFoundException {
 		boolean beanCheck = false; // booleano: true se uno dei campi della bean è vuoto, false altrimenti.
-
+		
+		
 		if (bub.getUsername().equals("")) {
-			FieldEmptyException.EMPTYUSERNAME = true;
+			ei.EMPTYUSERNAME = true;
 			beanCheck = true;
 		}
 		if (bub.getPassword().equals("")) {
-			FieldEmptyException.EMPTYPASSWORD = true;
+			ei.EMPTYPASSWORD = true;
 			beanCheck = true;
 		}
 		if (bub.getRole() == "noSelRole") {
-			FieldEmptyException.EMPTYROLE = true;
+			ei.EMPTYROLE = true;
 
 			beanCheck = true;
 		}
@@ -57,15 +61,15 @@ public class RegistrationController {
 		boolean beanCheck = false;
 
 		if (aub.getUsername().equals("")) {
-			FieldEmptyException.EMPTYUSERNAME = true;
+			ei.EMPTYUSERNAME = true;
 			beanCheck = true;
 		}
 		if (aub.getPassword().equals("")) {
-			FieldEmptyException.EMPTYPASSWORD = true;
+			ei.EMPTYPASSWORD = true;
 			beanCheck = true;
 		}
 		if (aub.getProfession() == null) {
-			FieldEmptyException.EMPTYPROFESSION = true;
+			ei.EMPTYPROFESSION = true;
 			beanCheck = true;
 		}
 
@@ -95,15 +99,15 @@ public class RegistrationController {
 		boolean beanLengthCheck = false; // booleano: true se uno dei campi della bean è troppo lungo, false altrimenti.
 
 		if (gub.getUsername().length() > userLength) {
-			FieldTooLongException.USERTOOLONG = true;
+			ei.USERTOOLONG = true;
 			beanLengthCheck = true;
 		}
 		if (gub.getPassword().length() > passwordLength) {
-			FieldTooLongException.PASSTOOLONG = true;
+			ei.PASSTOOLONG = true;
 			beanLengthCheck = true;
 		}
 		if (bio.length() > bioLength) {
-			FieldTooLongException.BIOTOOLONG = true;
+			ei.BIOTOOLONG = true;
 			beanLengthCheck = true;
 		}
 
@@ -113,6 +117,10 @@ public class RegistrationController {
 			return false;
 		}
 
+	}
+	
+	public ExceptionInfo getExceptionInfo() {
+		return ei;
 	}
 
 }
