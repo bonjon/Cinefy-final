@@ -68,7 +68,7 @@ public class HomeAdvancedBoundary implements Initializable {
 	public void onProfileClicked(MouseEvent event) throws IOException {
 		this.agc.toProfile(this.profile.getScene());
 	}
-	
+
 	@FXML
 	public void onPlaylistsClicked(MouseEvent event) throws IOException {
 		this.agc.toPlaylists(this.playlists.getScene());
@@ -80,13 +80,12 @@ public class HomeAdvancedBoundary implements Initializable {
 		this.splitMenu.setText("Nation");
 	}
 
-	
 	@FXML
 	public void onActorPressed(ActionEvent event) {
 		itemSelected = 3;
 		this.splitMenu.setText("Actor");
 	}
-	
+
 	@FXML
 	public void onDirectorPressed(ActionEvent event) {
 		itemSelected = 1;
@@ -122,76 +121,100 @@ public class HomeAdvancedBoundary implements Initializable {
 
 	@FXML
 	public void onEnterPressed(KeyEvent event) throws SQLException, ClassNotFoundException {
-		this.listView.getItems().clear();
 		this.errorLabel.setText("");
+		this.listView.getItems().clear();
 		if (event.getCode() == KeyCode.ENTER) {
 			// Caso in cui non si applicano filtri e si cerchi per nome del film
 			if (itemSelected == 0) {
-				String a = this.movie.getText().toString();
+				String search = this.movie.getText().toString();
 				list.removeAll(list);
-				try {
-					FilmBean fb = vfc.getFilm(a);
-					list.add(fb);
-					this.listView.getItems().addAll(list);
-					setCellsFilm();
-				} catch (FilmNotFoundException e) {
-					this.errorLabel.setText(e.getMessage());
-				}
+				getMovie(search);
 			} else if (itemSelected == 1) {
-				String a = this.movie.getText().toString();
+				String search = this.movie.getText().toString();
 				list.removeAll(list);
-				try {
-					List<FilmBean> mlb = vfc.getFilmByDirector(a);
-					list.addAll(mlb);
-					this.listView.getItems().addAll(list);
-					setCellsFilm();
-				} catch (FilmNotFoundException e) {
-					this.errorLabel.setText(e.getMessage());
-				}
+				getMovieByDirector(search);
 			} else if (itemSelected == 2) {
-				String a = this.movie.getText().toString();
+				String search = this.movie.getText().toString();
 				list.removeAll(list);
-				try {
-					List<FilmBean> mlb = vfc.getFilmByNation(a);
-					list.addAll(mlb);
-					this.listView.getItems().addAll(list);
-					setCellsFilm();
-				} catch (FilmNotFoundException e) {
-					this.errorLabel.setText(e.getMessage());
-				}
+				getMovieByNation(search);
 			} else if (itemSelected == 3) {
-				String a = this.movie.getText().toString();
+				String search = this.movie.getText().toString();
 				list.removeAll(list);
-				try {
-					List<FilmBean> mlb = vfc.getFilmByActor(a);
-					list.addAll(mlb);
-					this.listView.getItems().addAll(list);
-					setCellsFilm();
-				} catch (FilmNotFoundException e) {
-					this.errorLabel.setText(e.getMessage());
-				}
+				getMovieByActor(search);
 			} else if (itemSelected == 4) {
-				String a = this.movie.getText().toString();
+				String search = this.movie.getText().toString();
 				list.removeAll(list);
-				try {
-					List<FilmBean> mlb = vfc.getFilmByYear(a);
-					list.addAll(mlb);
-					this.listView.getItems().addAll(list);
-					setCellsFilm();
-				} catch (FilmNotFoundException e) {
-					this.errorLabel.setText(e.getMessage());
-				}
+				getMobieByYear(search);
 			} else if (itemSelected == 5) {
-				String a = this.movie.getText().toString();
+				String search = this.movie.getText().toString();
 				list.removeAll(list);
-				try {
-					List<FilmBean> mlb = vfc.getFilmByGenre(a);
-					list.addAll(mlb);
-					setCellsFilm();
-				} catch (FilmNotFoundException e) {
-					this.errorLabel.setText(e.getMessage());
-				}
+				getMovieByGenre(search);
 			}
+		}
+	}
+
+	private void getMovieByGenre(String search) throws ClassNotFoundException, SQLException {
+		try {
+			List<FilmBean> mlb = vfc.getFilmByGenre(search);
+			list.addAll(mlb);
+			setCellsFilm();
+		} catch (FilmNotFoundException e) {
+			this.errorLabel.setText(e.getMessage());
+		}
+	}
+
+	private void getMobieByYear(String search) throws ClassNotFoundException, SQLException {
+		try {
+			List<FilmBean> mlb = vfc.getFilmByYear(search);
+			list.addAll(mlb);
+			this.listView.getItems().addAll(list);
+			setCellsFilm();
+		} catch (FilmNotFoundException e) {
+			this.errorLabel.setText(e.getMessage());
+		}
+	}
+
+	private void getMovieByActor(String search) throws ClassNotFoundException, SQLException {
+		try {
+			List<FilmBean> mlb = vfc.getFilmByActor(search);
+			list.addAll(mlb);
+			this.listView.getItems().addAll(list);
+			setCellsFilm();
+		} catch (FilmNotFoundException e) {
+			this.errorLabel.setText(e.getMessage());
+		}
+	}
+
+	private void getMovieByDirector(String search) throws ClassNotFoundException, SQLException {
+		try {
+			List<FilmBean> mlb = vfc.getFilmByDirector(search);
+			list.addAll(mlb);
+			this.listView.getItems().addAll(list);
+			setCellsFilm();
+		} catch (FilmNotFoundException e) {
+			this.errorLabel.setText(e.getMessage());
+		}
+	}
+
+	private void getMovieByNation(String search) throws ClassNotFoundException, SQLException {
+		try {
+			List<FilmBean> mlb = vfc.getFilmByNation(search);
+			list.addAll(mlb);
+			this.listView.getItems().addAll(list);
+			setCellsFilm();
+		} catch (FilmNotFoundException e) {
+			this.errorLabel.setText(e.getMessage());
+		}
+	}
+
+	private void getMovie(String search) throws ClassNotFoundException, SQLException {
+		try {
+			FilmBean fb = vfc.getFilm(search);
+			list.add(fb);
+			this.listView.getItems().addAll(list);
+			setCellsFilm();
+		} catch (FilmNotFoundException e) {
+			this.errorLabel.setText(e.getMessage());
 		}
 	}
 
