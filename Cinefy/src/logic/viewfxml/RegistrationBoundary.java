@@ -284,7 +284,7 @@ public class RegistrationBoundary implements Initializable {
 		
 	}
 	
-	private void imageCopy(String fileName, String username) throws IOException {
+	private void imageCopy(String fName, String username) throws IOException {
 		//copia dell' immagine nella cartella "img"
 		
 		String path = FileManager.PROFILE;
@@ -292,8 +292,8 @@ public class RegistrationBoundary implements Initializable {
 
 		if(!imageChanged) {
 			newFileName=FileManager.generateNewFileName(defaultPic, username);
-			fileName=defaultPic;
-			File file = new File(path, fileName);
+			fName=defaultPic;
+			File file = new File(path, fName);
 			File newFile = new File(path, newFileName);
 			InputStream input = new FileInputStream(file);
 			Files.copy(input, newFile.toPath());
@@ -302,9 +302,9 @@ public class RegistrationBoundary implements Initializable {
 		}else {
 			
 		
-		fileName = this.imageFile.getName();
+		fName = this.imageFile.getName();
 		
-		File file = new File(path, fileName);
+		File file = new File(path, fName);
 		File newFile = new File(path, newFileName);
 		InputStream input = new FileInputStream(this.imageFile);
 		
@@ -312,7 +312,7 @@ public class RegistrationBoundary implements Initializable {
 		
 		Files.copy(input, file.toPath());
 		if(!file.renameTo(newFile)) {
-			logger.log(Level.WARNING, "Unable to rename: {0}", fileName);
+			logger.log(Level.WARNING, "Unable to rename: {0}", fName);
 		}
 		}
 	}
