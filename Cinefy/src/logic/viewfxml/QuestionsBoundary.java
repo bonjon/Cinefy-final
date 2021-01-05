@@ -57,7 +57,9 @@ public class QuestionsBoundary {
 	@FXML
 	private TextArea questionArea;
 	@FXML
-	private Button btnSubmit, btnBack;
+	private Button btnSubmit;
+	@FXML
+    private Button btnBack;
 	@FXML
 	private ScrollPane paneBio;
 
