@@ -187,6 +187,8 @@ public class RegistrationBoundary implements Initializable {
 		
 		username=this.tfUser.getText();
 		
+		try {
+		
 		if(!imageChanged) { newFileName = null;}
 		
 		else {
@@ -197,7 +199,7 @@ public class RegistrationBoundary implements Initializable {
 		
 		}
 
-			try {
+			
 			
 				if (role == Roles.BEGINNERUSER || role==null) {
 					BeginnerUserBean bub = new BeginnerUserBean();
