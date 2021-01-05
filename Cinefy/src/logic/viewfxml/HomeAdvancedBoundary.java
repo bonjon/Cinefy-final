@@ -33,9 +33,19 @@ import logic.exceptions.FilmNotFoundException;
 public class HomeAdvancedBoundary implements Initializable {
 
 	ObservableList<FilmBean> list;
+	public static final String BACK = "-fx-control-inner-background: ";
+	public static final String COLOR = " #1c1c1c";
 
 	@FXML
-	private Label home, answer, playlists, profile, errorLabel;
+	private Label home;
+	@FXML
+	private Label answer;
+	@FXML
+	private Label playlists;
+	@FXML
+	private Label profile;
+	@FXML
+	private Label errorLabel;
 	@FXML
 	private TextField movie;
 	@FXML
@@ -99,9 +109,9 @@ public class HomeAdvancedBoundary implements Initializable {
 		itemSelected = 0;
 		this.splitMenu.setText("Search by:");
 	}
-	
+
 	@FXML
-	public void onSelectedFilm(MouseEvent event) throws Exception {
+	public void onSelectedFilm(MouseEvent event) {
 		WebEngine engine = web.getEngine();
 		FilmBean fb = listView.getSelectionModel().getSelectedItem();
 		String url = fb.getUrl();
@@ -110,7 +120,7 @@ public class HomeAdvancedBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onEnterPressed(KeyEvent event) throws SQLException {
+	public void onEnterPressed(KeyEvent event) throws SQLException, ClassNotFoundException {
 		this.listView.getItems().clear();
 		this.errorLabel.setText("");
 		if (event.getCode() == KeyCode.ENTER) {
@@ -122,145 +132,55 @@ public class HomeAdvancedBoundary implements Initializable {
 					FilmBean fb = vfc.getFilm(a);
 					list.add(fb);
 					this.listView.getItems().addAll(list);
-					/*
-					 * Utilizziamo una setCellFactory per stampare i nomi dei film, infatti essa
-					 * serve a specificare come popolare le celle con una singola colonna
-					 */
-					this.listView.setCellFactory(param -> new ListCell<FilmBean>() {
-						@Override
-						protected void updateItem(FilmBean item, boolean empty) {
-							super.updateItem(item, empty);
-							if (empty || item == null || item.getTitolo() == null) {
-								setText(null);
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-							} else {
-								setText(item.getTitolo());
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-							}
-						}
-					});
-
+					setCellsFilm();
 				} catch (FilmNotFoundException e) {
 					this.errorLabel.setText(e.getMessage());
 				}
-			}
-			if (itemSelected == 1) {
+			} else if (itemSelected == 1) {
 				String a = this.movie.getText().toString();
 				list.removeAll(list);
 				try {
 					List<FilmBean> mlb = vfc.getFilmByDirector(a);
 					list.addAll(mlb);
 					this.listView.getItems().addAll(list);
-					/*
-					 * Utilizziamo una setCellFactory per stampare i nomi dei film, infatti essa
-					 * serve a specificare come popolare le celle con una singola colonna
-					 */
-					this.listView.setCellFactory(param -> new ListCell<FilmBean>() {
-						@Override
-						protected void updateItem(FilmBean item, boolean empty) {
-							super.updateItem(item, empty);
-							if (empty || item == null || item.getTitolo() == null) {
-								setText(null);
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-							} else {
-								setText(item.getTitolo());
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-							}
-						}
-					});
-
+					setCellsFilm();
 				} catch (FilmNotFoundException e) {
 					this.errorLabel.setText(e.getMessage());
 				}
-			}
-			if (itemSelected == 2) {
+			} else if (itemSelected == 2) {
 				String a = this.movie.getText().toString();
 				list.removeAll(list);
 				try {
 					List<FilmBean> mlb = vfc.getFilmByNation(a);
 					list.addAll(mlb);
 					this.listView.getItems().addAll(list);
-					/*
-					 * Utilizziamo una setCellFactory per stampare i nomi dei film, infatti essa
-					 * serve a specificare come popolare le celle con una singola colonna
-					 */
-					this.listView.setCellFactory(param -> new ListCell<FilmBean>() {
-						@Override
-						protected void updateItem(FilmBean item, boolean empty) {
-							super.updateItem(item, empty);
-							if (empty || item == null || item.getTitolo() == null) {
-								setText(null);
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-							} else {
-								setText(item.getTitolo());
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-							}
-						}
-					});
-
+					setCellsFilm();
 				} catch (FilmNotFoundException e) {
 					this.errorLabel.setText(e.getMessage());
 				}
-			}
-			if (itemSelected == 3) {
+			} else if (itemSelected == 3) {
 				String a = this.movie.getText().toString();
 				list.removeAll(list);
 				try {
 					List<FilmBean> mlb = vfc.getFilmByActor(a);
 					list.addAll(mlb);
 					this.listView.getItems().addAll(list);
-					/*
-					 * Utilizziamo una setCellFactory per stampare i nomi dei film, infatti essa
-					 * serve a specificare come popolare le celle con una singola colonna
-					 */
-					this.listView.setCellFactory(param -> new ListCell<FilmBean>() {
-						@Override
-						protected void updateItem(FilmBean item, boolean empty) {
-							super.updateItem(item, empty);
-							if (empty || item == null || item.getTitolo() == null) {
-								setText(null);
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-							} else {
-								setText(item.getTitolo());
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-							}
-						}
-					});
-
+					setCellsFilm();
 				} catch (FilmNotFoundException e) {
 					this.errorLabel.setText(e.getMessage());
 				}
-			}
-			if (itemSelected == 4) {
+			} else if (itemSelected == 4) {
 				String a = this.movie.getText().toString();
 				list.removeAll(list);
 				try {
 					List<FilmBean> mlb = vfc.getFilmByYear(a);
 					list.addAll(mlb);
 					this.listView.getItems().addAll(list);
-					/*
-					 * Utilizziamo una setCellFactory per stampare i nomi dei film, infatti essa
-					 * serve a specificare come popolare le celle con una singola colonna
-					 */
-					this.listView.setCellFactory(param -> new ListCell<FilmBean>() {
-						@Override
-						protected void updateItem(FilmBean item, boolean empty) {
-							super.updateItem(item, empty);
-							if (empty || item == null || item.getTitolo() == null) {
-								setText(null);
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-							} else {
-								setText(item.getTitolo());
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-							}
-						}
-					});
-
+					setCellsFilm();
 				} catch (FilmNotFoundException e) {
 					this.errorLabel.setText(e.getMessage());
 				}
-			}
-			if (itemSelected == 5) {
+			} else if (itemSelected == 5) {
 				String a = this.movie.getText().toString();
 				list.removeAll(list);
 				try {
@@ -277,10 +197,10 @@ public class HomeAdvancedBoundary implements Initializable {
 							super.updateItem(item, empty);
 							if (empty || item == null || item.getTitolo() == null) {
 								setText(null);
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+								setStyle(BACK + COLOR + ";");
 							} else {
 								setText(item.getTitolo());
-								setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+								setStyle(BACK + COLOR + ";");
 							}
 						}
 					});
@@ -289,6 +209,26 @@ public class HomeAdvancedBoundary implements Initializable {
 				}
 			}
 		}
+	}
+
+	private void setCellsFilm() {
+		/*
+		 * Utilizziamo una setCellFactory per stampare i nomi dei film, infatti essa
+		 * serve a specificare come popolare le celle con una singola colonna
+		 */
+		this.listView.setCellFactory(param -> new ListCell<FilmBean>() {
+			@Override
+			protected void updateItem(FilmBean item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null || item.getTitolo() == null) {
+					setText(null);
+					setStyle(BACK + COLOR + ";");
+				} else {
+					setText(item.getTitolo());
+					setStyle(BACK + COLOR + ";");
+				}
+			}
+		});
 	}
 
 	@Override

@@ -30,17 +30,22 @@ public class HomeAdminBoundary implements Initializable {
 
 	ObservableList<DomandaBean> list;
 	ObservableList<RispostaBean> list2;
+	public static final String BACK = "-fx-control-inner-background: ";
+	public static final String COLOR = " #1c1c1c";
 
 	@FXML
-	private Label home, profile, errorLabel, errorLabel2;
+	private Label home;
+	@FXML
+	private Label profile;
+	@FXML
+	private Label errorLabel;
+	@FXML
+	private Label errorLabel2;
 	@FXML
 	private ListView<DomandaBean> listQuestions;
 	@FXML
 	private ListView<RispostaBean> listAnswers;
 
-	private AskForQuestionsController afc;
-	private AnswerQuestionsController aqc;
-	
 	private AdminGraphicChange agc;
 
 	@FXML
@@ -52,8 +57,8 @@ public class HomeAdminBoundary implements Initializable {
 	public void onSelectedQuestion(MouseEvent event) throws IOException {
 		if (!this.list.isEmpty()) {
 			DomandaBean clicked = this.listQuestions.getSelectionModel().getSelectedItem();
-			if(clicked!=null) {
-				this.agc.toManageQuestion(this.listQuestions.getScene(),clicked);
+			if (clicked != null) {
+				this.agc.toManageQuestion(this.listQuestions.getScene(), clicked);
 			}
 		}
 	}
@@ -62,9 +67,8 @@ public class HomeAdminBoundary implements Initializable {
 	public void onSelectedAnswer(MouseEvent event) throws IOException {
 		if (!this.list2.isEmpty()) {
 			RispostaBean clicked = this.listAnswers.getSelectionModel().getSelectedItem();
-			if (clicked!=null) {	
-				this.agc.toManageAnswer(this.listAnswers.getScene(),
-					clicked);
+			if (clicked != null) {
+				this.agc.toManageAnswer(this.listAnswers.getScene(), clicked);
 			}
 		}
 	}
@@ -73,7 +77,7 @@ public class HomeAdminBoundary implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		list = FXCollections.observableArrayList();
 		list2 = FXCollections.observableArrayList();
-		this.afc = new AskForQuestionsController();
+		AskForQuestionsController afc = new AskForQuestionsController();
 		this.agc = AdminGraphicChange.getInstance();
 		GeneralUserBean gu = SessionUser.getInstance().getSession();
 		// Initialize the list of questions in pending
@@ -87,50 +91,44 @@ public class HomeAdminBoundary implements Initializable {
 				@Override
 				protected void updateItem(DomandaBean item, boolean empty) {
 					super.updateItem(item, empty);
+					setStyle(BACK + COLOR + ";");
 					if (empty || item == null) {
 						setText(null);
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 					} else {
 						setText(item.getContenuto());
-						setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 					}
 				}
 			});
-			
-		
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-		
-		
-		
-		
-			// Da implementare lista risposte, creare AnswerQuestionsController.
-			this.aqc = new AnswerQuestionsController();
-			this.agc = AdminGraphicChange.getInstance();
-		
-			// Initialize the list of questions in pending
-			list2.removeAll(list2);
-			try {
-				List<RispostaBean> rb = aqc.getAnswers(gu.getUsername(), gu.getRole());
-				if (rb != null)
-					list2.addAll(rb);
-				this.listAnswers.getItems().addAll(list2);
-				this.listAnswers.setCellFactory(param -> new ListCell<RispostaBean>() {
-					protected void updateItem(RispostaBean item, boolean empty) {
-						super.updateItem(item, empty);
-						if (empty || item == null) {
-							setText(null);
-							setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-						} else {
-							setText(item.getContenuto());
-							setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
-						}
+
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		// Da implementare lista risposte, creare AnswerQuestionsController.
+		AnswerQuestionsController aqc = new AnswerQuestionsController();
+		this.agc = AdminGraphicChange.getInstance();
+
+		// Initialize the list of questions in pending
+		list2.removeAll(list2);
+		try {
+			List<RispostaBean> rb = aqc.getAnswers(gu.getUsername(), gu.getRole());
+			if (rb != null)
+				list2.addAll(rb);
+			this.listAnswers.getItems().addAll(list2);
+			this.listAnswers.setCellFactory(param -> new ListCell<RispostaBean>() {
+				protected void updateItem(RispostaBean item, boolean empty) {
+					super.updateItem(item, empty);
+					if (empty || item == null) {
+						setText(null);
+						setStyle(BACK + COLOR + ";");
+					} else {
+						setText(item.getContenuto());
+						setStyle(BACK + COLOR + ";");
 					}
-				});
-			
-			
-		} catch (SQLException e) {
+				}
+			});
+
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
