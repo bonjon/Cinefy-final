@@ -61,13 +61,13 @@ public class PlaylistDetailsADBoundary {
 	private AdvancedGraphicChange agc;
 
 	@FXML
-	public void onHomeClicked(MouseEvent event) throws IOException {
-		this.agc.toHomepage(this.home.getScene());
-	}
-
-	@FXML
 	public void onAnswerClicked(MouseEvent event) throws IOException {
 		this.agc.toAnswer(this.answer.getScene());
+	}
+	
+	@FXML
+	public void onHomeClicked(MouseEvent event) throws IOException {
+		this.agc.toHomepage(this.home.getScene());
 	}
 
 	@FXML

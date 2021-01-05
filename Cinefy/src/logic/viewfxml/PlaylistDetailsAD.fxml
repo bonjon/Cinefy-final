@@ -31,7 +31,7 @@
 								<Font name="Arial" size="25.0" />
 							</font>
 						</Label>
-						<Label fx:id="playlists" layoutX="62.0" layoutY="608.0" onMouseClicked="#onPlaylistsClicked" text="Playlists" textFill="#f5c518" underline="true" AnchorPane.bottomAnchor="200.0">
+						<Label fx:id="playlists" layoutX="62.0" layoutY="608.0" text="Playlists" textFill="#f5c518" underline="true" AnchorPane.bottomAnchor="200.0">
 							<font>
 								<Font name="Arial Bold Italic" size="25.0" />
 							</font>

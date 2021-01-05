@@ -78,15 +78,15 @@ public class PlaylistBeginnerBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onSelectedTopPl(MouseEvent event) throws IOException {
+	public void onSelectedTopPl(MouseEvent event) throws IOException, ClassNotFoundException {
 		if (!this.listTop.isEmpty()) {
 			PlaylistBean topPlayItem = this.topPlaylist.getSelectionModel().getSelectedItem();
-			if(topPlayItem!=null) {
-				this.bgc.toViewPlaylist(this.topPlaylist.getScene(),topPlayItem);
+			if (topPlayItem != null) {
+				this.bgc.toViewPlaylist(this.topPlaylist.getScene(), topPlayItem);
 			}
 		}
 	}
-	
+
 	@FXML
 	public void onProfileClicked(MouseEvent event) throws IOException {
 		this.bgc.toProfile(this.profile.getScene());
@@ -166,16 +166,15 @@ public class PlaylistBeginnerBoundary implements Initializable {
 					setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 				}
 			}
-		});		
+		});
 	}
 
 	@FXML
-	public void onSelectedSearchPl(MouseEvent event) throws IOException {
+	public void onSelectedSearchPl(MouseEvent event) throws IOException, ClassNotFoundException {
 		if (!this.listPlay.isEmpty()) {
-			PlaylistBean playItem =this.playlistList.getSelectionModel().getSelectedItem();
-			if(playItem != null) {
-				this.bgc.toViewPlaylist(this.playlistList.getScene(),
-					playItem);
+			PlaylistBean playItem = this.playlistList.getSelectionModel().getSelectedItem();
+			if (playItem != null) {
+				this.bgc.toViewPlaylist(this.playlistList.getScene(), playItem);
 			}
 		}
 	}
@@ -202,6 +201,6 @@ public class PlaylistBeginnerBoundary implements Initializable {
 			this.labelError3.setText(e.getMessage());
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 }

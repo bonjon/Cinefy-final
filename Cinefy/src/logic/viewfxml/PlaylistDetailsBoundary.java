@@ -34,6 +34,7 @@ import logic.utils.SessionUser;
 public class PlaylistDetailsBoundary {
 
 	ObservableList<FilmBean> list;
+	public static final String BACK = "-fx-control-inner-background: ";
 
 	@FXML
 	private Label home;
@@ -127,7 +128,7 @@ public class PlaylistDetailsBoundary {
 				@Override
 				protected void updateItem(FilmBean item, boolean empty) {
 					super.updateItem(item, empty);
-					setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+					setStyle(BACK + " #1c1c1c" + ";");
 					if (empty || item == null || item.getTitolo() == null) {
 						setText(null);
 					} else {

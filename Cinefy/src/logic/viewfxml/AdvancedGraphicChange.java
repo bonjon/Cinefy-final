@@ -54,7 +54,7 @@ public class AdvancedGraphicChange extends GraphicChangeTemplate {
 		scene.setRoot(loader.load());
 	}
 	
-	public void toSelQuestionDetail(Scene scene, DomandaBean selectedItem, BeginnerUserBean bub) throws IOException, AdvancedNotFoundException, SQLException {
+	public void toSelQuestionDetail(Scene scene, DomandaBean selectedItem, BeginnerUserBean bub) throws IOException, AdvancedNotFoundException, SQLException, ClassNotFoundException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectedQuestion.fxml"));
 		SelectedQuestionBoundary sqb = new SelectedQuestionBoundary();
 		loader.setController(sqb);
@@ -84,7 +84,7 @@ public class AdvancedGraphicChange extends GraphicChangeTemplate {
 		scene.setRoot(loader.load());
 	}
 
-	public void toPlaylistDetails(Scene scene, PlaylistBean selectedItem) throws IOException {
+	public void toPlaylistDetails(Scene scene, PlaylistBean selectedItem) throws IOException, ClassNotFoundException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("PlaylistDetailsAD.fxml"));
 		PlaylistDetailsADBoundary pdb = new PlaylistDetailsADBoundary();
 		loader.setController(pdb);

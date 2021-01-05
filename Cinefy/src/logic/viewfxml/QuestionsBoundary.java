@@ -35,7 +35,23 @@ public class QuestionsBoundary {
 	private AskForQuestionsController afc;
 
 	@FXML
-	private Label home, ask, playlists, profile, username, voto, role, bio, laBioTitle, labelError;
+	private Label home;
+	@FXML
+	private Label playlists;
+	@FXML
+	private Label profile;
+	@FXML
+	private Label username;
+	@FXML
+	private Label voto;
+	@FXML
+	private Label role;
+	@FXML
+	private Label bio;
+	@FXML
+	private Label laBioTitle;
+	@FXML
+	private Label labelError;
 	@FXML
 	private ImageView profilePic;
 	@FXML
@@ -44,6 +60,11 @@ public class QuestionsBoundary {
 	private Button btnSubmit, btnBack;
 	@FXML
 	private ScrollPane paneBio;
+
+	@FXML
+	public void onHomeClicked(MouseEvent event) throws IOException {
+		this.bgc.toHomepage(this.home.getScene());
+	}
 
 	public void init(AdvancedUserBean aub) {
 		selectedAdvanced = aub;
@@ -71,18 +92,8 @@ public class QuestionsBoundary {
 	}
 
 	@FXML
-	public void onHomeClicked(MouseEvent event) throws IOException {
-		this.bgc.toHomepage(this.home.getScene());
-	}
-
-	@FXML
 	public void onPlaylistsClicked(MouseEvent event) throws IOException {
 		this.bgc.toPlaylists(this.playlists.getScene());
-	}
-
-	@FXML
-	public void onProfileClicked(MouseEvent event) throws IOException {
-		this.bgc.toProfile(this.profile.getScene());
 	}
 
 	@FXML
@@ -91,7 +102,12 @@ public class QuestionsBoundary {
 	}
 
 	@FXML
-	public void onSubmitBtn(ActionEvent event) throws IOException {
+	public void onProfileClicked(MouseEvent event) throws IOException {
+		this.bgc.toProfile(this.profile.getScene());
+	}
+
+	@FXML
+	public void onSubmitBtn(ActionEvent event) throws IOException, ClassNotFoundException {
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
 		DomandaBean db = new DomandaBean();
 		try {
@@ -100,9 +116,7 @@ public class QuestionsBoundary {
 			db.setAdvancedName(this.selectedAdvanced.getUsername());
 			this.afc.makeQuestion(db);
 			this.bgc.toAsk(this.btnSubmit.getScene());
-		} catch (FieldTooLongException e) {
-			this.labelError.setText(e.getMessage());
-		} catch (FieldEmptyException e) {
+		} catch (FieldTooLongException | FieldEmptyException e) {
 			this.labelError.setText(e.getMessage());
 		} catch (SQLException e) {
 			e.printStackTrace();

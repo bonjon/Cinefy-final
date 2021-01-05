@@ -62,7 +62,7 @@ public class BeginnerGraphicChange extends GraphicChangeTemplate {
 		scene.setRoot(loader.load());
 	}
 
-	public void toViewPlaylist(Scene scene, PlaylistBean selectedItem) throws IOException {
+	public void toViewPlaylist(Scene scene, PlaylistBean selectedItem) throws IOException, ClassNotFoundException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("PlaylistDetails.fxml"));
 		PlaylistDetailsBoundary pdb = new PlaylistDetailsBoundary();
 		loader.setController(pdb);
@@ -70,7 +70,7 @@ public class BeginnerGraphicChange extends GraphicChangeTemplate {
 		pdb.init(selectedItem);
 	}
 
-	public void toQuestionDetails(Scene scene, DomandaBean selectedItem, String color) throws IOException {
+	public void toQuestionDetails(Scene scene, DomandaBean selectedItem, String color) throws IOException, NumberFormatException, ClassNotFoundException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("QuestionDetails.fxml"));
 		QuestionDetailsBoundary qdp = new QuestionDetailsBoundary();
 		loader.setController(qdp);

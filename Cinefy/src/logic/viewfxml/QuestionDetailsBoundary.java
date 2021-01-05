@@ -66,11 +66,6 @@ public class QuestionDetailsBoundary {
 	private AskForQuestionsController afc;
 
 	@FXML
-	public void onHomeClicked(MouseEvent event) throws IOException {
-		this.bgc.toHomepage(this.home.getScene());
-	}
-
-	@FXML
 	public void onPlaylistsClicked(MouseEvent event) throws IOException {
 		this.bgc.toPlaylists(this.playlists.getScene());
 	}
@@ -81,7 +76,7 @@ public class QuestionDetailsBoundary {
 	}
 
 	@FXML
-	public void onOk(ActionEvent event) {
+	public void onOk(ActionEvent event) throws NumberFormatException, ClassNotFoundException {
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
 		AdvancedUserBean aub = new AdvancedUserBean();
 		aub.setUsername(this.selectedQuestion.getAdvancedName());
@@ -93,13 +88,18 @@ public class QuestionDetailsBoundary {
 			this.labelError.setText(e.getMessage());
 		}
 	}
+	
+	@FXML
+	public void onHomeClicked(MouseEvent event) throws IOException {
+		this.bgc.toHomepage(this.home.getScene());
+	}
 
 	@FXML
 	public void onBack(ActionEvent event) throws IOException {
 		this.bgc.toAsk(this.btnBack.getScene());
 	}
 
-	public void init(DomandaBean db, String color) {
+	public void init(DomandaBean db, String color) throws NumberFormatException, ClassNotFoundException {
 		this.selectedQuestion = db;
 		this.bgc = BeginnerGraphicChange.getInstance();
 		this.afc = new AskForQuestionsController();

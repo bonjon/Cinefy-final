@@ -84,7 +84,7 @@ public class PlaylistAdvancedBoundary implements Initializable {
 	}
 
 	@FXML
-	public void onSelectedPlaylist(MouseEvent event) throws IOException {
+	public void onSelectedPlaylist(MouseEvent event) throws IOException, ClassNotFoundException {
 
 		if (event.getSource() == topPlaylist && !list.isEmpty()) {
 			PlaylistBean topPlayItem = this.topPlaylist.getSelectionModel().getSelectedItem();
