@@ -15,7 +15,7 @@ public abstract class Subject {
 
 	private List<Observer> observers;
 
-	public Subject() {
+	protected Subject() {
 		this.observers = new ArrayList<>();
 	}
 
@@ -24,7 +24,7 @@ public abstract class Subject {
 	}
 
 	public void detach(Observer o) {
-		observers.remove(0);
+		observers.remove(o);
 	}
 
 	public void notifyObservers() throws IOException, AdvancedNotFoundException {
