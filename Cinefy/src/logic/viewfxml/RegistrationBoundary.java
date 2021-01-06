@@ -273,13 +273,13 @@ public class RegistrationBoundary implements Initializable {
 				if(info.get(y).equals(true)) {
 					//se il booleano di info torna true setto il messaggio d' errore sulla label corrispondente
 					labels.get(y).setText(e.getMessage());
+					if(info.get(y).equals(true)) { 
+						//rendo visibili le label che esprimono il massimo num. di caratteri nel caso di FieldTooLongException
+						labels.get(y+3).setVisible(true);
+					}
 					
 				}
-				
-				if(y>3&&info.get(y).equals(true)) { 
-					//rendo visibili le label che esprimono il massimo num. di caratteri nel caso di FieldTooLongException
-					labels.get(y+3).setVisible(true);
-				}
+		
 				
 				y++;
 			}
