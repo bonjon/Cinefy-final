@@ -104,8 +104,6 @@ public class RegistrationBoundary implements Initializable {
 	
 
 	private File imageFile ;
-
-	private String nomeFile;
 	
 	private String profession = null;
 
@@ -192,7 +190,7 @@ public class RegistrationBoundary implements Initializable {
 		if(imageChanged) {
 		
 			fileName=this.imageFile.getName();
-			nomeFile=fileName;
+			
 			newFileName = FileManager.generateNewFileName(fileName, username);
 		
 		}
@@ -230,7 +228,7 @@ public class RegistrationBoundary implements Initializable {
 				else {
 					
 					//copia dell' immagine nella cartella "img"
-					imageCopy(nomeFile,username);
+					imageCopy(username);
 					
 					//cambio scena
 					GraphicChangeTemplate.toLogin(btnSignup.getScene());
@@ -273,14 +271,11 @@ public class RegistrationBoundary implements Initializable {
 				if(info.get(y).equals(true)) {
 					//se il booleano di info torna true setto il messaggio d' errore sulla label corrispondente
 					labels.get(y).setText(e.getMessage());
-					if(y>3) { 
-						//rendo visibili le label che esprimono il massimo num. di caratteri nel caso di FieldTooLongException
-						labels.get(y+3).setVisible(true);
-					}
-					
-				}
-		
 				
+					//rendo visibili le label che esprimono il massimo num. di caratteri nel caso di FieldTooLongException
+					//per le prime 4 etichette della lista il setVisible non sortisce effetti in quanto già visibili 
+					labels.get(y+3).setVisible(true);
+				}
 				y++;
 			}
 		}
@@ -288,27 +283,25 @@ public class RegistrationBoundary implements Initializable {
 		
 	}
 	
-	private void imageCopy(String fileName, String username) throws IOException {
+	private void imageCopy(String username) throws IOException {
 		//copia dell' immagine nella cartella "img"
 		
 		String path = FileManager.PROFILE;
-		String fName = fileName;
+		
 
 		if(!imageChanged) {
 			newFileName=FileManager.generateNewFileName(defaultPic, username);
-			fName=defaultPic;
-			File file = new File(path, fName);
+			
+			File file = new File(path, defaultPic);
 			File newFile = new File(path, newFileName);
 			InputStream input = new FileInputStream(file);
 			Files.copy(input, newFile.toPath());
 			
 			
 		}else {
-			
+	
 		
-		fName = this.imageFile.getName();
-		
-		File file = new File(path, fName);
+		File file = new File(path,imageFile.getName());
 		File newFile = new File(path, newFileName);
 		InputStream input = new FileInputStream(this.imageFile);
 		
@@ -316,7 +309,7 @@ public class RegistrationBoundary implements Initializable {
 		
 		Files.copy(input, file.toPath());
 		if(!file.renameTo(newFile)) {
-			logger.log(Level.WARNING, "Unable to rename: {0}", fName);
+			logger.log(Level.WARNING, "Unable to rename: {0}", newFileName);
 		}
 		}
 	}
