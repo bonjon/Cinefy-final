@@ -2,7 +2,13 @@ package logic.utils;
 
 public class ExceptionInfo {
 
-	//classe che serve a far apparire contemporaneamente più messaggi d' errore che hanno causato eccezioni
+	/* 
+	 * Classe che serve a far apparire contemporaneamente più messaggi d' errore che hanno causato eccezioni.
+	 * Un controller che istanzia questa classe, ne setta a true i valori a seconda di ciò che la boundary corrispondente
+	 * gli ha passato. La boundary poi istanzierà questa classe all' interno di un blocco catch, chiamando un metodo del
+	 * controller che gliela restituirà riempita dei valori dei booleani settati in base ai campi vuoti o troppo lunghi rilevati.
+	 * Questa classe svolge un ruole simile a quello di una bean.
+	 */
 	
 	private  boolean emptyPassword;
 	private  boolean emptyUsername;

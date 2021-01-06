@@ -240,41 +240,45 @@ public class RegistrationBoundary implements Initializable {
 		
 		catch (FieldEmptyException | FieldTooLongException e) {
 			
-			//ad ogni indice della lista delle labels corrisponde un indice della lista dei booleani che descrivono
-			//il tipo d errore
+			/*ad ogni indice della lista delle labels corrisponde un indice della lista dei booleani che descrivono
+			  il tipo d errore (lista tornata da getExceptionInfo)*/
 
 			ExceptionInfo ei = controller.getExceptionInfo();
 			int y=0;
-			boolean tooLong = false;
+			
 		
 			List<Label> labels = new ArrayList<>();
-			labels.add(userError);
-			labels.add(passwordError);
+			labels.add(userError);				//0			labels - tipo di errore campo vuoto
+			labels.add(passwordError);			//1
 			labels.add(userTypeError);
 			labels.add(professionError);
-			labels.add(userTooLongError);
+			labels.add(userError);			    //4			labels - tipo di errore campo troppo lungo
+			labels.add(passwordError);
+			labels.add(bioError);				//6
+			labels.add(userTooLongError);		//7         labels - num. max di caratteri
 			labels.add(passwordTooLongError);
-			labels.add(bioTooLongError);
+			labels.add(bioTooLongError);		//9
 			
 			List<Boolean> info = new ArrayList<>();
-			info.add(ei.getEmptyUsername());
+			info.add(ei.getEmptyUsername());		//0
 			info.add(ei.getEmptyPassword());
 			info.add(ei.getEmptyRole());
 			info.add(ei.getEmptyProfession());
 			info.add(ei.getTooLongUser());
 			info.add(ei.getTooLongPassword());
-			info.add(ei.getTooLongBio());
+			info.add(ei.getTooLongBio());		   //6
 			
 			
 			while(y<info.size()) {
 				if(info.get(y).equals(true)) {
 					//se il booleano di info torna true setto il messaggio d' errore sulla label corrispondente
 					labels.get(y).setText(e.getMessage());
-					tooLong = true;
+					
 				}
-				if(tooLong) { 
-					labels.get(y).setVisible(true);
-					tooLong = false;
+				
+				if(y>3&&info.get(y).equals(true)) { 
+					//rendo visibili le label che esprimono il massimo num. di caratteri nel caso di FieldTooLongException
+					labels.get(y+3).setVisible(true);
 				}
 				
 				y++;
