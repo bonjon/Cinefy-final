@@ -53,12 +53,9 @@ public class AnswerDetailsBoundary {
 	private Label laTokensNumber; 
 	
 	private AdvancedGraphicChange agc;
-	private AnswerQuestionsController aqc;
-	private DomandaBean question;
 	private RispostaBean selAnswer;
-	private AdvancedUserBean aub;
 	private BeginnerUserBean bub;
-	private String advancedName;
+	
 	
 	@FXML
 	public void onHomeClicked(MouseEvent event) throws IOException {
@@ -71,11 +68,6 @@ public class AnswerDetailsBoundary {
 	}
 
 	@FXML
-	public void onProfileClicked(MouseEvent event) throws IOException {
-		this.agc.toProfile(this.profile.getScene());
-	}
-	
-	@FXML
 	public void onBack(ActionEvent event) throws IOException {
 		this.agc.toAnswer(this.btnBack.getScene());
 	}
@@ -85,7 +77,19 @@ public class AnswerDetailsBoundary {
 		this.agc.toQuestionsFromABeg(this.btnQuestionsFromABeg.getScene(),null, selAnswer,bub);
 	}
 	
-	public void init(RispostaBean selectedItem) throws SQLException, AdvancedNotFoundException {
+
+	@FXML
+	public void onProfileClicked(MouseEvent event) throws IOException {
+		this.agc.toProfile(this.profile.getScene());
+	}
+	
+	public void init(RispostaBean selectedItem) throws SQLException, AdvancedNotFoundException, ClassNotFoundException {
+		
+		AnswerQuestionsController aqc;
+		DomandaBean question;
+		AdvancedUserBean aub;
+
+		String advancedName;
 		int queueCount;
 		int idDomanda;
 	    String idRisposta;
@@ -110,7 +114,7 @@ public class AnswerDetailsBoundary {
 		aub = aqc.getAdvanced(advancedName,beginnerName);
 		
 		check = aqc.checkAnswer(selAnswer);
-		if(check==true) {
+		if(check) {
 			String path = FileManager.MARK;
 			File file = new File(path);
 			Image img = new Image(file.toURI().toString());
@@ -139,8 +143,7 @@ public class AnswerDetailsBoundary {
 		
 		labelAnswer.setText(selAnswer.getContenuto());
 		
-		RispostaBean rb = new RispostaBean();
-		rb = aqc.getVoto(beginnerName, idRisposta);
+		RispostaBean rb = aqc.getVoto(beginnerName, idRisposta);
 		vote = rb.getVoto();
 		if(vote==0) {
 			laVoteNumber.setText("Beginner user didn' t vote your answer");
