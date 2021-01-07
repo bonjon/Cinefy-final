@@ -203,9 +203,12 @@ public class QuestionsFromBeginner {
 							setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 						}
 				else {
-				HBox hBox = new HBox(2);
+				HBox hBox;
+				Label label;
+					
+				hBox = new HBox(2);
 			
-				Label label = new Label(item.getContenuto());
+				label = new Label(item.getContenuto());
 				label.setFont(Font.font("Arial", 15));
 			
 				hBox.getChildren().addAll(label);

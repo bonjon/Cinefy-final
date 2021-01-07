@@ -163,12 +163,16 @@ public class AnswerAdvancedBoundary implements Initializable {
 					
 				}
 				else {
-				
-				HBox hBox = new HBox(2);
+				HBox hBox;
+				Label label;
+				Label header;
+				HBox headerBox;
+					
+				hBox = new HBox(2);
 			
-				HBox headerBox = new HBox(1);
+				headerBox = new HBox(1);
 				String begName = item.getBeginnerName();
-				Label header = new Label(begName);
+				header = new Label(begName);
 				header.setFont(Font.font(FONT, 15));
 				
 				
@@ -178,7 +182,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 				headerBox.getChildren().addAll(header);
 				
 				
-				Label label = new Label(item.getContenuto());
+				label = new Label(item.getContenuto());
 				label.setFont(Font.font(FONT, 15));
 				label.setMaxHeight(15.0);
 				label.setMaxWidth(810.0);
@@ -230,9 +234,12 @@ public class AnswerAdvancedBoundary implements Initializable {
 					
 				}
 				else {
-				HBox hBox = new HBox(2);
+				HBox hBox;
+				Label label;
+				
+				hBox = new HBox(2);
 			
-				Label label = new Label(item.getContenuto());
+				label = new Label(item.getContenuto());
 				label.setFont(Font.font(FONT, 15));
 			
 				hBox.getChildren().addAll(label);
