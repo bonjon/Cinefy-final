@@ -36,6 +36,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import logic.bean.AdvancedUserBean;
 import logic.bean.BeginnerUserBean;
+import logic.bean.GeneralUserBean;
 import logic.controllers.RegistrationController;
 import logic.exceptions.FieldEmptyException;
 import logic.exceptions.FieldTooLongException;
@@ -107,7 +108,7 @@ public class RegistrationBoundary implements Initializable {
 	
 	private String profession = null;
 
-	private String role = null;
+	private String role = "";
 	
 	private boolean imageChanged = false; //booleano: true se l' immagine è diversa da quella di default, false altrimenti
 	
@@ -181,8 +182,6 @@ public class RegistrationBoundary implements Initializable {
 		String fileName = "";
 		String username;
 		
-		
-		
 		username=this.tfUser.getText();
 		
 		try {
@@ -196,8 +195,17 @@ public class RegistrationBoundary implements Initializable {
 		}
 
 			
-			
-				if (role.equals("beginner") || role==null) {
+				if(role.isEmpty()) {
+					GeneralUserBean gub = new GeneralUserBean();
+					gub.setRole("");
+					gub.setUsername(username);
+					gub.setPassword(this.tfPass.getText());
+					
+					controller.createGeneralUser(gub);
+					
+				}
+		
+				else if (role.equals("beginner") ) {
 					BeginnerUserBean bub = new BeginnerUserBean();
 					
 					bub.setUsername(username);
