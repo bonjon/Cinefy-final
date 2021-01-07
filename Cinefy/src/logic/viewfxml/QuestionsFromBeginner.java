@@ -183,7 +183,7 @@ public class QuestionsFromBeginner {
 	
 			questionsFromABegDel = aqc.deleteQuestion(questionsFromABeg,advancedName);
 			
-			if (questionsFromABegDel == null || questionsFromABegDel.isEmpty()) {	
+			if (questionsFromABegDel.isEmpty()) {	
 			
 				labelErrorQuestions.setText("No received questions without answer");
 			}

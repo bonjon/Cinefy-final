@@ -2,7 +2,7 @@ package logic.controllers;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.Collections;
 import java.util.List;
 
 import logic.bean.AdvancedUserBean;
@@ -35,7 +35,7 @@ public class AnswerQuestionsController extends Controller {
 		DomandaDAO dd = new DomandaDAO();
 		List<Domanda> ld = dd.getQuestions(username, role);
 		if (ld == null)
-			return null;
+			return Collections.emptyList();
 		return this.convertQuestionList(ld);
 	}
 
@@ -43,7 +43,7 @@ public class AnswerQuestionsController extends Controller {
 		RispostaDAO rd = new RispostaDAO();
 		List<Risposta> ld = rd.getAnswers(username, role);
 		if (ld == null)
-			return null;
+			return Collections.emptyList();
 		return this.convertAnswerList(ld);
 	}
 
@@ -99,7 +99,7 @@ public class AnswerQuestionsController extends Controller {
 		DomandaDAO dd = new DomandaDAO();
 		List<Domanda> ld = dd.getQuestionsFromABeg(advancedName, beginnerName);
 		if (ld == null)
-			return null;
+			return Collections.emptyList();
 		return this.convertQuestionList(ld);
 
 	}
@@ -255,7 +255,7 @@ public class AnswerQuestionsController extends Controller {
 		List<DomandaBean> db = lb;
 
 		int i = 0;
-		if (rb != null) {
+		if (!rb.isEmpty()) {
 			while (i < rb.size()) {
 				RispostaBean temp = rb.get(i);
 				Integer id = Integer.parseInt(temp.getIdDomanda());
@@ -264,7 +264,7 @@ public class AnswerQuestionsController extends Controller {
 			}
 		}
 		i = 0;
-		if (rb != null) {
+		if (!rb.isEmpty()) {
 			while (i < pendingRb.size()) {
 				RispostaBean temp = pendingRb.get(i);
 				Integer id = Integer.parseInt(temp.getIdDomanda());
@@ -275,8 +275,8 @@ public class AnswerQuestionsController extends Controller {
 		
 
 		int y;
-		if (db == null) {
-			return null;
+		if (!db.isEmpty()) {
+			return Collections.emptyList();
 		}
 		
 		for (y = 0; y < db.size(); y++) {

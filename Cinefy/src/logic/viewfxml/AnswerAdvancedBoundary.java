@@ -167,11 +167,12 @@ public class AnswerAdvancedBoundary implements Initializable {
 				Label label;
 				Label header;
 				HBox headerBox;
+				String begName;
 					
 				hBox = new HBox(2);
 			
 				headerBox = new HBox(1);
-				String begName = item.getBeginnerName();
+				begName = item.getBeginnerName();
 				header = new Label(begName);
 				header.setFont(Font.font(FONT, 15));
 				
