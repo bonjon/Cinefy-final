@@ -93,7 +93,7 @@ public class QuestionsFromBeginner {
 	}
 	
 	@FXML
-	public void onBack(ActionEvent event) throws IOException, AdvancedNotFoundException, SQLException {
+	public void onBack(ActionEvent event) throws IOException, AdvancedNotFoundException, SQLException, ClassNotFoundException {
 		if(selAnswer == null ) {
 			this.agc.toSelQuestionDetail(this.btnBack.getScene(),selQuestion ,begub);
 		}
@@ -104,7 +104,7 @@ public class QuestionsFromBeginner {
 	}
 	
 	@FXML
-	public void onSelectedQuestion(MouseEvent event) throws IOException, AdvancedNotFoundException, SQLException {
+	public void onSelectedQuestion(MouseEvent event) throws IOException, AdvancedNotFoundException, SQLException, ClassNotFoundException {
 		
 		
 		if (!listReceived.isEmpty()) {
@@ -117,7 +117,7 @@ public class QuestionsFromBeginner {
 		}
 	}
 
-	public void init(DomandaBean db,RispostaBean rb, BeginnerUserBean bub) throws AdvancedNotFoundException, SQLException, FileNotFoundException  {
+	public void init(DomandaBean db,RispostaBean rb, BeginnerUserBean bub) throws AdvancedNotFoundException, SQLException, FileNotFoundException, ClassNotFoundException  {
 		
 		
 		Integer queueCount;

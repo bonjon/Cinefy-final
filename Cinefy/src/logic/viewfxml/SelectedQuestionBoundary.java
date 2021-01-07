@@ -253,7 +253,7 @@ public class SelectedQuestionBoundary  {
 	
 	
 	@FXML
-	public void onQuestionsFromABegPressed(ActionEvent event) throws IOException, AdvancedNotFoundException, SQLException {
+	public void onQuestionsFromABegPressed(ActionEvent event) throws IOException, AdvancedNotFoundException, SQLException, ClassNotFoundException {
 		this.agc.toQuestionsFromABeg(this.btnQuestionsFromABeg.getScene(),selectedQuestion, null,begub);
 	}
 	

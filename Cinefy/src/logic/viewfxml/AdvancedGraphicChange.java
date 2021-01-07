@@ -71,7 +71,7 @@ public class AdvancedGraphicChange extends GraphicChangeTemplate {
 		adb.init(selectedItem);
 	}
 	
-	public void toQuestionsFromABeg(Scene scene, DomandaBean db, RispostaBean rb, BeginnerUserBean bub) throws IOException, AdvancedNotFoundException, SQLException {
+	public void toQuestionsFromABeg(Scene scene, DomandaBean db, RispostaBean rb, BeginnerUserBean bub) throws IOException, AdvancedNotFoundException, SQLException, ClassNotFoundException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("QuestionsFromABeginner.fxml"));
 		QuestionsFromBeginner qfb = new QuestionsFromBeginner();
 		loader.setController(qfb);

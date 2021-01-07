@@ -42,7 +42,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 	ObservableList<RispostaBean> listAnswers;
 	
 	List<DomandaBean> lb;
-	List<DomandaBean> lb_del;
+	List<DomandaBean> lbDel;
 	List<RispostaBean> rbTotal;
 
 	@FXML
@@ -109,7 +109,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 	
 	
 	@FXML
-	public void onSelectedAnswer(MouseEvent event) throws IOException, SQLException, AdvancedNotFoundException {
+	public void onSelectedAnswer(MouseEvent event) throws IOException, SQLException, AdvancedNotFoundException, ClassNotFoundException {
 		
 	
 		if (!listAnswers.isEmpty()) {
@@ -135,9 +135,9 @@ public class AnswerAdvancedBoundary implements Initializable {
 		try { listReceived.removeAll(listReceived);
 	
 		lb = aqc.getQuestions(gub.getUsername(), "advanced");
-		lb_del = aqc.deleteQuestion(lb, gub.getUsername());
+		lbDel = aqc.deleteQuestion(lb, gub.getUsername());
 		
-		if(lb_del==null||lb_del.isEmpty()) {
+		if(lbDel==null||lbDel.isEmpty()) {
 			laBeginner.setVisible(false);
 			laQuestion.setVisible(false);
 			labelErrorQuestions.setText("No received questions without answer");
@@ -145,7 +145,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 		else {
 			
 			
-			listReceived.addAll(lb_del);
+			listReceived.addAll(lbDel);
 		
 			questions.getItems().addAll(listReceived);
 		
