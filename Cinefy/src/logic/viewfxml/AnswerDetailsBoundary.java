@@ -102,7 +102,6 @@ public class AnswerDetailsBoundary {
 		
 		selAnswer=selectedItem;
 		aqc = new AnswerQuestionsController();
-		aub=new AdvancedUserBean();
 		bub=new BeginnerUserBean();
 		advancedName = selAnswer.getAdvancedName();
 		

@@ -91,7 +91,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 
 
 	@FXML
-	public void onSelectedQuestion(MouseEvent event) throws IOException, AdvancedNotFoundException, SQLException {
+	public void onSelectedQuestion(MouseEvent event) throws IOException, AdvancedNotFoundException, SQLException, ClassNotFoundException {
 		
 		
 		if (!listReceived.isEmpty()) {
@@ -196,7 +196,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 		}
 	}
 	
-	catch(SQLException e) {
+	catch(SQLException | ClassNotFoundException  e ) {
 		e.printStackTrace();
 	}
 	
@@ -245,7 +245,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 	catch(AnswersNotFoundException e) {
 		labelErrorAnswers.setText(e.getMessage());
 	}
-	catch(SQLException e) {
+	catch(SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 			labelErrorAnswers.setText("No answers found in our database");
 	}

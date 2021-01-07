@@ -62,7 +62,7 @@ public class AdvancedGraphicChange extends GraphicChangeTemplate {
 		sqb.init(selectedItem,bub);
 	}
 	
-	public void toAnswerDetail(Scene scene, RispostaBean selectedItem) throws IOException, SQLException, AdvancedNotFoundException {
+	public void toAnswerDetail(Scene scene, RispostaBean selectedItem) throws IOException, SQLException, AdvancedNotFoundException, ClassNotFoundException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("AnswerDetails.fxml"));
 		AnswerDetailsBoundary adb = new AnswerDetailsBoundary();
 		
