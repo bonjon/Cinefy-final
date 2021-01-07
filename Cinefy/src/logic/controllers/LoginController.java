@@ -26,7 +26,7 @@ public class LoginController {
 			beanCheck=true;
 		}
 		if(beanCheck) {
-			beanCheck=false;
+			
 			throw new FieldEmptyException("This field cannot be empty");
 		}
 		

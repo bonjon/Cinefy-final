@@ -16,6 +16,27 @@ import logic.utils.ExceptionInfo;
 public class RegistrationController {
 	
 	ExceptionInfo ei = new ExceptionInfo();
+	
+	public void createGeneralUser(GeneralUserBean gub) throws FieldEmptyException {
+		 
+		/* Caso in cui il ruolo non è stato scelto, quindi è come se si volesse creare un utente senza ruolo.
+		 * Dato che questa opzione non è ammessa, questo metodo causerà sempre un' eccezione di default.
+		 */
+
+		if (gub.getUsername().equals("")) {
+			ei.setEmptyUsername(true);
+		}
+		
+		if (gub.getPassword().equals("")) {
+			ei.setEmptyPassword(true);
+		}
+		
+		if (gub.getRole().equals("")) {
+			ei.setEmptyRole(true);
+		}
+		
+		throw new FieldEmptyException("This field cannot be empty");
+	}
 
 	public Boolean createBeginnerUser(BeginnerUserBean bub)
 			throws FieldEmptyException, FieldTooLongException, ClassNotFoundException {
@@ -30,14 +51,9 @@ public class RegistrationController {
 			ei.setEmptyPassword(true);
 			beanCheck = true;
 		}
-		if (bub.getRole() == "noSelRole") {
-			ei.setEmptyRole(true);
-
-			beanCheck = true;
-		}
+		
 
 		if (beanCheck) {
-			beanCheck = false;
 			throw new FieldEmptyException("This field cannot be empty");
 		}
 
@@ -74,7 +90,6 @@ public class RegistrationController {
 		}
 
 		if (beanCheck) {
-			beanCheck = false;
 			throw new FieldEmptyException("This field cannot be empty");
 		}
 
