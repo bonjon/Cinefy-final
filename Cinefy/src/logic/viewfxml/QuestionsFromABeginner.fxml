@@ -49,7 +49,7 @@
 			<center>
 				<AnchorPane prefHeight="720.0" prefWidth="1232.0" style="-fx-background-color: #1c1c1c;" BorderPane.alignment="CENTER">
 					<children>
-						<Label layoutX="6.0" layoutY="6.0" text="Beginner User Details" textFill="#f5c518" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+						<Label layoutX="6.0" layoutY="6.0" text="Received questions from this user" textFill="#f5c518" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
 							<font>
 								<Font name="Arial Bold" size="17.0" />
 							</font>
@@ -114,13 +114,8 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Label layoutX="20.0" layoutY="299.0" text="Received questions from this user" textFill="#f5c518">
-                     <font>
-                        <Font name="Arial Bold" size="17.0" />
-                     </font>
-                  </Label>
-                  <ListView fx:id="questions" layoutX="20.0" layoutY="342.0" onMouseClicked="#onSelectedQuestion" prefHeight="347.0" prefWidth="1080.0" style="-fx-background-color: #1c1c1c;" />
-                  <Label fx:id="labelErrorQuestions" layoutX="340.0" layoutY="302.0" textFill="#ff0202" />
+                  <ListView fx:id="questions" layoutX="20.0" layoutY="312.0" onMouseClicked="#onSelectedQuestion" prefHeight="377.0" prefWidth="1080.0" style="-fx-background-color: #1c1c1c;" />
+                  <Label fx:id="labelErrorQuestions" layoutX="340.0" layoutY="23.0" textFill="#ff0202" />
 					</children>
 				</AnchorPane>
 			</center>

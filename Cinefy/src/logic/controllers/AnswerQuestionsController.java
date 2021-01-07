@@ -275,7 +275,7 @@ public class AnswerQuestionsController extends Controller {
 		
 
 		int y;
-		if (!db.isEmpty()) {
+		if (db.isEmpty()) {
 			return Collections.emptyList();
 		}
 		
