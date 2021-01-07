@@ -87,9 +87,12 @@ public class AnswerQuestionsController extends Controller {
 
 	public boolean checkAnswer(RispostaBean rb) throws NumberFormatException, SQLException, ClassNotFoundException {
 		RispostaDAO rd = new RispostaDAO();
-		if (rd.getAnswer(rb.getBeginnerName(), Integer.parseInt(rb.getIdDomanda())) == null)
+		if (rd.getAnswer(rb.getBeginnerName(), Integer.parseInt(rb.getIdDomanda())) == null) {
 			return false;
+		}
+		else {	
 		return true;
+		}
 	}
 
 	// metodo che ci restituisce le domande che un beginner ha in coda verso uno specificato ad;
