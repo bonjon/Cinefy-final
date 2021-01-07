@@ -140,7 +140,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 		lb = aqc.getQuestions(gub.getUsername(), "advanced");
 		lbDel = aqc.deleteQuestion(lb, gub.getUsername());
 		
-		if(lbDel==null||lbDel.isEmpty()) {
+		if(lbDel.isEmpty()) {
 			laBeginner.setVisible(false);
 			laQuestion.setVisible(false);
 			labelErrorQuestions.setText("No received questions without answer");
@@ -216,8 +216,8 @@ public class AnswerAdvancedBoundary implements Initializable {
 	    rbTotal=aqc.getAllAnswers(gub.getUsername());
 		
 		
-		if (rbTotal != null) {
-			listAnswers.addAll(rbTotal);}
+		
+		listAnswers.addAll(rbTotal);
 		
 		
 		answers.getItems().addAll(listAnswers);
@@ -253,13 +253,9 @@ public class AnswerAdvancedBoundary implements Initializable {
 		
 	}
 	
-	catch(AnswersNotFoundException e) {
+	catch(AnswersNotFoundException | SQLException | ClassNotFoundException e ) {
 		labelErrorAnswers.setText(e.getMessage());
 	}
-	catch(SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-			labelErrorAnswers.setText("No answers found in our database");
-	}
-	    
+	
 	}
 }
