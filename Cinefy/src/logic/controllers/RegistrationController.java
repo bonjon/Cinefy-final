@@ -17,6 +17,8 @@ public class RegistrationController {
 	
 	ExceptionInfo ei = new ExceptionInfo();
 	
+	private String emptyMessage = "This field cannot be empty";
+	
 	public void createGeneralUser(GeneralUserBean gub) throws FieldEmptyException {
 		 
 		/* Caso in cui il ruolo non è stato scelto, quindi è come se si volesse creare un utente senza ruolo.
@@ -35,7 +37,7 @@ public class RegistrationController {
 			ei.setEmptyRole(true);
 		}
 		
-		throw new FieldEmptyException("This field cannot be empty");
+		throw new FieldEmptyException(emptyMessage);
 	}
 
 	public Boolean createBeginnerUser(BeginnerUserBean bub)
@@ -54,7 +56,7 @@ public class RegistrationController {
 		
 
 		if (beanCheck) {
-			throw new FieldEmptyException("This field cannot be empty");
+			throw new FieldEmptyException(emptyMessage);
 		}
 
 		boolean lengthControl = fieldTooLongControls(bub, bub.getBio());
@@ -90,7 +92,7 @@ public class RegistrationController {
 		}
 
 		if (beanCheck) {
-			throw new FieldEmptyException("This field cannot be empty");
+			throw new FieldEmptyException(emptyMessage);
 		}
 
 		boolean lengthControl = fieldTooLongControls(aub, aub.getBio());
