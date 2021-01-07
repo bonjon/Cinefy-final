@@ -62,15 +62,12 @@ public class QuestionsFromBeginner {
 	
 	
 	private AdvancedGraphicChange agc;
-	private AnswerQuestionsController aqc;
 	
 	List<DomandaBean> questionsFromABeg;
-	List<DomandaBean> questionsFromABeg_del;
-	private String beginnerName;
+	List<DomandaBean> questionsFromABegDel;
 	private String advancedName;
 	ObservableList<DomandaBean> listReceived;
 	private BeginnerUserBean begub;
-	private AdvancedUserBean aub;
 	private DomandaBean selQuestion;
 	private RispostaBean selAnswer;
 	
@@ -122,7 +119,9 @@ public class QuestionsFromBeginner {
 		
 		Integer queueCount;
 		String begPicPath;
-		
+		AnswerQuestionsController aqc;
+		String beginnerName;
+
 		
 		this.agc = AdvancedGraphicChange.getInstance();
 		
@@ -145,7 +144,7 @@ public class QuestionsFromBeginner {
 		
 		laUsername.setText(beginnerName);
 		
-		aub = new AdvancedUserBean();
+		AdvancedUserBean aub;
 		aub = aqc.getAdvanced(advancedName, beginnerName);
 		queueCount=aub.getQueueCount();
 		laNumber.setText(queueCount.toString());
@@ -182,9 +181,9 @@ public class QuestionsFromBeginner {
 		
 		try { listReceived.removeAll(listReceived);
 	
-			questionsFromABeg_del = aqc.deleteQuestion(questionsFromABeg,advancedName);
+			questionsFromABegDel = aqc.deleteQuestion(questionsFromABeg,advancedName);
 			
-			if (questionsFromABeg_del == null || questionsFromABeg_del.isEmpty()) {	
+			if (questionsFromABegDel == null || questionsFromABegDel.isEmpty()) {	
 			
 				labelErrorQuestions.setText("No received questions without answer");
 			}
