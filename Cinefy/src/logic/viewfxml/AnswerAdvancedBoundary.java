@@ -72,8 +72,11 @@ public class AnswerAdvancedBoundary implements Initializable {
 	private AnswerQuestionsController aqc; 
 	private AdvancedGraphicChange agc;
 	
+	public static final String FXBACK = "-fx-control-inner-background: ";
+	public static final String FONT = "Arial";
+	public static final String COLOR = " #1c1c1c";
 	
-
+	
 	@FXML
 	public void onHomeClicked(MouseEvent event) throws IOException {
 		this.agc.toHomepage(this.home.getScene());
@@ -98,7 +101,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 		
 			DomandaBean clickedItem = this.questions.getSelectionModel().getSelectedItem();
 			if(clickedItem!=null) {
-				BeginnerUserBean bub = new BeginnerUserBean();
+				BeginnerUserBean bub;
 				String beginnerName = clickedItem.getBeginnerName();
 				bub = aqc.getBeginnerUser(beginnerName, "beginner");
 				this.agc.toSelQuestionDetail(this.questions.getScene(),clickedItem,bub);
@@ -156,7 +159,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 				if (empty || item == null) {
 					
 					setText(null);
-					setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+					setStyle(FXBACK + COLOR);
 					
 				}
 				else {
@@ -166,7 +169,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 				HBox headerBox = new HBox(1);
 				String begName = item.getBeginnerName();
 				Label header = new Label(begName);
-				header.setFont(Font.font("Arial", 15));
+				header.setFont(Font.font(FONT, 15));
 				
 				
 				
@@ -176,7 +179,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 				
 				
 				Label label = new Label(item.getContenuto());
-				label.setFont(Font.font("Arial", 15));
+				label.setFont(Font.font(FONT, 15));
 				label.setMaxHeight(15.0);
 				label.setMaxWidth(810.0);
 				
@@ -185,7 +188,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 				hBox.getChildren().addAll(headerBox,label);
 				hBox.setAlignment(Pos.CENTER_LEFT);
 				setGraphic(hBox);
-				setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+				setStyle(FXBACK + COLOR);
 				
 				}
 				
@@ -223,19 +226,19 @@ public class AnswerAdvancedBoundary implements Initializable {
 				if (empty || item == null) {
 					
 					setText(null);
-					setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+					setStyle(FXBACK + COLOR);
 					
 				}
 				else {
 				HBox hBox = new HBox(2);
 			
 				Label label = new Label(item.getContenuto());
-				label.setFont(Font.font("Arial", 15));
+				label.setFont(Font.font(FONT, 15));
 			
 				hBox.getChildren().addAll(label);
 				hBox.setAlignment(Pos.CENTER_LEFT);
 				setGraphic(hBox);
-				setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
+				setStyle(FXBACK + COLOR);
 				}
 			}
 		});
