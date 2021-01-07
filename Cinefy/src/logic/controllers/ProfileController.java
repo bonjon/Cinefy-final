@@ -59,15 +59,12 @@ public class ProfileController extends Controller {
 
 		ld = getQuestions(beginner, "beginner");
 
-		List<AdvancedUserBean> contactedAdv = new ArrayList<>();
-		List<AdvancedUserBean> differentAdv = new ArrayList<>();
+		List<String> contactedAdv = new ArrayList<>();
+		List<String> differentAdv = new ArrayList<>();
 
-		while (i < ld.size()) { // prendo tutti gli advanced e li metto in una lista
-			AdvancedUserBean advanced = new AdvancedUserBean();
-
-			DomandaBean adv = ld.get(i);
-			advanced.setUsername(adv.getAdvancedName());
-			contactedAdv.add(advanced);
+		while (i < ld.size()) { // prendo tutti i nomi di advanced e li metto in una lista
+			String adv = ld.get(i).getAdvancedName();
+			contactedAdv.add(adv);
 			i++;
 
 		}
@@ -75,7 +72,7 @@ public class ProfileController extends Controller {
 		int y;
 		
 		if (contactedAdv.isEmpty()) {
-			return differentAdv;
+			return fromStringToBean(differentAdv);
 		}
 		for (y = 0; y < contactedAdv.size(); y++) {
 			
@@ -91,7 +88,25 @@ public class ProfileController extends Controller {
 			}
 		}
 
-		return differentAdv;
+		return fromStringToBean(differentAdv);
+	}
+	
+	private List<AdvancedUserBean> fromStringToBean(List<String> list){
+		List<AdvancedUserBean> resList = new ArrayList<>();
+		int i=0;
+		
+		if(list.isEmpty()) {
+			return resList;
+		}
+		else {
+			while(i<list.size()) {
+				AdvancedUserBean adv = new AdvancedUserBean();
+				adv.setUsername(list.get(i));
+				resList.add(adv);
+				i++;
+			}
+		}
+		return resList;
 	}
 
 	public AdvancedUserBean getUser2(String username, String role) throws ClassNotFoundException {
