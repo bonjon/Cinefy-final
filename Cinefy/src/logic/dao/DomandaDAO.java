@@ -23,7 +23,7 @@ public class DomandaDAO {
 	public static final String BEGINNER = "BeginnerName";
 	public static final String ADVANCED = "AdvancedName";
 
-	public List<Domanda> getQuestions(String username, String role) throws SQLException, ClassNotFoundException {
+	public List<Domanda> getQuestions(String name, String role) throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		PreparedStatement s = null;
 		List<Domanda> ld = new ArrayList<>();
@@ -34,25 +34,25 @@ public class DomandaDAO {
 			} else if (role.equals("beginner")) {
 				String sql = "call CinefyDB.stampa_domande(?);\r\n";
 				s = conn.prepareStatement(sql);
-				s.setString(1, username);
+				s.setString(1, name);
 			} else if (role.equals("beginner2")) {
 				String sql = "call CinefyDB.get_pending(?);\r\n";
 				s = conn.prepareStatement(sql);
-				s.setString(1, username);
+				s.setString(1, name);
 			} else if (role.equals("advanced")) {
 				String sql = "call CinefyDB.stampa_domande_ad(?);\r\n";
 				s = conn.prepareStatement(sql);
-				s.setString(1, username);
+				s.setString(1, name);
 			}
 			if (s != null) {
 				ResultSet rs = s.executeQuery();
 				if (!rs.first())
 					return Collections.emptyList();
 				do {
-					int id = rs.getInt("id");
-					String contenuto = rs.getString("contenuto");
 					String beginnerName = rs.getString(BEGINNER);
 					String advancedName = rs.getString(ADVANCED);
+					int id = rs.getInt("id");
+					String contenuto = rs.getString("contenuto");
 					ld.add(new Domanda(id, contenuto, beginnerName, advancedName));
 				} while (rs.next());
 			}
