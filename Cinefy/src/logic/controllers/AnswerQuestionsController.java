@@ -160,11 +160,9 @@ public class AnswerQuestionsController extends Controller {
 			throw new FieldEmptyException("Please, write something in the answer box");
 		}
 		if (rb.isAColleagueSuggested() && rb.isAResourceSuggested()) {
-			if (rb.getColleagueName().isEmpty() && (rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty())) {
-				throw new FieldEmptyException("Please, suggest the colleague and web \nresources you thinked of");
-			} else if (rb.getReasonChoice() == null
-					&& (rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty())) {
-				throw new FieldEmptyException("Please, suggest the colleague and web \nresources you thinked of");
+			if (rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty()
+					&& (rb.getReasonChoice() == null  || rb.getColleagueName().isEmpty())) {
+						throw new FieldEmptyException("Please, suggest the colleague and web \nresources you thinked of");
 			}
 		}
 		if (rb.isAColleagueSuggested()) {
