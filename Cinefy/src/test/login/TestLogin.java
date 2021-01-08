@@ -21,14 +21,14 @@ public class TestLogin {
 		String output;
 		String attended;
 		String username;
-		String password;
+		String pass;
 		GeneralUserBean gub = new GeneralUserBean();
 		output = "";
 		attended = "This field cannot be empty";
 		username = "";
-		password = "password";
+		pass = "password";
 		gub.setUsername(username);
-		gub.setPassword(password);
+		gub.setPassword(pass);
 		try {
 			lc.login(gub);
 		} catch (FieldEmptyException e) {
