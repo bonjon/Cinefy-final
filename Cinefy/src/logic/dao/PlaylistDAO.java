@@ -91,8 +91,7 @@ public class PlaylistDAO {
 				String sql = "call CinefyDB.stampa_playlist_username(?)\r\n";
 				s = conn.prepareStatement(sql);
 				s.setString(1, string);
-			}
-			if (type.equals("Rewards")) {
+			} else if (type.equals("Rewards")) {
 				conn = ConnectionDB.getInstance();
 				String sql = "call CinefyDB.classifica_playlist();\r\n";
 				s = conn.prepareStatement(sql);
