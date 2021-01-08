@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 
@@ -23,6 +25,8 @@ import logic.controllers.AskForQuestionsController;
 
 public class ManageQuestionBoundary {
 
+	private static final Logger LOGGER = Logger.getLogger(ManageQuestionBoundary.class.getName());
+	
 	@FXML
 	private Label home;
 	@FXML
@@ -51,7 +55,7 @@ public class ManageQuestionBoundary {
 			this.afc.acceptQuestion(this.selectedQuestion);
 			this.agc.toHomepage(this.btnAccept.getScene());
 		} catch (NumberFormatException | SQLException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 	}
 
@@ -61,7 +65,7 @@ public class ManageQuestionBoundary {
 			this.afc.rejectQuestion(this.selectedQuestion);
 			this.agc.toHomepage(this.btnReject.getScene());
 		} catch (NumberFormatException | SQLException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 	}
 

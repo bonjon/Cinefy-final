@@ -6,6 +6,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,6 +42,7 @@ public class PlaylistBeginnerBoundary implements Initializable {
 
 	ObservableList<PlaylistBean> listPlay;
 	ObservableList<PlaylistBean> listTop;
+	private static final Logger LOGGER = Logger.getLogger(PlaylistBeginnerBoundary.class.getName());
 
 	@FXML
 	private Label home;
@@ -200,7 +203,7 @@ public class PlaylistBeginnerBoundary implements Initializable {
 		} catch (PlaylistNotFoundException e) {
 			this.labelError3.setText(e.getMessage());
 		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 	}
 }

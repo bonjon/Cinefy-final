@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 
@@ -33,6 +35,8 @@ import logic.utils.SessionUser;
 
 public class QuestionDetailsBoundary {
 
+	private static final Logger LOGGER = Logger.getLogger(QuestionDetailsBoundary.class.getName());
+	
 	@FXML
 	private Label home;
 	@FXML
@@ -142,7 +146,7 @@ public class QuestionDetailsBoundary {
 				this.btnOk.setDisable(false);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 	}
 }

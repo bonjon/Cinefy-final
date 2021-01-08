@@ -166,8 +166,7 @@ public class ProfileBeginnerBoundary implements Initializable {
 		
 		}
 		} catch (SQLException | ClassNotFoundException e) {
-			logger.log(Level.WARNING, "db error or class not found exception detected");
-			e.printStackTrace();
+			logger.log(Level.WARNING, e.toString());
 		}
 		
 	}

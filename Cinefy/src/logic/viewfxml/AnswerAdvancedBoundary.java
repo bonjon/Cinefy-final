@@ -6,7 +6,8 @@ import java.sql.SQLException;
 
 import java.util.List;
 import java.util.ResourceBundle;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,6 +41,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 
 	ObservableList<DomandaBean> listReceived;
 	ObservableList<RispostaBean> listAnswers;
+	private static final Logger LOGGER = Logger.getLogger(AnswerAdvancedBoundary.class.getName());
 	
 	List<DomandaBean> lb;
 	List<DomandaBean> lbDel;
@@ -205,7 +207,7 @@ public class AnswerAdvancedBoundary implements Initializable {
 	}
 	
 	catch(SQLException | ClassNotFoundException  e ) {
-		e.printStackTrace();
+		LOGGER.log(Level.WARNING, e.toString());
 	}
 	
 		listAnswers = FXCollections.observableArrayList();

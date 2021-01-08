@@ -121,8 +121,7 @@ public class ProfileAdvancedBoundary implements Initializable {
 			this.bio.setText(aub.getBio());
 		}
 		} catch (ClassNotFoundException e) {
-			logger.log(Level.WARNING, "class not found exception detected");
-			e.printStackTrace();
+			logger.log(Level.WARNING, e.toString());
 		}
 	}
 }

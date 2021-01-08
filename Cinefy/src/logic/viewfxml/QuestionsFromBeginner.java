@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +34,8 @@ import logic.exceptions.AdvancedNotFoundException;
 import logic.utils.FileManager;
 
 public class QuestionsFromBeginner {
+	
+	private static final Logger LOGGER = Logger.getLogger(QuestionsFromBeginner.class.getName());
 	
 	@FXML
 	private Label home;
@@ -221,7 +225,7 @@ public class QuestionsFromBeginner {
 		}
 	}
 	catch(SQLException e) {
-		e.printStackTrace();
+		LOGGER.log(Level.WARNING, e.toString());
 	}
 
 	}	

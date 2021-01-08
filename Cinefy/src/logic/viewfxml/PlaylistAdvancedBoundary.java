@@ -11,6 +11,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,6 +48,7 @@ public class PlaylistAdvancedBoundary implements Initializable {
 	public static final String FONT = "Arial";
 	public static final String TEXTCOLOR = "#f5c518";
 	public static final String TEXTFILL = "-fx-text-fill: ";
+	private static final Logger LOGGER = Logger.getLogger(PlaylistAdvancedBoundary.class.getName());
 
 	@FXML
 	private Label home;
@@ -120,7 +123,7 @@ public class PlaylistAdvancedBoundary implements Initializable {
 		} catch (PlaylistNotFoundException e) {
 			this.labelError1.setText(e.getMessage());
 		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
 		try {
@@ -131,7 +134,7 @@ public class PlaylistAdvancedBoundary implements Initializable {
 		} catch (PlaylistNotFoundException e) {
 			this.labelError2.setText(e.getMessage());
 		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 	}
 

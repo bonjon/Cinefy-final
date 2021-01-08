@@ -5,6 +5,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +34,7 @@ public class HomeAdminBoundary implements Initializable {
 	ObservableList<RispostaBean> list2;
 	public static final String BACK = "-fx-control-inner-background: ";
 	public static final String COLOR = " #1c1c1c";
+	private static final Logger LOGGER = Logger.getLogger(HomeAdminBoundary.class.getName());
 
 	@FXML
 	private Label home;
@@ -101,7 +104,7 @@ public class HomeAdminBoundary implements Initializable {
 			});
 
 		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 
 		// Da implementare lista risposte, creare AnswerQuestionsController.
@@ -129,7 +132,7 @@ public class HomeAdminBoundary implements Initializable {
 			});
 
 		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 	}
 }

@@ -3,6 +3,8 @@ package logic.viewfxml;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,6 +32,7 @@ import logic.utils.SessionUser;
 
 public class QuestionsBoundary {
 
+	private static final Logger LOGGER = Logger.getLogger(QuestionsBoundary.class.getName());
 	private AdvancedUserBean selectedAdvanced;
 	private BeginnerGraphicChange bgc;
 	private AskForQuestionsController afc;
@@ -121,7 +124,7 @@ public class QuestionsBoundary {
 		} catch (FieldTooLongException | FieldEmptyException e) {
 			this.labelError.setText(e.getMessage());
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 	}
 }

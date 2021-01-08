@@ -52,6 +52,7 @@ import logic.utils.SessionUser;
 public class CreatePlaylistBoundary implements Initializable {
 
 	ObservableList<FilmBean> list;
+	private static final Logger LOGGER = Logger.getLogger(CreatePlaylistBoundary.class.getName());
 
 	@FXML
 	private Label home;
@@ -163,7 +164,7 @@ public class CreatePlaylistBoundary implements Initializable {
 			this.nameError.setText(e.getMessage());
 		
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 	}
 
