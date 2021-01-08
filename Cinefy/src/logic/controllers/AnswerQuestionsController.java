@@ -87,17 +87,19 @@ public class AnswerQuestionsController extends Controller {
 
 	public boolean checkAnswer(RispostaBean rb) throws NumberFormatException, SQLException, ClassNotFoundException {
 		RispostaDAO rd = new RispostaDAO();
+		boolean b = true ;
 		if (rd.getAnswer(rb.getBeginnerName(), Integer.parseInt(rb.getIdDomanda())) == null) {
-			return false;
+			b=false;
 		}
-		else {	
-		return true;
-		}
+		return b;
+		
 	}
 
-	// metodo che ci restituisce le domande che un beginner ha in coda verso uno specificato ad;
+	
 	public List<DomandaBean> questionsFromABeg(String advancedName, String beginnerName)
 			throws SQLException, ClassNotFoundException {
+		
+		// metodo che ci restituisce le domande che un beginner ha in coda verso uno specificato ad;
 
 		DomandaDAO dd = new DomandaDAO();
 		List<Domanda> ld = dd.getQuestionsFromABeg(advancedName, beginnerName);
