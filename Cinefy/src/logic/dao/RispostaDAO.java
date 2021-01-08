@@ -40,7 +40,8 @@ public class RispostaDAO {
 				s = conn.prepareStatement(sql);
 				s.setString(1, username);
 			}
-			try (ResultSet rs = s.executeQuery()) {
+			if (s != null) {
+				ResultSet rs = s.executeQuery();
 				if (!rs.first())
 					return Collections.emptyList();
 				do {
