@@ -32,7 +32,7 @@ public class SearchPlaylistServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		RequestDispatcher rd = null;
+		RequestDispatcher rd = request.getRequestDispatcher("playlist.jsp");
 		ViewPlaylistsController vpc = new ViewPlaylistsController();
 		String searchString = (String) request.getParameter(SEARCHSTRING);
 		if (searchString == null) {
@@ -42,7 +42,6 @@ public class SearchPlaylistServlet extends HttpServlet {
 		try {
 			PlaylistBean pb = vpc.getPlaylist(searchString);
 			session.setAttribute("P", pb);
-			rd = request.getRequestDispatcher("playlist.jsp");
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (PlaylistNotFoundException e) {

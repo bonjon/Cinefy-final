@@ -36,7 +36,7 @@ public class HomeBeginnerServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		RequestDispatcher rd = null;
+		RequestDispatcher rd = request.getRequestDispatcher("home_beginner.jsp");
 		ViewListOfFilmsController vfc = new ViewListOfFilmsController();
 		String searchString = request.getParameter(SEARCHSTRING);
 		String userProf = request.getParameter(USERPROF);
@@ -84,7 +84,6 @@ public class HomeBeginnerServlet extends HttpServlet {
 			}
 		} catch (FilmNotFoundException e) {
 			request.setAttribute("search", e.getMessage());
-			rd = request.getRequestDispatcher("home_beginner.jsp");
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}

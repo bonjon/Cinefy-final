@@ -32,7 +32,7 @@ public class SearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		RequestDispatcher rd = null;
+		RequestDispatcher rd = request.getRequestDispatcher("question.jsp");
 		AskForQuestionsController afc = new AskForQuestionsController();
 		String searchString = (String) request.getParameter(SEARCHSTRING);
 		if (searchString == null) {
@@ -44,7 +44,6 @@ public class SearchServlet extends HttpServlet {
 		try {
 			AdvancedUserBean aub = afc.getAdvanced(au);
 			session.setAttribute("AdS", aub);
-			rd = request.getRequestDispatcher("question.jsp");
 		} catch (AdvancedNotFoundException e) {
 			request.setAttribute("error", e.getMessage());
 			rd = request.getRequestDispatcher("AskBeginnerServlet");
