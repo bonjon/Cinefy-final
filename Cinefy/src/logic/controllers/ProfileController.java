@@ -24,7 +24,7 @@ import logic.utils.Controller;
  */
 
 public class ProfileController extends Controller {
-	
+
 	private static final Logger logger = Logger.getLogger(ProfileController.class.getName());
 
 	public BeginnerUserBean getUser(String username, String role) throws ClassNotFoundException {
@@ -37,9 +37,7 @@ public class ProfileController extends Controller {
 			bub.setBio(gu.getBio());
 			bub.setProfilePic(gu.getProfilePic());
 		} catch (SQLException e) {
-			e.printStackTrace();
-			logger.log(Level.WARNING, "db error");
-			
+			logger.log(Level.WARNING, e.toString());
 		}
 		return bub;
 	}
@@ -70,18 +68,18 @@ public class ProfileController extends Controller {
 		}
 
 		int y;
-		
+
 		if (contactedAdv.isEmpty()) {
 			return fromStringToBean(differentAdv);
 		}
 		for (y = 0; y < contactedAdv.size(); y++) {
-			
+
 			if (differentAdv.isEmpty()) {
 				differentAdv.add(contactedAdv.get(y));
 			} else {
 
 				if (!differentAdv.contains(contactedAdv.get(y))) {
-				
+
 					differentAdv.add(contactedAdv.get(y));
 
 				}
@@ -90,16 +88,15 @@ public class ProfileController extends Controller {
 
 		return fromStringToBean(differentAdv);
 	}
-	
-	private List<AdvancedUserBean> fromStringToBean(List<String> list){
+
+	private List<AdvancedUserBean> fromStringToBean(List<String> list) {
 		List<AdvancedUserBean> resList = new ArrayList<>();
-		int i=0;
-		
-		if(list.isEmpty()) {
+		int i = 0;
+
+		if (list.isEmpty()) {
 			return resList;
-		}
-		else {
-			while(i<list.size()) {
+		} else {
+			while (i < list.size()) {
 				AdvancedUserBean adv = new AdvancedUserBean();
 				adv.setUsername(list.get(i));
 				resList.add(adv);
@@ -123,7 +120,7 @@ public class ProfileController extends Controller {
 			aub.setTokens(gu.getTokens());
 			aub.setVoto(gu.getVoto());
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, e.toString());
 		}
 		return aub;
 	}
