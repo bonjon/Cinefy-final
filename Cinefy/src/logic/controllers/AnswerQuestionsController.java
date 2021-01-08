@@ -159,11 +159,9 @@ public class AnswerQuestionsController extends Controller {
 		if (rb.getContenuto().isEmpty()) {
 			throw new FieldEmptyException("Please, write something in the answer box");
 		}
-		if (rb.isAColleagueSuggested() && rb.isAResourceSuggested()) {
-			if (rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty()
-					&& (rb.getReasonChoice() == null  || rb.getColleagueName().isEmpty())) {
+		if (rb.isAColleagueSuggested() && rb.isAResourceSuggested() && (rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty()
+				&& (rb.getReasonChoice() == null  || rb.getColleagueName().isEmpty()))) {
 						throw new FieldEmptyException("Please, suggest the colleague and web \nresources you thinked of");
-			}
 		}
 		if (rb.isAColleagueSuggested()) {
 			if (rb.getColleagueName().isEmpty()) {
