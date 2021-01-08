@@ -1,5 +1,8 @@
 package logic;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,6 +10,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+	private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -21,7 +26,7 @@ public class Main extends Application {
 			primaryStage.setMaximized(true);
 			primaryStage.show();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 	}
 
