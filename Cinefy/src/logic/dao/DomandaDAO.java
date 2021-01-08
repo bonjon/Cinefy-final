@@ -23,30 +23,29 @@ public class DomandaDAO {
 	public static final String BEGINNER = "BeginnerName";
 	public static final String ADVANCED = "AdvancedName";
 
-	@SuppressWarnings("resource")
 	public List<Domanda> getQuestions(String username, String role) throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
-		String sql = null;
 		PreparedStatement s = null;
 		List<Domanda> ld = new ArrayList<>();
 		try {
 			if (role.equals("admin")) {
-				sql = "call CinefyDB.stampa_domande_in_coda();\r\n";
+				String sql = "call CinefyDB.stampa_domande_in_coda();\r\n";
 				s = conn.prepareStatement(sql);
 			} else if (role.equals("beginner")) {
-				sql = "call CinefyDB.stampa_domande(?);\r\n";
+				String sql = "call CinefyDB.stampa_domande(?);\r\n";
 				s = conn.prepareStatement(sql);
 				s.setString(1, username);
 			} else if (role.equals("beginner2")) {
-				sql = "call CinefyDB.get_pending(?);\r\n";
+				String sql = "call CinefyDB.get_pending(?);\r\n";
 				s = conn.prepareStatement(sql);
 				s.setString(1, username);
 			} else if (role.equals("advanced")) {
-				sql = "call CinefyDB.stampa_domande_ad(?);\r\n";
+				String sql = "call CinefyDB.stampa_domande_ad(?);\r\n";
 				s = conn.prepareStatement(sql);
 				s.setString(1, username);
 			}
-			try (ResultSet rs = s.executeQuery()) {
+			if (s != null) {
+				ResultSet rs = s.executeQuery();
 				if (!rs.first())
 					return Collections.emptyList();
 				do {
@@ -58,7 +57,9 @@ public class DomandaDAO {
 				} while (rs.next());
 			}
 		} finally {
-			s.close();
+			if (s != null) {
+				s.close();
+			}
 		}
 		return ld;
 	}
