@@ -106,7 +106,7 @@ public class QuestionDetailsBoundary {
 		this.labelQuestion.setText(selectedQuestion.getContenuto());
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
 		try {
-			if (color == "y") {
+			if (color.equals("y")) {
 				String path = FileManager.YELLOW;
 				File file = new File(path);
 				Image img = new Image(file.toURI().toString());
@@ -117,7 +117,7 @@ public class QuestionDetailsBoundary {
 				this.sliderVote.setDisable(true);
 				this.btnOk.setDisable(true);
 			}
-			if (color == "g") {
+			if (color.equals("g")) {
 				String path = FileManager.GREEN;
 				File file = new File(path);
 				Image img = new Image(file.toURI().toString());
@@ -129,7 +129,7 @@ public class QuestionDetailsBoundary {
 				this.sliderVote.setDisable(true);
 				this.btnOk.setDisable(true);
 			}
-			if (color == "m") {
+			if (color.equals("m")) {
 				String path = FileManager.MARK;
 				File file = new File(path);
 				Image img = new Image(file.toURI().toString());
