@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,6 +31,7 @@ import logic.exceptions.AdvancedNotFoundException;
 public class AskBeginnerServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOGGER = Logger.getLogger(AskBeginnerServlet.class.getName());
 	public static final String TOPAD = "topAd";
 	public static final String ERROR = "error";
 
@@ -53,7 +56,7 @@ public class AskBeginnerServlet extends HttpServlet {
 				request.setAttribute(TOPAD, topAd);
 			}
 		} catch (AdvancedNotFoundException | SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 		session.setAttribute(TOPAD, topAd);
 		try {
@@ -63,7 +66,7 @@ public class AskBeginnerServlet extends HttpServlet {
 			else
 				request.setAttribute("questions", questions);
 		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 		session.setAttribute("questions", questions);
 		if (request.getParameter("a") != null) {
@@ -92,7 +95,7 @@ public class AskBeginnerServlet extends HttpServlet {
 				i = 1;
 			}
 		} catch (NumberFormatException | ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		} catch (SQLException e) {
 			request.setAttribute(ERROR, e.getMessage());
 		}

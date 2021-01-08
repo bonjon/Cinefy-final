@@ -3,6 +3,8 @@ package logic.view;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,7 +30,8 @@ public class HomeBeginnerServlet extends HttpServlet {
 	public static final String USERPROF = "userProf";
 	public static final String FILMLIST = "filmList";
 	public static final String FILTER = "film_filter.jsp";
-
+	private static final Logger LOGGER = Logger.getLogger(HomeBeginnerServlet.class.getName());
+	
 	public HomeBeginnerServlet() {
 		super();
 	}
@@ -85,7 +88,7 @@ public class HomeBeginnerServlet extends HttpServlet {
 		} catch (FilmNotFoundException e) {
 			request.setAttribute("search", e.getMessage());
 		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 		rd.forward(request, response);
 	}

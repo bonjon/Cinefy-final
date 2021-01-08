@@ -52,7 +52,7 @@ public class CreatePlaylistServlet extends HttpServlet {
 			try {
 				rd = this.create(request, session, cpc);
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				logger.log(Level.WARNING, e.toString());
 			}
 		}
 		rd.forward(request, response);
@@ -69,7 +69,7 @@ public class CreatePlaylistServlet extends HttpServlet {
 		try {
 			filePart = request.getPart("avatar");
 		} catch (IOException | ServletException e1) {
-			e1.printStackTrace();
+			logger.log(Level.WARNING, e1.toString());
 		}
 		if (filePart != null) {
 			fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();

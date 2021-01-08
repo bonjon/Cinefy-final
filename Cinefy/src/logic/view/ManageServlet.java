@@ -2,6 +2,8 @@ package logic.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,7 +24,8 @@ import logic.controllers.AskForQuestionsController;
 public class ManageServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
+	private static final Logger LOGGER = Logger.getLogger(ManageServlet.class.getName());
+	
 	public ManageServlet() {
 		super();
 	}
@@ -36,7 +39,7 @@ public class ManageServlet extends HttpServlet {
 			try {
 				rd = this.accept(request, session, afc);
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				LOGGER.log(Level.WARNING, e.toString());
 			}
 		else if (request.getParameter("reject") != null)
 			rd = this.reject(request, session, afc);
@@ -48,7 +51,7 @@ public class ManageServlet extends HttpServlet {
 		try {
 			afc.rejectQuestion(db);
 		} catch (NumberFormatException | SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 		return request.getRequestDispatcher("HomeAdminServlet");
 	}
@@ -58,7 +61,7 @@ public class ManageServlet extends HttpServlet {
 		try {
 			afc.acceptQuestion(db);
 		} catch (NumberFormatException | SQLException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 		return request.getRequestDispatcher("HomeAdminServlet");
 	}

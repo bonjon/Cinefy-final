@@ -2,6 +2,8 @@ package logic.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,6 +28,7 @@ import logic.exceptions.FilmNotFoundException;
 @WebServlet("/AddFilmServlet")
 public class AddFilmServlet extends HttpServlet {
 
+	private static final Logger LOGGER = Logger.getLogger(AddFilmServlet.class.getName());
 	private static final long serialVersionUID = 1L;
 	public static final String ADDFILM = "add_film.jsp";
 	public static final String ERROR = "error";
@@ -50,10 +53,8 @@ public class AddFilmServlet extends HttpServlet {
 		} catch (FilmNotFoundException e) {
 			request.setAttribute(ERROR, e.getMessage());
 			rd = request.getRequestDispatcher(ADDFILM);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
+		} catch (SQLException | ClassNotFoundException e) {
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 		rd.forward(request, response);
 	}
@@ -63,7 +64,7 @@ public class AddFilmServlet extends HttpServlet {
 			cpc.addFilm(Integer.parseInt(pb.getId()), fb);
 			request.setAttribute(ERROR, "Film added in Playlist!");
 		} catch (NumberFormatException | ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		} catch (FieldEmptyException e) {
 			request.setAttribute(ERROR, e.getMessage());
 		}

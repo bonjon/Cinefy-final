@@ -2,6 +2,8 @@ package logic.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,6 +27,7 @@ import logic.controllers.AskForQuestionsController;
 public class QuestionDetailsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOGGER = Logger.getLogger(QuestionDetailsServlet.class.getName());
 
 	public QuestionDetailsServlet() {
 		super();
@@ -41,7 +44,7 @@ public class QuestionDetailsServlet extends HttpServlet {
 		try {
 			r = afc.getAnswer(gub.getUsername(), db.getId());
 		} catch (NumberFormatException | ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 		session.setAttribute("R", r);
 		if (request.getParameter("BTNOK") != null) {
@@ -63,7 +66,7 @@ public class QuestionDetailsServlet extends HttpServlet {
 			} catch (SQLException e) {
 				request.setAttribute("error", "You Already vote this advanced");
 			} catch (NumberFormatException | ClassNotFoundException e) {
-				e.printStackTrace();
+				LOGGER.log(Level.WARNING, e.toString());
 			} 
 		}
 		return request.getRequestDispatcher("question_details.jsp");

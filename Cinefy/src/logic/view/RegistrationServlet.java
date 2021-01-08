@@ -64,7 +64,7 @@ public class RegistrationServlet extends HttpServlet {
 		try {
 			filePart = request.getPart("avatar");
 		} catch (IOException | ServletException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, e.toString());
 		}
 		if (filePart != null) {
 			fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
@@ -106,7 +106,7 @@ public class RegistrationServlet extends HttpServlet {
 			} catch (FieldEmptyException | FieldTooLongException e) {
 				request.setAttribute(FIELD, e.getMessage());
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				logger.log(Level.WARNING, e.toString());
 			}
 		} else if (userType.equals("Advanced")) {
 			String profession = request.getParameter("userProf");
@@ -121,7 +121,7 @@ public class RegistrationServlet extends HttpServlet {
 			} catch (FieldEmptyException | FieldTooLongException e) {
 				request.setAttribute(FIELD, e.getMessage());
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				logger.log(Level.WARNING, e.toString());
 			}
 		}
 		return false;

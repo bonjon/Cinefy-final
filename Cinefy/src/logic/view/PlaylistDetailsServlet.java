@@ -2,6 +2,9 @@ package logic.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +26,8 @@ import logic.controllers.PlaylistDetailsController;
 public class PlaylistDetailsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
+	private static final Logger LOGGER = Logger.getLogger(PlaylistDetailsServlet.class.getName());
+		
 	public PlaylistDetailsServlet() {
 		super();
 	}
@@ -49,7 +53,7 @@ public class PlaylistDetailsServlet extends HttpServlet {
 				pdc.votePlaylist(Integer.parseInt(rating), p.getId(), gub.getUsername());
 				request.setAttribute("error", "Playlist voted!");
 			} catch (NumberFormatException | ClassNotFoundException e) {
-				e.printStackTrace();
+				LOGGER.log(Level.WARNING, e.toString());
 			} catch (SQLException e) {
 				request.setAttribute("error", "You've already voted this playlist");
 			}

@@ -1,6 +1,8 @@
 package logic.view;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +27,8 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String INDEX = "index.jsp";
 	private static final String LOGIN = "login";
-
+	private static final Logger LOGGER = Logger.getLogger(LoginServlet.class.getName());
+	
 	public LoginServlet() {
 		super();
 	}
@@ -63,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 				return request.getRequestDispatcher("home_beginner.jsp");
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		} catch (FieldEmptyException e) {
 			request.setAttribute(LOGIN, e.getMessage());
 		}

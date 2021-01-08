@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,6 +31,7 @@ public class PlaylistsAdvancedServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	public static final String TOPLP = "topLP";
+	private static final Logger LOGGER = Logger.getLogger(PlaylistsAdvancedServlet.class.getName());
 
 	public PlaylistsAdvancedServlet() {
 		super();
@@ -49,14 +52,14 @@ public class PlaylistsAdvancedServlet extends HttpServlet {
 			request.setAttribute(TOPLP, Collections.emptyList());
 			request.setAttribute("errorx", e.getMessage());
 		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 		session.setAttribute(TOPLP, topLP);
 		try {
 			lp = vpc.getPlaylistByAd(gub.getUsername());
 			request.setAttribute("LP", lp);
 		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		} catch (PlaylistNotFoundException e) {
 			request.setAttribute("LP", Collections.emptyList());
 			request.setAttribute("errorx", e.getMessage());

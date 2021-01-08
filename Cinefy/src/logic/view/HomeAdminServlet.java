@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +27,8 @@ import logic.controllers.AskForQuestionsController;
 public class HomeAdminServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
+	private static final Logger LOGGER = Logger.getLogger(HomeAdminServlet.class.getName());
+	
 	public HomeAdminServlet() {
 		super();
 	}
@@ -42,7 +45,7 @@ public class HomeAdminServlet extends HttpServlet {
 			if (questionsList == null)
 				request.setAttribute("error", "No questions");
 		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.toString());
 		}
 		if(request.getParameter("d") != null)
 			rd = this.manage(request, session);
