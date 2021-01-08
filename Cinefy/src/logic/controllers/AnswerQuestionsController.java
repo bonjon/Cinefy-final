@@ -184,6 +184,21 @@ public class AnswerQuestionsController extends Controller {
 	}
 
 	public void fieldTooLongControls(RispostaBean rb) throws FieldTooLongException {
+		
+		
+		if (rb.getChoice() == "general") {
+
+			generalControls(rb);
+
+		} else if (rb.getChoice() == "film") {
+
+			adviceControls(rb);
+			
+		}
+
+	}
+	
+	private void generalControls(RispostaBean rb) throws FieldTooLongException {
 		String characters = " characters)";
 		
 		// general answer
@@ -195,7 +210,31 @@ public class AnswerQuestionsController extends Controller {
 		Integer colleagueSize = 16;
 		Integer wikiSize = 250;
 		Integer youTubeSize = 900;
-
+		
+		if (rb.getContenuto().length() > genAnswerSize) {
+			throw new FieldTooLongException(
+					"Answer box text is too long \n(max " + genAnswerSize.toString() + characters);
+		}
+		if (rb.isAColleagueSuggested()&&rb.getColleagueName().length() > colleagueSize) {
+			throw new FieldTooLongException("Suggested advanced user' s name is too long \n(max "
+						+ colleagueSize.toString() + characters);
+			
+		}
+		if (rb.isAResourceSuggested()) {
+			if (rb.getWikiLink().length() > wikiSize) {
+				throw new FieldTooLongException(
+						"The entered Wiki's URL is too long \n(max " + wikiSize.toString() + characters);
+			}
+			if (rb.getYoutubeLink().length() > youTubeSize) {
+				throw new FieldTooLongException(
+						"The entered YouTube's URL is too long \n(max " + youTubeSize.toString() + characters);
+			}
+		}
+	}
+	
+	private void adviceControls(RispostaBean rb) throws FieldTooLongException {
+		String characters = " characters)";
+		
 		// film advice
 		// circa 120 caratteri vengono aggiunti nel caso peggiore (professione
 		// screenwriter) dal pattern
@@ -205,47 +244,23 @@ public class AnswerQuestionsController extends Controller {
 		Integer partecipantSize = 70;
 		Integer genreSize = 100;
 		Integer explanationSize = 1400;
+		
 
-		if (rb.getChoice() == "general") {
-
-			if (rb.getContenuto().length() > genAnswerSize) {
-				throw new FieldTooLongException(
-						"Answer box text is too long \n(max " + genAnswerSize.toString() + characters);
-			}
-			if (rb.isAColleagueSuggested()&&rb.getColleagueName().length() > colleagueSize) {
-				throw new FieldTooLongException("Suggested advanced user' s name is too long \n(max "
-							+ colleagueSize.toString() + characters);
-				
-			}
-			if (rb.isAResourceSuggested()) {
-				if (rb.getWikiLink().length() > wikiSize) {
-					throw new FieldTooLongException(
-							"The entered Wiki's URL is too long \n(max " + wikiSize.toString() + characters);
-				}
-				if (rb.getYoutubeLink().length() > youTubeSize) {
-					throw new FieldTooLongException(
-							"The entered YouTube's URL is too long \n(max " + youTubeSize.toString() + characters);
-				}
-			}
-
-		} else if (rb.getChoice() == "film") {
-
-			if (rb.getFilm().length() > filmSize) {
-				throw new FieldTooLongException(
-						"The entered film's title is too long \n(max " + filmSize.toString() + characters);
-			}
-			if (rb.getPartecipant().length() > partecipantSize) {
-				throw new FieldTooLongException("The entered " + rb.getProfession().toLowerCase()
-						+ "'s name is too long \n(max " + partecipantSize.toString() + characters);
-			}
-			if (rb.getGenre().length() > genreSize) {
-				throw new FieldTooLongException(
-						"The entered film's title is too long \n(max " + filmSize.toString() + characters);
-			}
-			if (rb.getExplanation().length() > explanationSize) {
-				throw new FieldTooLongException("The explanation of the film advice is too long \n(max "
-						+ explanationSize.toString() + characters);
-			}
+		if (rb.getFilm().length() > filmSize) {
+			throw new FieldTooLongException(
+					"The entered film's title is too long \n(max " + filmSize.toString() + characters);
+		}
+		if (rb.getPartecipant().length() > partecipantSize) {
+			throw new FieldTooLongException("The entered " + rb.getProfession().toLowerCase()
+					+ "'s name is too long \n(max " + partecipantSize.toString() + characters);
+		}
+		if (rb.getGenre().length() > genreSize) {
+			throw new FieldTooLongException(
+					"The entered film's title is too long \n(max " + filmSize.toString() + characters);
+		}
+		if (rb.getExplanation().length() > explanationSize) {
+			throw new FieldTooLongException("The explanation of film advice is too long \n(max "
+					+ explanationSize.toString() + characters);
 		}
 
 	}
