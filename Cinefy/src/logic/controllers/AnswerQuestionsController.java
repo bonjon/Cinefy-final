@@ -99,7 +99,7 @@ public class AnswerQuestionsController extends Controller {
 	public List<DomandaBean> questionsFromABeg(String advancedName, String beginnerName)
 			throws SQLException, ClassNotFoundException {
 		
-		// metodo che ci restituisce le domande che un beginner ha in coda verso uno specificato ad;
+		// metodo che ci restituisce le domande che un beginner ha in coda verso uno specificato ad
 
 		DomandaDAO dd = new DomandaDAO();
 		List<Domanda> ld = dd.getQuestionsFromABeg(advancedName, beginnerName);
@@ -155,10 +155,9 @@ public class AnswerQuestionsController extends Controller {
 					throw new FieldEmptyException("Please, tell why you suggest this colleague");
 				}
 			}
-			if (rb.isAResourceSuggested()) {
-				if (rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty()) {
-					throw new FieldEmptyException("Please, enter a Wikipedia or YouTube's URL at least");
-				}
+			if (rb.isAResourceSuggested()&&rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty()) {
+				throw new FieldEmptyException("Please, enter a Wikipedia or YouTube's URL at least");
+				
 			}
 
 			gaf = new GeneralAnswerFactory();
@@ -213,11 +212,10 @@ public class AnswerQuestionsController extends Controller {
 				throw new FieldTooLongException(
 						"Answer box text is too long \n(max " + genAnswerSize.toString() + characters);
 			}
-			if (rb.isAColleagueSuggested()) {
-				if (rb.getColleagueName().length() > colleagueSize) {
-					throw new FieldTooLongException("Suggested advanced user' s name is too long \n(max "
+			if (rb.isAColleagueSuggested()&&rb.getColleagueName().length() > colleagueSize) {
+				throw new FieldTooLongException("Suggested advanced user' s name is too long \n(max "
 							+ colleagueSize.toString() + characters);
-				}
+				
 			}
 			if (rb.isAResourceSuggested()) {
 				if (rb.getWikiLink().length() > wikiSize) {
