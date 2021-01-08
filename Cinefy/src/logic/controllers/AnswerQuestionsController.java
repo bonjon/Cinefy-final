@@ -136,41 +136,12 @@ public class AnswerQuestionsController extends Controller {
 		FilmAdviceFactory faf;
 
 		if (rb.getChoice() == "general") {
-			if (rb.getContenuto().isEmpty()) {
-				throw new FieldEmptyException("Please, write something in the answer box");
-			}
-			if (rb.isAColleagueSuggested() && rb.isAResourceSuggested()) {
-				if (rb.getColleagueName().isEmpty() && (rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty())) {
-					throw new FieldEmptyException("Please, suggest the colleague and web \nresources you thinked of");
-				} else if (rb.getReasonChoice() == null
-						&& (rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty())) {
-					throw new FieldEmptyException("Please, suggest the colleague and web \nresources you thinked of");
-				}
-			}
-			if (rb.isAColleagueSuggested()) {
-				if (rb.getColleagueName().isEmpty()) {
-					throw new FieldEmptyException("Please, write the name of a colleague");
-				}
-				if (rb.getReasonChoice() == null) {
-					throw new FieldEmptyException("Please, tell why you suggest this colleague");
-				}
-			}
-			if (rb.isAResourceSuggested()&&rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty()) {
-				throw new FieldEmptyException("Please, enter a Wikipedia or YouTube's URL at least");
-				
-			}
-
+			emptyGeneralControls(rb);
 			gaf = new GeneralAnswerFactory();
 			answer = gaf.answerCreation(rb);
+			
 		} else if (rb.getChoice() == "film") {
-
-			if (rb.getFilm().isEmpty() || rb.getPartecipant().isEmpty() || rb.getGenre().isEmpty()) {
-				throw new FieldEmptyException("Film, " + rb.getProfession() + ", Genre fields cannot be empty");
-			}
-			if (rb.getExplanation().isEmpty()) {
-				throw new FieldEmptyException("Please, explain the reason of your advice");
-			}
-
+			emptyAdviceControls(rb);
 			faf = new FilmAdviceFactory();
 			answer = faf.answerCreation(rb);
 
@@ -181,6 +152,43 @@ public class AnswerQuestionsController extends Controller {
 		rd = new RispostaDAO();
 		rd.addAnswer(answer, rb.getBeginnerName(), rb.getAdvancedName(), Integer.parseInt(rb.getId()));
 
+	}
+	
+	private void emptyGeneralControls(RispostaBean rb) throws FieldEmptyException {
+		
+		if (rb.getContenuto().isEmpty()) {
+			throw new FieldEmptyException("Please, write something in the answer box");
+		}
+		if (rb.isAColleagueSuggested() && rb.isAResourceSuggested()) {
+			if (rb.getColleagueName().isEmpty() && (rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty())) {
+				throw new FieldEmptyException("Please, suggest the colleague and web \nresources you thinked of");
+			} else if (rb.getReasonChoice() == null
+					&& (rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty())) {
+				throw new FieldEmptyException("Please, suggest the colleague and web \nresources you thinked of");
+			}
+		}
+		if (rb.isAColleagueSuggested()) {
+			if (rb.getColleagueName().isEmpty()) {
+				throw new FieldEmptyException("Please, write the name of a colleague");
+			}
+			if (rb.getReasonChoice() == null) {
+				throw new FieldEmptyException("Please, tell why you suggest this colleague");
+			}
+		}
+		if (rb.isAResourceSuggested()&&rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty()) {
+			throw new FieldEmptyException("Please, enter a Wikipedia or YouTube's URL at least");
+		}
+
+	}
+	
+	private void emptyAdviceControls(RispostaBean rb) throws FieldEmptyException {
+		
+		if (rb.getFilm().isEmpty() || rb.getPartecipant().isEmpty() || rb.getGenre().isEmpty()) {
+			throw new FieldEmptyException("Film, " + rb.getProfession() + ", Genre fields cannot be empty");
+		}
+		if (rb.getExplanation().isEmpty()) {
+			throw new FieldEmptyException("Please, explain the reason of your advice");
+		}
 	}
 
 	public void fieldTooLongControls(RispostaBean rb) throws FieldTooLongException {
@@ -202,7 +210,7 @@ public class AnswerQuestionsController extends Controller {
 		String characters = " characters)";
 		
 		// general answer
-		// circa 182 caratteri vengono aggiunti nel caso peggiore (reason:
+		// circa 182 caratteri vengono aggiunti nel caso peggiore (reason
 		// renown....person in this sector)
 		// dal pattern che formatta la risposta per una general answer
 		// 2048-182=1866 caratteri disponibili
