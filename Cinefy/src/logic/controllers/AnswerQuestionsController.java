@@ -260,7 +260,7 @@ public class AnswerQuestionsController extends Controller {
 		}
 		if (rb.getGenre().length() > genreSize) {
 			throw new FieldTooLongException(
-					"The entered film's title is too long \n(max " + filmSize.toString() + characters);
+					"The entered genre is too long \n(max " + genreSize.toString() + characters);
 		}
 		if (rb.getExplanation().length() > explanationSize) {
 			throw new FieldTooLongException("The explanation of film advice is too long \n(max "
