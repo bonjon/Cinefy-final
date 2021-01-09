@@ -31,7 +31,7 @@
 					</form></li>
 				<li class="liBtn"><form action="AnswerAdvancedServlet"
 						method="post">
-						<input type="submit" class="notSelected" value="Ask">
+						<input type="submit" class="notSelected" value="Answer">
 					</form></li>
 				<li class="liBtn"><form action="PlaylistsAdvancedServlet"
 						method="post">
