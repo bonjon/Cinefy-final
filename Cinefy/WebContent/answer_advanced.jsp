@@ -43,7 +43,7 @@ import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.AdvancedU
 			</ul>
 		</div>
 		<div class="splitRight">
-		<label class="textDown">Your last questions</label>
+		<label class="textDown">Received questions</label>
 			<div>
 				<ul style="height: 300px; overflow: auto">
 					<%
