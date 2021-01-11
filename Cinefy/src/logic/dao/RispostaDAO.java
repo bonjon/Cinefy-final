@@ -43,7 +43,9 @@ public class RispostaDAO {
 			if (s != null) {
 				ResultSet rs = s.executeQuery();
 				if (!rs.first())
+					
 					return Collections.emptyList();
+				
 				do {
 					int id = rs.getInt("id");
 					String contenuto = rs.getString("contenuto");
@@ -51,6 +53,7 @@ public class RispostaDAO {
 					String advancedName = rs.getString("AdvancedName");
 					int idDomanda = rs.getInt("idDomanda");
 					lr.add(new Risposta(id, contenuto, advancedName, beginnerName, idDomanda));
+					System.out.println(lr);
 				} while (rs.next());
 			}
 		} finally {

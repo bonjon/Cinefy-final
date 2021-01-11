@@ -45,18 +45,20 @@ public class AnswerAdvancedServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("answer_advanced.jsp");
 		AnswerQuestionsController aqc = new AnswerQuestionsController();
 		List<DomandaBean> questions = new ArrayList<>();
+		List<DomandaBean> questionsDel = new ArrayList<>();
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 		
 		try {
 			questions = aqc.getQuestions(gub.getUsername(), "advanced");
-			if (questions.isEmpty())
+			questionsDel = aqc.deleteQuestion(questions, gub.getUsername());
+			if (questionsDel.isEmpty())
 				request.setAttribute(ERROR, "No questions list");
 			else
-				request.setAttribute("questions", questions);
+				request.setAttribute("questions", questionsDel);
 		} catch (SQLException | ClassNotFoundException e) {
 			LOGGER.log(Level.WARNING, e.toString());
 		}
-		session.setAttribute("questions", questions);
+		session.setAttribute("questions", questionsDel);
 		if (request.getParameter("d") != null) {
 			int index = Integer.parseInt(request.getParameter("index2"));
 			DomandaBean db = (DomandaBean) questions.get(index);

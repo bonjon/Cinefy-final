@@ -34,16 +34,18 @@ public class AnswerQuestionsController extends Controller {
 	public List<DomandaBean> getQuestions(String username, String role) throws SQLException, ClassNotFoundException {
 		DomandaDAO dd = new DomandaDAO();
 		List<Domanda> ld = dd.getQuestions(username, role);
-		if (ld == null)
+		if (ld.isEmpty()) {
 			return Collections.emptyList();
+		}
 		return this.convertQuestionList(ld);
 	}
 
 	public List<RispostaBean> getAnswers(String username, String role) throws SQLException, ClassNotFoundException {
 		RispostaDAO rd = new RispostaDAO();
 		List<Risposta> ld = rd.getAnswers(username, role);
-		if (ld == null)
+		if (ld.isEmpty()) {
 			return Collections.emptyList();
+		}
 		return this.convertAnswerList(ld);
 	}
 
@@ -286,7 +288,7 @@ public class AnswerQuestionsController extends Controller {
 			}
 		}
 		i = 0;
-		if (!rb.isEmpty()) {
+		if (!pendingRb.isEmpty()) {
 			while (i < pendingRb.size()) {
 				RispostaBean temp = pendingRb.get(i);
 				Integer id = Integer.parseInt(temp.getIdDomanda());
@@ -294,7 +296,6 @@ public class AnswerQuestionsController extends Controller {
 				i++;
 			}
 		}
-		
 
 		int y;
 		if (db.isEmpty()) {
@@ -306,6 +307,7 @@ public class AnswerQuestionsController extends Controller {
 			int tempID = Integer.parseInt(db.get(y).getId());
 			if (idList.contains(tempID)) {
 				db.remove(db.get(y));
+
 			}
 
 		}
