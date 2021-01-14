@@ -43,10 +43,23 @@ import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.AdvancedU
 			</ul>
 		</div>
 		<div class="splitRight">
-		<label class="textDown">Received questions</label>
+		 <label class="textUp">Received questions</label>
+			<%
+				String log = (String) request.getAttribute("error");
+				if (log != null) {
+					
+			%><h6 style="color: RED; margin-left: 30px;"><%=log%></h6>
+			<%
+				}
+				else{
+			%>
+			<br>
+			
+		
 			<div>
 				<ul style="height: 300px; overflow: auto">
 					<%
+						
 						for (j = 0; j < questions.size(); j++) {
 					%><li class="itemQ">
 						<form action="AnswerAdvancedServlet" method="post">
@@ -58,6 +71,7 @@ import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.AdvancedU
 					</li>
 					<%
 						}
+				}
 					%>
 				</ul>
 			</div>
