@@ -51,18 +51,21 @@ public class AnswerAdvancedServlet extends HttpServlet {
 		try {
 			questions = aqc.getQuestions(gub.getUsername(), "advanced");
 			questionsDel = aqc.deleteQuestion(questions, gub.getUsername());
-			if (questionsDel.isEmpty())
-				request.setAttribute(ERROR, "No questions list");
-			else
+			if (questionsDel.isEmpty()) {
+				request.setAttribute(ERROR, "No received questions without answer");
+			}
+			else {
 				request.setAttribute("questions", questionsDel);
+			}
 		} catch (SQLException | ClassNotFoundException e) {
-			LOGGER.log(Level.WARNING, e.toString());
+			System.out.println("sono in catch");
 		}
-		session.setAttribute("questions", questionsDel);
 		if (request.getParameter("d") != null) {
 			int index = Integer.parseInt(request.getParameter("index2"));
-			DomandaBean db = (DomandaBean) questions.get(index);
+			DomandaBean db = (DomandaBean) questionsDel.get(index);
 			session.setAttribute("QU", db);
+		}else {
+			LOGGER.log(Level.WARNING,"else funziona");
 		}
 		rd.forward(request, response);
 	}
