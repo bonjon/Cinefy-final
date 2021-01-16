@@ -152,7 +152,7 @@ public class AnswerQuestionsController extends Controller {
 		fieldTooLongControls(rb);
 
 		rd = new RispostaDAO();
-		rd.addAnswer(answer, rb.getBeginnerName(), rb.getAdvancedName(), Integer.parseInt(rb.getId()));
+		rd.addAnswer(answer, rb.getBeginnerName(), rb.getAdvancedName(), Integer.parseInt(rb.getIdDomanda()));
 
 	}
 	

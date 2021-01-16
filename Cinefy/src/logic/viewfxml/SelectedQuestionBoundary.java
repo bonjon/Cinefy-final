@@ -156,7 +156,7 @@ public class SelectedQuestionBoundary  {
 		rb = new RispostaBean();
 		rb.setAdvancedName(advancedName);
 		rb.setBeginnerName(beginnerName);
-		rb.setId(Integer.parseInt(id));
+		rb.setIdDomanda(Integer.parseInt(id));
 		
 		try {
 		

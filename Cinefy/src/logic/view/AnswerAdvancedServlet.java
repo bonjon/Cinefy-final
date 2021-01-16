@@ -3,7 +3,6 @@ package logic.view;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,13 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import logic.bean.AdvancedUserBean;
+import logic.bean.BeginnerUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.GeneralUserBean;
-import logic.bean.RispostaBean;
 import logic.controllers.AnswerQuestionsController;
-import logic.controllers.AskForQuestionsController;
-import logic.exceptions.AdvancedNotFoundException;
+
 
 /**
  * Servlet implementation class AnswerAdvancedServlet che è la view di AnswerAdvanced.
@@ -47,6 +44,7 @@ public class AnswerAdvancedServlet extends HttpServlet {
 		List<DomandaBean> questions = new ArrayList<>();
 		List<DomandaBean> questionsDel = new ArrayList<>();
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
+		BeginnerUserBean bub;
 		
 		try {
 			questions = aqc.getQuestions(gub.getUsername(), "advanced");
@@ -57,16 +55,21 @@ public class AnswerAdvancedServlet extends HttpServlet {
 			else {
 				request.setAttribute("questions", questionsDel);
 			}
-		} catch (SQLException | ClassNotFoundException e) {
-			System.out.println("sono in catch");
-		}
+		
 		if (request.getParameter("d") != null) {
 			int index = Integer.parseInt(request.getParameter("index2"));
 			DomandaBean db = (DomandaBean) questionsDel.get(index);
+			String beginner = db.getBeginnerName();
+			bub = aqc.getBeginnerUser(beginner, "beginner");
 			session.setAttribute("QU", db);
+			session.setAttribute("begS", bub);
+			rd = request.getRequestDispatcher("GeneralAnswerServlet");
 		}else {
 			LOGGER.log(Level.WARNING,"else funziona");
 		}
+	} catch (SQLException | ClassNotFoundException e) {
+		LOGGER.log(Level.WARNING,"sono in catch");
+	}
 		rd.forward(request, response);
 	}
 }
