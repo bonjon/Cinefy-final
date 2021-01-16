@@ -35,7 +35,7 @@ import logic.utils.SessionUser;
 public class QuestionDetailsBoundary {
 
 	private static final Logger LOGGER = Logger.getLogger(QuestionDetailsBoundary.class.getName());
-	
+
 	@FXML
 	private Label home;
 	@FXML
@@ -64,7 +64,6 @@ public class QuestionDetailsBoundary {
 	private Label labelAnswer;
 
 	private BeginnerGraphicChange bgc;
-	private DomandaBean selectedQuestion;
 	private RispostaBean answer;
 	private AskForQuestionsController afc;
 
@@ -89,7 +88,7 @@ public class QuestionDetailsBoundary {
 			this.labelError.setText(e.getMessage());
 		}
 	}
-	
+
 	@FXML
 	public void onHomeClicked(MouseEvent event) throws IOException {
 		this.bgc.toHomepage(this.home.getScene());
@@ -101,7 +100,7 @@ public class QuestionDetailsBoundary {
 	}
 
 	public void init(DomandaBean db, String color) throws NumberFormatException, ClassNotFoundException {
-		this.selectedQuestion = db;
+		DomandaBean selectedQuestion = db;
 		this.bgc = BeginnerGraphicChange.getInstance();
 		this.afc = new AskForQuestionsController();
 		this.labelQuestion.setText(selectedQuestion.getContenuto());
@@ -114,7 +113,7 @@ public class QuestionDetailsBoundary {
 				this.imageView.setImage(img);
 				this.labelCheck.setText("The question has been sent to our admins who will accept or reject");
 				this.labelAnswer.setText("");
-				this.labelName.setText("No answer from " + this.selectedQuestion.getAdvancedName());
+				this.labelName.setText("No answer from " + selectedQuestion.getAdvancedName());
 				this.sliderVote.setDisable(true);
 				this.btnOk.setDisable(true);
 			}
@@ -124,9 +123,9 @@ public class QuestionDetailsBoundary {
 				Image img = new Image(file.toURI().toString());
 				this.imageView.setImage(img);
 				this.labelCheck.setText("The question has been accepted by the admin and it's arrived to "
-						+ this.selectedQuestion.getAdvancedName());
+						+ selectedQuestion.getAdvancedName());
 				this.labelAnswer.setText("");
-				this.labelName.setText("No answer from " + this.selectedQuestion.getAdvancedName());
+				this.labelName.setText("No answer from " + selectedQuestion.getAdvancedName());
 				this.sliderVote.setDisable(true);
 				this.btnOk.setDisable(true);
 			}
@@ -135,10 +134,10 @@ public class QuestionDetailsBoundary {
 				File file = new File(path);
 				Image img = new Image(file.toURI().toString());
 				this.imageView.setImage(img);
-				this.labelCheck.setText("You have received an answer from " + this.selectedQuestion.getAdvancedName());
+				this.labelCheck.setText("You have received an answer from " + selectedQuestion.getAdvancedName());
 				this.answer = afc.getAnswer(gub.getUsername(), selectedQuestion.getId());
 				this.labelAnswer.setText(this.answer.getContenuto());
-				this.labelName.setText("Answer from " + this.selectedQuestion.getAdvancedName());
+				this.labelName.setText("Answer from " + selectedQuestion.getAdvancedName());
 				this.sliderVote.setDisable(false);
 				this.btnOk.setDisable(false);
 			}

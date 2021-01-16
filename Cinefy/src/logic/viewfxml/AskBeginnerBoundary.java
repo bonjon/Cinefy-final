@@ -285,12 +285,12 @@ public class AskBeginnerBoundary implements Initializable {
 				@Override
 				protected void updateItem(AdvancedUserBean item, boolean empty) {
 					super.updateItem(item, empty);
-					if (empty || item == null) {
+					if (empty) {
 						setText(null);
 						setStyle(FXBACK + COLOR + ";");
 					} else {
 						if (item.getProfilePic() == null)
-							item.setProfilePic("default.png");
+							item.setProfilePic(DEFAULT);
 						ImageView iv;
 						Label username;
 						Label voto;
