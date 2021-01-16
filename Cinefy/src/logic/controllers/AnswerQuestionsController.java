@@ -287,6 +287,7 @@ public class AnswerQuestionsController extends Controller {
 				i++;
 			}
 		}
+		System.out.println("LISTA ID DOMANDE DI RISPOSTE ZCCETTATE" + rb);
 		i = 0;
 		if (!pendingRb.isEmpty()) {
 			while (i < pendingRb.size()) {
@@ -296,7 +297,7 @@ public class AnswerQuestionsController extends Controller {
 				i++;
 			}
 		}
-
+		System.out.println("LISTA ID DOMANDE DI RISPOSTE PENDENTI"+pendingRb);
 		int y;
 		if (db.isEmpty()) {
 			return Collections.emptyList();
@@ -306,8 +307,9 @@ public class AnswerQuestionsController extends Controller {
 
 			int tempID = Integer.parseInt(db.get(y).getId());
 			if (idList.contains(tempID)) {
+				System.out.println("rimuovo: "+db.get(y));
 				db.remove(db.get(y));
-
+				
 			}
 
 		}
