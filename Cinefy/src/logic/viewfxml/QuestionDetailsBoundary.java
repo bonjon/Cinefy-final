@@ -19,7 +19,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.input.MouseEvent;
-import logic.bean.AdvancedUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.GeneralUserBean;
 import logic.bean.RispostaBean;
@@ -82,10 +81,8 @@ public class QuestionDetailsBoundary {
 	@FXML
 	public void onOk(ActionEvent event) throws NumberFormatException, ClassNotFoundException {
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
-		AdvancedUserBean aub = new AdvancedUserBean();
-		aub.setUsername(this.selectedQuestion.getAdvancedName());
-		aub.setVoto(this.sliderVote.getValue());
-		int a = (int) Double.parseDouble(aub.getVoto());
+		int a = (int) this.sliderVote.getValue();
+		this.labelError.setText("You voted " + a);
 		try {
 			this.afc.voteAdvanced(gub.getUsername(), this.answer, a);
 		} catch (SQLException e) {

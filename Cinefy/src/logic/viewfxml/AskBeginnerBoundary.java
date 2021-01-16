@@ -289,6 +289,8 @@ public class AskBeginnerBoundary implements Initializable {
 						setText(null);
 						setStyle(FXBACK + COLOR + ";");
 					} else {
+						if (item.getProfilePic() == null)
+							item.setProfilePic("default.png");
 						ImageView iv;
 						Label username;
 						Label voto;

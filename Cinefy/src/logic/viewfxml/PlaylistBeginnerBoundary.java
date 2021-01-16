@@ -146,6 +146,8 @@ public class PlaylistBeginnerBoundary implements Initializable {
 					setText(null);
 					setStyle("-fx-control-inner-background: " + " #1c1c1c" + ";");
 				} else {
+					if (item.getPlaylistPic() == null)
+						item.setPlaylistPic("default2.jpg");
 					String path;
 					ImageView iv;
 					VBox vBox;

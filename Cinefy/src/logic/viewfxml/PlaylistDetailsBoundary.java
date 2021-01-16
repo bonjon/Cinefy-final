@@ -91,6 +91,7 @@ public class PlaylistDetailsBoundary {
 	@FXML
 	public void onOk(ActionEvent event) throws ClassNotFoundException {
 		vote = (int) this.sliderVote.getValue();
+		this.labelError.setText("You vote " + vote);
 		GeneralUserBean gub = SessionUser.getInstance().getSession();
 		try {
 			pdc.votePlaylist(vote, this.selectedPlaylist.getId(), gub.getUsername());
@@ -111,7 +112,12 @@ public class PlaylistDetailsBoundary {
 		this.playlistDate.setText(pb.getDate());
 		this.filmPlaylist.setMouseTransparent(true);
 		this.filmPlaylist.setFocusTraversable(false);
-		String path = FileManager.PLAYLISTS + File.separator + this.selectedPlaylist.getPlaylistPic();
+		String path;
+		if(this.selectedPlaylist != null)
+			path = FileManager.PLAYLISTS + File.separator + this.selectedPlaylist.getPlaylistPic();
+		else {
+			path = FileManager.PLAYLISTS + File.separator + "default2.jpg";
+		}
 		this.bgc = BeginnerGraphicChange.getInstance();
 		this.pdc = new PlaylistDetailsController();
 		this.selectedPlaylist = pb;

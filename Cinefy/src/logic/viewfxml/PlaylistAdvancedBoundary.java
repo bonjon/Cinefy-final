@@ -153,6 +153,8 @@ public class PlaylistAdvancedBoundary implements Initializable {
 					setText(null);
 					setStyle(BACK + COLOR + ";");
 				} else {
+					if (item.getPlaylistPic() == null)
+						item.setPlaylistPic("default2.jpg");
 					VBox vBox;
 					Label name;
 					Label voto;
