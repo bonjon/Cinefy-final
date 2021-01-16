@@ -16,14 +16,12 @@ public class BeginnerUserDAO {
 	public boolean createBeginnerUser(String username, String password, String bio, String profilePic)
 			throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
-
 		String sql = "call CinefyDB.aggiungi_beginner(?,?,?,?);\r\n";
 		try (PreparedStatement s = conn.prepareStatement(sql)) {
 			s.setString(1, username);
 			s.setString(2, password);
 			s.setString(3, bio);
 			s.setString(4, profilePic);
-
 			s.executeUpdate();
 			return true;
 		}

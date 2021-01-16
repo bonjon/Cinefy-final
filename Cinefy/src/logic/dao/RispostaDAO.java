@@ -43,9 +43,9 @@ public class RispostaDAO {
 			if (s != null) {
 				ResultSet rs = s.executeQuery();
 				if (!rs.first())
-					
+
 					return Collections.emptyList();
-				
+
 				do {
 					int id = rs.getInt("id");
 					String contenuto = rs.getString("contenuto");
@@ -75,7 +75,7 @@ public class RispostaDAO {
 				int id = rs.getInt("id");
 				String contenuto = rs.getString("Contenuto");
 				String advancedName = rs.getString("AdvancedName");
-				r = new Risposta(id, contenuto, beginnerName, advancedName, idDomanda);
+				r = new Risposta(id, contenuto, advancedName, beginnerName, idDomanda);
 			}
 		}
 		return r;
