@@ -51,7 +51,7 @@
 					String logx = (String) request.getAttribute("errorx");
 					if (logx != null) {
 						if (logx != null) {
-				%><h6 style="color: RED;"><%=logx%></h6>
+				%><h6 style="color: RED; margin-left: 30px;"><%=logx%></h6>
 				<%
 					}
 					}
@@ -64,9 +64,21 @@
 						<form class="formCard" action="AskBeginnerServlet" method="post">
 							<button type="submit" name="<%="a"%>"
 								value="<%=topAd.get(i).getUsername()%>">
+								<%
+									if (topAd.get(i).getProfilePic() != null) {
+								%>
 								<img
 									src="<%="img/profilePictures/" + topAd.get(i).getProfilePic()%>"
 									class="card-img-top cardImg" height="100" width="100" />
+								<%
+									} else {
+								%>
+								<img
+									src="<%="img/profilePictures/" + "default.png"%>"
+									class="card-img-top cardImg" height="100" width="100" />
+								<%
+									}
+								%>
 							</button>
 							<br> <label class="nameAd"><%=topAd.get(i).getUsername()%></label><br>
 							<label class="nameAd"><%=topAd.get(i).getVoto()%> average</label>

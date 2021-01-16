@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page
-	import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.DomandaBean, logic.bean.GeneralUserBean"%>
+	import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.DomandaBean, logic.bean.RispostaBean,logic.bean.GeneralUserBean"%>
 <%
 	int i;
 	@SuppressWarnings("unchecked")
 	List<DomandaBean> questionsList = (List<DomandaBean>) session.getAttribute("questionsList");
+	@SuppressWarnings("unchecked")
+	List<RispostaBean> answersList = (List<RispostaBean>) session.getAttribute("answersList");
 %>
 <!-- HTML5 -->
 <!DOCTYPE html>
@@ -33,15 +35,16 @@
 			</ul>
 		</div>
 		<div class="splitRight">
+			<label class="textUp">List questions</label><br>
 			<%
-				String log = (String) request.getAttribute("search");
+				String log = (String) request.getAttribute("error");
 				if (log != null) {
 					if (log != null) {
-			%><h6 style="color: RED;"><%=log%></h6>
+			%><h6 style="color: RED; margin-left: 30px;"><%=log%></h6>
 			<%
 				}
 				}
-			%><label class="textUp">List questions</label><br>
+			%>
 			<div>
 				<ul style="height: 300px; overflow: auto">
 					<%
@@ -51,7 +54,8 @@
 							<input class="question" type="submit" name="<%="d"%>"
 								value="<%=questionsList.get(i).getContenuto()%>"><input
 								type="hidden" name="index2" value="<%=i%>"><input
-								type="hidden" name="QU" value="<%=questionsList.get(i).getId()%>">
+								type="hidden" name="QU"
+								value="<%=questionsList.get(i).getId()%>">
 						</form>
 					</li>
 					<%
@@ -59,7 +63,33 @@
 					%>
 				</ul>
 			</div>
-			<br>
+			<br> <label class="textMiddle">List answers</label><br>
+			<%
+				String log2 = (String) request.getAttribute("search");
+				if (log2 != null) {
+					if (log2 != null) {
+			%><h6 style="color: RED; margin-left: 30px;"><%=log2%></h6>
+			<%
+				}
+				}
+			%>
+			<div>
+				<ul style="height: 300px; overflow: auto">
+					<%
+						for (i = 0; i < answersList.size(); i++) {
+					%><li class="itemQ">
+						<form action="HomeAdminServlet" method="post">
+							<input class="question" type="submit" name="<%="r"%>"
+								value="<%=answersList.get(i).getContenuto()%>"><input
+								type="hidden" name="index" value="<%=i%>"><input
+								type="hidden" name="R" value="<%=answersList.get(i).getId()%>">
+						</form>
+					</li>
+					<%
+						}
+					%>
+				</ul>
+			</div>
 		</div>
 	</div>
 </body>

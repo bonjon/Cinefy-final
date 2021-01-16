@@ -69,8 +69,19 @@
 		<div class="splitRight">
 			<label class="textUp">Playlist Details</label><br>
 			<div class="cardContainer">
+				<%
+					if (P.getPlaylistPic() != null) {
+				%>
 				<img src="<%="img/playlistPictures/" + P.getPlaylistPic()%>"
 					class="circleImg" height="150" width="150" />
+				<%
+					} else {
+				%>
+				<img src="<%="img/playlistPictures/" + "default2.jpg"%>"
+					class="circleImg" height="150" width="150" />
+				<%
+					}
+				%>
 				<h3 class="headUser"><%=P.getName()%></h3>
 				<h3 class="headUser">
 					<%=P.getAdvancedName()%>
@@ -92,8 +103,7 @@
 					<%
 						for (i = 0; i < LF.size(); i++) {
 					%><li class="itemFilms"><a class="linkGo3"
-					href="<%=LF.get(i).getUrl()%>"><%=LF.get(i).getTitolo()%></a>
-				</li>
+						href="<%=LF.get(i).getUrl()%>"><%=LF.get(i).getTitolo()%></a></li>
 					<%
 						}
 					%>

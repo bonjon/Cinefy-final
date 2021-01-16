@@ -52,9 +52,21 @@
 							method="post">
 							<button type="submit" name="<%="a"%>"
 								value="<%=topLP.get(i).getName()%>">
+								<%
+									if (topLP.get(i).getPlaylistPic() != null) {
+								%>
 								<img
 									src="<%="img/playlistPictures/" + topLP.get(i).getPlaylistPic()%>"
 									class="card-img-top cardImg" height="100" width="100" />
+								<%
+									} else {
+								%>
+								<img
+									src="<%="img/playlistPictures/" + "default2.jpg"%>"
+									class="card-img-top cardImg" height="100" width="100" />
+								<%
+									}
+								%>
 							</button>
 							<br> <label class="nameAd"><%=topLP.get(i).getName()%></label><br>
 							<label class="nameAd"><%=topLP.get(i).getVoto()%> average</label>
@@ -72,7 +84,7 @@
 				String logx = (String) request.getAttribute("errorx");
 				if (logx != null) {
 					if (logx != null) {
-			%><h6 style="color: RED;"><%=logx%></h6>
+			%><h6 style="color: RED; margin-left: 30px;"><%=logx%></h6>
 			<%
 				}
 				}
