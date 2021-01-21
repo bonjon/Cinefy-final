@@ -24,8 +24,9 @@ public class TestLogin {
 	 */
 
 	@Test
-	public void testLoginFails() {
+	public void testLoginFails() throws InterruptedException {
 		WebDriver driver = this.setProps();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys("test");
 		driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("test");
 		driver.findElement(By.xpath(LOGIN)).click();
@@ -38,8 +39,9 @@ public class TestLogin {
 	 */
 
 	@Test
-	public void testEmptyField() {
+	public void testEmptyField() throws InterruptedException {
 		WebDriver driver = this.setProps();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(LOGIN)).click();
 		WebElement label = driver.findElement(By.xpath("/html/body/div/div[2]/h6"));
 		String output = label.getText();
