@@ -61,9 +61,10 @@ public class AskBeginnerServlet extends HttpServlet {
 		session.setAttribute(TOPAD, topAd);
 		try {
 			questions = afc.getQuestions(gub, gub.getRole());
-			if (questions.isEmpty())
+			if (questions.isEmpty()) {
+				request.setAttribute("questions", Collections.emptyList());
 				request.setAttribute(ERROR, "No questions list");
-			else
+			} else
 				request.setAttribute("questions", questions);
 		} catch (SQLException | ClassNotFoundException e) {
 			LOGGER.log(Level.WARNING, e.toString());

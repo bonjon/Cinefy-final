@@ -69,7 +69,8 @@ public class RegistrationServlet extends HttpServlet {
 		if (filePart != null) {
 			fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 		}
-		newFileName = FileManager.generateNewFileName(fileName, username);
+		if (!fileName.equals(""))
+			newFileName = FileManager.generateNewFileName(fileName, username);
 		regResult = this.create(userType, username, password, bio, newFileName, controller, request);
 		if (Boolean.TRUE.equals(regResult)) {
 			request.setAttribute("reg", "Registered");
