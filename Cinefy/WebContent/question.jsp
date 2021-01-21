@@ -41,8 +41,19 @@
 		<div class="splitRight">
 			<label class="textUp">Make a question to <%=AdS.getUsername()%></label><br>
 			<div class="cardContainer">
+				<%
+					if (AdS.getProfilePic() != null) {
+				%>
 				<img src="<%="img/profilePictures/" + AdS.getProfilePic()%>"
 					class="circleImg" height="150" width="150" />
+				<%
+					} else {
+				%>
+				<img src="<%="img/profilePictures/" + "default.png"%>"
+					class="circleImg" height="150" width="150" />
+				<%
+					}
+				%>
 				<h6 class="headSmall"><%=AdS.getVoto()%>
 					average
 				</h6>

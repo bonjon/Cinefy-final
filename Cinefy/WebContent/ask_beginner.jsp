@@ -98,6 +98,7 @@
 				<input name="searchString" type="text" class="text-box2"
 					aria-label="Search">
 			</form>
+			<br> <label class="textDown">Your last questions</label>
 			<%
 				String log = (String) request.getAttribute("error");
 				if (log != null) {
@@ -107,7 +108,6 @@
 				}
 				}
 			%>
-			<br> <label class="textDown">Your last questions</label>
 			<div>
 				<ul style="height: 300px; overflow: auto">
 					<%
