@@ -5,6 +5,7 @@
 <%
 	
 	BeginnerUserBean beg = (BeginnerUserBean) session.getAttribute("begS");
+	DomandaBean QU = (DomandaBean) session.getAttribute("QU");
 %>
 <!-- HTML5 -->
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
 </head>
 <body>
 	<div>
-		<div class="splitLeft">
+		<div class="splitLeft pageStretch" style="height: 900px">
 			<div class="titolo">Cinefy</div>
 			<ul class="listGroup">
 				<li class="liBtn"><form action="home_beginner.jsp"
@@ -39,8 +40,8 @@
 					</form></li>
 			</ul>
 		</div>
-		<div class="splitRight">
-			<label class="textUp">Answer to <%=beg.getUsername()%></label><br>
+		<div class="splitRight pageStretch" style="height: 900px">
+			<label class="textUp">Answer to <%= beg.getUsername() %></label><br>
 			<div class="cardContainer">
 				<img src="<%="img/profilePictures/" + beg.getProfilePic()%>"
 					class="circleImg" height="150" width="150" />
@@ -56,29 +57,52 @@
 				}
 				}
 			%>
-			
-			<form class="containerBio" action="GeneralAnswerServlet" method="post">
+			<div style="text-align: center; padding-top:6px;">
+			<label class="textUp" >Question</label><br>
+			<div class="cardContainer" style="padding-top:6px;">
+				<label class="headde"><%=QU.getContenuto()%></label>
+			</div></div>
+			<br>
+			<div style="text-align: center;">
+			<label class="textUp">General answer</label><br>
+			<form class="containerBio" style="padding-top:6px;" action="GeneralAnswerServlet" method="post">
 				<div>
-				<textarea name="answer" id="answer" class="quest" style="margin: auto;"></textarea>
+				<textarea name="answer" id="answer" class="quest" style="margin: auto; height: 150px;"></textarea>
 				</div>
 					<br>
-					<div class=gAnswerRect >
-					<span class="gAnswerRes">
-						<span class="resContainerL" >
-						<span  class="checkBL" >
-							<input  type="checkbox"> Suggest to interact also with a collegue
-						</span></span>
-						<span class="resContainerR" >
-						<span  class="checkBR" >
+					
+					<div class="gAnswerRes" style="width: 900px; display: inline-block; background: #1c1c1c;">
+						<div class="resContainerL" style=" min-width:450px; float:left;">
+							<span  class="checkBL" style="color: #f5c518; margin: auto; text-align:center;" >
+							<input  type="checkbox"  id="colleagueMark" name="colleagueMark"> Suggest to interact also with a colleague 
+							</span>
+							<br><br>
+							<label for="colleagueName" class="resFieldsText" style="text-align:center; font-size: 12px; color: #f5c518">Advanced user's nickname</label><br> <input
+								id="colleagueName" name="colleagueName" type="text" class="text-box"> <br> <br>
+							<label for="reasonChoice" class="resFieldsText" style="text-align:center; font-size: 12px; color: #f5c518">Why I suggest this colleague</label><br>
+								<select class="formControl" name="reasonChoice" id="reasonChoice" onChange="select()"> 
+									<option>My personal knowledge</option>
+									<option>Renowned person in this sector</option>
+								</select> <br>
+							
+						</div>
+						<div class="resContainerR" style=" min-width:449px; float: right;">
+							<span  class="checkBR"  style="color: #f5c518; margin: auto; text-align:center;" >
 							<input  type="checkbox" > Suggest additional web resources
-						</span></span>
-					</span></div>
+							</span>
+							<br><br>
+							<label for="WikiLink" class="resFieldsText" style="text-align:center; font-size: 12px; color: #f5c518">Wikipedia link</label><br> <input
+								id="WikiLink" name="WikiLink" type="text" class="text-box"> <br> <br>
+							<label for="YoutubeLink" class="resFieldsText" style="text-align:center; font-size: 12px; color: #f5c518">YouTube link</label><br> <input
+								id="YoutubeLink" name="YoutubeLink" type="text" class="text-box"> <br> <br>
+						</div>
+					</div>
 					
 				<br> <br> <input name="make" id="make" type="submit"
 					class="signIn" value="Submit">
 			</form>
-			
-		</div>
+			</div>
+			</div>
 	</div>
 </body>
 </html>

@@ -412,71 +412,60 @@ a.facebook {
 	font-size: 20px;
 }
 
-.answerBox{
-	margin: auto;
-	background: #1c1c1c;
-	width: 900px;
-	text-align: center;
-}
-
-
-	
-
-.gAnswerRect{
-	text-align: center;
-	width: 900px;
-	display: -moz-inline-stack;
-    display: inline-block;
-}
-
 
 .gAnswerRes{
+	margin: auto;
 	text-align: center;
 	color: #f5c518;
 	background: #000000;
 	font-family: Arial;
-	min-width: 900px;
-    display: grid;
-	vertical-align: top;
+	width: 900px;
 	border-color: #f5c518;
+
 	
 }
 
 .resContainerL{
-	text-align:left;
 	clear:none;
-	float:left ;
 	color: #f5c518;
-	display: -moz-inline-stack;
-    display: inline-block;
-	text-color: #f5c518;
 	min-width:449px;
 }
 
 .resContainerR{
-	text-align: right;
+	
 	clear:none;
-	float: right;
 	color: #f5c518;
-	display: -moz-inline-stack;
-    display: inline-block;
 	min-width: 450px;
 }
 
+.pageStretch{
+	height:900px;
+}
+
 .checkBL{
-	padding-left: 60px;
 	color: #f5c518;
 	clear:none;
-	float: left;
-	text-align: left;
+	font-style: bold;
+	text-align: center;
+	
 }
 
 .checkBR{
-	padding-right: 60px;
 	color: #f5c518;
 	clear:none;
-	float: right;
 	text-align: right;
+	font-style: bold;
+
+	
+	
+}
+
+
+.resFieldsText {
+	text-align: center;
+	font-family: Arial;
+	font-size: 12px;
+	color: #f5c518;
 }
 
 @import
