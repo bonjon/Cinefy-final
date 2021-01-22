@@ -47,7 +47,6 @@ public class QuestionDetailsServlet extends HttpServlet {
 			LOGGER.log(Level.WARNING, e.toString());
 		}
 		session.setAttribute("R", r);
-		System.out.println(r.getContenuto());
 		if (request.getParameter("BTNOK") != null) {
 			rd = this.voteAdvanced(request, session);
 		}
