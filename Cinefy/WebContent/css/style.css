@@ -406,6 +406,10 @@ a.facebook {
 	font-size: 15px;
 }
 
+.show-white-space {
+    white-space: pre-wrap;
+}
+
 .contenuto {
 	color: #f5c518;
 	font-family: Arial;

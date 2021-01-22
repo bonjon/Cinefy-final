@@ -46,7 +46,7 @@
 			</div>
 			<br> <label class="textMiddle">Answer from <%=QU.getAdvancedName()%></label><br>
 			<div class="cardContainer">
-				<label class="headde"><%=R.getContenuto()%></label>
+				<label class="headde show-white-space"><%=R.getContenuto()%></label>
 			</div>
 			<br>
 			<form action="QuestionDetailsServlet" method="post">

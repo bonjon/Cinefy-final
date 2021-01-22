@@ -98,6 +98,15 @@
 				<input name="searchString" type="text" class="text-box2"
 					aria-label="Search">
 			</form>
+			<%
+				String log3 = (String) request.getAttribute("error2");
+				if (log3 != null) {
+					if (log3 != null) {
+			%><h6 style="color: RED; margin-left: 30px;"><%=log3%></h6>
+			<%
+				}
+				}
+			%>
 			<br> <label class="textDown">Your last questions</label>
 			<%
 				String log = (String) request.getAttribute("error");
