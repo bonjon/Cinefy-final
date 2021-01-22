@@ -48,7 +48,7 @@ public class SearchServlet extends HttpServlet {
 			AdvancedUserBean aub = afc.getAdvanced(au);
 			session.setAttribute("AdS", aub);
 		} catch (AdvancedNotFoundException e) {
-			request.setAttribute("error", e.getMessage());
+			request.setAttribute("error2", e.getMessage());
 			rd = request.getRequestDispatcher("AskBeginnerServlet");
 		} catch (SQLException | ClassNotFoundException e) {
 			LOGGER.log(Level.WARNING, e.toString());
