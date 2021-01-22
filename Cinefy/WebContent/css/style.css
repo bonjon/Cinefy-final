@@ -412,6 +412,54 @@ a.facebook {
 	font-size: 20px;
 }
 
+.answerBox{
+	margin: auto;
+	background: #1c1c1c;
+	width: 900px;
+	text-align: center;
+}
+
+.gAnswerRes{
+
+	margin:auto;
+	color: #f5c518;
+	background: #1c1c1c;
+	font-family: Arial;
+	width: 900px;
+	display:in;
+	
+}
+
+.resContainerL{
+	text-align:left;
+	float:left ;
+	width:449px;
+	color: #f5c518;
+	display: inline;
+}
+
+.resContainerR{
+	text-align:right;
+	float:right ;
+	width:450px;
+	color: #f5c518;
+	display: inline;
+}
+
+.checkBL{
+	padding-left:60px;
+	color: #f5c518;
+	float:left ;
+	text-align:left;
+}
+
+.checkBR{
+	padding-right:60px;
+	color: #f5c518;
+	float:right ;
+	text-align:right;
+}
+
 @import
 	url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 

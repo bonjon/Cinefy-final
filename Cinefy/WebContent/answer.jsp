@@ -56,11 +56,27 @@
 				}
 				}
 			%>
+			
 			<form class="containerBio" action="GeneralAnswerServlet" method="post">
-				<textarea name="answer" id="answer" class="quest"></textarea>
+				<div>
+				<textarea name="answer" id="answer" class="quest" style="margin: auto;"></textarea>
+				</div>
+					<br>
+					<div class="gAnswerRes">
+						<div class="resContainerL" >
+						<span  class="checkBL" >
+							<input  type="checkbox"> Suggest to interact also with a collegue
+						</span></div>
+						<div class="resContainerR" >
+						<span  class="checkBR" >
+							<input  type="checkbox" > Suggest additional web resources
+						</span></div>
+					</div>
+					
 				<br> <br> <input name="make" id="make" type="submit"
 					class="signIn" value="Submit">
 			</form>
+			
 		</div>
 	</div>
 </body>
