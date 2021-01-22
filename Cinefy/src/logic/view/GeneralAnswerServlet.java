@@ -49,6 +49,10 @@ public class GeneralAnswerServlet  extends HttpServlet{
 
 private RequestDispatcher makeAnswer(HttpServletRequest request, HttpSession session,AnswerQuestionsController aqc) {
 	String answer = (String) request.getParameter("answer");
+	String colleagueMark = (String) request.getParameter("colleagueMark");
+	String colleagueName = (String) request.getParameter("colleagueName");
+	String wikiLink = (String) request.getParameter("wikiLink");
+	String youtubeLink = (String) request.getParameter("youtubeLink");
 	RispostaBean rb = new RispostaBean();
 	DomandaBean db = (DomandaBean) session.getAttribute("QU");
 	
@@ -62,7 +66,14 @@ private RequestDispatcher makeAnswer(HttpServletRequest request, HttpSession ses
 	rb.setBeginnerName(bub.getUsername());
 	rb.setChoice("general");
 	rb.setContenuto(answer);
-	rb.setColleagueFlag(false);
+	if(colleagueMark.equals("true")) {
+		rb.setColleagueFlag(true);
+	}
+	else {
+		rb.setColleagueFlag(false);
+	}
+	rb.setWikiLink(wikiLink);
+	rb.setYoutubeLink(youtubeLink);
 	rb.setResourceFlag(false);
 	try {
 		aqc.createAnswer(rb);
