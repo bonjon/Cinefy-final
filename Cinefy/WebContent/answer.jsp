@@ -62,16 +62,17 @@
 				<textarea name="answer" id="answer" class="quest" style="margin: auto;"></textarea>
 				</div>
 					<br>
-					<div class="gAnswerRes">
-						<div class="resContainerL" >
+					<div class=gAnswerRect >
+					<span class="gAnswerRes">
+						<span class="resContainerL" >
 						<span  class="checkBL" >
 							<input  type="checkbox"> Suggest to interact also with a collegue
-						</span></div>
-						<div class="resContainerR" >
+						</span></span>
+						<span class="resContainerR" >
 						<span  class="checkBR" >
 							<input  type="checkbox" > Suggest additional web resources
-						</span></div>
-					</div>
+						</span></span>
+					</span></div>
 					
 				<br> <br> <input name="make" id="make" type="submit"
 					class="signIn" value="Submit">

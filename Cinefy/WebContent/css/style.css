@@ -419,45 +419,64 @@ a.facebook {
 	text-align: center;
 }
 
-.gAnswerRes{
 
-	margin:auto;
-	color: #f5c518;
-	background: #1c1c1c;
-	font-family: Arial;
+	
+
+.gAnswerRect{
+	text-align: center;
 	width: 900px;
-	display:flex;
+	display: -moz-inline-stack;
+    display: inline-block;
+}
+
+
+.gAnswerRes{
+	text-align: center;
+	color: #f5c518;
+	background: #000000;
+	font-family: Arial;
+	min-width: 900px;
+    display: grid;
+	vertical-align: top;
+	border-color: #f5c518;
 	
 }
 
 .resContainerL{
 	text-align:left;
+	clear:none;
 	float:left ;
-	width:449px;
 	color: #f5c518;
-	display: inline;
+	display: -moz-inline-stack;
+    display: inline-block;
+	text-color: #f5c518;
+	min-width:449px;
 }
 
 .resContainerR{
-	text-align:right;
-	float:right ;
-	width:450px;
+	text-align: right;
+	clear:none;
+	float: right;
 	color: #f5c518;
-	display: inline;
+	display: -moz-inline-stack;
+    display: inline-block;
+	min-width: 450px;
 }
 
 .checkBL{
-	padding-left:60px;
+	padding-left: 60px;
 	color: #f5c518;
-	float:left ;
-	text-align:left;
+	clear:none;
+	float: left;
+	text-align: left;
 }
 
 .checkBR{
-	padding-right:60px;
+	padding-right: 60px;
 	color: #f5c518;
-	float:right ;
-	text-align:right;
+	clear:none;
+	float: right;
+	text-align: right;
 }
 
 @import
