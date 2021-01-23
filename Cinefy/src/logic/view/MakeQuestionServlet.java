@@ -57,7 +57,7 @@ public class MakeQuestionServlet extends HttpServlet {
 		try {
 			afc.makeQuestion(db);
 		} catch (FieldTooLongException | FieldEmptyException e) {
-			request.setAttribute("error", e.getMessage());
+			request.setAttribute("error3", e.getMessage());
 			return request.getRequestDispatcher(QUESTION);
 		} catch (SQLException | ClassNotFoundException e) {
 			LOGGER.log(Level.WARNING, e.toString());
