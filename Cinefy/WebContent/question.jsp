@@ -67,7 +67,7 @@
 				<p class="bioP"><%=AdS.getBio()%></p>
 			</div>
 			<%
-				String log = (String) request.getAttribute("error");
+				String log = (String) request.getAttribute("error3");
 				if (log != null) {
 					if (log != null) {
 			%><h6 style="color: RED; text-align: center;"><%=log%></h6>

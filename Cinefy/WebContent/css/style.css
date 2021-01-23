@@ -298,6 +298,7 @@ a.facebook {
 	margin-left: 400px;
 	margin-right: 400px;
 	box-shadow: 10px 10px 20px 10px rgba(0, 0, 0, 0.75);
+	overflow-wrap: break-word;
 }
 
 .headUser {

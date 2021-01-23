@@ -98,7 +98,7 @@
 				String log = (String) request.getAttribute("error");
 				if (log != null) {
 					if (log != null) {
-			%><h6 style="color: RED;"><%=log%></h6>
+			%><h6 style="color: RED; margin-left: 30px;"><%=log%></h6>
 			<%
 				}
 				}
