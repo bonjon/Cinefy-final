@@ -41,18 +41,25 @@ public class GeneralAnswerServlet  extends HttpServlet{
 			HttpSession session = request.getSession();
 			RequestDispatcher rd = request.getRequestDispatcher(ANSWER);
 			AnswerQuestionsController aqc = new AnswerQuestionsController();
-			if (request.getParameter("make") != null)
+			if (request.getParameter("make") != null) {
 				rd = this.makeAnswer(request, session, aqc);
+			}
+			else if (request.getParameter("switch") != null){
+				request.getRequestDispatcher("FilmAdviceServlet");
+			}
 			rd.forward(request, response);
 		}
 	
 
 private RequestDispatcher makeAnswer(HttpServletRequest request, HttpSession session,AnswerQuestionsController aqc) {
+	String emptyString = "";
+	
+	String general = "general";
 	String answer = (String) request.getParameter("answer");
+	if(answer==null) {answer=emptyString;}
 	String colleagueMark = (String) request.getParameter("colleagueMark");
-	String colleagueName = (String) request.getParameter("colleagueName");
-	String wikiLink = (String) request.getParameter("wikiLink");
-	String youtubeLink = (String) request.getParameter("youtubeLink");
+	String resourceMark =  (String) request.getParameter("resourceMark");
+
 	RispostaBean rb = new RispostaBean();
 	DomandaBean db = (DomandaBean) session.getAttribute("QU");
 	
@@ -64,17 +71,37 @@ private RequestDispatcher makeAnswer(HttpServletRequest request, HttpSession ses
 	rb.setIdDomanda(domId);
 	rb.setAdvancedName(gub.getUsername());
 	rb.setBeginnerName(bub.getUsername());
-	rb.setChoice("general");
+	rb.setChoice(general);
 	rb.setContenuto(answer);
-	if(colleagueMark.equals("true")) {
+	if(colleagueMark!=null) {
+		
+		String colleagueName = (String) request.getParameter("colleagueName");
+		if(colleagueName==null) {colleagueName=emptyString;}
+		String reasonChoice  = (String) request.getParameter("reasonChoice");
 		rb.setColleagueFlag(true);
+		rb.setColleagueName(colleagueName);
+		rb.setReasonChoice(reasonChoice);
+	}
+	else{
+		rb.setColleagueFlag(false);
+		rb.setColleagueName(emptyString);
+		rb.setReasonChoice(emptyString);
+	}
+	if(resourceMark!=null) {
+		String wikiLink = (String) request.getParameter("wikiLink");
+		if(wikiLink==null) {wikiLink=emptyString;}
+		String youtubeLink = (String) request.getParameter("youtubeLink");
+		if(youtubeLink==null) {youtubeLink=emptyString;}
+		rb.setResourceFlag(true);
+		rb.setWikiLink(wikiLink);
+		rb.setYoutubeLink(youtubeLink);
 	}
 	else {
-		rb.setColleagueFlag(false);
+		rb.setResourceFlag(false);
+		rb.setWikiLink(emptyString);
+		rb.setYoutubeLink(emptyString);
 	}
-	rb.setWikiLink(wikiLink);
-	rb.setYoutubeLink(youtubeLink);
-	rb.setResourceFlag(false);
+	
 	try {
 		aqc.createAnswer(rb);
 	} catch (FieldTooLongException | FieldEmptyException e) {

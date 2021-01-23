@@ -163,7 +163,7 @@ public class AnswerQuestionsController extends Controller {
 		}
 		if (rb.isAColleagueSuggested() && rb.isAResourceSuggested() && (rb.getWikiLink().isEmpty() && rb.getYoutubeLink().isEmpty()
 				&& (rb.getReasonChoice() == null  || rb.getColleagueName().isEmpty()))) {
-						throw new FieldEmptyException("Please, suggest the colleague and web \nresources you thinked of");
+						throw new FieldEmptyException("Please, suggest the colleague and web \nresources you thought of");
 		}
 		if (rb.isAColleagueSuggested()) {
 			if (rb.getColleagueName().isEmpty()) {
