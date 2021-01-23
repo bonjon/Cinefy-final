@@ -6,6 +6,7 @@
 	
 	BeginnerUserBean beg = (BeginnerUserBean) session.getAttribute("begS");
 	DomandaBean QU = (DomandaBean) session.getAttribute("QU");
+	
 %>
 <!-- HTML5 -->
 <!DOCTYPE html>
@@ -20,7 +21,7 @@
 </head>
 <body>
 	<div>
-		<div class="splitLeft pageStretch" style="height: 900px">
+		<div class="splitLeft pageStretch" style="height: 990px">
 			<div class="titolo">Cinefy</div>
 			<ul class="listGroup">
 				<li class="liBtn"><form action="home_beginner.jsp"
@@ -40,31 +41,45 @@
 					</form></li>
 			</ul>
 		</div>
-		<div class="splitRight pageStretch" style="height: 900px">
+		<div class="splitRight pageStretch" style="height: 990px">
 			<label class="textUp">Answer to <%= beg.getUsername() %></label><br>
 			<div class="cardContainer">
+				<%
+					if (beg.getProfilePic() != null) {
+				%>
 				<img src="<%="img/profilePictures/" + beg.getProfilePic()%>"
 					class="circleImg" height="150" width="150" />
-				
+				<%
+					} else {
+				%>
+				<img src="<%="img/profilePictures/" + "default.png"%>"
+					class="circleImg" height="150" width="150" />
+				<%
+					}
+				%>
 				<p class="bioP"><%=beg.getBio()%></p>
 			</div>
-			<%
-				String log = (String) request.getAttribute("error");
-				if (log != null) {
-					if (log != null) {
-			%><h6 style="color: RED; text-align: center;"><%=log%></h6>
-			<%
-				}
-				}
-			%>
+			
 			<div style="text-align: center; padding-top:6px;">
 			<label class="textUp" >Question</label><br>
 			<div class="cardContainer" style="padding-top:6px;">
 				<label class="headde"><%=QU.getContenuto()%></label>
 			</div></div>
-			<br>
+			<br><br>
+			<input name="switch" id="switch" type="submit"
+					class="signIn" value="Switch type of answer" style="margin-left:566px; text-align: center;">
+			<br><br>
+			<%
+				String log = (String) request.getAttribute("error");
+				if (log != null) {
+					if (log != null) {
+			%><h6 style="color: RED; text-align: center; padding-left:12px"><%=log%></h6>
+			<%
+					}
+					}
+			%>
 			<div style="text-align: center;">
-			<label class="textUp">General answer</label><br>
+			<label class="textMiddle">General answer</label><br>
 			<form class="containerBio" style="padding-top:6px;" action="GeneralAnswerServlet" method="post">
 				<div>
 				<textarea name="answer" id="answer" class="quest" style="margin: auto; height: 150px;"></textarea>
@@ -74,7 +89,7 @@
 					<div class="gAnswerRes" style="width: 900px; display: inline-block; background: #1c1c1c;">
 						<div class="resContainerL" style=" min-width:450px; float:left;">
 							<span  class="checkBL" style="color: #f5c518; margin: auto; text-align:center;" >
-							<input  type="checkbox"  id="colleagueMark" name="colleagueMark"> Suggest to interact also with a colleague 
+							<input  type="checkbox"  id="colleagueMark" name="colleagueMark" value="colmark"> Suggest to interact also with a colleague 
 							</span>
 							<br><br>
 							<label for="colleagueName" class="resFieldsText" style="text-align:center; font-size: 12px; color: #f5c518">Advanced user's nickname</label><br> <input
@@ -88,15 +103,16 @@
 						</div>
 						<div class="resContainerR" style=" min-width:449px; float: right;">
 							<span  class="checkBR"  style="color: #f5c518; margin: auto; text-align:center;" >
-							<input  type="checkbox" > Suggest additional web resources
+							<input  type="checkbox" id="resourceMark" name="resourceMark" value="resmark"> Suggest additional web resources
 							</span>
 							<br><br>
-							<label for="WikiLink" class="resFieldsText" style="text-align:center; font-size: 12px; color: #f5c518">Wikipedia link</label><br> <input
-								id="WikiLink" name="WikiLink" type="text" class="text-box"> <br> <br>
-							<label for="YoutubeLink" class="resFieldsText" style="text-align:center; font-size: 12px; color: #f5c518">YouTube link</label><br> <input
-								id="YoutubeLink" name="YoutubeLink" type="text" class="text-box"> <br> <br>
+							<label for="wikiLink" class="resFieldsText" style="text-align:center; font-size: 12px; color: #f5c518">Wikipedia link</label><br> <input
+								id="wikiLink" name="wikiLink" type="text" class="text-box"> <br> <br>
+							<label for="youtubeLink" class="resFieldsText" style="text-align:center; font-size: 12px; color: #f5c518">YouTube link</label><br> <input
+								id="youtubeLink" name="youtubeLink" type="text" class="text-box"> <br> <br>
 						</div>
 					</div>
+					
 					
 				<br> <br> <input name="make" id="make" type="submit"
 					class="signIn" value="Submit" style="margin-left: 20px;">
