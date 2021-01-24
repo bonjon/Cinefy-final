@@ -3,10 +3,10 @@
 html {
 	width: 1480px;
 	height: 100%;
+	background: #1c1c1c;
 }
 
 .loginBackground {
-	background: #121212;
 	width: 740px;
 	height: 720px;
 	margin: 0;

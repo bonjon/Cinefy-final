@@ -41,11 +41,11 @@
 		</div>
 		<div class="splitRight">
 			<label class="textUp">Question Details</label><br>
-			<div class="cardContainer">
-				<label class="headde"><%=QU.getContenuto()%></label>
+			<div class="cardContainer" style="overflow: auto; height: 100px;">
+				<label class="headde show-white-space"><%=QU.getContenuto()%></label>
 			</div>
 			<br> <label class="textMiddle">Answer from <%=QU.getAdvancedName()%></label><br>
-			<div class="cardContainer">
+			<div class="cardContainer" style= "overflow: auto; height: 100px">
 				<label class="headde show-white-space"><%=R.getContenuto()%></label>
 			</div>
 			<br>
