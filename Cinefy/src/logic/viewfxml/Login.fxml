@@ -18,7 +18,7 @@
 					<children>
                   <ImageView fx:id="cinema" blendMode="COLOR_DODGE" fitHeight="720.0" fitWidth="740.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../res/cinema.png" />
+                        <Image url="@../../../WebContent/img/cinema.png" />
                      </image>
                   </ImageView>
                   <AnchorPane layoutX="78.0" layoutY="312.0">

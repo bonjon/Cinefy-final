@@ -305,7 +305,7 @@ public class SelectedQuestionBoundary  {
 		laBio.setText(bio);
 		}
 		profession = aub.getProfession();
-		laName.setText(profession+" to focus on");
+		laName.setText(profession+" whose work I suggest to focus on");
 		
 		if (bub.getProfilePic()==null) {
 			begPicPath = FileManager.PROFILE + File.separator + FileManager.generateNewFileName("default.png",beginnerName);

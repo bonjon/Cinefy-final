@@ -39,13 +39,14 @@ public class GeneralAnswerServlet  extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException {
 			HttpSession session = request.getSession();
+			session.setAttribute("type", "general");
 			RequestDispatcher rd = request.getRequestDispatcher(ANSWER);
 			AnswerQuestionsController aqc = new AnswerQuestionsController();
 			if (request.getParameter("make") != null) {
 				rd = this.makeAnswer(request, session, aqc);
 			}
-			else if (request.getParameter("switch") != null){
-				request.getRequestDispatcher("FilmAdviceServlet");
+			else if(request.getParameter("switch") != null){
+				rd = request.getRequestDispatcher("FilmAdviceServlet");
 			}
 			rd.forward(request, response);
 		}

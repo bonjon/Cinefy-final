@@ -85,7 +85,7 @@
                   <Label fx:id="professionError" layoutX="356.0" layoutY="227.0" textFill="#ff0202" />
 						<ImageView fx:id="ivProfilepic" fitHeight="150.0" fitWidth="171.0" layoutX="24.0" layoutY="274.0" onMouseClicked="#onImagePressed" pickOnBounds="true" AnchorPane.topAnchor="274.0">
 							<image>
-								<Image url="@../../../res/profilePictures/default.png" />
+								<Image url="@../../../WebContent/img/profilePictures/default.png" />
 							</image>
 						</ImageView>
 						<Label fx:id="laDefaultPic" layoutX="243.0" layoutY="305.0" prefHeight="89.0" prefWidth="159.0" text="This is your default profile image, click it to choose a file from your pc." textFill="#f5c518" wrapText="true">
@@ -111,7 +111,7 @@
 					<children>
 						<ImageView fx:id="cinema" blendMode="COLOR_DODGE" fitHeight="720.0" fitWidth="740.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<image>
-								<Image url="@../../../res/cinema.png" />
+								<Image url="@../../../WebContent/img/cinema.png" />
 							</image>
 						</ImageView>
 						<AnchorPane layoutX="99.0" layoutY="46.0" prefHeight="231.0" prefWidth="542.0" style="-fx-background-color: #1c1c1c;" AnchorPane.topAnchor="51.0">

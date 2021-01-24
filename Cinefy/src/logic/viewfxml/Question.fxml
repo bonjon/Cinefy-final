@@ -56,7 +56,7 @@
 						</Label>
 						<ImageView fx:id="profilePic" fitHeight="250.0" fitWidth="300.0" layoutX="20.0" layoutY="40.0" pickOnBounds="true" AnchorPane.topAnchor="60.0">
 							<image>
-								<Image url="@../../../res/profilePictures/default.png" />
+								<Image url="@../../../WebContent/img/profilePictures/default.png" />
 							</image>
 						</ImageView>
 						<Label layoutX="320.0" layoutY="60.0" text="Username" textFill="#f5c518" AnchorPane.leftAnchor="340.0">

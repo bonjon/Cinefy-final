@@ -56,7 +56,7 @@
 						</Label>
 						<ImageView fx:id="ivBegPic" fitHeight="183.0" fitWidth="232.0" layoutX="20.0" layoutY="40.0" pickOnBounds="true" AnchorPane.topAnchor="60.0">
 							<image>
-								<Image url="@../../../res/profilePictures/default.png" />
+								<Image url="@../../../WebContent/img/profilePictures/default.png" />
 							</image>
 						</ImageView>
                   <AnchorPane layoutX="340.0" layoutY="56.0" prefHeight="194.0" prefWidth="759.0">
