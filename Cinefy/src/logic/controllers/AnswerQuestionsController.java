@@ -242,10 +242,10 @@ public class AnswerQuestionsController extends Controller {
 		String characters = " characters)";
 		
 		// film advice
-		// circa 162 caratteri vengono aggiunti nel caso peggiore (professione
+		// circa 167 caratteri vengono aggiunti nel caso peggiore (professione
 		// screenwriter) dal pattern
 		// che formatta la risposta per una film advice
-		// 2048-162=1886 caratteri disponibili
+		// 2048-167=1881 caratteri disponibili
 		Integer filmSize = 150;
 		Integer partecipantSize = 70;
 		Integer genreSize = 100;

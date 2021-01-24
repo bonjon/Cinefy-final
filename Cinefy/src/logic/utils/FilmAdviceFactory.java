@@ -19,7 +19,7 @@ public class FilmAdviceFactory implements AnswerAutomationFactory {
 	
 	public FilmAdviceFactory() {
 		this.header = "||FILM ADVICE||";
-		this.explanationHeader = "I adviced you this film because of the reason below.\n";
+		this.explanationHeader = "Let me explain you why I decided to advice you this film.\n";
 		this.titleHeader = "Title: ";
 		this.genreHeader = "Genre: ";
 		
