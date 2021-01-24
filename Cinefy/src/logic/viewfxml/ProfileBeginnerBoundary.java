@@ -116,7 +116,7 @@ public class ProfileBeginnerBoundary implements Initializable {
 		
 		this.username.setText(bub.getUsername());
 		if (bub.getProfilePic() == null) {
-			String path = FileManager.PROFILE + File.separator + FileManager.generateNewFileName("default.png",gub.getUsername());
+			String path = FileManager.PROFILE + File.separator + "default.png";
 			File file = new File(path);
 			Image img = new Image(file.toURI().toString());
 			this.profilePic.setImage(img);

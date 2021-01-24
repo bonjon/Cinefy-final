@@ -158,6 +158,7 @@ public class HomeAdvancedBoundary implements Initializable {
 			List<FilmBean> mlb = vfc.getFilmByGenre(search);
 			list.addAll(mlb);
 			setCellsFilm();
+			this.listView.getItems().addAll(list);
 		} catch (FilmNotFoundException e) {
 			this.errorLabel.setText(e.getMessage());
 		}
