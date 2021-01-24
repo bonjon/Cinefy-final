@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import logic.bean.AdvancedUserBean;
 import logic.bean.BeginnerUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.GeneralUserBean;
 import logic.bean.RispostaBean;
 import logic.controllers.AnswerQuestionsController;
+import logic.exceptions.AdvancedNotFoundException;
 import logic.exceptions.FieldEmptyException;
 import logic.exceptions.FieldTooLongException;
 
@@ -31,6 +33,7 @@ public class FilmAdviceServlet  extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	public static final String ANSWER = "answer.jsp";
 	private static final Logger LOGGER = Logger.getLogger(FilmAdviceServlet.class.getName());
+	private String profession;
 	
 	public FilmAdviceServlet() {
 		super();
@@ -40,8 +43,18 @@ public class FilmAdviceServlet  extends HttpServlet{
 		throws ServletException, IOException {
 			HttpSession session = request.getSession();
 			session.setAttribute("type", "film");
-			RequestDispatcher rd = request.getRequestDispatcher(ANSWER);
 			AnswerQuestionsController aqc = new AnswerQuestionsController();
+			DomandaBean db = (DomandaBean) session.getAttribute("QU");
+			String adv = db.getAdvancedName();
+			AdvancedUserBean aub = new AdvancedUserBean();
+			try {
+				aub = aqc.getAdvanced(adv);
+			} catch (ClassNotFoundException | AdvancedNotFoundException | SQLException e) {
+				LOGGER.log(Level.WARNING, e.toString());
+			}
+			profession = aub.getProfession();
+			request.setAttribute("prof", profession);
+			RequestDispatcher rd = request.getRequestDispatcher(ANSWER);
 			if (request.getParameter("make") != null) {
 				rd = this.makeAnswer(request, session, aqc);
 			}
@@ -77,6 +90,7 @@ private RequestDispatcher makeAnswer(HttpServletRequest request, HttpSession ses
 	rb.setAdvancedName(gub.getUsername());
 	rb.setBeginnerName(bub.getUsername());
 	rb.setChoice(film);
+	rb.setProfession(profession);
 	rb.setFilm(suggestedFilm);
 	rb.setPartecipant(partecipant);
 	rb.setGenre(genre);

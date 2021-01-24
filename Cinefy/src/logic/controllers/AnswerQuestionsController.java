@@ -356,7 +356,7 @@ public class AnswerQuestionsController extends Controller {
 		rb.setVoto(voto);
 		return rb;
 	}
-
+	
 	public void acceptAnswer(RispostaBean rb) throws NumberFormatException, SQLException, ClassNotFoundException {
 
 		RispostaDAO dd = new RispostaDAO();
