@@ -9,8 +9,6 @@
 	String type = (String) session.getAttribute("type");
 	String general = "general";
 	String film = "film";
- 	System.out.println(type);
-	String partecipant = "partecipant";
 %>
 <!-- HTML5 -->
 <!DOCTYPE html>
@@ -148,7 +146,7 @@
 								id="suggestedFilm" name="suggestedFilm" type="text" class="text-box" style="float: left; " >
 						</div>
 						<span style="display: inline-block;margin:auto; margin-left:19px; ">
-						 <label for="partecipant" class="resFieldsText" style="font-size: 12px; color: #f5c518; "><%=partecipant %> whose work I suggest to focus on</label><br> <input
+						 <label for="partecipant" class="resFieldsText" style="font-size: 12px; color: #f5c518; "><%=request.getAttribute("prof") %> whose work I suggest to focus on</label><br> <input
 								id="partecipant" name="partecipant" type="text" class="text-box" style="margin:auto;">
 						</span>
 						<div style="float:right; min-width:300;padding-top: 1px;">
