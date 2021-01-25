@@ -63,7 +63,7 @@ import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.AdvancedU
 					<%
 						
 						for (j = 0; j < questions.size(); j++) {
-					%><li class="itemQ">
+					%><li class="itemQ" style=" padding:0; margin: 0; display:flex; line-height:110%; height:145px;">
 						<form action="AnswerAdvancedServlet" method="post">
 							<input class="question" type="submit" name="<%="d"%>"
 								value="<%=questions.get(j).getContenuto()%>"><input
@@ -92,7 +92,7 @@ import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.AdvancedU
 			
 		
 			<div>
-				<ul style="height: 300px; overflow: auto; display:flex; flex-direction:column; width:1300px; border-spacing: 0px 0px; ">
+				<ul style="height: 300px; overflow: auto;">
 					<%
 						
 						for (j = 0; j < answers.size(); j++) {
