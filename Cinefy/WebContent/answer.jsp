@@ -25,6 +25,7 @@
 	<div>
 		<div class="splitLeft pageStretch" style="height: 990px">
 			<div class="titolo">Cinefy</div>
+			<hr style="border-color: #f5c518;">
 			<ul class="listGroup">
 				<li class="liBtn"><form action="home_beginner.jsp"
 						method="post">

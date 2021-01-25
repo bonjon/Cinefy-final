@@ -21,6 +21,7 @@
 	<div>
 		<div class="splitLeft">
 			<div class="titolo">Cinefy</div>
+			<hr style="border-color: #f5c518;">
 			<ul class="listGroup">
 				<%
 					if (gub.getRole().equals("advanced")) {

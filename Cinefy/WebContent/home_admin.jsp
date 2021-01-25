@@ -24,6 +24,7 @@
 	<div>
 		<div class="splitLeft pageStretch">
 			<div class="titolo">Cinefy</div>
+			<hr style="border-color: #f5c518;">
 			<ul class="listGroup">
 				<li class="liBtn"><form action="HomeAdminServlet" method="post">
 						<input type="submit" class="selected" value="Home">
