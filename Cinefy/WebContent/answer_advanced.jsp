@@ -26,6 +26,7 @@ import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.AdvancedU
 <div>
 		<div class="splitLeft pageStretch">
 			<div class="titolo">Cinefy</div>
+			<hr style="border-color: #f5c518;">
 			<ul class="listGroup">
 				<li class="liBtn"><form action="home_beginner.jsp"
 						method="post">
