@@ -8,6 +8,7 @@
 	boolean check = (boolean) session.getAttribute("check");
 	int vote = (int) session.getAttribute("vote");
 	String feedback = "Beginner user's vote was: "+(double)vote+"\n You gained: "+vote+" tokens"; 
+	String noVote = "Beginner user hasn't voted your answer yet.\nTokens you gained: 0";
 %>
 <!-- HTML5 -->
 <!DOCTYPE html>
@@ -69,7 +70,7 @@
 				<br><br>
 				<label class="textMiddle">Feedback</label>
 				<div class="cardContainer" style= "overflow: auto;">
-					<label class="headde show-white-space">Beginner user hasn't voted your answer yet</label>
+					<label class="headde show-white-space"><%=noVote %></label>
 				</div>
 			<%
 			}
