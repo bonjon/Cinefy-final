@@ -80,7 +80,6 @@ public class AnswerAdvancedServlet extends HttpServlet {
 			int index = Integer.parseInt(request.getParameter("ansIndex"));
 			RispostaBean rb = (RispostaBean) allAnswers.get(index);
 			session.setAttribute("RI", rb);
-			LOGGER.log(Level.INFO,"You chose answer with this id: "+index);
 			rd = request.getRequestDispatcher("AnswerDetailsServlet");
 			
 		}
