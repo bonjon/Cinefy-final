@@ -77,7 +77,12 @@ public class AnswerAdvancedServlet extends HttpServlet {
 			session.setAttribute("begS", bub);
 			rd = request.getRequestDispatcher("GeneralAnswerServlet");
 		}else if (request.getParameter("a") !=null){
-			LOGGER.log(Level.INFO,"You chose answer with this id:"+Integer.parseInt(request.getParameter("ansIndex")));
+			int index = Integer.parseInt(request.getParameter("ansIndex"));
+			RispostaBean rb = (RispostaBean) allAnswers.get(index);
+			session.setAttribute("RI", rb);
+			LOGGER.log(Level.INFO,"You chose answer with this id: "+index);
+			rd = request.getRequestDispatcher("AnswerDetailsServlet");
+			
 		}
 	} catch (SQLException | ClassNotFoundException | AnswersNotFoundException e) {
 		LOGGER.log(Level.WARNING,e.getMessage());

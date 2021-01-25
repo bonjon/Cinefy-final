@@ -145,7 +145,12 @@ public class AnswerDetailsBoundary {
 		RispostaBean rb = aqc.getVoto(beginnerName, idRisposta);
 		vote = rb.getVoto();
 		if(vote==0) {
-			laVoteNumber.setText("Beginner user didn' t vote your answer");
+			if(check) {
+				laVoteNumber.setText("Beginner user hasn't voted your answer yet");
+			}
+			else {
+				laVoteNumber.setText("Beginner user has not received your answer yet");
+			}
 			tokens=0;
 			laTokensNumber.setText(String.valueOf(tokens));
 		}
