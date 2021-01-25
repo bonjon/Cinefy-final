@@ -18,7 +18,9 @@ import javax.servlet.http.HttpSession;
 import logic.bean.BeginnerUserBean;
 import logic.bean.DomandaBean;
 import logic.bean.GeneralUserBean;
+import logic.bean.RispostaBean;
 import logic.controllers.AnswerQuestionsController;
+import logic.exceptions.AnswersNotFoundException;
 
 
 /**
@@ -31,6 +33,7 @@ public class AnswerAdvancedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger.getLogger(AnswerAdvancedServlet.class.getName());
 	public static final String ERROR = "error";
+	public static final String ERROR2 = "error2";
 
 	public AnswerAdvancedServlet() {
 		super();
@@ -43,6 +46,7 @@ public class AnswerAdvancedServlet extends HttpServlet {
 		AnswerQuestionsController aqc = new AnswerQuestionsController();
 		List<DomandaBean> questions = new ArrayList<>();
 		List<DomandaBean> questionsDel = new ArrayList<>();
+		List<RispostaBean> allAnswers= new ArrayList<>();
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 		BeginnerUserBean bub;
 		
@@ -56,6 +60,14 @@ public class AnswerAdvancedServlet extends HttpServlet {
 				request.setAttribute("questions", questionsDel);
 			}
 		
+			allAnswers = aqc.getAllAnswers(gub.getUsername());
+			if (questionsDel.isEmpty()) {
+				request.setAttribute(ERROR2, "You haven' t answered to any question yet");
+			}
+			else {
+				request.setAttribute("answers", allAnswers);
+			}
+			
 		if (request.getParameter("d") != null) {
 			int index = Integer.parseInt(request.getParameter("index2"));
 			DomandaBean db = (DomandaBean) questionsDel.get(index);
@@ -64,11 +76,11 @@ public class AnswerAdvancedServlet extends HttpServlet {
 			session.setAttribute("QU", db);
 			session.setAttribute("begS", bub);
 			rd = request.getRequestDispatcher("GeneralAnswerServlet");
-		}else {
-			LOGGER.log(Level.WARNING,"else funziona");
+		}else if (request.getParameter("a") !=null){
+			LOGGER.log(Level.INFO,"You chose answer with this id:"+Integer.parseInt(request.getParameter("ansIndex")));
 		}
-	} catch (SQLException | ClassNotFoundException e) {
-		LOGGER.log(Level.WARNING,"sono in catch");
+	} catch (SQLException | ClassNotFoundException | AnswersNotFoundException e) {
+		LOGGER.log(Level.WARNING,e.getMessage());
 	}
 		rd.forward(request, response);
 	}
