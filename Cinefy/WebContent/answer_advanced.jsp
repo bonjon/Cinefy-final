@@ -7,6 +7,8 @@ import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.AdvancedU
 	GeneralUserBean user = (GeneralUserBean) session.getAttribute("user");
 	@SuppressWarnings("unchecked")
 	List<DomandaBean> questions = (List<DomandaBean>) request.getAttribute("questions");
+	@SuppressWarnings("unchecked")
+	List<RispostaBean> answers = (List<RispostaBean>) request.getAttribute("answers");
 %>
 <!-- HTML5 -->
 <!DOCTYPE html>
@@ -22,7 +24,7 @@ import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.AdvancedU
 </head>
 <body>
 <div>
-		<div class="splitLeft">
+		<div class="splitLeft pageStretch">
 			<div class="titolo">Cinefy</div>
 			<ul class="listGroup">
 				<li class="liBtn"><form action="home_beginner.jsp"
@@ -42,7 +44,7 @@ import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.AdvancedU
 					</form></li>
 			</ul>
 		</div>
-		<div class="splitRight">
+		<div class="splitRight pageStretch">
 		 <label class="textUp">Received questions</label>
 			<%
 				String log = (String) request.getAttribute("error");
@@ -69,6 +71,40 @@ import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.AdvancedU
 								type="hidden" name="QU" value="<%=questions.get(j).getId()%>">
 						</form>
 					</li>
+					<%
+						}
+				}
+					%>
+				</ul>
+			</div>
+			<br><br>
+			 <label class="textUp">Your Answers</label>
+			<%
+				String logTwo = (String) request.getAttribute("error2");
+				if (logTwo != null) {
+					
+			%><h6 style="color: RED; margin-left: 30px;"><%=logTwo%></h6>
+			<%
+				}
+				else{
+			%>
+			<br>
+			
+		
+			<div>
+				<ul style="height: 300px; overflow: auto; display:flex; flex-direction:column; width:1300px; border-spacing: 0px 0px; ">
+					<%
+						
+						for (j = 0; j < answers.size(); j++) {
+					%><li class="itemQ" style=" padding:0; margin: 0; display:flex; line-height:110%; height:145px;">
+						<form action="AnswerAdvancedServlet" method="post">
+							<input class="question" type="submit" name="<%="a"%>"
+								value="<%=answers.get(j).getContenuto()%>"><input
+								type="hidden" name="ansIndex" value="<%=j%>"><input
+								type="hidden" name="QU" value="<%=answers.get(j).getId()%>">
+						</form>
+					</li>
+					
 					<%
 						}
 				}
