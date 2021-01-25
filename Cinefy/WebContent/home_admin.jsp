@@ -22,7 +22,7 @@
 </head>
 <body>
 	<div>
-		<div class="splitLeft">
+		<div class="splitLeft pageStretch">
 			<div class="titolo">Cinefy</div>
 			<ul class="listGroup">
 				<li class="liBtn"><form action="HomeAdminServlet" method="post">
@@ -34,7 +34,7 @@
 					</form></li>
 			</ul>
 		</div>
-		<div class="splitRight">
+		<div class="splitRight pageStretch">
 			<label class="textUp">List questions</label><br>
 			<%
 				String log = (String) request.getAttribute("error");
