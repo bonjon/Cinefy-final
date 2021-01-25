@@ -33,7 +33,9 @@
 		<div class="splitRight">
 			<label class="textUp">Q and A Details</label><br>
 			<div style="text-align: center">
-				<label class="contenuto"><%=question.getContenuto()%></label>
+				<div class="cardContainer" style="overflow: auto; height: 100px;">
+					<label class="headde show-white-space"><%=question.getContenuto()%></label>
+				</div>
 				<form class="questionContainer" action="ManageServlet" method="post">
 					<input name="accept" class="acceptB" type="submit" value="accept">
 					<input name="reject" class="rejectB" type="submit" value="reject">
