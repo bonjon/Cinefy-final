@@ -19,9 +19,14 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+		window.history.forward();
+		function noBack() { window.history.forward(); }
+</script>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body onload="noBack();" 
+	onpageshow="if (event.persisted) noBack();" onunload="">
 	<div>
 		<div class="splitLeft pageStretch" style="height: 990px">
 			<div class="titolo">Cinefy</div>
