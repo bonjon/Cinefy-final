@@ -34,6 +34,7 @@ public class AskBeginnerServlet extends HttpServlet {
 	private static final Logger LOGGER = Logger.getLogger(AskBeginnerServlet.class.getName());
 	public static final String TOPAD = "topAd";
 	public static final String ERROR = "error";
+	public static final String QUESTIONS = "questions";
 
 	public AskBeginnerServlet() {
 		super();
@@ -62,14 +63,14 @@ public class AskBeginnerServlet extends HttpServlet {
 		try {
 			questions = afc.getQuestions(gub, gub.getRole());
 			if (questions.isEmpty()) {
-				request.setAttribute("questions", Collections.emptyList());
+				request.setAttribute(QUESTIONS, Collections.emptyList());
 				request.setAttribute(ERROR, "No questions list");
 			} else
-				request.setAttribute("questions", questions);
+				request.setAttribute(QUESTIONS, questions);
 		} catch (SQLException | ClassNotFoundException e) {
 			LOGGER.log(Level.WARNING, e.toString());
 		}
-		session.setAttribute("questions", questions);
+		session.setAttribute(QUESTIONS, questions);
 		if (request.getParameter("a") != null) {
 			rd = this.goToQuestion(session, request);
 		} else if (request.getParameter("d") != null) {
