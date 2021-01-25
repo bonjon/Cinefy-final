@@ -49,7 +49,7 @@
 				<ul style="height: 300px; overflow: auto">
 					<%
 						for (i = 0; i < questionsList.size(); i++) {
-					%><li class="itemQ">
+					%><li class="itemQ" style=" padding:0; margin: 0; display:flex; line-height:110%; height:145px;">
 						<form action="HomeAdminServlet" method="post">
 							<input class="question" type="submit" name="<%="d"%>"
 								value="<%=questionsList.get(i).getContenuto()%>"><input
@@ -77,7 +77,7 @@
 				<ul style="height: 300px; overflow: auto">
 					<%
 						for (i = 0; i < answersList.size(); i++) {
-					%><li class="itemQ">
+					%><li class="itemQ" style=" padding:0; margin: 0; display:flex; line-height:110%; height:145px;">
 						<form action="HomeAdminServlet" method="post">
 							<input class="question" type="submit" name="<%="r"%>"
 								value="<%=answersList.get(i).getContenuto()%>"><input
