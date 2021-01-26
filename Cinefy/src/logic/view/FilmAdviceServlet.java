@@ -34,6 +34,7 @@ public class FilmAdviceServlet  extends HttpServlet{
 	public static final String ANSWER = "answer.jsp";
 	private static final Logger LOGGER = Logger.getLogger(FilmAdviceServlet.class.getName());
 	private String profession;
+	private boolean duplicate = false;
 	
 	public FilmAdviceServlet() {
 		super();
@@ -63,7 +64,7 @@ public class FilmAdviceServlet  extends HttpServlet{
 				rd = request.getRequestDispatcher("GeneralAnswerServlet");
 			}
 			rd.forward(request, response);
-			return;
+			if(!duplicate) {return;}
 		}
 	
 
