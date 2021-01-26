@@ -300,7 +300,7 @@ BEGIN
     declare var_advanced varchar(16);
 	select Contenuto, BeginnerName, AdvancedName from Domanda_incoda where id = var_id
     into var_contenuto, var_beginner, var_advanced;
-	insert into Domanda values (var_id, var_contenuto, var_beginner, var_advanced);
+	insert into Domanda(Contenuto, BeginnerName, AdvancedName) values (var_contenuto, var_beginner, var_advanced);
     delete from Domanda_incoda where id = var_id;
 END$$
 
@@ -320,7 +320,7 @@ BEGIN
     declare var_beginner varchar(16);
     select Contenuto, idDomanda, AdvancedName, BeginnerName from Risposta_incoda where id = var_id
     into var_contenuto, var_idDomanda, var_advanced, var_beginner;
-	insert into Risposta values (var_id, var_contenuto, var_idDomanda, var_beginner, var_advanced);
+	insert into Risposta(Contenuto, idDomanda, BeginnerName, AdvancedName) values (var_contenuto, var_idDomanda, var_beginner, var_advanced);
     delete from Risposta_incoda where id = var_id;
 END$$
 
