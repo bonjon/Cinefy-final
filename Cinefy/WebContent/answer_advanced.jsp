@@ -51,7 +51,7 @@ import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.AdvancedU
 				String log = (String) request.getAttribute("error");
 				if (log != null) {
 					
-			%><h6 style="color: RED; margin-left: 30px;"><%=log%></h6>
+			%><h6 style="color: RED; height: 300px; margin-left: 30px;"><%=log%></h6>
 			<%
 				}
 				else{
@@ -74,14 +74,16 @@ import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.AdvancedU
 					</li>
 					<%
 						}
-				}
 					%>
 				</ul>
 			</div>
+			<%
+				}
+			%>
 			<br><br>
 			 <label class="textUp">Your Answers</label>
 			<%
-				String logTwo = (String) request.getAttribute("error2");
+				 String logTwo = (String) request.getAttribute("error2");
 				if (logTwo != null) {
 					
 			%><h6 style="color: RED; margin-left: 30px;"><%=logTwo%></h6>
@@ -90,8 +92,6 @@ import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.AdvancedU
 				else{
 			%>
 			<br>
-			
-		
 			<div>
 				<ul style="height: 300px; overflow: auto;">
 					<%
@@ -108,10 +108,12 @@ import="java.util.ArrayList, java.util.List, logic.utils.*, logic.bean.AdvancedU
 					
 					<%
 						}
-				}
 					%>
 				</ul>
 			</div>
+			<%
+				}
+			%>
 		</div>
 </div>
 </body>
