@@ -61,17 +61,25 @@ public class AnswerAdvancedServlet extends HttpServlet {
 			}
 		
 			allAnswers = aqc.getAllAnswers(gub.getUsername());
-			if (questionsDel.isEmpty()) {
-				request.setAttribute(ERROR2, "You haven' t answered to any question yet");
-			}
-			else {
+			if(!allAnswers.isEmpty()) {
 				request.setAttribute("answers", allAnswers);
 			}
-			
+		
+	} 
+		catch(AnswersNotFoundException e ) {
+			request.setAttribute(ERROR2, e.getMessage());
+		}
+		
+		catch (SQLException | ClassNotFoundException e) {
+		LOGGER.log(Level.WARNING,e.getMessage());
+	}
+		
+	try {
 		if (request.getParameter("d") != null) {
 			int index = Integer.parseInt(request.getParameter("index2"));
 			DomandaBean db = (DomandaBean) questionsDel.get(index);
 			String beginner = db.getBeginnerName();
+			
 			bub = aqc.getBeginnerUser(beginner, "beginner");
 			session.setAttribute("QU", db);
 			session.setAttribute("begS", bub);
@@ -83,7 +91,8 @@ public class AnswerAdvancedServlet extends HttpServlet {
 			rd = request.getRequestDispatcher("AnswerDetailsServlet");
 			
 		}
-	} catch (SQLException | ClassNotFoundException | AnswersNotFoundException e) {
+		
+	} catch (ClassNotFoundException | SQLException e) {
 		LOGGER.log(Level.WARNING,e.getMessage());
 	}
 		rd.forward(request, response);
