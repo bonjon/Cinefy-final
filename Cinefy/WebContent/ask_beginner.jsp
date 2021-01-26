@@ -46,7 +46,7 @@
 			</ul>
 		</div>
 		<div class="splitRight">
-			<label class="textUp">Top Advanced</label><br>
+			<label class="textUp">Top advanced</label><br>
 			<div>
 				<%
 					String logx = (String) request.getAttribute("errorx");

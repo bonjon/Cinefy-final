@@ -44,7 +44,7 @@
 			</ul>
 		</div>
 		<div class="splitRight">
-			<label class="textUp">Top rated Playlists</label><br>
+			<label class="textUp">Top rated playlists</label><br>
 			<div>
 				<ul style="width: 900px; overflow: auto">
 
@@ -91,7 +91,7 @@
 				}
 				}
 			%>
-			<label class="textMiddle">Your Playlists</label><br>
+			<label class="textMiddle">Your playlists</label><br>
 			<div>
 				<ul style="width: 900px; overflow: auto">
 

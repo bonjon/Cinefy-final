@@ -68,7 +68,7 @@
 			</ul>
 		</div>
 		<div class="splitRight">
-			<label class="textUp">Playlist Details</label><br>
+			<label class="textUp">Playlist details</label><br>
 			<div class="cardContainer">
 				<%
 					if (P.getPlaylistPic() != null) {
@@ -88,7 +88,7 @@
 					<%=P.getAdvancedName()%>
 				</h3>
 				<h6 class="headSmall">
-					Date of Pubblication
+					Date of pubblication
 					<%=P.getDate()%></h6>
 				<h6 class="headSmall"><%=P.getVoto()%>
 					average

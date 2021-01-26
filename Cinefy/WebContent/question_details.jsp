@@ -41,7 +41,7 @@
 			</ul>
 		</div>
 		<div class="splitRight">
-			<label class="textUp">Question Details</label><br>
+			<label class="textUp">Question details</label><br>
 			<div class="cardContainer" style="overflow: auto; height: 100px;">
 				<label class="headde show-white-space"><%=QU.getContenuto()%></label>
 			</div>
