@@ -298,22 +298,25 @@ public class AnswerQuestionsController extends Controller {
 			}
 		}
 		System.out.println("LISTA ID DOMANDE DI RISPOSTE PENDENTI+ACCETTATE"+idList);
-		int y;
+		int y=0;
 		if (db.isEmpty()) {
 			return Collections.emptyList();
 		}
-		
-		for (y = 0; y < db.size(); y++) {
+
+		while(y<db.size()) {
 
 			int tempID = Integer.parseInt(db.get(y).getId());
-			System.out.println("id della lista di domande"+tempID);
+			System.out.println("id della lista di domande tempID: "+tempID);
 			if (idList.contains(tempID)) {
 				System.out.println("rimuovo: "+db.get(y).getId());
 				db.remove(db.get(y));
 				
 			}
-
+			else {
+			y++;
+			}
 		}
+		
 
 		return db;
 	}

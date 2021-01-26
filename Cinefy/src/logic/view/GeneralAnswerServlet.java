@@ -43,12 +43,16 @@ public class GeneralAnswerServlet  extends HttpServlet{
 			RequestDispatcher rd = request.getRequestDispatcher(ANSWER);
 			AnswerQuestionsController aqc = new AnswerQuestionsController();
 			if (request.getParameter("make") != null) {
+				System.out.println("sono qui general ");
+				
 				rd = this.makeAnswer(request, session, aqc);
+				
 			}
 			else if(request.getParameter("switch") != null){
 				rd = request.getRequestDispatcher("FilmAdviceServlet");
 			}
 			rd.forward(request, response);
+			return;
 		}
 	
 
@@ -60,7 +64,7 @@ private RequestDispatcher makeAnswer(HttpServletRequest request, HttpSession ses
 	if(answer==null) {answer=emptyString;}
 	String colleagueMark = (String) request.getParameter("colleagueMark");
 	String resourceMark =  (String) request.getParameter("resourceMark");
-
+	
 	RispostaBean rb = new RispostaBean();
 	DomandaBean db = (DomandaBean) session.getAttribute("QU");
 	
@@ -105,6 +109,7 @@ private RequestDispatcher makeAnswer(HttpServletRequest request, HttpSession ses
 	
 	try {
 		aqc.createAnswer(rb);
+		System.out.println("contenuto risposta creata: "+ rb.getContenuto());
 	} catch (FieldTooLongException | FieldEmptyException e) {
 		request.setAttribute("error", e.getMessage());
 		return request.getRequestDispatcher(ANSWER);
