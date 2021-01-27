@@ -274,7 +274,7 @@ public class AnswerQuestionsController extends Controller {
 	public List<DomandaBean> deleteQuestion(List<DomandaBean> lb, String advancedName)
 			throws SQLException, ClassNotFoundException {
 		List<RispostaBean> rb = getAnswers(advancedName, "advanced");
-		List<RispostaBean> pendingRb = getAnswers(advancedName, "admin");
+		List<RispostaBean> pendingRb = getAnswers(advancedName, "advanced2");
 		List<Integer> idList = new ArrayList<>();
 		List<DomandaBean> db = lb;
 

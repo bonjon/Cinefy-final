@@ -52,7 +52,7 @@ public class GeneralAnswerServlet  extends HttpServlet{
 				rd = request.getRequestDispatcher("FilmAdviceServlet");
 			}
 			rd.forward(request, response);
-			return;
+		
 		}
 	
 
