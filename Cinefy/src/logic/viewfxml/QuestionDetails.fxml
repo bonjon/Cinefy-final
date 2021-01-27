@@ -162,7 +162,7 @@
 							</content>
 						</ScrollPane>
 						<Label fx:id="labelError" layoutX="321.0" layoutY="551.0"
-							textFill="#f51818">
+							textFill="#f5c518">
 							<font>
 								<Font name="Arial Bold" size="17.0" />
 							</font>
