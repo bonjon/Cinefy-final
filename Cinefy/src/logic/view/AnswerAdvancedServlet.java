@@ -48,7 +48,6 @@ public class AnswerAdvancedServlet extends HttpServlet {
 		List<DomandaBean> questionsDel = new ArrayList<>();
 		List<RispostaBean> allAnswers= new ArrayList<>();
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
-		System.out.println(gub.getUsername());
 		BeginnerUserBean bub;
 		
 		try {

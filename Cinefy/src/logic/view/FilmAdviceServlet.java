@@ -56,7 +56,6 @@ public class FilmAdviceServlet  extends HttpServlet{
 			request.setAttribute("prof", profession);
 			RequestDispatcher rd = request.getRequestDispatcher(ANSWER);
 			if (request.getParameter("make") != null) {
-				System.out.println("sono qui");
 				rd = this.makeAnswer(request, session, aqc);
 			}
 			else if (request.getParameter("switch2") != null){

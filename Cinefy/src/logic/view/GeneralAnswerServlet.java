@@ -43,8 +43,6 @@ public class GeneralAnswerServlet  extends HttpServlet{
 			RequestDispatcher rd = request.getRequestDispatcher(ANSWER);
 			AnswerQuestionsController aqc = new AnswerQuestionsController();
 			if (request.getParameter("make") != null) {
-				System.out.println("sono qui general ");
-				
 				rd = this.makeAnswer(request, session, aqc);
 				
 			}
@@ -109,7 +107,6 @@ private RequestDispatcher makeAnswer(HttpServletRequest request, HttpSession ses
 	
 	try {
 		aqc.createAnswer(rb);
-		System.out.println("contenuto risposta creata: "+ rb.getContenuto());
 	} catch (FieldTooLongException | FieldEmptyException e) {
 		request.setAttribute("error", e.getMessage());
 		return request.getRequestDispatcher(ANSWER);
