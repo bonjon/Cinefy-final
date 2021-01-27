@@ -114,7 +114,7 @@ public class PlaylistDetailsBoundary {
 		this.filmPlaylist.setMouseTransparent(true);
 		this.filmPlaylist.setFocusTraversable(false);
 		String path;
-		if(this.selectedPlaylist != null)
+		if(this.selectedPlaylist.getPlaylistPic() != null)
 			path = FileManager.PLAYLISTS + File.separator + this.selectedPlaylist.getPlaylistPic();
 		else {
 			path = FileManager.PLAYLISTS + File.separator + "default2.jpg";
