@@ -110,6 +110,7 @@ public class PlaylistDetailsBoundary {
 		this.advancedName.setText(pb.getAdvancedName());
 		this.voto.setText(pb.getVoto());
 		this.playlistDate.setText(pb.getDate());
+		this.selectedPlaylist = pb;
 		this.filmPlaylist.setMouseTransparent(true);
 		this.filmPlaylist.setFocusTraversable(false);
 		String path;
@@ -120,7 +121,6 @@ public class PlaylistDetailsBoundary {
 		}
 		this.bgc = BeginnerGraphicChange.getInstance();
 		this.pdc = new PlaylistDetailsController();
-		this.selectedPlaylist = pb;
 		File file = new File(path);
 		Image img = new Image(file.toURI().toString());
 		this.playlistPic.setImage(img);
