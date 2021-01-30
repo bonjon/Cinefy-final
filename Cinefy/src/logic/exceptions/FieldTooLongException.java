@@ -3,7 +3,7 @@ package logic.exceptions;
 /*
  * Classe FieldTooLongException che gestisce il caso
  * in cui si inserisca un testo maggiore di un certo
- * numero di caratteri.
+ * numero di caratteri. Jacopo Onorati
  */
 
 public class FieldTooLongException extends Exception {

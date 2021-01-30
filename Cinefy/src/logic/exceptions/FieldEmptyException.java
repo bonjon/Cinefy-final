@@ -2,7 +2,7 @@ package logic.exceptions;
 
 /*
  * Classe FieldEmptyException che gestirà il
- * caso in cui non si inserisca nulla nei testi.
+ * caso in cui non si inserisca nulla nei testi. Jacopo Onorati
  */
 
 public class FieldEmptyException extends Exception {

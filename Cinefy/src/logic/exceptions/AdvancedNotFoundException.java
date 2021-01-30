@@ -3,7 +3,7 @@ package logic.exceptions;
 /*
  * Classe AdvancedNotFoundException che gestisce il
  * caso in cui si cerchi un advanced non presente nel 
- * database.
+ * database. Giovanni Pica
  */
 
 public class AdvancedNotFoundException extends Exception {

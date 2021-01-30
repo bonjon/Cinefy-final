@@ -2,7 +2,7 @@ package logic.exceptions;
 
 /*
  * Classe FilmNotFoundException che gestisce il caso in
- * cui si stia cercando un film non presente nel database.
+ * cui si stia cercando un film non presente nel database. Giovanni Pica
  */
 
 public class FilmNotFoundException extends Exception{
