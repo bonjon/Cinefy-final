@@ -827,9 +827,11 @@ BEGIN
     if var_controllo = 0.0 then
 		update Advanced set voto = var_voto, numerodivoti = 1, tokens = var_voto where username = var_advanced; 
     end if;
+    if var_controllo > 0.0 then
     set var_new_numero = var_new_numero + 1;
     set var_media = (var_controllo + var_voto)/var_new_numero;
 	update Advanced set voto = var_media, numerodivoti = var_new_numero, tokens = tokens + var_voto where username = var_advanced;
+    end if;
 END$$
 
 DELIMITER ;
