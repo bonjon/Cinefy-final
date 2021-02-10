@@ -51,7 +51,7 @@
             									<children>
             										<Label fx:id="labelQuestion" ellipsisString="" text="Domanda" textFill="#ffdf87" textOverrun="CLIP" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             											<font>
-            												<Font name="Arial Italic" size="19.0" />
+            												<Font size="14.0" />
             											</font>
             										</Label>
             									</children>
