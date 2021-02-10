@@ -39,6 +39,10 @@
 			<img src="img/cinema.png" width="740" height="720">
 			<div class="rectangular"></div>
 			<div class="cinefy">Cinefy</div>
+			<form action="RegistrationServlet" method="post">
+				<input class="registration" type="submit" name="back"
+					id="back" value="Back to login">
+			</form>
 		</div>
 		<div class="loginBackground2">
 			<h1 class="login">Registration</h1>
@@ -105,7 +109,7 @@
 				<br>
 				<div>
 					<input name="registration" type="submit" id="registration"
-						value="Sign up" class="signIn">
+						style="margin-top: 8px;" value="Sign up" class="signIn">
 				</div>
 			</form>
 		</div>
