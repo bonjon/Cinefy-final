@@ -47,8 +47,12 @@ public class RegistrationServlet extends HttpServlet {
 			throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher(REGIS);
 		RegistrationController controller = new RegistrationController();
-		if (request.getParameter(REGB) != null)
+		if (request.getParameter(REGB) != null) {
 			rd = this.register(request, controller);
+		}
+		else if (request.getParameter("back") != null) {
+			rd = request.getRequestDispatcher("index.jsp");
+		}
 		rd.forward(request, response);
 	}
 

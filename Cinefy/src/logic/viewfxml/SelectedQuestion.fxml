@@ -21,7 +21,7 @@
 			<left>
 				<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="220.0" style="-fx-background-color: #121212;" BorderPane.alignment="CENTER">
 					<children>
-						<Label layoutX="48.0" layoutY="14.0" text="Cinefy" textFill="#f5c518" AnchorPane.topAnchor="14.0">
+						<Label layoutX="49.0" layoutY="14.0" text="Cinefy" textFill="#f5c518" AnchorPane.topAnchor="14.0">
 							<font>
 								<Font name="DejaVu Sans Mono Bold" size="33.0" />
 							</font>

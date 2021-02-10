@@ -53,7 +53,7 @@
                         <Image url="@../../../WebContent/img/profilePictures/default.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="32.0" layoutY="21.0" text="Advanced user account" textFill="#f5c518">
+                  <Label layoutX="20.0" layoutY="20.0" text="Advanced user account" textFill="#f5c518">
                      <font>
                         <Font name="Arial Bold" size="17.0" />
                      </font>
