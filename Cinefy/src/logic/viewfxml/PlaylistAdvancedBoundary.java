@@ -163,7 +163,13 @@ public class PlaylistAdvancedBoundary implements Initializable {
 					path = FileManager.PLAYLISTS + File.separator + item.getPlaylistPic();
 					iv = new ImageView(new Image(new File(path).toURI().toString()));
 					name = new Label(item.getName());
-					voto = new Label(item.getVoto() + "/10.0");
+					if(item.getVoto().length()>4) {
+						String elidedVote=item.getVoto().substring(0,4);
+						voto = new Label(elidedVote+" /10.0");
+					}
+					else {
+						voto = new Label(item.getVoto() + "/10.0");
+					}
 					name.setFont(Font.font(FONT, 13));
 					voto.setFont(Font.font(FONT, 13));
 					vBox = new VBox(3);

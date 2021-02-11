@@ -28,7 +28,7 @@
       								<Font name="Arial" size="15.0" />
       							</font>
       						</Label>
-      						<Label layoutX="324.0" prefHeight="98.0" prefWidth="264.0" text="Would you learn something about &#10;cinema? Have a great interaction &#10;with our advanced users. Let they &#10;help you about several aspects of&#10;cinema production " textFill="#f5c518">
+      						<Label layoutX="324.0" prefHeight="98.0" prefWidth="283.0" text="Would you like to learn something &#10;about cinema? Have a great &#10;interaction with our advanced users!&#10;Let they help you about several&#10;aspects of cinema production " textFill="#f5c518">
       							<font>
       								<Font name="Arial" size="15.0" />
       							</font>

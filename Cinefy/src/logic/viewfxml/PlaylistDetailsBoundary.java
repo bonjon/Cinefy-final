@@ -106,9 +106,17 @@ public class PlaylistDetailsBoundary {
 	}
 
 	public void init(PlaylistBean pb) throws ClassNotFoundException {
+		String elidedVote;
+		
 		this.playlistName.setText(pb.getName());
 		this.advancedName.setText(pb.getAdvancedName());
-		this.voto.setText(pb.getVoto());
+		if(pb.getVoto().length()>4) {
+			elidedVote=pb.getVoto().substring(0,4);
+			voto.setText(elidedVote);
+		}
+		else {
+			voto.setText(pb.getVoto());
+		}
 		this.playlistDate.setText(pb.getDate());
 		this.selectedPlaylist = pb;
 		this.filmPlaylist.setMouseTransparent(true);

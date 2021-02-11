@@ -157,7 +157,15 @@ public class PlaylistBeginnerBoundary implements Initializable {
 					iv = new ImageView(new Image(new File(path).toURI().toString()));
 					vBox = new VBox(3);
 					name = new Label(item.getName());
-					voto = new Label(item.getVoto() + "/10.0");
+					
+					if(item.getVoto().length()>4) {
+						String elidedVote=item.getVoto().substring(0,4);
+						voto = new Label(elidedVote+" /10.0");
+					}
+					else {
+						voto = new Label(item.getVoto() + "/10.0");
+					}
+					
 					name.setFont(Font.font("Arial", 13));
 					voto.setFont(Font.font("Arial", 13));
 					name.setStyle("-fx-text-fill: " + "#f5c518" + ";");
