@@ -6,8 +6,10 @@ import java.util.List;
 import logic.bean.FilmBean;
 import logic.dao.BeginnerUserDAO;
 import logic.dao.FilmDAO;
+import logic.dao.PlaylistDAO;
 import logic.entities.Film;
 import logic.exceptions.FilmNotFoundException;
+import logic.exceptions.PlaylistNotFoundException;
 import logic.utils.Controller;
 
 public class PlaylistDetailsController extends Controller {
@@ -20,8 +22,13 @@ public class PlaylistDetailsController extends Controller {
 	}
 
 	public void votePlaylist(int voto, String id, String beginner)
-			throws NumberFormatException, SQLException, ClassNotFoundException {
+			throws NumberFormatException, SQLException, ClassNotFoundException, PlaylistNotFoundException {
 		BeginnerUserDAO bud = new BeginnerUserDAO();
-		bud.votePlaylist(voto, Integer.parseInt(id), beginner);
+		PlaylistDAO pd = new PlaylistDAO();
+		boolean voteResult;
+		voteResult = bud.votePlaylist(voto, Integer.parseInt(id), beginner);
+		if(voteResult) {
+			pd.assignToken(Integer.parseInt(id));
+		}
 	}
 }

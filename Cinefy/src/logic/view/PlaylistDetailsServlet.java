@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import logic.bean.GeneralUserBean;
 import logic.bean.PlaylistBean;
 import logic.controllers.PlaylistDetailsController;
+import logic.exceptions.PlaylistNotFoundException;
 
 /**
  * Servlet implementation class PlaylistDetailsServlet della view
@@ -40,13 +41,17 @@ public class PlaylistDetailsServlet extends HttpServlet {
 		GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 		PlaylistBean pb = (PlaylistBean) session.getAttribute("P");
 		if (request.getParameter("BTNOK") != null) {
-			rd = this.votePlaylist(request, pdc, gub, pb);
+			try {
+				rd = this.votePlaylist(request, pdc, gub, pb);
+			} catch (PlaylistNotFoundException e) {
+				LOGGER.log(Level.WARNING, e.toString());
+			}
 		}
 		rd.forward(request, response);
 	}
 
 	private RequestDispatcher votePlaylist(HttpServletRequest request, PlaylistDetailsController pdc,
-			GeneralUserBean gub, PlaylistBean p) {
+			GeneralUserBean gub, PlaylistBean p) throws PlaylistNotFoundException {
 		String rating = request.getParameter("rating");
 		if (rating != null) {
 			try {

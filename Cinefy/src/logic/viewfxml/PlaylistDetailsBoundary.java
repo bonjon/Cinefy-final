@@ -22,6 +22,7 @@ import logic.bean.GeneralUserBean;
 import logic.bean.PlaylistBean;
 import logic.controllers.PlaylistDetailsController;
 import logic.exceptions.FilmNotFoundException;
+import logic.exceptions.PlaylistNotFoundException;
 import logic.utils.FileManager;
 import logic.utils.SessionUser;
 
@@ -89,7 +90,7 @@ public class PlaylistDetailsBoundary {
 	}
 
 	@FXML
-	public void onOk(ActionEvent event) throws ClassNotFoundException {
+	public void onOk(ActionEvent event) throws ClassNotFoundException, PlaylistNotFoundException {
 		vote = (int) this.sliderVote.getValue();
 		this.labelError.setText("You vote " + vote);
 		GeneralUserBean gub = SessionUser.getInstance().getSession();

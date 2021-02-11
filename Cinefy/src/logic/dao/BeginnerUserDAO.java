@@ -40,7 +40,7 @@ public class BeginnerUserDAO {
 		}
 	}
 
-	public void votePlaylist(int voto, int idPlaylist, String beginner) throws SQLException, ClassNotFoundException {
+	public boolean votePlaylist(int voto, int idPlaylist, String beginner) throws SQLException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
 		String sql = "call CinefyDB.vota_playlist(?,?,?);\r\n";
 		try (PreparedStatement s = conn.prepareStatement(sql)) {
@@ -48,6 +48,7 @@ public class BeginnerUserDAO {
 			s.setInt(2, idPlaylist);
 			s.setString(3, beginner);
 			s.executeUpdate();
+			return true;
 		}
 	}
 }

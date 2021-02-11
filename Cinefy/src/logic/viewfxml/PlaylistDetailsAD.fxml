@@ -58,7 +58,7 @@
 								<ListView fx:id="filmPlaylist" layoutX="20.0" layoutY="316.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="1020.0" style="-fx-background-color: #1c1c1c;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="336.0" />
                         <AnchorPane layoutX="20.0" layoutY="60.0">
                            <children>
-      								<ImageView fx:id="playlistPic" fitHeight="250.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+      								<ImageView fx:id="playlistPic" fitHeight="250.0" fitWidth="239.0" pickOnBounds="true">
       									<image>
       										<Image url="@../../../WebContent/img/playlistPictures/default2.jpg" />
       									</image>
