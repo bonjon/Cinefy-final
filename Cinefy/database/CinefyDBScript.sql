@@ -848,6 +848,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `vota_playlist`(IN var_voto int, IN 
 BEGIN
 	declare var_controllo double;
     declare var_media double;
+    declare var_vecchia_somma int;
     declare var_new_numero int;
 	declare var_check int;
     select count(*) from VotaPlaylist where `BeginnerName` = var_beginner and `idPlaylist` = var_id into var_check;
@@ -859,9 +860,12 @@ BEGIN
     if var_controllo = 0.0 then
 		update Playlist set Voto = var_voto, numerodivoti = 1 where idPlaylist = var_id;
 	end if;
+    if var_controllo > 0.0 then
+    set var_vecchia_somma = var_controllo*var_new_numero;
     set var_new_numero = var_new_numero + 1;
-    set var_media = (var_controllo + var_voto)/var_new_numero;
+    set var_media = (var_vecchia_somma + var_voto)/var_new_numero;
 	update Playlist set Voto = var_media, numerodivoti = var_new_numero where idPlaylist = var_id;
+    end if;
 END$$
 
 DELIMITER ;
