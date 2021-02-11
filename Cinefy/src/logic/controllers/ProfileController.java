@@ -19,14 +19,21 @@ import logic.entities.Domanda;
 import logic.utils.Controller;
 
 /*
- * Classe ProfileController che appunto è il controller di
- * Profile.
+ * Classe ProfileController è il controller dei profili utente
  */
 
 public class ProfileController extends Controller {
 
 	private static final Logger logger = Logger.getLogger(ProfileController.class.getName());
+	
+	/*
+	 * reward
+	 * Attributo che specifica il valore in denaro con il quale viene
+	 * ricompensato ogni singolo token ricevuto da un Advanced User
+	 */
+	private Double reward = 0.09;
 
+	
 	public BeginnerUserBean getUser(String username, String role) throws ClassNotFoundException {
 		GeneralUserDAO gud = new GeneralUserDAO();
 		BeginnerUserBean bub = new BeginnerUserBean();
@@ -123,6 +130,17 @@ public class ProfileController extends Controller {
 			logger.log(Level.WARNING, e.toString());
 		}
 		return aub;
+	}
+	
+	public double countMoney(int tokens) {
+		Double myMoney;
+		myMoney = tokens*reward;
+		return myMoney;
+		
+	}
+	
+	public double getReward() {
+		return reward;
 	}
 
 }

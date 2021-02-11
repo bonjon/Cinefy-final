@@ -60,8 +60,12 @@ public class ProfileAdvancedBoundary implements Initializable {
 	private Label role;
 	@FXML
 	private AnchorPane anchorPaneBio;
+	@FXML
+	private Label laMoney;
+	@FXML
+	private Label laReward;
 
-	private AdvancedGraphicChange agc;
+	private AdvancedGraphicChange agc; 
 	
 	private static final Logger logger = Logger.getLogger(ProfileAdvancedBoundary.class.getName());
 
@@ -89,6 +93,11 @@ public class ProfileAdvancedBoundary implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		String elidedVote;
+		Double money;
+		Double reward;
+		String rewardText;
+		
 		try {
 		AdvancedUserBean aub;
 		ProfileController pc;
@@ -99,6 +108,21 @@ public class ProfileAdvancedBoundary implements Initializable {
 		aub = pc.getUser2(gub.getUsername(), gub.getRole());
 		
 		this.username.setText(aub.getUsername());
+		
+		money = pc.countMoney(Integer.parseInt(aub.getTokens()));
+		if(money.toString().length()>4) {
+			laMoney.setText(money.toString().substring(0,4)+" $");
+		}
+		else {
+			laMoney.setText(money.toString()+" $");
+		}
+		
+		reward=pc.getReward();
+	    rewardText="Actually Cinefy rewards your \n" + 
+	    		"work with "+reward.toString() +" $ for each new \n" + 
+	    		"token you gain";
+	    laReward.setText(rewardText);
+		
 		if (aub.getProfilePic() == null) {
 			String path = FileManager.PROFILE + File.separator + "default.png";
 			File file = new File(path);
@@ -110,7 +134,15 @@ public class ProfileAdvancedBoundary implements Initializable {
 			Image img = new Image(file.toURI().toString());
 			this.profilePic.setImage(img);
 		}
-		this.voto.setText(aub.getVoto());
+		
+		if(aub.getVoto().length()>4) {
+			elidedVote=aub.getVoto().substring(0, 4);
+			voto.setText(elidedVote);
+		}
+		else {
+			voto.setText(aub.getVoto());
+		}
+		
 		this.role.setText(aub.getProfession());
 		this.tokens.setText(aub.getTokens());
 		if (aub.getBio().isEmpty()) {

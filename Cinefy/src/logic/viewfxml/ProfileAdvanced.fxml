@@ -79,7 +79,7 @@
                               <Font name="Arial Bold" size="17.0" />
                            </font>
                         </Label>
-                        <Label fx:id="username" layoutX="4.0" layoutY="42.0" text="username..." textFill="#ffdf87">
+                        <Label fx:id="username" layoutX="2.0" layoutY="42.0" text="username..." textFill="#ffdf87">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -89,7 +89,7 @@
                               <Font name="Arial Bold" size="17.0" />
                            </font>
                         </Label>
-                        <Label layoutX="344.0" text="Tokens" textFill="#f5c518">
+                        <Label layoutX="344.0" text="Tokens (answers and playlists)" textFill="#f5c518">
                            <font>
                               <Font name="Arial Bold" size="17.0" />
                            </font>
@@ -116,7 +116,7 @@
                               </ScrollPane>
                            </children>
                         </AnchorPane>
-                        <Label fx:id="role" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="154.0" text="Role..." textAlignment="CENTER" textFill="#ffe283d6" textOverrun="CENTER_ELLIPSIS">
+                        <Label fx:id="role" alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="154.0" text="Role..." textAlignment="CENTER" textFill="#ffe283d6" textOverrun="CENTER_ELLIPSIS">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -126,7 +126,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="344.0" layoutY="111.0" text="Feedbacks average" textFill="#f5c518">
+                        <Label layoutX="344.0" layoutY="111.0" text="Answers feedbacks average" textFill="#f5c518">
                            <font>
                               <Font name="Arial Bold" size="17.0" />
                            </font>
@@ -136,6 +136,38 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="32.0" layoutY="92.0">
+                     <children>
+                        <AnchorPane>
+                           <children>
+                              <Label text="Earnings" textFill="#f5c518">
+                                 <font>
+                                    <Font name="Arial Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="laMoney" layoutX="1.0" layoutY="48.0" text="10.20$" textFill="#ffdf87">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutY="129.0">
+                           <children>
+                              <Label text="About earnings" textFill="#f5c518">
+                                 <font>
+                                    <Font name="Arial Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="laReward" layoutY="51.0" text="Actually Cinefy rewards your &#10;work with 0.10$ for each new &#10;token you gain" textFill="#ffdf87">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
 					</children>

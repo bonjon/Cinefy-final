@@ -73,10 +73,20 @@ public class QuestionsBoundary {
 
 	public void init(AdvancedUserBean aub) {
 		selectedAdvanced = aub;
+		String elidedVote;
+		
 		this.bgc = BeginnerGraphicChange.getInstance();
 		this.afc = new AskForQuestionsController();
 		username.setText(selectedAdvanced.getUsername());
-		voto.setText(selectedAdvanced.getVoto());
+		
+		if(aub.getVoto().length()>4) {
+			elidedVote=selectedAdvanced.getVoto().substring(0, 4);
+			voto.setText(elidedVote);
+		}
+		else {
+			voto.setText(selectedAdvanced.getVoto());
+		}
+		
 		role.setText(selectedAdvanced.getProfession());
 		String path;
 		if (aub.getProfilePic() == null) {

@@ -47,7 +47,7 @@
 				</AnchorPane>
 			</left>
 			<center>
-				<ScrollPane fx:id="scrollPane" BorderPane.alignment="CENTER">
+				<ScrollPane fx:id="scrollPane" style="-fx-background-color: #1c1c1c;" BorderPane.alignment="CENTER">
 					<content>
 						<AnchorPane prefWidth="1250.0" style="-fx-background-color: #1c1c1c;">
 							<children>

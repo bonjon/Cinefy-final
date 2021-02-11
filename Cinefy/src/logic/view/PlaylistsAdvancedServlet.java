@@ -62,7 +62,7 @@ public class PlaylistsAdvancedServlet extends HttpServlet {
 			LOGGER.log(Level.WARNING, e.toString());
 		} catch (PlaylistNotFoundException e) {
 			request.setAttribute("LP", Collections.emptyList());
-			request.setAttribute("errorx", e.getMessage());
+			request.setAttribute("error", e.getMessage());
 		}
 		session.setAttribute("LP", lp);
 		if (request.getParameter("a") != null)
