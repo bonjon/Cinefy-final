@@ -91,6 +91,7 @@
 				}
 				}
 			%>
+			<br><br><br>
 			<label class="textMiddle">Your playlists</label><br>
 			<div>
 				<ul style="width: 900px; overflow: auto">
@@ -119,7 +120,7 @@
 								%>
 							</button>
 							<br> <label class="nameAd"><%=LP.get(i).getName()%></label><br>
-							<label class="nameAd"><%=LP.get(i).getVoto()%> average</label> <input
+							<label class="nameAd"><%=LP.get(i).getVoto()%>  /10.0</label> <input
 								type="hidden" name="index" value="<%=i%>"> <input
 								type="hidden" name="P" value="<%=LP.get(i).getId()%>">
 						</form>
@@ -134,11 +135,12 @@
 				String log = (String) request.getAttribute("error");
 				if (log != null) {
 					if (log != null) {
-			%><h6 style="color: RED;"><%=log%></h6>
+			%><h6 style="color: RED; margin-left: 30px;"><%=log%></h6>
 			<%
 				}
 				}
 			%>
+			<br><br>
 			<form action="CreatePlaylistServlet" method="post">
 				<input name="create" type="submit" id="create"
 					value="Create a playlist" class="signIn centro">

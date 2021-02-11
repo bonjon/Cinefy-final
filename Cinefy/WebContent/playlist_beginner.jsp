@@ -90,6 +90,7 @@
 				}
 				}
 			%>
+			<br><br><br>
 			<label class="textMiddle">Search playlist</label>
 			<form action="SearchPlaylistServlet" method="post">
 				<input name="searchString" type="text" class="text-box2"

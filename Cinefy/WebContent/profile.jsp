@@ -9,6 +9,7 @@
 	ProfileController pc = new ProfileController();
 	if (gub.getRole().equals("beginner"))
 		bub = pc.getUser(gub.getUsername(), gub.getRole());
+	
 	else
 		aub = pc.getUser2(gub.getUsername(), gub.getRole());
 %>
@@ -25,7 +26,7 @@
 </head>
 <body>
 	<div>
-		<div class="splitLeft">
+		<div class="splitLeft pageStretch">
 			<div class="titolo">Cinefy</div>
 			<hr style="border-color: #f5c518;">
 			<ul class="listGroup">
@@ -70,7 +71,7 @@
 				%>
 			</ul>
 		</div>
-		<div class="splitRight">
+		<div class="splitRight pageStretch">
 			<%
 				if (gub.getRole().equals("advanced")) {
 			%>
@@ -89,22 +90,50 @@
 				<%
 					}
 				%>
-				<h3 class="headUser"><%=aub.getUsername()%></h3>
-				<h6 class="headSmall"><%=aub.getVoto()%>
-					average
-				</h6>
+				<h3 class="bioP"><%=aub.getUsername()%></h3>
+				<h3 class="bioP"><%=aub.getProfession()%></h3>
+				<p class="bioP" ><%=aub.getBio()%></p>
+				<br>
 				<%
-					int vote = (int) Double.parseDouble(aub.getVoto());
+				if(aub.getVoto().length()>4) {
+					String elidedVote;
+					elidedVote=aub.getVoto().substring(0, 4);
+					%><h6 class="headSmall">Answers feedbacks average: <%= elidedVote%> </h6>
+				<% 
+				}
+				else {
+					%><h6 class="headSmall">Answers feedbacks average: <%= aub.getVoto()%> </h6>
+				<%
+				}
+				int vote = (int) Double.parseDouble(aub.getVoto());
 						for (int i = 0; i < vote; i++) {
 				%><span class="fa">★</span>
 				<%
 					}
-				%><h3 class="headUser"><%=aub.getProfession()%></h3>
-				<h3 class="headUser">
+				%>
+				<h6 class="headSmall">
 					Tokens:
-					<%=aub.getTokens()%></h3>
-				<p class="bioP"><%=aub.getBio()%></p>
+					<%=aub.getTokens()%></h6>
+					
+				<%
+				Double money = pc.countMoney(Integer.parseInt(aub.getTokens()));
+				if(money.toString().length()>4) {
+					String textMoney = money.toString().substring(0,4)+" $";
+					%><h6 class="headSmall">Earnings: <%= textMoney%> </h6>
+				<% 
+				}
+				else {
+					String textMoney = money.toString()+ " $";
+					%><h6 class="headSmall">Earnings: <%=textMoney %> </h6>
+				<%
+				}
+				Double reward = pc.getReward();
+				%>
+				<h6 class="headSmall">
+					Cinefy rewards your work with 
+					<%=reward%> $ for each new token you gain</h6>
 			</div>
+			
 			<%
 				} else {
 			%>

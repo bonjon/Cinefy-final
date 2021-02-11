@@ -22,7 +22,7 @@
 </head>
 <body>
 	<div>
-		<div class="splitLeft">
+		<div class="splitLeft" style="height: 1300px;">
 			<div class="titolo">Cinefy</div>
 			<hr style="border-color: #f5c518;">
 			<ul class="listGroup">
@@ -67,14 +67,15 @@
 				%>
 			</ul>
 		</div>
-		<div class="splitRight">
+		<div class="splitRight" style="height: 1300px;">
 			<label class="textUp">Playlist details</label><br>
-			<div class="cardContainer">
+			<div class="cardContainer" style="overflow: auto;">
 				<%
 					if (P.getPlaylistPic() != null) {
 				%>
 				<img src="<%="img/playlistPictures/" + P.getPlaylistPic()%>"
-					class="circleImg" height="150" width="150" />
+					class="circleImg" height="150" width="150" style="margin:auto; 
+					margin-left: 35px;"/>
 				<%
 					} else {
 				%>
@@ -83,28 +84,34 @@
 				<%
 					}
 				%>
-				<h3 class="headUser"><%=P.getName()%></h3>
-				<h3 class="headUser">
+				<h3 class="headUser" style="padding-left: 35px;"><%=P.getName()%></h3>
+				<h3 class="headUser" style="padding-left: 35px;">
 					<%=P.getAdvancedName()%>
-				</h3>
-				<h6 class="headSmall">
-					Date of pubblication
+				</h3><br>
+				<h6 class="headSmall" style="padding-left: 35px;">
+					Date of pubblication: 
 					<%=P.getDate()%></h6>
-				<h6 class="headSmall"><%=P.getVoto()%>
-					average
-				</h6>
+				<h6 class="headSmall"  style="padding-top: 6px; padding-left: 35px;">Ratings average: <%=P.getVoto()%>
+				
+				
+				</h6 >
+				<span style="display: inline-block; text-align: center; margin:auto; margin-left: 35px;">
 				<%
 					int vote = (int) Double.parseDouble(P.getVoto());
 					for (int j = 0; j < vote; j++) {
-				%><span class="fa">★</span>
+				%><span class="fa" >★</span>
+				</span>
 				<%
 					}
 				%>
-				<ul>
+				
+				<br><br>
+				<h6 class="headSmall" style= "padding-left: 35px; ">Film titles: </h6>
+				<ul style="padding-top: 7px; margin-left: 0px; float:left; text-align: center;">
 					<%
 						for (i = 0; i < LF.size(); i++) {
-					%><li class="itemFilms"><a class="linkGo3"
-						href="<%=LF.get(i).getUrl()%>"><%=LF.get(i).getTitolo()%></a></li>
+					%><li class="itemFilms" style="text-align: center;"><a class="linkGo3"
+						 href="<%=LF.get(i).getUrl()%>"><%=LF.get(i).getTitolo()%></a></li>
 					<%
 						}
 					%>
@@ -115,12 +122,12 @@
 			%>
 			<form action="PlaylistDetailsServlet" method="post">
 				<div
-					class="container d-flex justify-content-center mt-100 alignment">
+					class="container d-flex justify-content-center mt-100 alignment" >
 					<div class="row">
 						<div class="col-md-6">
 							<div class="card">
 								<div class="card-body text-center bigger">
-									<fieldset class="rating">
+									<fieldset class="rating" style="display: inline-block;">
 										<input type="radio" id="star10" name="rating" value="10" /><label
 											class="full" for="star10" title="PERFECT - 10 stars"></label>
 										<input type="radio" id="star9" name="rating" value="9" /><label
