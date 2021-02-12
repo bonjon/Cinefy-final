@@ -37,8 +37,7 @@
 		<div class="splitRight">
 			<form action="CreatePlaylistServlet" method="post"
 				enctype='multipart/form-data'>
-				<label class="textUp">Name of the playlist and choose the
-					image</label><br> <br>
+				<label class="textUp">Create playlist</label><br> <br>
 				<%
 					String logx = (String) request.getAttribute("errorx");
 					if (logx != null) {
@@ -48,10 +47,16 @@
 					}
 					}
 				%>
+				<label for="name" class="resFieldsText" style="text-align:left; margin-left: 30px; font-size: 12px;">Playlist's name</label>
+				<br>
 				<input id="name" name="name" type="text" class="text-box left"><br>
+				<br><br>
+				<label class="resFieldText" style="text-align:left; margin-left: 30px; font-size: 12px; color: #f5c518">Playlist' s image</label><br>
+				
 				<br> <input class="av2" type="file" id="avatar" name="avatar"
-					accept="image/png, image/jpeg"><br> <input
-					class="signIn left" id="ok" name="ok" type="submit" value="Ok">
+					accept="image/png, image/jpeg"><br> 
+				<br>
+				<input	class="signIn left" id="ok" name="ok" type="submit" value="Ok">
 			</form>
 		</div>
 	</div>

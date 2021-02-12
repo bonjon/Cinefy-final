@@ -20,7 +20,7 @@
 </head>
 <body>
 	<div>
-		<div class="splitLeft">
+		<div class="splitLeft" style="height: 1300px;">
 			<div class="titolo">Cinefy</div>
 			<hr style="border-color: #f5c518;">
 			<ul class="listGroup">
@@ -41,7 +41,7 @@
 					</form></li>
 			</ul>
 		</div>
-		<div class="splitRight">
+		<div class="splitRight" style="height: 1300px;">
 			<label class="textUp">Top rated playlists</label><br>
 			<div>
 				<ul style="width: 900px; overflow: auto">

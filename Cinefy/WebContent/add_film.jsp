@@ -41,13 +41,17 @@
 		</div>
 		<div class="splitRight">
 			<form action="AddFilmServlet" method="post">
-				<label class="textUp">Name of the playlist and the image</label><br>
-				<br> <img
+				<label class="textUp">You have just created a new playlist!</label><br>
+				<br> 
+				<div class= "cardContainer">
+				<img
 					src="<%="img/playlistPictures/" + pb.getPlaylistPic()%>"
 					class="circleImg adjust" height="150" width="150" /><br> <label
-					class="headUser adjust"><%=pb.getName()%></label><br>
-				<br> <label class="textMiddle">Now search film and
-					press enter to add in the playlist</label><br> <br> <input
+					class="headUser adjust"><%=pb.getName()%></label>
+				</div>
+					<br>
+				<br> <br><label class="textMiddle">Now you can search films and
+					press ENTER to add them in your playlist</label><br> <br> <input
 					id="film" name="film" type="text" class="text-box left">
 				<%
 					String log = (String) request.getAttribute("error");
