@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page
-	import="java.util.ArrayList, java.util.List, logic.bean.PlaylistBean, logic.bean.GeneralUserBean, logic.bean.FilmBean, logic.controllers.PlaylistDetailsController"%>
+	import="java.util.ArrayList, java.util.List, java.sql.SQLException, logic.exceptions.FilmNotFoundException, java.util.Collections,  logic.bean.PlaylistBean, logic.bean.GeneralUserBean, logic.bean.FilmBean, logic.controllers.PlaylistDetailsController"%>
 <%
 	PlaylistBean P = (PlaylistBean) session.getAttribute("P");
 	PlaylistDetailsController pdc = new PlaylistDetailsController();
-	List<FilmBean> LF = pdc.getFilmPlaylist(P.getId());
+	List<FilmBean> LF = new ArrayList<>();
+	try{
+		LF = pdc.getFilmPlaylist(P.getId());
+	}
+	catch(SQLException | FilmNotFoundException e){
+		LF = Collections.emptyList();
+		
+	}
 	int i;
 	GeneralUserBean gub = (GeneralUserBean) session.getAttribute("user");
 %>
@@ -91,10 +98,20 @@
 				<h6 class="headSmall" style="padding-left: 35px;">
 					Date of pubblication: 
 					<%=P.getDate()%></h6>
-				<h6 class="headSmall"  style="padding-top: 6px; padding-left: 35px;">Ratings average: <%=P.getVoto()%>
-				
-				
-				</h6 >
+					
+				<%
+				if(P.getVoto().length()>4) {
+					String elidedVote;
+					elidedVote=P.getVoto().substring(0, 4);
+					%><h6 class="headSmall" style="padding-top: 6px; padding-left: 35px;">Ratings average: <%= elidedVote%> </h6>
+				<% 
+				}
+				else {
+					%><h6 class="headSmall" style="padding-top: 6px; padding-left: 35px;">Ratings average: <%= P.getVoto()%> </h6>
+				<%
+				}
+				%>
+				<div style="min-width: 100px; max-height:25px; text-align:center; margin:auto; overflow: auto;">
 				<span style="display: inline-block; text-align: center; margin:auto; margin-left: 35px;">
 				<%
 					int vote = (int) Double.parseDouble(P.getVoto());
@@ -104,25 +121,40 @@
 				<%
 					}
 				%>
+				</div>
 				
-				<br><br>
-				<h6 class="headSmall" style= "padding-left: 35px; ">Film titles: </h6>
-				<ul style="padding-top: 7px; margin-left: 0px; float:left; text-align: center;">
+				</div>
+				<br>
+				<br>
+				<%
+				if(!LF.isEmpty()) {
+				%>
+				<div class="cardContainer" style="overflow: auto;">
+				<ul style="display:block; padding-top: 14px; color: #f5c518;">
 					<%
 						for (i = 0; i < LF.size(); i++) {
-					%><li class="itemFilms" style="text-align: center;"><a class="linkGo3"
-						 href="<%=LF.get(i).getUrl()%>"><%=LF.get(i).getTitolo()%></a></li>
+					%><li style="text-align: center; float:none; background-color: #121212;  max-height: 25px; display:flex;min-width:380px;max-width:380px;"
+					<span style="text-align: center; margin: auto;"></span>>
+					<a class="linkGo3" style="text-align: center; margin: auto; padding-left: 18px;" href="<%=LF.get(i).getUrl()%>"><%=LF.get(i).getTitolo()%></a></li>
+						
 					<%
 						}
 					%>
+					
 				</ul>
-			</div>
-			<%
+				</div>
+				<%
+				}
+				else{
+				%>
+					<h6 style="color: RED; text-align: center;">This playlist does not contain any films</h6>
+				<%
+				}
 				if (gub.getRole().equals("beginner")) {
 			%>
 			<form action="PlaylistDetailsServlet" method="post">
 				<div
-					class="container d-flex justify-content-center mt-100 alignment" >
+					class="container d-flex justify-content-center mt-100 alignment" style="padding-top:40px; margin-top:0px;">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="card">

@@ -71,7 +71,20 @@
 								%>
 							</button>
 							<br> <label class="nameAd"><%=topLP.get(i).getName()%></label><br>
-							<label class="nameAd"><%=topLP.get(i).getVoto()%> average</label>
+							
+							<%
+							if(topLP.get(i).getVoto().length()>4) {
+								String elidedVote;
+								elidedVote=topLP.get(i).getVoto().substring(0, 4);
+							%><label class="nameAd"><%= elidedVote%>  /10.0</label>
+							<% 
+							}
+							else {
+							%><label class="nameAd"><%=topLP.get(i).getVoto()%> /10.0</label>
+							<%
+							}
+							%>
+			
 							<input type="hidden" name="index" value="<%=i%>"> <input
 								type="hidden" name="P" value="<%=topLP.get(i).getId()%>">
 						</form>
@@ -120,7 +133,18 @@
 								%>
 							</button>
 							<br> <label class="nameAd"><%=LP.get(i).getName()%></label><br>
-							<label class="nameAd"><%=LP.get(i).getVoto()%>  /10.0</label> <input
+							<%
+							if(LP.get(i).getVoto().length()>4) {
+								String elidedVote;
+								elidedVote=LP.get(i).getVoto().substring(0, 4);
+							%><label class="nameAd"><%= elidedVote%>  /10.0</label>
+							<% 
+							}
+							else {
+							%><label class="nameAd"><%=LP.get(i).getVoto()%> /10.0</label>
+							<%
+							}
+							%> <input
 								type="hidden" name="index" value="<%=i%>"> <input
 								type="hidden" name="P" value="<%=LP.get(i).getId()%>">
 						</form>

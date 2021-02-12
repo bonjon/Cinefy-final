@@ -57,7 +57,7 @@
 						<div class="col-md-6">
 							<div class="card">
 								<div class="card-body text-center">
-									<fieldset class="rating">
+									<fieldset class="rating" >
 										<input type="radio" id="star5" name="rating" value="5" /><label
 											class="full" for="star5" title="Awesome - 5 stars"></label> <input
 											type="radio" id="star4" name="rating" value="4" /><label
@@ -70,7 +70,7 @@
 											class="full" for="star1" title="Sucks big time - 1 star"></label>
 									</fieldset>
 									<input name="BTNOK" type="submit" id="BTNOK" value="OK"
-										class="signIn">
+										class="signIn" style="margin-left: 18px;">
 								</div>
 							</div>
 						</div>

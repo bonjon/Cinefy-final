@@ -82,7 +82,7 @@
 								%>
 							</button>
 							<br> <label class="nameAd"><%=topAd.get(i).getUsername()%></label><br>
-							<label class="nameAd"><%=topAd.get(i).getVoto()%> average</label>
+							<label class="nameAd"><%=topAd.get(i).getVoto()%> /5.0</label>
 							<input type="hidden" name="index" value="<%=i%>"> <input
 								type="hidden" name="AdS" value="<%=topAd.get(i).getUsername()%>">
 						</form>
