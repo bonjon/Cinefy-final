@@ -140,14 +140,16 @@ public class PlaylistAdvancedBoundary implements Initializable {
 	
 	private Label elideVote(PlaylistBean item, Label voto) {
 		String eliVote;
+		Label theVote;
+		theVote=voto;
 		if(item.getVoto().length()>4) {
 			eliVote=item.getVoto().substring(0,4);
-			voto = new Label(eliVote+" /10.0");
+			theVote = new Label(eliVote+" /10.0");
 		}
 		else {
-			voto = new Label(item.getVoto() + "/10.0");
+			theVote = new Label(item.getVoto() + "/10.0");
 		}
-		return voto;
+		return theVote;
 	}
 
 	private void setCellsPlaylist(int i) {

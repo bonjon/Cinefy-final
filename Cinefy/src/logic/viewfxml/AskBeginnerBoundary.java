@@ -266,14 +266,16 @@ public class AskBeginnerBoundary implements Initializable {
 	
 	private Label elideVote(AdvancedUserBean item, Label voto) {
 		String elidedVote;
+		Label myVote;
+		myVote=voto;
 		if(item.getVoto().length()>4) {
 			elidedVote=item.getVoto().substring(0, 4);
-			voto = new Label(elidedVote+ "/5.0");
+			myVote = new Label(elidedVote+ "/5.0");
 		}
 		else {
-			voto = new Label(item.getVoto() + "/5.0");
+			myVote = new Label(item.getVoto() + "/5.0");
 		}
-		return voto;
+		return myVote;
 	}
 
 	@Override

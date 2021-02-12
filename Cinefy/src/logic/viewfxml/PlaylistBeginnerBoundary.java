@@ -133,14 +133,16 @@ public class PlaylistBeginnerBoundary implements Initializable {
 	
 	private Label elideVote(PlaylistBean item, Label voto) {
 		String elidedVote;
+		Label myVote;
+		myVote=voto;
 		if(item.getVoto().length()>4) {
 			elidedVote=item.getVoto().substring(0,4);
-			voto = new Label(elidedVote+" /10.0");
+			myVote = new Label(elidedVote+" /10.0");
 		}
 		else {
-			voto = new Label(item.getVoto() + "/10.0");
+			myVote = new Label(item.getVoto() + "/10.0");
 		}
-		return voto;
+		return myVote;
 	}
 
 	private void setCellPlaylist(int i) {
