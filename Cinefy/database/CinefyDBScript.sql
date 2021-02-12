@@ -427,24 +427,24 @@ DELIMITER ;
 
 DELIMITER $$
 USE `CinefyDB`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `assegna_token_playlist`(IN var_id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `assegna_token_playlist`(IN var_id int, IN var_vote double)
 BEGIN
-	declare var_vote double;
+
     declare var_ad varchar(16);
-	select AdvancedName, Voto from Playlist where idPlaylist = var_id into var_ad, var_vote;
+	select AdvancedName from Playlist where idPlaylist = var_id into var_ad;
     if var_vote = 0 then
 		update Advanced set tokens = tokens where username = var_ad;
 	end if;
-    if var_vote < 5 then
+    if var_vote > 0 and var_vote < 5 then
 		update Advanced set tokens = tokens + 1 where username = var_ad;
 	end if;
-    if var_vote < 7 then 
+    if var_vote > 4 and var_vote < 7 then 
 		update Advanced set tokens = tokens + 2 where username = var_ad;
 	end if;
-    if var_vote < 10 then
+    if var_vote > 6 and var_vote < 10 then
 		update Advanced set tokens = tokens + 3 where username = var_ad;
 	end if;
-    if var_voto = 10 then
+    if var_vote = 10 then
 		update Advanced set tokens = tokens + 5 where username = var_ad;
 	end if;
 END$$
