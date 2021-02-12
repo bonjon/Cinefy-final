@@ -137,6 +137,18 @@ public class PlaylistAdvancedBoundary implements Initializable {
 			LOGGER.log(Level.WARNING, e.toString());
 		}
 	}
+	
+	private Label elideVote(PlaylistBean item, Label voto) {
+		String eliVote;
+		if(item.getVoto().length()>4) {
+			eliVote=item.getVoto().substring(0,4);
+			voto = new Label(eliVote+" /10.0");
+		}
+		else {
+			voto = new Label(item.getVoto() + "/10.0");
+		}
+		return voto;
+	}
 
 	private void setCellsPlaylist(int i) {
 		ListView<PlaylistBean> playlist;
@@ -163,13 +175,8 @@ public class PlaylistAdvancedBoundary implements Initializable {
 					path = FileManager.PLAYLISTS + File.separator + item.getPlaylistPic();
 					iv = new ImageView(new Image(new File(path).toURI().toString()));
 					name = new Label(item.getName());
-					if(item.getVoto().length()>4) {
-						String elidedVote=item.getVoto().substring(0,4);
-						voto = new Label(elidedVote+" /10.0");
-					}
-					else {
-						voto = new Label(item.getVoto() + "/10.0");
-					}
+					voto = new Label();
+					voto = elideVote(item,voto);
 					name.setFont(Font.font(FONT, 13));
 					voto.setFont(Font.font(FONT, 13));
 					vBox = new VBox(3);

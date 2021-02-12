@@ -130,6 +130,18 @@ public class PlaylistBeginnerBoundary implements Initializable {
 			}
 		}
 	}
+	
+	private Label elideVote(PlaylistBean item, Label voto) {
+		String elidedVote;
+		if(item.getVoto().length()>4) {
+			elidedVote=item.getVoto().substring(0,4);
+			voto = new Label(elidedVote+" /10.0");
+		}
+		else {
+			voto = new Label(item.getVoto() + "/10.0");
+		}
+		return voto;
+	}
 
 	private void setCellPlaylist(int i) {
 		ListView<PlaylistBean> playlistL;
@@ -158,14 +170,8 @@ public class PlaylistBeginnerBoundary implements Initializable {
 					vBox = new VBox(3);
 					name = new Label(item.getName());
 					
-					if(item.getVoto().length()>4) {
-						String elidedVote=item.getVoto().substring(0,4);
-						voto = new Label(elidedVote+" /10.0");
-					}
-					else {
-						voto = new Label(item.getVoto() + "/10.0");
-					}
-					
+					voto = new Label();
+					voto = elideVote(item,voto);
 					name.setFont(Font.font("Arial", 13));
 					voto.setFont(Font.font("Arial", 13));
 					name.setStyle("-fx-text-fill: " + "#f5c518" + ";");

@@ -198,7 +198,7 @@ public class AskBeginnerBoundary implements Initializable {
 						Label voto;
 						ImageView iv;
 						VBox vBox;
-						String elidedVote;
+						
 						
 						if (item.getProfilePic() == null) {
 							path = FileManager.PROFILE + File.separator + DEFAULT;
@@ -208,13 +208,8 @@ public class AskBeginnerBoundary implements Initializable {
 						iv = new ImageView(new Image(new File(path).toURI().toString()));
 						username = new Label(item.getUsername());
 						
-						if(item.getVoto().length()>4) {
-							elidedVote=item.getVoto().substring(0, 4);
-							voto = new Label(elidedVote+ "/5.0");
-						}
-						else {
-							voto = new Label(item.getVoto() + "/5.0");
-						}
+						voto=new Label();
+						voto=elideVote(item,voto);
 						username.setFont(Font.font(FONT, 13));
 						voto.setFont(Font.font(FONT, 13));
 						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
@@ -268,6 +263,18 @@ public class AskBeginnerBoundary implements Initializable {
 			}
 		}
 	}
+	
+	private Label elideVote(AdvancedUserBean item, Label voto) {
+		String elidedVote;
+		if(item.getVoto().length()>4) {
+			elidedVote=item.getVoto().substring(0, 4);
+			voto = new Label(elidedVote+ "/5.0");
+		}
+		else {
+			voto = new Label(item.getVoto() + "/5.0");
+		}
+		return voto;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -305,16 +312,10 @@ public class AskBeginnerBoundary implements Initializable {
 						Label voto;
 						VBox vBox;
 						String path;
-						String elidedVote;
 						
+						voto=new Label();
 						username = new Label(item.getUsername());
-						if(item.getVoto().length()>4) {
-							elidedVote=item.getVoto().substring(0, 4);
-							voto = new Label(elidedVote+ "/5.0");
-						}
-						else {
-							voto = new Label(item.getVoto() + "/5.0");
-						}
+						voto=elideVote(item,voto);
 						username.setFont(Font.font(FONT, 13));
 						voto.setFont(Font.font(FONT, 13));
 						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
