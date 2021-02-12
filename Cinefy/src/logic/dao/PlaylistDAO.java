@@ -136,11 +136,12 @@ public class PlaylistDAO {
 		return this.queryDatabase(null, "Rewards");
 	}
 
-	public void assignToken(int id) throws SQLException, PlaylistNotFoundException, ClassNotFoundException {
+	public void assignToken(int id, double voto) throws SQLException, PlaylistNotFoundException, ClassNotFoundException {
 		Connection conn = ConnectionDB.getInstance();
-		String sql = "call CinefyDB.assegna_token_playlist(?);\r\n";
+		String sql = "call CinefyDB.assegna_token_playlist(?,?);\r\n";
 		try (PreparedStatement s = conn.prepareStatement(sql)) {
 			s.setInt(1, id);
+			s.setDouble(2, voto);
 			s.executeUpdate();
 		}
 	}

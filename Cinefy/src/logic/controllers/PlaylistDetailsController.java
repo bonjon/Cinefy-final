@@ -20,7 +20,7 @@ public class PlaylistDetailsController extends Controller {
 		List<Film> lf = fd.selectFilmPlaylist(Integer.parseInt(id));
 		return this.convertFilmList(lf);
 	}
-
+ 
 	public void votePlaylist(int voto, String id, String beginner)
 			throws NumberFormatException, SQLException, ClassNotFoundException, PlaylistNotFoundException {
 		BeginnerUserDAO bud = new BeginnerUserDAO();
@@ -28,7 +28,7 @@ public class PlaylistDetailsController extends Controller {
 		boolean voteResult;
 		voteResult = bud.votePlaylist(voto, Integer.parseInt(id), beginner);
 		if(voteResult) {
-			pd.assignToken(Integer.parseInt(id));
+			pd.assignToken(Integer.parseInt(id),voto);
 		}
 	}
 }
