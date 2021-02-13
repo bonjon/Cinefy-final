@@ -88,7 +88,7 @@
 										<Font name="Arial" size="13.0" />
 									</font>
 								</Label>
-                        <Label layoutX="20.0" layoutY="612.0" text="Cinefy offers the possibility to create playlists of films to advanced users. When you create a playlist, every beginner user can find it and rate it expressing a vote from 1 to 10. &#10;Every time a beginner rate your playlist, you' ll receive a sum of tokens, according to the following scheme:&#10;-from 1 to 4 you'll gain 1 token&#10;-from 5 to 6 you'll gain 2 tokens&#10;-from 7 to 9 you'll gain 3 tokens&#10;-10 you'll gain 5 tokens." textFill="#ffe283">
+                        <Label layoutX="20.0" layoutY="612.0" text="Cinefy offers to advanced users the possibility to create playlists of films. When you create a playlist, every beginner user can find it and rate it expressing a vote from 1 to 10. &#10;Every time a beginner rate your playlist, you' ll receive a sum of tokens, according to the following scheme:&#10;-from 1 to 4 you'll gain 1 token&#10;-from 5 to 6 you'll gain 2 tokens&#10;-from 7 to 9 you'll gain 3 tokens&#10;-10 you'll gain 5 tokens." textFill="#ffe283">
                            <font>
                               <Font size="12.0" />
                            </font>

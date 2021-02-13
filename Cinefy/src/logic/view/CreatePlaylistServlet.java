@@ -74,7 +74,8 @@ public class CreatePlaylistServlet extends HttpServlet {
 		if (filePart != null) {
 			fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 		}
-		newFileName = FileManager.generateNewFileName(fileName, name);
+		if (!fileName.equals(""))
+			newFileName = FileManager.generateNewFileName(fileName, name);
 		try {
 			pb = cpc.createPlaylist(name, gub.getUsername(), newFileName);
 			if (!fileName.equals("") && filePart != null) {
