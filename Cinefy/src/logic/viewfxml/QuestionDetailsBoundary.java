@@ -111,7 +111,7 @@ public class QuestionDetailsBoundary {
 				File file = new File(path);
 				Image img = new Image(file.toURI().toString());
 				this.imageView.setImage(img);
-				this.labelCheck.setText("The question has been sent to our admins who will accept or reject");
+				this.labelCheck.setText("The question was sent to our admins who will accept or reject it");
 				this.labelAnswer.setText("");
 				this.labelName.setText("No answer from " + selectedQuestion.getAdvancedName());
 				this.sliderVote.setDisable(true);
@@ -122,7 +122,7 @@ public class QuestionDetailsBoundary {
 				File file = new File(path);
 				Image img = new Image(file.toURI().toString());
 				this.imageView.setImage(img);
-				this.labelCheck.setText("The question has been accepted by the admin and it's arrived to "
+				this.labelCheck.setText("The question was accepted by the admin and it's arrived to "
 						+ selectedQuestion.getAdvancedName());
 				this.labelAnswer.setText("");
 				this.labelName.setText("No answer from " + selectedQuestion.getAdvancedName());
@@ -134,7 +134,7 @@ public class QuestionDetailsBoundary {
 				File file = new File(path);
 				Image img = new Image(file.toURI().toString());
 				this.imageView.setImage(img);
-				this.labelCheck.setText("You have received an answer from " + selectedQuestion.getAdvancedName());
+				this.labelCheck.setText("You received an answer from " + selectedQuestion.getAdvancedName());
 				this.answer = afc.getAnswer(gub.getUsername(), selectedQuestion.getId());
 				this.labelAnswer.setText(this.answer.getContenuto());
 				this.labelName.setText("Answer from " + selectedQuestion.getAdvancedName());
