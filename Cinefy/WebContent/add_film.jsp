@@ -44,9 +44,22 @@
 				<label class="textUp">You have just created a new playlist!</label><br>
 				<br> 
 				<div class= "cardContainer">
-				<img
-					src="<%="img/playlistPictures/" + pb.getPlaylistPic()%>"
-					class="circleImg adjust" height="150" width="150" /><br> <label
+				<%
+									if (pb.getPlaylistPic() != null) {
+								%>
+								<img
+									src="<%="img/playlistPictures/" + pb.getPlaylistPic()%>"
+									class="circleImg adjust" height="150" width="150" />
+								<%
+									} else {
+								%>
+								<img
+									src="<%="img/playlistPictures/" + "default2.jpg"%>"
+									class="circleImg adjust" height="150" width="150" />
+								<%
+									}
+								%>
+				<br> <label
 					class="headUser adjust"><%=pb.getName()%></label>
 				</div>
 					<br>

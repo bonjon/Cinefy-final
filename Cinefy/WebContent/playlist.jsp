@@ -87,7 +87,8 @@
 					} else {
 				%>
 				<img src="<%="img/playlistPictures/" + "default2.jpg"%>"
-					class="circleImg" height="150" width="150" />
+					class="circleImg" height="150" width="150" style="margin:auto; 
+					margin-left: 35px;" />
 				<%
 					}
 				%>
