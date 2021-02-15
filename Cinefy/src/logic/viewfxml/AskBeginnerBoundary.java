@@ -209,7 +209,7 @@ public class AskBeginnerBoundary implements Initializable {
 						username = new Label(item.getUsername());
 						
 						voto=new Label();
-						voto=elideVote(item,voto);
+						voto=elideVote(item);
 						username.setFont(Font.font(FONT, 13));
 						voto.setFont(Font.font(FONT, 13));
 						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
@@ -264,9 +264,9 @@ public class AskBeginnerBoundary implements Initializable {
 		}
 	}
 	
-	private Label elideVote(AdvancedUserBean item, Label voto) {
+	private Label elideVote(AdvancedUserBean item) {
 		String elidedVote;
-		
+		Label voto;
 	    
 		if(item.getVoto().length()>4) {
 			elidedVote=item.getVoto().substring(0, 4);
@@ -275,7 +275,7 @@ public class AskBeginnerBoundary implements Initializable {
 		else {
 			voto = new Label(item.getVoto() + "/5.0");
 		}
-		return myVote;
+		return voto;
 	}
 
 	@Override
@@ -317,7 +317,7 @@ public class AskBeginnerBoundary implements Initializable {
 						
 						voto=new Label();
 						username = new Label(item.getUsername());
-						voto=elideVote(item,voto);
+						voto=elideVote(item);
 						username.setFont(Font.font(FONT, 13));
 						voto.setFont(Font.font(FONT, 13));
 						username.setStyle(TEXTFILL + TEXTCOLOR + ";");
