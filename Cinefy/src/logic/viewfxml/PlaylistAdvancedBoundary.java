@@ -138,10 +138,10 @@ public class PlaylistAdvancedBoundary implements Initializable {
 		}
 	}
 	
-	private Label elideVote(PlaylistBean item, Label voto) {
+	private Label elideVote(PlaylistBean item) {
 		String eliVote;
 		Label theVote;
-		theVote=voto;
+		
 		if(item.getVoto().length()>4) {
 			eliVote=item.getVoto().substring(0,4);
 			theVote = new Label(eliVote+" /10.0");
@@ -178,7 +178,7 @@ public class PlaylistAdvancedBoundary implements Initializable {
 					iv = new ImageView(new Image(new File(path).toURI().toString()));
 					name = new Label(item.getName());
 					voto = new Label();
-					voto = elideVote(item,voto);
+					voto = elideVote(item);
 					name.setFont(Font.font(FONT, 13));
 					voto.setFont(Font.font(FONT, 13));
 					vBox = new VBox(3);

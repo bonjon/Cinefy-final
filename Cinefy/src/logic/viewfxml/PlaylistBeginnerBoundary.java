@@ -131,10 +131,9 @@ public class PlaylistBeginnerBoundary implements Initializable {
 		}
 	}
 	
-	private Label elideVote(PlaylistBean item, Label voto) {
+	private Label elideVote(PlaylistBean item) {
 		String elidedVote;
 		Label myVote;
-		myVote=voto;
 		if(item.getVoto().length()>4) {
 			elidedVote=item.getVoto().substring(0,4);
 			myVote = new Label(elidedVote+" /10.0");
@@ -173,7 +172,7 @@ public class PlaylistBeginnerBoundary implements Initializable {
 					name = new Label(item.getName());
 					
 					voto = new Label();
-					voto = elideVote(item,voto);
+					voto = elideVote(item);
 					name.setFont(Font.font("Arial", 13));
 					voto.setFont(Font.font("Arial", 13));
 					name.setStyle("-fx-text-fill: " + "#f5c518" + ";");
